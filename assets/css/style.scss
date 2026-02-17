@@ -81,18 +81,18 @@ $accent-orange: #e94560;
 }
 
 /* =========================================
-   ТАБЛИЦЫ — ИДЕНТИЧНЫЕ КОЛОНКИ (50%-25%-25%)
+   ТАБЛИЦЫ ПРАЙСА — СТРОГО ОДИНАКОВЫЕ (50%-25%-25%)
    ========================================= */
-.main-content table {
+.price-table {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
-  table-layout: fixed; /* Фиксирует ширину */
+  table-layout: fixed;
   box-sizing: border-box;
 }
 
-.main-content table th,
-.main-content table td {
+.price-table th,
+.price-table td {
   box-sizing: border-box;
   padding: 12px;
   border-bottom: 1px solid #ddd;
@@ -100,44 +100,41 @@ $accent-orange: #e94560;
   vertical-align: top;
 }
 
-/* Колонка 1 — Услуга (50%) */
-.main-content table th:nth-child(1),
-.main-content table td:nth-child(1) {
+/* Столбец 1 — Услуга (50%) */
+.price-table th:first-child,
+.price-table td:first-child {
   width: 50%;
   min-width: 50%;
-  max-width: 50%;
   text-align: left;
 }
 
-/* Колонка 2 — Цена (25%, по центру, жирная) */
-.main-content table th:nth-child(2),
-.main-content table td:nth-child(2) {
+/* Столбец 2 — Цена (25%, по центру, жирная) */
+.price-table th:nth-child(2),
+.price-table td:nth-child(2) {
   width: 25%;
   min-width: 25%;
-  max-width: 25%;
   text-align: center;
   font-weight: bold;
+  color: $accent-orange;
 }
 
-/* Колонка 3 — Примечание/Срок (25%) */
-.main-content table th:nth-child(3),
-.main-content table td:nth-child(3) {
+/* Столбец 3 — Примечание (25%) */
+.price-table th:nth-child(3),
+.price-table td:nth-child(3) {
   width: 25%;
   min-width: 25%;
-  max-width: 25%;
   text-align: left;
 }
 
 /* Заголовки таблиц */
-.main-content table th {
+.price-table th {
   background: $primary-blue;
   color: white;
   font-weight: 600;
   border-bottom: 2px solid $accent-orange;
 }
 
-/* Подсветка строк при наведении */
-.main-content table tr:hover {
+.price-table tr:hover {
   background-color: #f5f5f5;
 }
 
@@ -254,10 +251,8 @@ $accent-orange: #e94560;
     grid-template-columns: 1fr;
   }
   
-  /* На мобильных таблицы остаются с теми же пропорциями, 
-     но текст может переноситься */
-  .main-content table th,
-  .main-content table td {
+  .price-table th,
+  .price-table td {
     padding: 8px;
     font-size: 0.9rem;
   }
