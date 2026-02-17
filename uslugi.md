@@ -37,7 +37,6 @@ title: Услуги и цены
   const countSpan = document.getElementById('foundCount');
   
   function findHeader(table) {
-    // Ищем h2 перед таблицей (может быть разделитель hr между ними)
     let element = table.previousElementSibling;
     while (element && element.tagName !== 'H2') {
       element = element.previousElementSibling;
@@ -51,7 +50,6 @@ title: Услуги и цены
     let totalFound = 0;
     let hasVisibleTables = false;
     
-    // Показываем/скрываем кнопку очистки
     clearBtn.style.display = searchTerm.length > 0 ? 'block' : 'none';
     
     tables.forEach(table => {
@@ -59,7 +57,6 @@ title: Услуги и цены
       let tableHasVisibleRows = false;
       
       rows.forEach((row) => {
-        // Пропускаем заголовок таблицы (первая строка с th)
         if (row.querySelector('th')) return;
         
         const text = row.innerText.toLowerCase();
@@ -75,7 +72,6 @@ title: Услуги и цены
       
       const sectionHeader = findHeader(table);
       
-      // ПОЛНОСТЬЮ скрываем таблицу и заголовок, если нет данных
       if (tableHasVisibleRows) {
         hasVisibleTables = true;
         table.style.display = '';
@@ -86,7 +82,6 @@ title: Услуги и цены
       }
     });
     
-    // Обновляем статистику
     if (searchTerm.length > 0) {
       statsDiv.style.display = 'block';
       countSpan.textContent = totalFound;
@@ -94,7 +89,6 @@ title: Услуги и цены
     } else {
       statsDiv.style.display = 'none';
       noResultsDiv.style.display = 'none';
-      // ВОССТАНАВЛИВАЕМ все при пустом поиске
       tables.forEach(table => {
         table.style.display = '';
         const rows = table.querySelectorAll('tr');
@@ -105,10 +99,8 @@ title: Услуги и цены
     }
   }
   
-  // Основной обработчик
   searchInput.addEventListener('input', filterTables);
   
-  // Подсветка активного поля
   searchInput.addEventListener('focus', function() {
     this.style.borderColor = '#e94560';
     this.style.boxShadow = '0 0 0 3px rgba(233, 69, 96, 0.1)';
@@ -184,3 +176,58 @@ title: Услуги и цены
 💡 **Бесплатная диагностика — платишь только за ремонт!**
 
 **[← На главную](./)** | **[💬 Записаться в Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
+
+<!-- ПЛАВАЮЩАЯ КНОПКА ЗВОНКА (только мобильные) -->
+<a href="tel:+375297256982" class="fixed-call-btn" aria-label="Позвонить">
+  <span style="font-size: 24px;">📞</span>
+  <span style="font-weight: 600;">Позвонить</span>
+</a>
+
+<style>
+.fixed-call-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .fixed-call-btn {
+    display: flex !important;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #e94560 0%, #c9183a 100%);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 16px;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4), 
+                0 2px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
+    transition: all 0.3s ease;
+    border: 2px solid rgba(255,255,255,0.2);
+    animation: pulse 2s infinite;
+  }
+  
+  .fixed-call-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(233, 69, 96, 0.5);
+    background: linear-gradient(135deg, #ff4757 0%, #e94560 100%);
+  }
+  
+  .fixed-call-btn:active {
+    transform: translateY(0) scale(0.98);
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4), 0 0 0 0 rgba(233, 69, 96, 0.7); }
+    70% { box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4), 0 0 0 15px rgba(233, 69, 96, 0); }
+    100% { box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4), 0 0 0 0 rgba(233, 69, 96, 0); }
+  }
+  
+  body {
+    padding-bottom: 80px;
+  }
+}
+</style>
