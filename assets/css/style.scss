@@ -277,3 +277,59 @@ $border-gray: #0f3460;       // Границы блоков
     font-size: 40px;
   }
 }}
+/* =========================================
+   ШАПКА С ФОНОМ-ЗДАНИЕМ И ЛОГОТИПОМ
+   ========================================= */
+
+/* Фоновое фото здания с темной маской для читаемости текста */
+.page-header {
+  background: 
+    linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
+    url('./assets/images/zdanie.jpg');
+  background-size: cover;        /* Растягиваем на всю ширину */
+  background-position: center;   /* Центрируем */
+  background-repeat: no-repeat;
+  position: relative;
+  padding-top: 30px;
+  padding-bottom: 60px;
+  border-bottom: 4px solid #e94560;
+}
+
+/* Круглый логотип над заголовком */
+.page-header::before {
+  content: '';
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px auto;      /* Центрируем и делаем отступ снизу */
+  background: url('./assets/images/logo.png') center/contain no-repeat;
+  background-color: white;       /* Белый фон под логотип (если png с прозрачностью) */
+  border-radius: 50%;            /* Делаем круглым */
+  border: 4px solid #e94560;     /* Красная рамка в цвет темы */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+/* Делаем заголовок белым для контраста на фото */
+.page-header h1 {
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  margin-top: 0;
+  font-size: 2.5rem;
+}
+
+.page-header h2 {
+  color: rgba(255,255,255,0.9);
+  font-weight: 300;
+}
+
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+@media (max-width: 768px) {
+  .page-header::before {
+    width: 90px;
+    height: 90px;
+    border-width: 3px;
+  }
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+}
