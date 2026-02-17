@@ -21,27 +21,8 @@ layout: default
 
 <div class="gallery-grid">
   
-  <!-- Карточка 1 -->
-  <a href="#photo1" class="gallery-thumb">
-    <img src="./assets/images/iphone_do.jpg" alt="iPhone до ремонта">
-  </a>
-  <div id="photo1" class="lightbox">
-    <a href="#" class="close-btn">&times;</a>
-    <img src="./assets/images/iphone_do.jpg" alt="iPhone до ремонта">
-    <div class="lightbox-caption">iPhone 11 до ремонта — полное погружение в воду</div>
-  </div>
-
-  <!-- Карточка 2 -->
-  <a href="#photo2" class="gallery-thumb">
-    <img src="./assets/images/iphone_posle.jpg" alt="iPhone после ремонта">
-  </a>
-  <div id="photo2" class="lightbox">
-    <a href="#" class="close-btn">&times;</a>
-    <img src="./assets/images/iphone_posle.jpg" alt="iPhone после ремонта">
-    <div class="lightbox-caption">После чистки платы ультразвуком — полная работоспособность</div>
-  </div>
-
-  <!-- Карточка 3 -->
+  
+    <!-- Карточка 1 -->
   <a href="#photo3" class="gallery-thumb">
     <img src="./assets/images/notebook_pasta.jpg" alt="Замена термопасты">
   </a>
@@ -51,7 +32,7 @@ layout: default
     <div class="lightbox-caption">Чистка ноутбука и замена термопасты — температура упала на 25°</div>
   </div>
 
-  <!-- Карточка 4 -->
+  <!-- Карточка 2 -->
   <a href="#photo4" class="gallery-thumb">
     <img src="./assets/images/xiaomi_unlock.jpg" alt="Разблокировка Mi">
   </a>
