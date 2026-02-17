@@ -8,7 +8,7 @@ soft:
     price: от 30 BYN
     note: 1 час
     
-  - name: Драыверы
+  - name: Драйверы одно устройство
     price: от 10 BYN
     note: 1 час
     
@@ -42,7 +42,7 @@ phones:
     
   - name: Разблокировка FRP
     price: от 50 BYN
-    note: Без потери данных
+    note: С потерей данных
     
   - name: Снятие Mi-Account
     price: от 70 BYN
