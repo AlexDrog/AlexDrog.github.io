@@ -27,14 +27,44 @@ title: Услуги и цены
 {% for item in site.data.prices.phones %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
 
-<h2>🗺️ Навигаторы</h2>
+<h2>🗺️ Навигаторы и автоэлектроника</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
 {% for item in site.data.prices.navigators %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+</table>
+
+<h2>🌐 Сети и интернет</h2>
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+{% for item in site.data.prices.network %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+</table>
+
+<h2>🖨️ Принтеры и МФУ</h2>
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+{% for item in site.data.prices.printers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+</table>
+
+<h2>💾 Восстановление данных</h2>
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+{% for item in site.data.prices.recovery %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+</table>
+
+<h2>🔧 Электроника и мелкая техника</h2>
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+{% for item in site.data.prices.electronics %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+</table>
+
+<h2>💻 Удалённая помощь и консультации</h2>
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+{% for item in site.data.prices.remote %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
 
 ---
 
 💡 **Бесплатная диагностика — платишь только за ремонт!**
 
-**[← На главную](./)** | **[Записаться в Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
+**[← На главную](./)** | **[💬 Записаться в Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
