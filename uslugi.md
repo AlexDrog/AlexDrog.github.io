@@ -41,7 +41,6 @@ title: Услуги и цены
 | Установка IGO Primo (карты EU/RU/BY) | от 35 BYN |
 | Обновление Garmin (любые карты мира) | от 40 BYN |
 
-
 ---
 
 &lt;div align="center"&gt;
