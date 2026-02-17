@@ -13,8 +13,7 @@ layout: default
 
 <p>
 <a href="./uslugi" class="btn">Прайс и услуги</a>
-<a href="https://wa.me/375291234567" class="btn">Написать в WhatsApp</a>
-<a href="https://t.me/vash_nick" class="btn">Telegram</a>
+<a href="https://t.me/@alexdrog81" class="btn">Telegram</a>
 </p>
 
 ## Примеры работ (клик для увеличения)
