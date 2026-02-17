@@ -63,13 +63,17 @@ $accent-orange: #e94560;
   margin-top: 2rem;
 }
 
-/* ТАБЛИЦЫ — ЖЕСТКАЯ ФИКСАЦИЯ 50%-25%-25% */
+/* =========================================
+   ТАБЛИЦЫ — ИДЕНТИЧНЫЕ НА ВСЕХ УСТРОЙСТВАХ
+   ========================================= */
 .price-table {
-  width: 100%;
+  width: 100% !important;
+  min-width: 100%;
   max-width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
-  table-layout: fixed;
+  table-layout: fixed !important;
+  box-sizing: border-box;
 }
 
 .price-table col:first-child { width: 50%; }
@@ -80,28 +84,37 @@ $accent-orange: #e94560;
 .price-table td {
   padding: 12px;
   border: 1px solid #ddd;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
   word-break: break-word;
+  overflow-wrap: break-word;
   vertical-align: top;
   box-sizing: border-box;
 }
 
-.price-table th:first-child,
-.price-table td:first-child {
-  text-align: left;
+/* Жесткая фиксация столбцов */
+.price-table th:nth-child(1),
+.price-table td:nth-child(1) { 
+  width: 50% !important; 
+  min-width: 50% !important;
+  max-width: 50% !important;
+  text-align: left; 
 }
 
 .price-table th:nth-child(2),
-.price-table td:nth-child(2) {
-  text-align: center;
-  font-weight: bold;
-  color: $accent-orange;
+.price-table td:nth-child(2) { 
+  width: 25% !important; 
+  min-width: 25% !important;
+  max-width: 25% !important;
+  text-align: center; 
+  font-weight: bold; 
+  color: $accent-orange; 
 }
 
 .price-table th:nth-child(3),
-.price-table td:nth-child(3) {
-  text-align: left;
+.price-table td:nth-child(3) { 
+  width: 25% !important; 
+  min-width: 25% !important;
+  max-width: 25% !important;
+  text-align: left; 
 }
 
 .price-table th {
@@ -111,9 +124,7 @@ $accent-orange: #e94560;
   border-bottom: 2px solid $accent-orange;
 }
 
-.price-table tr:hover {
-  background-color: #f5f5f5;
-}
+.price-table tr:hover { background-color: #f5f5f5; }
 
 .btn {
   display: inline-block;
@@ -177,9 +188,7 @@ $accent-orange: #e94560;
   align-items: center;
 }
 
-.lightbox:target {
-  display: flex;
-}
+.lightbox:target { display: flex; }
 
 .lightbox img {
   max-width: 90%;
@@ -198,6 +207,8 @@ $accent-orange: #e94560;
 
 @media screen and (max-width: 768px) {
   .page-header h1 { font-size: 1.5rem; }
+  .page-header::after { font-size: 0.85rem; }
   .btn { display: block; width: 100%; text-align: center; margin: 0.5rem 0; }
   .gallery-grid { grid-template-columns: 1fr; }
+  .price-table th, .price-table td { padding: 8px; font-size: 0.9rem; }
 }
