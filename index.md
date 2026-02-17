@@ -1,107 +1,71 @@
 ---
 layout: default
+title: Услуги и цены
 ---
 
 {% include service-menu.html %}
 
 # 📋 Прайс-лист
-...
 
-
-
-# Ремонт компьютерной и мобильной техники в Дрогичине
-
-### 📞 [+375 (29) 725-69-82](tel:+375297256982)
-
-**Александр**  
-*Мастер по ремонту*
-
-📍 **[г. Дрогичин, ул. Ленина, 141 а](https://yandex.ru/maps/?text=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)** (2 этаж)
-
-🗺️ [Яндекс Карты](https://yandex.ru/maps/?text=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а) • [Google Maps](https://www.google.com/maps/search/?api=1&query=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)
-
-💬 [Telegram](https://t.me/@AlexDrog81) • [Viber](viber://chat?number=375297256982)
-
-
+**📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж)** | **📞 [+375 (29) 725-69-82](tel:+375297256982)**
 
 ---
 
-**Решаю сложные случаи, от которых отказываются другие.**
+<h2 id="soft">💿 Программное обеспечение</h2>
+<table class="price-table">
+  <colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+  <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
+  <tr><td>Windows + драйверы</td><td><strong>от 50 BYN</strong></td><td>2-4 часа</td></tr>
+  <tr><td>MS Office + 1С</td><td><strong>от 40 BYN</strong></td><td>1-2 часа</td></tr>
+  <tr><td>Антивирусная защита</td><td><strong>от 30 BYN</strong></td><td>1 час</td></tr>
+</table>
 
-- **Ремонт и настройка ПК и ноутбуков** — замена разъёмов, установка ОС и драйверов
-- **Разблокировка** — FRP, Google-аккаунты, Mi-Account,Huawei ID
-- **Прошивка** — смартфоны, восстановление «кирпичей»
-- **Обновление карт** — Navitel,  IGO (весь мир)
-- **Чистка ноутбуков** — от пыли с заменой термопасты, термовкладок.
+<h2 id="computers">🖥️ Компьютеры и ноутбуки</h2>
+<table class="price-table">
+  <colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+  <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
+  <tr><td>Диагностика</td><td><strong>Бесплатно</strong></td><td>15 мин</td></tr>
+  <tr><td>Чистка + термопаста</td><td><strong>от 50 BYN</strong></td><td>1-2 часа</td></tr>
+  <tr><td>Замена матрицы</td><td><strong>от 120 BYN</strong></td><td>2-3 часа</td></tr>
+  <tr><td>Разъем питания (пайка)</td><td><strong>от 80 BYN</strong></td><td>2-4 часа</td></tr>
+</table>
 
-<p>
-<a href="./uslugi" class="btn">Прайс и услуги</a>
-<a href="https://t.me/alexdrog81" class="btn">Telegram</a>
-<a href="tel:+375297256982" class="btn">Позвонить</a>
-</p>
+<h2 id="phones">📱 Смартфоны и планшеты</h2>
+<table class="price-table">
+  <colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+  <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+  <tr><td>Замена дисплея</td><td><strong>от 60 BYN</strong></td><td>Оригинал/копия</td></tr>
+  <tr><td>Разблокировка FRP</td><td><strong>от 50 BYN</strong></td><td>С потерей данных</td></tr>
+  <tr><td>Снятие Mi-Account</td><td><strong>от 70 BYN</strong></td><td>Разблокировка</td></tr>
+  <tr><td>Разъем зарядки (пайка)</td><td><strong>от 35 BYN</strong></td><td>Под микроскопом</td></tr>
+</table>
+
+<h2 id="auto">🗺️ Навигаторы и автоэлектроника</h2>
+<table class="price-table">
+  <colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+  <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+  <tr><td>Navitel / IGO / Garmin</td><td><strong>от 25 BYN</strong></td><td>Все регионы</td></tr>
+  <tr><td>VCDS кодирование</td><td><strong>от 50 BYN</strong></td><td>VW/Audi/Skoda</td></tr>
+</table>
+
+<h2 id="network">🌐 Сети и интернет</h2>
+<table class="price-table">
+  <colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+  <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
+  <tr><td>Настройка Wi-Fi роутера</td><td><strong>от 30 BYN</strong></td><td>30 мин</td></tr>
+  <tr><td>Прокладка LAN кабеля</td><td><strong>от 15 BYN/м</strong></td><td>По длине</td></tr>
+</table>
+
+<h2 id="other">🔧 Прочие услуги</h2>
+<table class="price-table">
+  <colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+  <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+  <tr><td>Заправка картриджей</td><td><strong>от 25 BYN</strong></td><td>Лазерные</td></tr>
+  <tr><td>Восстановление данных</td><td><strong>от 50 BYN</strong></td><td>HDD/SSD/флешки</td></tr>
+</table>
 
 ---
 
-## 📍 Адрес и режим работы
+💡 **Бесплатная диагностика — платишь только за ремонт!**
 
-**г. Дрогичин, ул. Ленина, 141 а** (второй этаж)
-
-🕐 Пн-Пт: 10:00-18:00  
-🕐 Обед: 12:00-13:00  
-🕐 Сб-Вс: 10:00-14:00  
-<span style="color: #e94560; font-weight: bold;">🕐 Понедельник: ВЫХОДНОЙ</span>
-
-## Примеры работ (клик для увеличения)
-
-<p><strong>Замена термопасты: До и После</strong></p>
-<div class="gallery-grid">
-
-<a href="#photo1" class="gallery-thumb">
-<img src="./assets/images/termopasta.jpg" alt="До чистки">
-</a>
-<div id="photo1" class="lightbox">
-<a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/temp_posle.jpg" alt="До чистки">
-<div class="lightbox-caption">До: перегрев, шум вентилятора</div>
-</div>
-
-<a href="#photo2" class="gallery-thumb">
-<img src="./assets/images/temp_posle.jpg" alt="После чистки">
-</a>
-<div id="photo2" class="lightbox">
-<a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/temp_posle.jpg" alt="После чистки">
-<div class="lightbox-caption">После: температура норма, тихая работа</div>
-</div>
-
-</div>
-
-<p><strong>Разблокировка Xiaomi: До и После</strong></p>
-<div class="gallery-grid">
-
-<a href="#photo3" class="gallery-thumb">
-<img src="./assets/images/redmi9a.jpg" alt="Заблокирован">
-</a>
-<div id="photo3" class="lightbox">
-<a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/redmi9a.jpg" alt="Заблокирован">
-<div class="lightbox-caption">До: запрос Mi-Account, телефон заблокирован</div>
-</div>
-
-<a href="#photo4" class="gallery-thumb">
-<img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован">
-</a>
-<div id="photo4" class="lightbox">
-<a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован">
-<div class="lightbox-caption">После: полный доступ, все функции работают</div>
-</div>
-
-</div>
-
-## Почему обращаются ко мне
-
-✅ **Бесплатная диагностика** — платишь только за ремонт  
-✅ **Гарантия** — от 1 месяца на все виды работ  
-✅ **Быстро** — большинство работ в день обращения  
-✅ **Сложные случаи** — то, что отказались делать другие
+**[← На главную](./)** | **[💬 Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
