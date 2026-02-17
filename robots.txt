@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Sitemap: https://alexdrog.github.io/sitemap.xml
+
+# Запретим служебные папки
+User-agent: *
+Disallow: /assets/css/
+Disallow: /assets/js/
