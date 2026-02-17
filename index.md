@@ -11,9 +11,11 @@ layout: default
 - Обновление карт Navitel, Garmin, IGO (весь мир, не только Европа)
 - Чистка ноутбуков от пыли с заменой термопасты
 
-&lt;a href="./uslugi" class="btn"&gt;Прайс и услуги&lt;/a&gt;
-&lt;a href="https://wa.me/375291234567" class="btn"&gt;Написать в WhatsApp&lt;/a&gt;
-&lt;a href="https://t.me/vash_nick" class="btn"&gt;Telegram&lt;/a&gt;
+<p>
+<a href="./uslugi" class="btn">Прайс и услуги</a>
+<a href="https://wa.me/375291234567" class="btn">Написать в WhatsApp</a>
+<a href="https://t.me/vash_nick" class="btn">Telegram</a>
+</p>
 
 ## Примеры работ
 *Фото «до/после» добавите позже, загрузив в папку `assets/images/`*
