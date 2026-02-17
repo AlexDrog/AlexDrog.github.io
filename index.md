@@ -48,48 +48,125 @@ layout: default
 
 ## Примеры работ (клик для увеличения)
 
-<p><strong>Замена термопасты: До и После</strong></p>
-<div class="gallery-grid">
+### 🔧 Замена термопасты в ноутбуке
+&lt;div class="gallery-grid"&gt;
+  &lt;a href="#termo1" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/termopasta.jpg" alt="До чистки"&gt;
+  &lt;/a&gt;
+  &lt;a href="#termo2" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/temp_posle.jpg" alt="После чистки"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="termo1" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/termopasta.jpg" alt="До"&gt;
+  &lt;div class="lightbox-caption"&gt;🔴 До: перегрев 95°C, шум вентилятора&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="termo2" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/temp_posle.jpg" alt="После"&gt;
+  &lt;div class="lightbox-caption"&gt;🟢 После: 65°C, тихая работа&lt;/div&gt;
+&lt;/div&gt;
 
-<a href="#photo1" class="gallery-thumb">
-<img src="./assets/images/termopasta.jpg" alt="До чистки">
-</a>
-<div id="photo1" class="lightbox">
-<a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/temp_posle.jpg" alt="До чистки">
-<div class="lightbox-caption">До: перегрев, шум вентилятора</div>
-</div>
+### 📱 Замена дисплейного модуля
+&lt;div class="gallery-grid"&gt;
+  &lt;a href="#disp1" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/display_crack.jpg" alt="Разбитый экран"&gt;
+  &lt;/a&gt;
+  &lt;a href="#disp2" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/display_new.jpg" alt="Новый экран"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="disp1" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/display_crack.jpg" alt="До"&gt;
+  &lt;div class="lightbox-caption"&gt;🔴 До: трещины, не работает тачскрин&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="disp2" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/display_new.jpg" alt="После"&gt;
+  &lt;div class="lightbox-caption"&gt;🟢 После: оригинальный дисплей, идеальная картинка&lt;/div&gt;
+&lt;/div&gt;
 
-<a href="#photo2" class="gallery-thumb">
-</a>
-<div id="photo2" class="lightbox">
-<a href="#" class="close-btn">&times;</a>
-<div class="lightbox-caption">После: температура норма, тихая работа</div>
+### 🗺️ Обновление карт навигации
+&lt;div class="gallery-grid"&gt;
+  &lt;a href="#navi1" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/navi_old.jpg" alt="Старые карты"&gt;
+  &lt;/a&gt;
+  &lt;a href="#navi2" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/navi_new.jpg" alt="Новые карты"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="navi1" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/navi_old.jpg" alt="До"&gt;
+  &lt;div class="lightbox-caption"&gt;🔴 До: устаревшие карты 2019 года&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="navi2" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/navi_new.jpg" alt="После"&gt;
+  &lt;div class="lightbox-caption"&gt;🟢 После: Navitel 2024, все регионы&lt;/div&gt;
+&lt;/div&gt;
 
-</div>
+### 🔓 Снятие Google аккаунта (FRP)
+&lt;div class="gallery-grid"&gt;
+  &lt;a href="#frp1" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/frp_lock.jpg" alt="Блокировка"&gt;
+  &lt;/a&gt;
+  &lt;a href="#frp2" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/frp_unlock.jpg" alt="Разблокировано"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="frp1" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/frp_lock.jpg" alt="До"&gt;
+  &lt;div class="lightbox-caption"&gt;🔴 До: требует Google аккаунт, FRP блокировка&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="frp2" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/frp_unlock.jpg" alt="После"&gt;
+  &lt;div class="lightbox-caption"&gt;🟢 После: полный доступ к системе&lt;/div&gt;
+&lt;/div&gt;
 
-<p><strong>Разблокировка Xiaomi: До и После</strong></p>
-<div class="gallery-grid">
+### 🔓 Снятие Mi аккаунта
+&lt;div class="gallery-grid"&gt;
+  &lt;a href="#mi1" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/redmi9a.jpg" alt="Mi-Account блокировка"&gt;
+  &lt;/a&gt;
+  &lt;a href="#mi2" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/redmi9a_posle.jpg" alt="Разблокировано"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="mi1" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/redmi9a.jpg" alt="До"&gt;
+  &lt;div class="lightbox-caption"&gt;🔴 До: запрос пароля Mi-Account&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="mi2" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/redmi9a_posle.jpg" alt="После"&gt;
+  &lt;div class="lightbox-caption"&gt;🟢 После: аккаунт удален, телефон работает&lt;/div&gt;
+&lt;/div&gt;
 
-<a href="#photo3" class="gallery-thumb">
-<img src="./assets/images/redmi9a.jpg" alt="Заблокирован">
-</a>
-<div id="photo3" class="lightbox">
-<a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/redmi9a.jpg" alt="Заблокирован">
-<div class="lightbox-caption">До: запрос Mi-Account, телефон заблокирован</div>
-</div>
-
-<a href="#photo4" class="gallery-thumb">
-<img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован">
-</a>
-<div id="photo4" class="lightbox">
-<a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован">
-<div class="lightbox-caption">После: полный доступ, все функции работают</div>
-</div>
-
-</div>
+### 🛑 Убрать рекламу на смартфоне
+&lt;div class="gallery-grid"&gt;
+  &lt;a href="#ads1" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/ads_popup.jpg" alt="Реклама"&gt;
+  &lt;/a&gt;
+  &lt;a href="#ads2" class="gallery-thumb"&gt;
+    &lt;img src="./assets/images/ads_clean.jpg" alt="Чисто"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+&lt;div id="ads1" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/ads_popup.jpg" alt="До"&gt;
+  &lt;div class="lightbox-caption"&gt;🔴 До: всплывающая реклама, вирусы&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="ads2" class="lightbox"&gt;
+  &lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+  &lt;img src="./assets/images/ads_clean.jpg" alt="После"&gt;
+  &lt;div class="lightbox-caption"&gt;🟢 После: чистая система, антивирус установлен&lt;/div&gt;
+&lt;/div&gt;
 
 ## Почему обращаются ко мне
 
