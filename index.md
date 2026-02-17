@@ -2,7 +2,7 @@
 layout: default
 ---
 
-&lt;div align="center"&gt;
+
 
 # Ремонт компьютерной и мобильной техники в Дрогичине
 
@@ -17,7 +17,7 @@ layout: default
 
 💬 [Telegram](https://t.me/alexdrog81) • [Viber](viber://chat?number=375297256982)
 
-&lt;/div&gt;
+
 
 ---
 
