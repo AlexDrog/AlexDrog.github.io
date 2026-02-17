@@ -67,56 +67,26 @@ $accent-orange: #e94560;
    ТАБЛИЦЫ — ИДЕНТИЧНЫЕ НА ВСЕХ УСТРОЙСТВАХ
    ========================================= */
 .price-table {
-  width: 100% !important;
-  min-width: 100%;
-  max-width: 100%;
+  width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
-  margin: 1.5rem 0;
-  table-layout: fixed !important;
-  box-sizing: border-box;
 }
 
-.price-table col:first-child { width: 50%; }
-.price-table col:nth-child(2) { width: 25%; }
-.price-table col:nth-child(3) { width: 25%; }
-
-.price-table th,
-.price-table td {
-  padding: 12px;
-  border: 1px solid #ddd;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  vertical-align: top;
-  box-sizing: border-box;
-}
-
-/* Жесткая фиксация столбцов */
 .price-table th:nth-child(1),
-.price-table td:nth-child(1) { 
-  width: 50% !important; 
-  min-width: 50% !important;
-  max-width: 50% !important;
-  text-align: left; 
-}
+.price-table td:nth-child(1) { width: 50%; }
 
 .price-table th:nth-child(2),
 .price-table td:nth-child(2) { 
-  width: 25% !important; 
-  min-width: 25% !important;
-  max-width: 25% !important;
-  text-align: center; 
-  font-weight: bold; 
-  color: $accent-orange; 
+  width: 25%; 
+  white-space: nowrap; /* Цена всегда в одну строку */
 }
 
 .price-table th:nth-child(3),
 .price-table td:nth-child(3) { 
-  width: 25% !important; 
-  min-width: 25% !important;
-  max-width: 25% !important;
-  text-align: left; 
+  width: 25%; 
+  white-space: normal; /* Примечание может переноситься */
+  word-break: break-word;
 }
-
 .price-table th {
   background: $primary-blue;
   color: white;
