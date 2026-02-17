@@ -1,0 +1,148 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* =========================================
+   ЦВЕТОВАЯ СХЕМА ДЛЯ РЕМОНТНОЙ МАСТЕРСКОЙ
+   ========================================= */
+
+// Основные цвета (тёмно-синий металлик + оранжевый акцент)
+$primary-dark: #1a1a2e;      // Тёмный фон шапки
+$primary-blue: #16213e;      // Основной синий
+$accent-orange: #e94560;     // Красно-оранжевый для кнопок «Заказать ремонт»
+$text-light: #eaeaea;        // Светлый текст на тёмном
+$text-dark: #1a1a2e;         // Тёмный текст на белом
+$border-gray: #0f3460;       // Границы блоков
+
+/* Шапка сайта (было зелёно-голубое, станет тёмным) */
+.page-header {
+  background: linear-gradient(135deg, $primary-dark 0%, $primary-blue 100%);
+  padding: 3rem 1rem;         // Увеличим отступы
+  border-bottom: 4px solid $accent-orange;
+  
+  h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  h2 {
+    font-weight: 300;
+    opacity: 0.9;
+    font-size: 1.2rem;
+  }
+}
+
+/* Основное содержимое */
+.main-content {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  max-width: 900px;           // Узкая колонка для читаемости
+  
+  h1, h2, h3 {
+    color: $primary-blue;
+    border-bottom: 2px solid $accent-orange;
+    padding-bottom: 0.3em;
+    margin-top: 2rem;
+  }
+  
+  // Таблицы прайса — сделаем современными
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    
+    th {
+      background: $primary-blue;
+      color: white;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+    
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    tr:hover {
+      background-color: #f5f5f5; // Подсветка строки при наведении
+    }
+  }
+}
+
+/* Кнопки (Зелёные → Оранжевые) */
+.btn {
+  display: inline-block;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: white !important;
+  background-color: $accent-orange !important;
+  border: 2px solid $accent-orange !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: darken($accent-orange, 10%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+    text-decoration: none;
+  }
+  
+  // Вторичная кнопка (прозрачная с рамкой)
+  &.btn-secondary {
+    background-color: transparent !important;
+    color: $accent-orange !important;
+    
+    &:hover {
+      background-color: $accent-orange !important;
+      color: white !important;
+    }
+  }
+}
+
+/* Футер (подвал) */
+.site-footer {
+  background: $primary-dark;
+  color: rgba(255,255,255,0.7);
+  padding: 2rem;
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 0.9rem;
+  
+  a {
+    color: $accent-orange;
+  }
+}
+
+/* Мобильная адаптация (чтобы на телефонах не ломалось) */
+@media screen and (max-width: 768px) {
+  .page-header {
+    padding: 2rem 1rem;
+    
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .main-content {
+    padding: 1rem;
+    font-size: 16px; // Крупный шрифт для чтения на телефоне
+  }
+  
+  table {
+    font-size: 0.9rem;
+    
+    td, th {
+      padding: 8px;
+    }
+  }
+}
