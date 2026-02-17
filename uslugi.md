@@ -178,7 +178,7 @@ title: Услуги и цены
 **[← На главную](./)** | **[💬 Записаться в Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
 
 <!-- ПЛАВАЮЩАЯ КНОПКА ЗВОНКА (только мобильные) -->
-<a href="tel:+375297256982" class="fixed-call-btn" aria-label="Позвонить">
+
   <span style="font-size: 24px;">📞</span>
   <span style="font-weight: 600;">Позвонить</span>
 </a>
