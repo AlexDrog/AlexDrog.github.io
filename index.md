@@ -8,7 +8,7 @@ title: Ремонт техники в Дрогичине
 ### 📞 [+375 (29) 725-69-82](tel:+375297256982)
 
 **Александр**  
-&lt;span style="display: inline-block; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 5px; box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);"&gt;🛠️ С &lt;script&gt;document.write(new Date().getFullYear() - 2008)&lt;/script&gt; лет опыта (с 2008)&lt;/span&gt;  
+&lt;span style="display: inline-block; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 5px; box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);"&gt;🛠️ С {{ 'now' | date: '%Y' | minus: 2008 }} лет опыта (с 2008)&lt;/span&gt;  
 *Мастер по ремонту*
 
 📍 **[г. Дрогичин, ул. Ленина, 141 а](https://yandex.ru/maps/?text=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)** (2 этаж)
