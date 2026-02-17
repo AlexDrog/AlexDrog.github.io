@@ -2,13 +2,13 @@ remote_theme: pages-themes/cayman@v0.2.0
 plugins:
   - jekyll-remote-theme
 
-title: "Ремонт техники | ВашГород"
+title: "Ремонт техники | Дрогичин"
 description: "Профессиональный ремонт компьютеров, ноутбуков и смартфонов. Прошивка, разблокировка, обновление навигаторов. Выезд и диагностика."
 
 contact:
-  phone: "+375 (29) 123-45-67"
-  telegram: "https://t.me/vash_nick"
-  whatsapp: "https://wa.me/375291234567"
+  phone: "+375 (29) 725-69-82"
+  telegram: "https://t.me/@alexdrog81"
+  
   
 defaults:
   - scope:
