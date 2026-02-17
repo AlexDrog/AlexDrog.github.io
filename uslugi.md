@@ -32,4 +32,4 @@ title: Услуги и цены
 | Русификация китайских GPS | от 30 BYN |
 
 <a href="./" class="btn">← На главную</a>
-<a href="https://t.me/@AlexDrog81" class="btn">Записаться</a>
+<a href="https://t.me/@AlexDrog81"class="btn">Записаться</a>
