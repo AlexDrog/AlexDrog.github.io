@@ -75,30 +75,58 @@ $accent-orange: #e94560;
 }
 
 /* ТАБЛИЦЫ — равномерные колонки */
+/* ТАБЛИЦЫ — строго одинаковые колонки во всех таблицах */
 .main-content table {
   width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   table-layout: fixed;
+  box-sizing: border-box;
+}
+
+.main-content table th,
+.main-content table td {
+  box-sizing: border-box;
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  overflow-wrap: break-word;
+}
+
+/* Первая колонка — строго 50% */
+.main-content table th:nth-child(1),
+.main-content table td:nth-child(1) {
+  width: 50%;
+  min-width: 50%;
+  max-width: 50%;
+}
+
+/* Вторая колонка — строго 25% */
+.main-content table th:nth-child(2),
+.main-content table td:nth-child(2) {
+  width: 25%;
+  min-width: 25%;
+  max-width: 25%;
+  text-align: center;
+}
+
+/* Третья колонка — строго 25% */
+.main-content table th:nth-child(3),
+.main-content table td:nth-child(3) {
+  width: 25%;
+  min-width: 25%;
+  max-width: 25%;
 }
 
 .main-content table th {
   background: $primary-blue;
   color: white;
-  padding: 12px;
-  text-align: left;
   font-weight: 600;
-}
-
-.main-content table td {
-  padding: 12px;
-  border-bottom: 1px solid #ddd;
+  text-align: left;
 }
 
 .main-content table tr:hover {
   background-color: #f5f5f5;
-}
+}}
 
 /* Ширина колонок: 50% | 25% | 25% */
 .main-content table th:first-child,
