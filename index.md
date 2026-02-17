@@ -2,6 +2,8 @@
 layout: default
 ---
 
+
+
 # Ремонт компьютерной и мобильной техники в Дрогичине
 
 ### 📞 [+375 (29) 725-69-82](tel:+375297256982)
@@ -13,23 +15,25 @@ layout: default
 
 🗺️ [Яндекс Карты](https://yandex.ru/maps/?text=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а) • [Google Maps](https://www.google.com/maps/search/?api=1&query=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)
 
-💬 [Telegram](https://t.me/alexdrog81) • [Viber](viber://chat?number=375297256982)
+💬 [Telegram](https://t.me/@AlexDrog81) • [Viber](viber://chat?number=375297256982)
+
+
 
 ---
 
 **Решаю сложные случаи, от которых отказываются другие.**
 
 - **Ремонт и настройка ПК и ноутбуков** — замена разъёмов, установка ОС и драйверов
-- **Разблокировка** — FRP, Google-аккаунты, Mi-Account, Huawei ID
+- **Разблокировка** — FRP, Google-аккаунты, Mi-Account,Huawei ID
 - **Прошивка** — смартфоны, восстановление «кирпичей»
-- **Обновление карт** — Navitel, IGO (весь мир)
+- **Обновление карт** — Navitel,  IGO (весь мир)
 - **Чистка ноутбуков** — от пыли с заменой термопасты, термовкладок.
 
-&lt;p&gt;
-&lt;a href="./uslugi" class="btn"&gt;Прайс и услуги&lt;/a&gt;
-&lt;a href="https://t.me/alexdrog81" class="btn"&gt;Telegram&lt;/a&gt;
-&lt;a href="tel:+375297256982" class="btn"&gt;Позвонить&lt;/a&gt;
-&lt;/p&gt;
+<p>
+<a href="./uslugi" class="btn">Прайс и услуги</a>
+<a href="https://t.me/alexdrog81" class="btn">Telegram</a>
+<a href="tel:+375297256982" class="btn">Позвонить</a>
+</p>
 
 ---
 
@@ -40,55 +44,55 @@ layout: default
 🕐 Пн-Пт: 10:00-18:00  
 🕐 Обед: 12:00-13:00  
 🕐 Сб-Вс: 10:00-14:00  
-&lt;span style="color: #e94560; font-weight: bold;"&gt;🕐 Понедельник: ВЫХОДНОЙ&lt;/span&gt;
+<span style="color: #e94560; font-weight: bold;">🕐 Понедельник: ВЫХОДНОЙ</span>
 
 ## Примеры работ (клик для увеличения)
 
-&lt;p&gt;&lt;strong&gt;Замена термопасты: До и После&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="gallery-grid"&gt;
+<p><strong>Замена термопасты: До и После</strong></p>
+<div class="gallery-grid">
 
-&lt;a href="#photo1" class="gallery-thumb"&gt;
-&lt;img src="./assets/images/termopasta.jpg" alt="До чистки"&gt;
-&lt;/a&gt;
-&lt;div id="photo1" class="lightbox"&gt;
-&lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
-&lt;img src="./assets/images/termopasta.jpg" alt="До чистки"&gt;
-&lt;div class="lightbox-caption"&gt;До: перегрев, шум вентилятора&lt;/div&gt;
-&lt;/div&gt;
+<a href="#photo1" class="gallery-thumb">
+<img src="./assets/images/termopasta.jpg" alt="До чистки">
+</a>
+<div id="photo1" class="lightbox">
+<a href="#" class="close-btn">&times;</a>
+<img src="./assets/images/temp_posle.jpg" alt="До чистки">
+<div class="lightbox-caption">До: перегрев, шум вентилятора</div>
+</div>
 
-&lt;a href="#photo2" class="gallery-thumb"&gt;
-&lt;img src="./assets/images/temp_posle.jpg" alt="После чистки"&gt;
-&lt;/a&gt;
-&lt;div id="photo2" class="lightbox"&gt;
-&lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
-&lt;img src="./assets/images/temp_posle.jpg" alt="После чистки"&gt;
-&lt;div class="lightbox-caption"&gt;После: температура норма, тихая работа&lt;/div&gt;
-&lt;/div&gt;
+<a href="#photo2" class="gallery-thumb">
+<img src="./assets/images/temp_posle.jpg" alt="После чистки">
+</a>
+<div id="photo2" class="lightbox">
+<a href="#" class="close-btn">&times;</a>
+<img src="./assets/images/temp_posle.jpg" alt="После чистки">
+<div class="lightbox-caption">После: температура норма, тихая работа</div>
+</div>
 
-&lt;/div&gt;
+</div>
 
-&lt;p&gt;&lt;strong&gt;Разблокировка Xiaomi: До и После&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="gallery-grid"&gt;
+<p><strong>Разблокировка Xiaomi: До и После</strong></p>
+<div class="gallery-grid">
 
-&lt;a href="#photo3" class="gallery-thumb"&gt;
-&lt;img src="./assets/images/redmi9a.jpg" alt="Заблокирован"&gt;
-&lt;/a&gt;
-&lt;div id="photo3" class="lightbox"&gt;
-&lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
-&lt;img src="./assets/images/redmi9a.jpg" alt="Заблокирован"&gt;
-&lt;div class="lightbox-caption"&gt;До: запрос Mi-Account, телефон заблокирован&lt;/div&gt;
-&lt;/div&gt;
+<a href="#photo3" class="gallery-thumb">
+<img src="./assets/images/redmi9a.jpg" alt="Заблокирован">
+</a>
+<div id="photo3" class="lightbox">
+<a href="#" class="close-btn">&times;</a>
+<img src="./assets/images/redmi9a.jpg" alt="Заблокирован">
+<div class="lightbox-caption">До: запрос Mi-Account, телефон заблокирован</div>
+</div>
 
-&lt;a href="#photo4" class="gallery-thumb"&gt;
-&lt;img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован"&gt;
-&lt;/a&gt;
-&lt;div id="photo4" class="lightbox"&gt;
-&lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
-&lt;img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован"&gt;
-&lt;div class="lightbox-caption"&gt;После: полный доступ, все функции работают&lt;/div&gt;
-&lt;/div&gt;
+<a href="#photo4" class="gallery-thumb">
+<img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован">
+</a>
+<div id="photo4" class="lightbox">
+<a href="#" class="close-btn">&times;</a>
+<img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован">
+<div class="lightbox-caption">После: полный доступ, все функции работают</div>
+</div>
 
-&lt;/div&gt;
+</div>
 
 ## Почему обращаются ко мне
 
