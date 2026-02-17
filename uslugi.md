@@ -9,29 +9,23 @@ title: Услуги и цены
 
 ---
 
-## 🖥️ Компьютеры и ноутбуки
+<h2>🖥️ Компьютеры и ноутбуки</h2>
+<table>
+<tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
+{% for item in site.data.prices.computers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+</table>
 
-| Услуга | Цена | Срок |
-|--------|------|------|
-{% for item in site.data.prices.computers %}
-| {{ item.name }} | **{{ item.price }}** | {{ item.note }} |
-{% endfor %}
+<h2>📱 Смартфоны и планшеты</h2>
+<table>
+<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+{% for item in site.data.prices.phones %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+</table>
 
-## 📱 Смартфоны и планшеты
-
-| Услуга | Цена | Примечание |
-|--------|------|------------|
-{% for item in site.data.prices.phones %}
-| {{ item.name }} | **{{ item.price }}** | {{ item.note }} |
-{% endfor %}
-
-## 🗺️ Навигаторы
-
-| Услуга | Цена | Примечание |
-|--------|------|------------|
-{% for item in site.data.prices.navigators %}
-| {{ item.name }} | **{{ item.price }}** | {{ item.note }} |
-{% endfor %}
+<h2>🗺️ Навигаторы</h2>
+<table>
+<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
+{% for item in site.data.prices.navigators %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+</table>
 
 ---
 
