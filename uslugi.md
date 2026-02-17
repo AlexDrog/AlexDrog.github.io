@@ -8,7 +8,7 @@ title: Услуги и цены
 **📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж)** | **📞 [+375 (29) 725-69-82](tel:+375297256982)**
 
 ---
-<h2>🖥️ SOFT</h2>
+<h2>💽 SOFT</h2>
 <table class="price-table">
 <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
 {% for item in site.data.prices.soft %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
