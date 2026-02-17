@@ -1,261 +1,14 @@
-<!-- _includes/service-menu.html -->
-<style>
-/* Стили меню услуг */
-.service-navbar {
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 3px solid #1abc9c;
-}
-
-.service-navbar .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-.service-navbar ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-}
-
-.service-navbar li {
-  position: relative;
-  flex: 1;
-  text-align: center;
-}
-
-/* Верхние ссылки */
-.service-navbar > .nav-container > ul > li > a {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 10px;
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transition: all 0.3s ease;
-  height: 70px;
-  box-sizing: border-box;
-  border-right: 1px solid rgba(255,255,255,0.1);
-}
-
-.service-navbar > .nav-container > ul > li:first-child > a {
-  border-left: 1px solid rgba(255,255,255,0.1);
-}
-
-.service-navbar > .nav-container > ul > li:hover > a {
-  background: rgba(255,255,255,0.15);
-  color: #fff;
-}
-
-.nav-icon {
-  font-size: 24px;
-  margin-bottom: 5px;
-  display: block;
-  transition: transform 0.3s;
-}
-
-.service-navbar li:hover .nav-icon {
-  transform: translateY(-3px);
-}
-
-/* Выпадающее меню */
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  min-width: 320px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-  border-radius: 0 0 8px 8px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-top: 3px solid #1abc9c;
-  text-align: left;
-  overflow: hidden;
-}
-
-/* Широкое меню для категорий с множеством услуг */
-.dropdown-menu.wide {
-  min-width: 600px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-10px);
-}
-
-.dropdown-menu.wide .dropdown-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-}
-
-.service-navbar li:hover .dropdown-menu {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.service-navbar li:hover .dropdown-menu.wide {
-  transform: translateX(-50%) translateY(0);
-}
-
-/* Элементы списка с ценами */
-.dropdown-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  color: #2c3e50;
-  text-decoration: none;
-  font-size: 14px;
-  border-bottom: 1px solid #ecf0f1;
-  transition: all 0.2s;
-  line-height: 1.4;
-}
-
-.dropdown-item:hover {
-  background: #f8f9fa;
-  color: #2980b9;
-  padding-left: 25px;
-}
-
-.dropdown-item:last-child {
-  border-bottom: none;
-}
-
-/* Цена в меню */
-.price-tag {
-  color: #e74c3c;
-  font-weight: 700;
-  font-size: 13px;
-  white-space: nowrap;
-  margin-left: 15px;
-  background: #fff5f5;
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid #ffe0e0;
-}
-
-.dropdown-item:hover .price-tag {
-  background: #e74c3c;
-  color: white;
-  border-color: #e74c3c;
-}
-
-/* Заголовок в выпадающем меню */
-.dropdown-header {
-  background: #34495e;
-  color: white;
-  padding: 10px 20px;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 600;
-  grid-column: 1 / -1;
-}
-
-/* Мобильная версия */
-@media (max-width: 968px) {
-  .service-navbar ul {
-    flex-direction: column;
-  }
-  
-  .service-navbar > .nav-container > ul > li {
-    width: 100%;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
-  
-  .service-navbar > .nav-container > ul > li > a {
-    flex-direction: row;
-    justify-content: flex-start;
-    height: auto;
-    padding: 15px 20px;
-    border: none !important;
-  }
-  
-  .nav-icon {
-    margin-right: 15px;
-    margin-bottom: 0;
-    font-size: 20px;
-  }
-  
-  .dropdown-menu, .dropdown-menu.wide {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    display: none;
-    min-width: auto;
-    width: 100%;
-    box-shadow: none;
-    border-top: none;
-    border-radius: 0;
-  }
-  
-  .dropdown-menu.wide .dropdown-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .dropdown-item {
-    padding-left: 60px;
-    background: #f8f9fa;
-  }
-  
-  /* Аккордеон */
-  .service-navbar li.active .dropdown-menu {
-    display: block;
-    animation: slideDown 0.3s ease;
-  }
-  
-  @keyframes slideDown {
-    from { opacity: 0; max-height: 0; }
-    to { opacity: 1; max-height: 1000px; }
-  }
-}
-
-/* Индикатор стрелки для мобильных */
-.mobile-arrow {
-  display: none;
-  margin-left: auto;
-  transition: transform 0.3s;
-}
-
-@media (max-width: 968px) {
-  .mobile-arrow {
-    display: inline-block;
-  }
-  
-  .service-navbar li.active .mobile-arrow {
-    transform: rotate(180deg);
-  }
-}
-</style>
-
 <nav class="service-navbar">
   <div class="nav-container">
     <ul>
-      <!-- Программы -->
       <li>
         <a href="#soft" onclick="return false;">
           <span class="nav-icon">💿</span>
-          <span>Программы</span>
+          <span>ПРОГРАММЫ</span>
           <span class="mobile-arrow">▼</span>
         </a>
         <div class="dropdown-menu">
-          <div class="dropdown-header">Программное обеспечение</div>
+          <div class="dropdown-header">ПРОГРАММНОЕ ОБЕСПЕЧЕНИЕ</div>
           <a href="#windows" class="dropdown-item">
             <span>Windows + драйверы</span>
             <span class="price-tag">от 50 BYN</span>
@@ -268,23 +21,18 @@
             <span>Антивирусная защита</span>
             <span class="price-tag">от 30 BYN</span>
           </a>
-          <a href="#linux" class="dropdown-item">
-            <span>Linux / Dual-boot</span>
-            <span class="price-tag">от 60 BYN</span>
-          </a>
         </div>
       </li>
 
-      <!-- Компьютеры -->
       <li>
         <a href="#computers" onclick="return false;">
           <span class="nav-icon">🖥️</span>
-          <span>Компьютеры</span>
+          <span>КОМПЬЮТЕРЫ</span>
           <span class="mobile-arrow">▼</span>
         </a>
         <div class="dropdown-menu wide">
           <div class="dropdown-grid">
-            <div class="dropdown-header" style="grid-column: 1 / -1;">Ремонт компьютеров и ноутбуков</div>
+            <div class="dropdown-header">РЕМОНТ КОМПЬЮТЕРОВ</div>
             <a href="#diag" class="dropdown-item">
               <span>Диагностика</span>
               <span class="price-tag">Бесплатно</span>
@@ -297,32 +45,23 @@
               <span>Замена матрицы</span>
               <span class="price-tag">от 120 BYN</span>
             </a>
-            <a href="#upgrade" class="dropdown-item">
-              <span>Апгрейд RAM/SSD</span>
-              <span class="price-tag">от 40 BYN</span>
-            </a>
             <a href="#power" class="dropdown-item">
-              <span>Разъем питания (пайка)</span>
+              <span>Разъем питания</span>
               <span class="price-tag">от 80 BYN</span>
-            </a>
-            <a href="#flood" class="dropdown-item">
-              <span>После залития</span>
-              <span class="price-tag">от 150 BYN</span>
             </a>
           </div>
         </div>
       </li>
 
-      <!-- Телефоны -->
       <li>
         <a href="#phones" onclick="return false;">
           <span class="nav-icon">📱</span>
-          <span>Телефоны</span>
+          <span>ТЕЛЕФОНЫ</span>
           <span class="mobile-arrow">▼</span>
         </a>
         <div class="dropdown-menu wide">
           <div class="dropdown-grid">
-            <div class="dropdown-header" style="grid-column: 1 / -1;">Ремонт смартфонов</div>
+            <div class="dropdown-header">РЕМОНТ СМАРТФОНОВ</div>
             <a href="#display" class="dropdown-item">
               <span>Замена дисплея</span>
               <span class="price-tag">от 60 BYN</span>
@@ -335,105 +74,68 @@
               <span>Снятие Mi-Account</span>
               <span class="price-tag">от 70 BYN</span>
             </a>
-            <a href="#brick" class="dropdown-item">
-              <span>Восстановление "кирпича"</span>
-              <span class="price-tag">от 60 BYN</span>
-            </a>
             <a href="#charge" class="dropdown-item">
               <span>Разъем зарядки</span>
               <span class="price-tag">от 35 BYN</span>
-            </a>
-            <a href="#reball" class="dropdown-item">
-              <span>Реболлинг BGA</span>
-              <span class="price-tag">от 150 BYN</span>
             </a>
           </div>
         </div>
       </li>
 
-      <!-- Авто -->
       <li>
         <a href="#auto" onclick="return false;">
           <span class="nav-icon">🗺️</span>
-          <span>Авто/Нави</span>
+          <span>АВТО/НАВИ</span>
           <span class="mobile-arrow">▼</span>
         </a>
         <div class="dropdown-menu">
-          <div class="dropdown-header">Навигаторы и автоэлектроника</div>
+          <div class="dropdown-header">АВТОЭЛЕКТРОНИКА</div>
           <a href="#navitel" class="dropdown-item">
             <span>Navitel / IGO / Garmin</span>
             <span class="price-tag">от 25 BYN</span>
           </a>
-          <a href="#russ" class="dropdown-item">
-            <span>Русификация GPS</span>
-            <span class="price-tag">от 30 BYN</span>
-          </a>
           <a href="#vcds" class="dropdown-item">
-            <span>VCDS / OBDeleven</span>
+            <span>VCDS кодирование</span>
             <span class="price-tag">от 50 BYN</span>
-          </a>
-          <a href="#immobilizer" class="dropdown-item">
-            <span>Ключи / иммобилайзер</span>
-            <span class="price-tag">от 80 BYN</span>
           </a>
         </div>
       </li>
 
-      <!-- Сети -->
       <li>
         <a href="#network" onclick="return false;">
           <span class="nav-icon">🌐</span>
-          <span>Сети</span>
+          <span>СЕТИ</span>
           <span class="mobile-arrow">▼</span>
         </a>
         <div class="dropdown-menu">
-          <div class="dropdown-header">Сети и интернет</div>
+          <div class="dropdown-header">СЕТИ И ИНТЕРНЕТ</div>
           <a href="#wifi" class="dropdown-item">
             <span>Настройка Wi-Fi роутера</span>
             <span class="price-tag">от 30 BYN</span>
           </a>
           <a href="#cable" class="dropdown-item">
-            <span>Прокладка LAN кабеля</span>
+            <span>Прокладка кабеля</span>
             <span class="price-tag">от 15 BYN/м</span>
-          </a>
-          <a href="#lan" class="dropdown-item">
-            <span>Локальная сеть</span>
-            <span class="price-tag">от 50 BYN</span>
-          </a>
-          <a href="#mesh" class="dropdown-item">
-            <span>Усиление сигнала Mesh</span>
-            <span class="price-tag">от 60 BYN</span>
           </a>
         </div>
       </li>
 
-      <!-- Прочее -->
       <li>
         <a href="#other" onclick="return false;">
           <span class="nav-icon">🔧</span>
-          <span>Прочее</span>
+          <span>ПРОЧЕЕ</span>
           <span class="mobile-arrow">▼</span>
         </a>
-        <div class="dropdown-menu wide">
-          <div class="dropdown-grid">
-            <div class="dropdown-header" style="grid-column: 1 / -1;">Дополнительные услуги</div>
-            <a href="#printers" class="dropdown-item">
-              <span>Заправка картриджей</span>
-              <span class="price-tag">от 25 BYN</span>
-            </a>
-            <a href="#recovery" class="dropdown-item">
-              <span>Восстановление данных</span>
-              <span class="price-tag">от 50 BYN</span>
-            </a>
-            <a href="#solder" class="dropdown-item">
-              <span>Пайка Type-C</span>
-              <span class="price-tag">от 40 BYN</span>
-            </a>
-            <a href="#remote" class="dropdown-item">
-              <span>Удаленная помощь</span>
-              <span class="price-tag">от 15 BYN</span>
-            </a>
-          </div>
+        <div class="dropdown-menu">
+          <div class="dropdown-header">ДОПОЛНИТЕЛЬНО</div>
+          <a href="#printers" class="dropdown-item">
+            <span>Заправка картриджей</span>
+            <span class="price-tag">от 25 BYN</span>
+          </a>
+          <a href="#recovery" class="dropdown-item">
+            <span>Восстановление данных</span>
+            <span class="price-tag">от 50 BYN</span>
+          </a>
         </div>
       </li>
     </ul>
@@ -443,23 +145,13 @@
 <script>
 // Мобильное меню (аккордеон)
 document.addEventListener('DOMContentLoaded', function() {
-  const isMobile = window.innerWidth <= 968;
-  
-  if (isMobile) {
-    const navItems = document.querySelectorAll('.service-navbar > .nav-container > ul > li');
-    
-    navItems.forEach(item => {
+  if (window.innerWidth <= 968) {
+    const items = document.querySelectorAll('.service-navbar > .nav-container > ul > li');
+    items.forEach(item => {
       const link = item.querySelector('a');
-      
       link.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        // Закрыть другие
-        navItems.forEach(other => {
-          if (other !== item) other.classList.remove('active');
-        });
-        
-        // Тоггл текущего
+        items.forEach(i => { if (i !== item) i.classList.remove('active'); });
         item.classList.toggle('active');
       });
     });
