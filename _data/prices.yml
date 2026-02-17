@@ -11,8 +11,8 @@ soft:
   - name: Драйверы (одно устройство)
     price: от 10 BYN
     note: Поиск и установка, 30 мин
- 
-   - name: Установка Linux / dual-boot
+  
+  - name: Установка Linux / dual-boot
     price: от 60 BYN
     note: Ubuntu/Debian + драйверы
     
@@ -45,7 +45,6 @@ computers:
   - name: Апгрейд (RAM, SSD, накопители)
     price: от 40 BYN
     note: Перенос данных, настройка
-    
 
 # Смартфоны и планшеты
 phones:
@@ -68,8 +67,7 @@ phones:
   - name: Замена разъёма зарядки
     price: от 35 BYN
     note: Микропайка под микроскопом
-     
-  
+
 # Навигаторы и автоэлектроника
 navigators:
   - name: Обновление Navitel
@@ -79,7 +77,7 @@ navigators:
   - name: Установка IGO Primo / OpenStreetMap
     price: от 35 BYN
     note: Карты EU/RU/BY, скоростные камеры
-       
+    
   - name: Русификация китайских GPS
     price: от 30 BYN
     note: Прошивка, шрифты, голос
@@ -87,14 +85,14 @@ navigators:
   - name: Настройка VCDS / OBDeleven (VW/Audi/Skoda)
     price: от 50 BYN
     note: Кодирование модулей, адаптация
-  
+
 # Сети и интернет
 network:
   - name: Настройка Wi-Fi роутера
     price: от 30 BYN
     note: Защита, пароли, QoS
- 
-   - name: Настройка локальной сети (LAN)
+  
+  - name: Настройка локальной сети (LAN)
     price: от 50 BYN
     note: Общие папки, принтеры, доступы
     
