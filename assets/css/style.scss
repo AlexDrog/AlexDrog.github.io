@@ -3,65 +3,26 @@
 
 @import "{{ site.theme }}";
 
-/* =========================================
-   ЦВЕТОВАЯ СХЕМА
-   ========================================= */
-
 $primary-dark: #1a1a2e;
 $primary-blue: #16213e;
 $accent-orange: #e94560;
 
-/* =========================================
-   ШАПКА С ФОНОМ-ЗДАНИЕМ
-   ========================================= */
-
 .page-header {
-  background: 
-    linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
-    url('/assets/images/zdanie.JPG?v=4');
+  background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), url('/assets/images/zdanie.JPG?v=6');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-  padding: 2rem 1rem 3rem 1rem;
+  padding: 2rem 1rem 4rem 1rem;
   border-bottom: 4px solid $accent-orange;
   text-align: center;
-  
-  /* Убираем стандартные отступы у заголовков в шапке */
-  h1 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-    color: white;
-    font-size: 2.2rem;
-    border-bottom: none; /* Убираем линию под заголовком в шапке */
-  }
-  
-  /* Для телефона и адреса в шапке */
-  p {
-    margin: 0.5rem 0;
-  }
-  
-  a {
-    color: #e94560;
-    text-decoration: none;
-    
-    &:hover {
-      text-decoration: underline;
-      color: #ff6b6b;
-    }
-  }
 }
 
-/* Логотип круглый над заголовком */
 .page-header::before {
   content: '';
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   margin: 0 auto 15px auto;
   background: url('/assets/images/logo.png') center/contain no-repeat;
   background-color: white;
@@ -70,66 +31,48 @@ $accent-orange: #e94560;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
-/* =========================================
-   ОСНОВНОЕ СОДЕРЖИМОЕ
-   ========================================= */
+.page-header::after {
+  content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Пн-Пт 10:00-19:00, Сб 11:00-17:00';
+  display: block;
+  color: rgba(255,255,255,0.95);
+  font-size: 1rem;
+  margin-top: 15px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.page-header h1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 700;
+  color: white;
+  font-size: 2rem;
+  margin-top: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+.page-header h3 {
+  color: #e94560;
+  font-size: 1.8rem;
+  margin: 10px 0;
+}
+
+.page-header h3 a {
+  color: #e94560;
+  text-decoration: none;
+}
 
 .main-content {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   line-height: 1.6;
   max-width: 900px;
   padding: 2rem 1rem;
-  
-  h1, h2, h3 {
-    color: $primary-blue;
-    border-bottom: 2px solid $accent-orange;
-    padding-bottom: 0.3em;
-    margin-top: 2.5rem;
-    font-weight: 600;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-  }
-  
-  /* Списки услуг */
-  ul {
-    padding-left: 1.5rem;
-    
-    li {
-      margin-bottom: 0.5rem;
-    }
-  }
-  
-  /* Таблицы прайса */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1.5rem 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    
-    th {
-      background: $primary-blue;
-      color: white;
-      padding: 12px;
-      text-align: left;
-      font-weight: 600;
-    }
-    
-    td {
-      padding: 12px;
-      border-bottom: 1px solid #ddd;
-    }
-    
-    tr:hover {
-      background-color: #f5f5f5;
-    }
-  }
 }
 
-/* =========================================
-   КНОПКИ
-   ========================================= */
+.main-content h1, .main-content h2, .main-content h3 {
+  color: $primary-blue;
+  border-bottom: 2px solid $accent-orange;
+  padding-bottom: 0.3em;
+  margin-top: 2rem;
+}
 
 .btn {
   display: inline-block;
@@ -138,25 +81,18 @@ $accent-orange: #e94560;
   font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: white !important;
-  background-color: $accent-orange !important;
-  border: 2px solid $accent-orange !important;
+  color: white;
+  background-color: $accent-orange;
+  border: 2px solid $accent-orange;
   border-radius: 4px;
-  transition: all 0.2s ease;
-  text-decoration: none !important;
-  
-  &:hover {
-    background-color: darken($accent-orange, 10%) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
-    text-decoration: none !important;
-  }
+  text-decoration: none;
 }
 
-/* =========================================
-   ГАЛЕРЕЯ
-   ========================================= */
+.btn:hover {
+  background-color: #c9183a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
 
 .gallery-grid {
   display: grid;
@@ -170,46 +106,23 @@ $accent-orange: #e94560;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
   cursor: zoom-in;
   border: 2px solid transparent;
   display: block;
-  text-decoration: none;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 24px rgba(233, 69, 96, 0.25);
-    border-color: #e94560;
-  }
-  
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-  }
-  
-  &::after {
-    content: "🔍 Увеличить";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(26, 26, 46, 0.9);
-    color: white;
-    padding: 12px;
-    text-align: center;
-    font-size: 14px;
-    transform: translateY(100%);
-    transition: transform 0.3s;
-  }
-  
-  &:hover::after {
-    transform: translateY(0);
-  }
 }
 
-/* Лайтбокс (увеличение) */
+.gallery-thumb:hover {
+  border-color: #e94560;
+  transform: translateY(-5px);
+}
+
+.gallery-thumb img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
 .lightbox {
   display: none;
   position: fixed;
@@ -221,19 +134,16 @@ $accent-orange: #e94560;
   z-index: 9999;
   justify-content: center;
   align-items: center;
-  animation: fadeIn 0.3s;
-  
-  &:target {
-    display: flex;
-  }
-  
-  img {
-    max-width: 90%;
-    max-height: 80vh;
-    border-radius: 4px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.8);
-    border: 3px solid #e94560;
-  }
+}
+
+.lightbox:target {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 80vh;
+  border: 3px solid #e94560;
 }
 
 .close-btn {
@@ -243,104 +153,18 @@ $accent-orange: #e94560;
   color: white;
   font-size: 50px;
   text-decoration: none;
-  font-weight: bold;
-  opacity: 0.8;
-  transition: opacity 0.2s;
-  z-index: 10000;
-  
-  &:hover {
-    opacity: 1;
-    color: #e94560;
-  }
 }
-
-.lightbox-caption {
-  position: absolute;
-  bottom: 30px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  color: white;
-  font-size: 16px;
-  padding: 15px;
-  background: rgba(0,0,0,0.7);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* =========================================
-   ФУТЕР
-   ========================================= */
-
-.site-footer {
-  background: $primary-dark;
-  color: rgba(255,255,255,0.8);
-  padding: 2rem;
-  margin-top: 3rem;
-  text-align: center;
-  font-size: 0.9rem;
-  
-  a {
-    color: $accent-orange;
-    text-decoration: none;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
-/* =========================================
-   МОБИЛЬНАЯ АДАПТАЦИЯ
-   ========================================= */
 
 @media screen and (max-width: 768px) {
-  .page-header {
-    padding: 1.5rem 1rem;
-    
-    &::before {
-      width: 80px;
-      height: 80px;
-    }
-    
-    h1 {
-      font-size: 1.5rem;
-    }
-    
-    p {
-      font-size: 0.95rem !important;
-    }
+  .page-header h1 {
+    font-size: 1.5rem;
   }
-  
-  .main-content {
-    padding: 1rem;
-    
-    h2 {
-      font-size: 1.3rem;
-    }
-  }
-  
   .btn {
     display: block;
     width: 100%;
-    margin: 0.5rem 0;
     text-align: center;
   }
-  
   .gallery-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .lightbox img {
-    max-width: 95%;
-  }
-  
-  .close-btn {
-    top: 10px;
-    right: 20px;
-    font-size: 40px;
   }
 }
