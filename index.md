@@ -14,11 +14,11 @@ layout: default
 - **Обновление карт** — Navitel, Garmin, IGO (весь мир)
 - **Чистка ноутбуков** — от пыли с заменой термопасты
 
-&lt;p&gt;
-&lt;a href="./uslugi" class="btn"&gt;Прайс и услуги&lt;/a&gt;
-&lt;a href="https://t.me/alexdrog81" class="btn"&gt;Telegram&lt;/a&gt;
-&lt;a href="tel:+375297256982" class="btn"&gt;Позвонить&lt;/a&gt;
-&lt;/p&gt;
+<p>
+<a href="./uslugi" class="btn">Прайс и услуги</a>
+<a href="https://t.me/alexdrog81" class="btn">Telegram</a>
+<a href="tel:+375297256982" class="btn">Позвонить</a>
+</p>
 
 ---
 
