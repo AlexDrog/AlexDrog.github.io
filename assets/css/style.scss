@@ -8,7 +8,7 @@ $primary-blue: #16213e;
 $accent-orange: #e94560;
 
 // ============================================
-// ШАПКА (твоя текущая)
+// ШАПКА (твоя)
 // ============================================
 .page-header {
   background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), url('/assets/images/zdanie.JPG?v=6');
@@ -30,12 +30,12 @@ $accent-orange: #e94560;
   background: url('/assets/images/logo.png') center/contain no-repeat;
   background-color: white;
   border-radius: 50%;
-  border: 3px solid #e94560;
+  border: 3px solid $accent-orange;
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
 
 .page-header::after {
-  content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Вт-Пт 10:00-18:00, Сб-Вс 10:00-14:00, Пн-ВЫХОДНОЙ';
+  content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Вт-Пт 10:00-18:00, Сб-Вс 10:00-14:00';
   display: block;
   color: rgba(255,255,255,0.95);
   font-size: 1rem;
@@ -53,20 +53,23 @@ $accent-orange: #e94560;
 }
 
 // ============================================
-// НАВИГАЦИЯ УСЛУГ (новое меню под шапкой)
+// МЕНЮ НАВИГАЦИИ (ПОЛНАЯ ШИРИНА)
 // ============================================
 .service-navbar {
-  background: $primary-dark;
+  background: $primary-blue;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   border-bottom: 3px solid $accent-orange;
   
   .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     padding: 0;
   }
   
@@ -75,66 +78,77 @@ $accent-orange: #e94560;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-  }
-  
-  li {
-    position: relative;
-    flex: 1;
-    text-align: center;
+    width: 100%;
     
-    &:not(:last-child) {
-      border-right: 1px solid rgba(255,255,255,0.1);
+    > li {
+      flex: 1;
+      position: relative;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      
+      &:last-child { border-right: none; }
+      
+      > a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 5px;
+        color: rgba(255,255,255,0.9);
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        transition: all 0.3s;
+        height: 85px;
+        position: relative;
+        
+        .nav-icon {
+          font-size: 26px;
+          margin-bottom: 8px;
+          filter: grayscale(20%);
+          transition: all 0.3s;
+        }
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background: $accent-orange;
+          transform: scaleX(0);
+          transition: transform 0.3s;
+        }
+        
+        &:hover {
+          background: rgba(255,255,255,0.05);
+          color: white;
+          
+          .nav-icon {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+          }
+          
+          &::after { transform: scaleX(1); }
+        }
+      }
     }
   }
   
-  // Верхние пункты меню
-  > .nav-container > ul > li > a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 8px;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-    height: 70px;
-    box-sizing: border-box;
-    
-    &:hover {
-      background: rgba(233, 69, 96, 0.2);
-      color: white;
-    }
-  }
-  
-  .nav-icon {
-    font-size: 22px;
-    margin-bottom: 5px;
-    display: block;
-    transition: transform 0.3s;
-  }
-  
-  li:hover .nav-icon {
-    transform: translateY(-3px);
-  }
-  
-  // Мобильная стрелка (скрыта на десктопе)
   .mobile-arrow {
     display: none;
-    margin-left: auto;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.6);
     font-size: 12px;
-    transition: transform 0.3s;
   }
 }
 
-// ============================================
-// ВЫПАДАЮЩЕЕ МЕНЮ
-// ============================================
+// Выпадающее меню
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -146,12 +160,11 @@ $accent-orange: #e94560;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s;
   border-top: 3px solid $accent-orange;
   text-align: left;
   overflow: hidden;
   
-  // Широкое меню (2 колонки)
   &.wide {
     min-width: 600px;
     left: 50%;
@@ -164,32 +177,26 @@ $accent-orange: #e94560;
     }
   }
   
-  // Появление при наведении
   .service-navbar li:hover & {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     
-    &.wide {
-      transform: translateX(-50%) translateY(0);
-    }
+    &.wide { transform: translateX(-50%) translateY(0); }
   }
 }
 
-// Заголовок внутри выпадашки
 .dropdown-header {
-  background: $primary-blue;
+  background: $primary-dark;
   color: white;
   padding: 12px 20px;
   font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
   font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   grid-column: 1 / -1;
-  border-bottom: 2px solid $accent-orange;
 }
 
-// Пункты меню с ценами
 .dropdown-item {
   display: flex;
   justify-content: space-between;
@@ -200,7 +207,6 @@ $accent-orange: #e94560;
   font-size: 14px;
   border-bottom: 1px solid #ecf0f1;
   transition: all 0.2s;
-  line-height: 1.3;
   
   &:hover {
     background: #f8f9fa;
@@ -208,11 +214,8 @@ $accent-orange: #e94560;
     padding-left: 25px;
   }
   
-  &:last-child {
-    border-bottom: none;
-  }
+  &:last-child { border-bottom: none; }
   
-  // Цена (красный тег как на скриншоте GSMMaster)
   .price-tag {
     color: $accent-orange;
     font-weight: 700;
@@ -223,18 +226,16 @@ $accent-orange: #e94560;
     padding: 4px 10px;
     border-radius: 4px;
     border: 1px solid rgba(233, 69, 96, 0.3);
-    transition: all 0.2s;
   }
   
   &:hover .price-tag {
     background: $accent-orange;
     color: white;
-    border-color: $accent-orange;
   }
 }
 
 // ============================================
-// ОСНОВНОЙ КОНТЕНТ (твой текущий)
+// ОСТАЛЬНЫЕ СТИЛИ (твои)
 // ============================================
 .main-content {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -251,15 +252,9 @@ $accent-orange: #e94560;
   padding-bottom: 0.3em;
   margin-top: 2rem;
   
-  // Якоря для плавной прокрутки
-  &[id] {
-    scroll-margin-top: 90px; // Отступ для фиксированного меню
-  }
+  &[id] { scroll-margin-top: 90px; }
 }
 
-// ============================================
-// ТАБЛИЦЫ (твои текущие)
-// ============================================
 .price-table {
   width: 100%;
   max-width: 100%;
@@ -275,10 +270,7 @@ $accent-orange: #e94560;
     padding: 12px;
     border: 1px solid #ddd;
     word-wrap: break-word;
-    overflow-wrap: break-word;
-    word-break: break-word;
     vertical-align: top;
-    box-sizing: border-box;
   }
   
   th:first-child, td:first-child { text-align: left; }
@@ -301,9 +293,6 @@ $accent-orange: #e94560;
   tr:hover { background-color: #f5f5f5; }
 }
 
-// ============================================
-// КНОПКИ (твои текущие)
-// ============================================
 .btn {
   display: inline-block;
   margin: 0.5rem 0.5rem 0.5rem 0;
@@ -316,7 +305,6 @@ $accent-orange: #e94560;
   border: 2px solid $accent-orange;
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.3s;
   
   &:hover {
     background-color: darken($accent-orange, 10%);
@@ -325,178 +313,62 @@ $accent-orange: #e94560;
   }
 }
 
-// ============================================
-// ГАЛЕРЕЯ (твоя текущая)
-// ============================================
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin: 2rem 0;
-}
-
-.gallery-thumb {
-  position: relative;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  cursor: zoom-in;
-  border: 2px solid transparent;
-  display: block;
-  transition: all 0.3s;
-  
-  &:hover {
-    border-color: $accent-orange;
-    transform: translateY(-5px);
-  }
-  
-  img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-  }
-}
-
-.lightbox {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.95);
-  z-index: 9999;
-  justify-content: center;
-  align-items: center;
-  
-  &:target { display: flex; }
-  
-  img {
-    max-width: 90%;
-    max-height: 80vh;
-    border: 3px solid $accent-orange;
-  }
-}
-
-.close-btn {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  color: white;
-  font-size: 50px;
-  text-decoration: none;
-}
-
-// ============================================
-// АДАПТИВНОСТЬ
-// ============================================
+// Мобильная адаптация меню
 @media screen and (max-width: 968px) {
-  .page-header h1 { font-size: 1.5rem; }
-  
-  // Мобильное меню (аккордеон)
   .service-navbar {
+    width: 100%;
+    margin-left: 0;
     position: relative;
     
     ul { flex-direction: column; }
     
-    li {
+    > .nav-container > ul > li {
       width: 100%;
+      border-right: none;
       border-bottom: 1px solid rgba(255,255,255,0.1);
       
-      &:not(:last-child) { border-right: none; }
-    }
-    
-    > .nav-container > ul > li > a {
-      flex-direction: row;
-      justify-content: flex-start;
-      height: auto;
-      padding: 15px 20px;
-      font-size: 14px;
+      > a {
+        flex-direction: row;
+        justify-content: flex-start;
+        height: auto;
+        padding: 15px 20px;
+        
+        .nav-icon {
+          margin-right: 15px;
+          margin-bottom: 0;
+          font-size: 22px;
+        }
+        
+        &::after { display: none; }
+      }
       
-      .nav-icon {
-        margin-right: 15px;
-        margin-bottom: 0;
-        font-size: 20px;
+      &.active .dropdown-menu {
+        display: block;
+        position: static;
+        width: 100%;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        box-shadow: none;
+        border-top: 2px solid $accent-orange;
       }
     }
     
-    .mobile-arrow { 
-      display: inline-block; 
-      margin-left: auto;
-    }
-    
-    li.active .mobile-arrow { transform: rotate(180deg); }
+    .mobile-arrow { display: block; }
   }
   
-  .dropdown-menu, 
   .dropdown-menu.wide {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    display: none;
     min-width: auto;
-    width: 100%;
-    box-shadow: none;
-    border-top: none;
-    border-radius: 0;
+    left: 0;
     
     .dropdown-grid { grid-template-columns: 1fr; }
   }
   
   .dropdown-item {
     padding-left: 60px;
-    background: rgba(255,255,255,0.05);
-    color: white;
-    border-bottom-color: rgba(255,255,255,0.1);
-    
-    .price-tag {
-      background: rgba(233, 69, 96, 0.3);
-      color: white;
-    }
-    
-    &:hover {
-      background: rgba(233, 69, 96, 0.2);
-      color: white;
-      padding-left: 65px;
-    }
+    background: #f8f9fa;
   }
   
-  .dropdown-header {
-    background: rgba(0,0,0,0.3);
-  }
-  
-  // Активное состояние для мобильных
-  .service-navbar li.active .dropdown-menu {
-    display: block;
-    animation: slideDown 0.3s ease;
-  }
-  
-  @keyframes slideDown {
-    from { opacity: 0; max-height: 0; }
-    to { opacity: 1; max-height: 1000px; }
-  }
-  
-  // Контент
   .main-content h2[id] { scroll-margin-top: 10px; }
   .btn { display: block; width: 100%; text-align: center; margin: 0.5rem 0; }
-  .gallery-grid { grid-template-columns: 1fr; }
-}
-
-@media screen and (max-width: 480px) {
-  .service-navbar > .nav-container > ul > li > a {
-    font-size: 12px;
-    padding: 12px 15px;
-  }
-  
-  .dropdown-item {
-    font-size: 13px;
-    padding: 12px 15px 12px 50px;
-    
-    .price-tag {
-      font-size: 12px;
-      padding: 3px 6px;
-    }
-  }
 }
