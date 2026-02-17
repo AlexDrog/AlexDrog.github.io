@@ -44,6 +44,7 @@ layout: default
 
 ## Примеры работ (клик для увеличения)
 
+{::nomarkdown}
 &lt;h3 style="text-align: center; border-bottom: none; margin-bottom: 20px;"&gt;Замена термопасты&lt;/h3&gt;
 
 &lt;div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; align-items: start;"&gt;
@@ -65,6 +66,7 @@ layout: default
 &lt;/div&gt;
 
 &lt;/div&gt;
+{:/nomarkdown}
 
 &lt;!-- Lightbox для термопасты --&gt;
 &lt;div id="photo1" class="lightbox"&gt;
@@ -79,6 +81,7 @@ layout: default
   &lt;div class="lightbox-caption"&gt;После: температура норма, тихая работа&lt;/div&gt;
 &lt;/div&gt;
 
+{::nomarkdown}
 &lt;h3 style="text-align: center; border-bottom: none; margin-bottom: 20px;"&gt;Разблокировка Xiaomi&lt;/h3&gt;
 
 &lt;div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; align-items: start;"&gt;
@@ -100,6 +103,7 @@ layout: default
 &lt;/div&gt;
 
 &lt;/div&gt;
+{:/nomarkdown}
 
 &lt;!-- Lightbox для Xiaomi --&gt;
 &lt;div id="photo3" class="lightbox"&gt;
