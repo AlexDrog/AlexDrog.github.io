@@ -8,26 +8,27 @@ title: Услуги и цены
 **📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж)** | **📞 [+375 (29) 725-69-82](tel:+375297256982)**
 
 ---
-<h2>💽 SOFT</h2>
-<table class="price-table">
+
+<h2>💿 Программное обеспечение</h2>
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
 {% for item in site.data.prices.soft %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
 
 <h2>🖥️ Компьютеры и ноутбуки</h2>
-<table class="price-table">
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
 {% for item in site.data.prices.computers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
 
 <h2>📱 Смартфоны и планшеты</h2>
-<table class="price-table">
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
 {% for item in site.data.prices.phones %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
 
 <h2>🗺️ Навигаторы</h2>
-<table class="price-table">
+<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
 {% for item in site.data.prices.navigators %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
