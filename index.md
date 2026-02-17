@@ -8,8 +8,10 @@ layout: default
 
 ### 📞 [+375 (29) 725-69-82](tel:+375297256982)
 
-**Александр** &lt;span style="background: #e94560; color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; vertical-align: middle; margin-left: 5px;"&gt;с 2008 года&lt;/span&gt;  
-*Мастер по ремонту · 17 лет опыта*
+&lt;p&gt;
+  &lt;strong&gt;Александр&lt;/strong&gt; &lt;span style="background-color: #e94560; color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.8em;"&gt;с 2008 года&lt;/span&gt;&lt;br&gt;
+  &lt;em&gt;Мастер по ремонту · 17 лет опыта&lt;/em&gt;
+&lt;/p&gt;
 
 📍 **[г. Дрогичин, ул. Ленина, 141 а](https://yandex.ru/maps/?text= г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)** (2 этаж)
 
