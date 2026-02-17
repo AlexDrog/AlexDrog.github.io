@@ -61,13 +61,10 @@ layout: default
 </div>
 
 <a href="#photo2" class="gallery-thumb">
-<img src="./assets/images/temp_posle.jpg" alt="После чистки">
 </a>
 <div id="photo2" class="lightbox">
 <a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/temp_posle.jpg" alt="После чистки">
 <div class="lightbox-caption">После: температура норма, тихая работа</div>
-</div>
 
 </div>
 
