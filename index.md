@@ -31,27 +31,51 @@ layout: default
 
 ## Примеры работ (клик для увеличения)
 
-&lt;div class="gallery-grid"&gt;
+<p><strong>Замена термопасты: До и После</strong></p>
+<div class="gallery-grid">
 
-&lt;a href="#photo1" class="gallery-thumb"&gt;
-&lt;img src="./assets/images/termopasta.jpg" alt="Замена термопасты"&gt;
-&lt;/a&gt;
-&lt;div id="photo1" class="lightbox"&gt;
-&lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
-&lt;img src="./assets/images/termopasta.jpg" alt="Замена термопасты"&gt;
-&lt;div class="lightbox-caption"&gt;Чистка ноутбука и замена термопасты&lt;/div&gt;
-&lt;/div&gt;
+<a href="#photo1" class="gallery-thumb">
+<img src="./assets/images/termopasta.jpg" alt="До чистки">
+</a>
+<div id="photo1" class="lightbox">
+<a href="#" class="close-btn">&times;</a>
+<img src="./assets/images/termopasta.jpg" alt="До чистки">
+<div class="lightbox-caption">До: перегрев, шум вентилятора</div>
+</div>
 
-&lt;a href="#photo2" class="gallery-thumb"&gt;
-&lt;img src="./assets/images/redmi9a.jpg" alt="Разблокировка"&gt;
-&lt;/a&gt;
-&lt;div id="photo2" class="lightbox"&gt;
-&lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
-&lt;img src="./assets/images/redmi9a.jpg" alt="Разблокировка"&gt;
-&lt;div class="lightbox-caption"&gt;Xiaomi Redmi 9A — удаление Mi-Account&lt;/div&gt;
-&lt;/div&gt;
+<a href="#photo2" class="gallery-thumb">
+<img src="./assets/images/temp_posle.jpg" alt="После чистки">
+</a>
+<div id="photo2" class="lightbox">
+<a href="#" class="close-btn">&times;</a>
+<img src="./assets/images/temp_posle.jpg" alt="После чистки">
+<div class="lightbox-caption">После: температура норма, тихая работа</div>
+</div>
 
-&lt;/div&gt;
+</div>
+
+<p><strong>Разблокировка Xiaomi: До и После</strong></p>
+<div class="gallery-grid">
+
+<a href="#photo3" class="gallery-thumb">
+<img src="./assets/images/redmi9a.jpg" alt="Заблокирован">
+</a>
+<div id="photo3" class="lightbox">
+<a href="#" class="close-btn">&times;</a>
+<img src="./assets/images/redmi9a.jpg" alt="Заблокирован">
+<div class="lightbox-caption">До: запрос Mi-Account, телефон заблокирован</div>
+</div>
+
+<a href="#photo4" class="gallery-thumb">
+<img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован">
+</a>
+<div id="photo4" class="lightbox">
+<a href="#" class="close-btn">&times;</a>
+<img src="./assets/images/redmi9a_posle.jpg" alt="Разблокирован">
+<div class="lightbox-caption">После: полный доступ, все функции работают</div>
+</div>
+
+</div>
 
 ## Почему обращаются ко мне
 
