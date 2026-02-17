@@ -32,7 +32,7 @@ $accent-orange: #e94560;
 }
 
 .page-header::after {
-  content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Вт-Пт 10:00-18:00, Сб-Вс 10:00-14:00,Понедельник-ВЫХОДНОЙ';
+  content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Вт-Пт 10:00-18:00, Сб-Вс 10:00-14:00, Пн-ВЫХОДНОЙ';
   display: block;
   color: rgba(255,255,255,0.95);
   font-size: 1rem;
@@ -72,6 +72,49 @@ $accent-orange: #e94560;
   border-bottom: 2px solid $accent-orange;
   padding-bottom: 0.3em;
   margin-top: 2rem;
+}
+
+/* ТАБЛИЦЫ — равномерные колонки */
+.main-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  table-layout: fixed;
+}
+
+.main-content table th {
+  background: $primary-blue;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.main-content table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.main-content table tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Ширина колонок: 50% | 25% | 25% */
+.main-content table th:first-child,
+.main-content table td:first-child {
+  width: 50%;
+}
+
+.main-content table th:nth-child(2),
+.main-content table td:nth-child(2) {
+  width: 25%;
+  text-align: center;
+}
+
+.main-content table th:nth-child(3),
+.main-content table td:nth-child(3) {
+  width: 25%;
 }
 
 .btn {
@@ -155,6 +198,7 @@ $accent-orange: #e94560;
   text-decoration: none;
 }
 
+/* МОБИЛЬНАЯ ВЕРСИЯ */
 @media screen and (max-width: 768px) {
   .page-header h1 {
     font-size: 1.5rem;
@@ -167,27 +211,4 @@ $accent-orange: #e94560;
   .gallery-grid {
     grid-template-columns: 1fr;
   }
-/* Равномерные таблицы на странице услуг */
-.main-content table {
-  width: 100%;
-  table-layout: fixed;
 }
-
-/* Первая колонка (Услуга) — 50% */
-.main-content table th:first-child,
-.main-content table td:first-child {
-  width: 50%;
-}
-
-/* Вторая колонка (Цена) — 25% */
-.main-content table th:nth-child(2),
-.main-content table td:nth-child(2) {
-  width: 25%;
-  text-align: center; /* Цены по центру */
-}
-
-/* Третья колонка (Примечание/Срок) — 25% */
-.main-content table th:nth-child(3),
-.main-content table td:nth-child(3) {
-  width: 25%;
-}}
