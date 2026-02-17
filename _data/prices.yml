@@ -1,15 +1,61 @@
+# Компьютеры и ноутбуки
 computers:
   - name: Диагностика
     price: Бесплатно
-    time: 15 мин
+    note: 15 мин
+    
   - name: Чистка + замена термопасты
     price: от 50 BYN
-    time: 1-2 часа
+    note: 1-2 часа
+    
+  - name: Замена разъёма питания
+    price: от 80 BYN
+    note: 2-4 часа
+    
+  - name: Ремонт после залития
+    price: от 150 BYN
+    note: 1-3 дня
+    
+  - name: Установка Windows + софт
+    price: 50 BYN
+    note: 1-3 часа
 
+# Смартфоны и планшеты
 phones:
   - name: Замена дисплея
     price: от 60 BYN
     note: Оригинал/копия
+    
   - name: Разблокировка FRP
     price: от 50 BYN
     note: Без потери данных
+    
+  - name: Снятие Mi-Account
+    price: от 70 BYN
+    note: Разблокировка
+    
+  - name: Восстановление "кирпича"
+    price: от 60 BYN
+    note: QFIL, SP Flash
+    
+  - name: Замена разъёма зарядки
+    price: от 35 BYN
+    note: Пайка под микроскопом
+
+# Навигаторы
+navigators:
+  - name: Обновление Navitel
+    price: от 25 BYN
+    note: Все регионы
+    
+  - name: Установка IGO Primo
+    price: от 35 BYN
+    note: Карты EU/RU/BY
+    
+  - name: Обновление Garmin
+    price: от 40 BYN
+    note: Любые карты
+    
+  - name: Русификация GPS
+    price: от 30 BYN
+    note: Китайские модели
