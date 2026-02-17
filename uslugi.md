@@ -47,10 +47,6 @@ title: Услуги и цены
 
 **💡 Бесплатная диагностика — платишь только за ремонт!**
 
-&lt;p&gt;
-&lt;a href="./" class="btn"&gt;← На главную&lt;/a&gt;
-&lt;a href="https://t.me/alexdrog81" class="btn"&gt;Записаться в Telegram&lt;/a&gt;
-&lt;a href="tel:+375297256982" class="btn"&gt;Позвонить&lt;/a&gt;
-&lt;/p&gt;
+&lt;p&gt;&lt;a href="./" class="btn"&gt;← На главную&lt;/a&gt; &lt;a href="https://t.me/alexdrog81" class="btn"&gt;Записаться в Telegram&lt;/a&gt; &lt;a href="tel:+375297256982" class="btn"&gt;Позвонить&lt;/a&gt;&lt;/p&gt;
 
 &lt;/div&gt;
