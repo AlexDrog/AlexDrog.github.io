@@ -3,13 +3,11 @@ layout: default
 title: Услуги и цены
 ---
 
-&lt;div align="center"&gt;
-
 ### 📋 Прайс-лист на услуги
+{: style="text-align: center"}
 
 **г. Дрогичин** | 📞 [+375 (29) 725-69-82](tel:+375297256982)
-
-&lt;/div&gt;
+{: style="text-align: center"}
 
 ---
 
@@ -43,10 +41,8 @@ title: Услуги и цены
 
 ---
 
-&lt;div align="center"&gt;
-
 **💡 Бесплатная диагностика — платишь только за ремонт!**
+{: style="text-align: center"}
 
-&lt;p&gt;&lt;a href="./" class="btn"&gt;← На главную&lt;/a&gt; &lt;a href="https://t.me/alexdrog81" class="btn"&gt;Записаться в Telegram&lt;/a&gt; &lt;a href="tel:+375297256982" class="btn"&gt;Позвонить&lt;/a&gt;&lt;/p&gt;
-
-&lt;/div&gt;
+[← На главную](./){: .btn} [Записаться в Telegram](https://t.me/alexdrog81){: .btn} [Позвонить](tel:+375297256982){: .btn}
+{: style="text-align: center"}
