@@ -39,7 +39,7 @@ layout: default
 </a>
 <div id="photo1" class="lightbox">
 <a href="#" class="close-btn">&times;</a>
-<img src="./assets/images/termopasta.jpg" alt="До чистки">
+<img src="./assets/images/temp_posle.jpg" alt="До чистки">
 <div class="lightbox-caption">До: перегрев, шум вентилятора</div>
 </div>
 
