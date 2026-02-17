@@ -60,20 +60,6 @@ layout: default
 
 <details><summary><h3 style="display:inline; cursor:pointer;">🛑 Убрать рекламу на смартфоне</h3></summary><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"><div style="text-align:center;"><div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🔴 ДО</div><a href="#a1" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/ads_popup.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Всплывающая реклама</p></div><div style="text-align:center;"><div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🟢 ПОСЛЕ</div><a href="#a2" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/ads_clean.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Чистая система</p></div></div></details>
 
-<!-- Lightbox для всех фото (вне спойлеров) -->
-<div id="t1" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/termopasta.jpg" alt="До"><div class="lightbox-caption">🔴 До: перегрев 95°C</div></div>
-<div id="t2" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/temp_posle.jpg" alt="После"><div class="lightbox-caption">🟢 После: 65°C, тихая работа</div></div>
-<div id="d1" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/display_crack.jpg" alt="До"><div class="lightbox-caption">🔴 До: разбитый экран</div></div>
-<div id="d2" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/display_new.jpg" alt="После"><div class="lightbox-caption">🟢 После: новый дисплей</div></div>
-<div id="n1" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/navi_old.jpg" alt="До"><div class="lightbox-caption">🔴 До: устаревшие карты</div></div>
-<div id="n2" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/navi_new.jpg" alt="После"><div class="lightbox-caption">🟢 После: Navitel 2024</div></div>
-<div id="g1" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/frp_lock.jpg" alt="До"><div class="lightbox-caption">🔴 До: FRP блокировка</div></div>
-<div id="g2" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/frp_unlock.jpg" alt="После"><div class="lightbox-caption">🟢 После: полный доступ</div></div>
-<div id="m1" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/redmi9a.jpg" alt="До"><div class="lightbox-caption">🔴 До: запрос Mi-Account</div></div>
-<div id="m2" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/redmi9a_posle.jpg" alt="После"><div class="lightbox-caption">🟢 После: аккаунт удалён</div></div>
-<div id="a1" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/ads_popup.jpg" alt="До"><div class="lightbox-caption">🔴 До: вирусы и реклама</div></div>
-<div id="a2" class="lightbox"><a href="#" class="close-btn">&times;</a><img src="./assets/images/ads_clean.jpg" alt="После"><div class="lightbox-caption">🟢 После: чистая система</div></div>
-
 ## Почему обращаются ко мне
 
 ✅ **Бесплатная диагностика** — платишь только за ремонт  
