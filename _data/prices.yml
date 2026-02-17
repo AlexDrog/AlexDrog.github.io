@@ -11,12 +11,8 @@ soft:
   - name: Драйверы (одно устройство)
     price: от 10 BYN
     note: Поиск и установка, 30 мин
-    
-  - name: Настройка 1С + обновление конфигурации
-    price: от 40 BYN
-    note: Под твои задачи (TTN, CMR, прокси)
-    
-  - name: Установка Linux / dual-boot
+ 
+   - name: Установка Linux / dual-boot
     price: от 60 BYN
     note: Ubuntu/Debian + драйверы
     
