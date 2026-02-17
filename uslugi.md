@@ -37,6 +37,7 @@ title: Услуги и цены
   const countSpan = document.getElementById('foundCount');
   
   function findHeader(table) {
+    // Ищем h2 перед таблицей (может быть разделитель hr между ними)
     let element = table.previousElementSibling;
     while (element && element.tagName !== 'H2') {
       element = element.previousElementSibling;
@@ -50,6 +51,7 @@ title: Услуги и цены
     let totalFound = 0;
     let hasVisibleTables = false;
     
+    // Показываем/скрываем кнопку очистки
     clearBtn.style.display = searchTerm.length > 0 ? 'block' : 'none';
     
     tables.forEach(table => {
@@ -57,6 +59,7 @@ title: Услуги и цены
       let tableHasVisibleRows = false;
       
       rows.forEach((row) => {
+        // Пропускаем заголовок таблицы (первая строка с th)
         if (row.querySelector('th')) return;
         
         const text = row.innerText.toLowerCase();
@@ -72,6 +75,7 @@ title: Услуги и цены
       
       const sectionHeader = findHeader(table);
       
+      // ПОЛНОСТЬЮ скрываем таблицу и заголовок, если нет данных
       if (tableHasVisibleRows) {
         hasVisibleTables = true;
         table.style.display = '';
@@ -82,6 +86,7 @@ title: Услуги и цены
       }
     });
     
+    // Обновляем статистику
     if (searchTerm.length > 0) {
       statsDiv.style.display = 'block';
       countSpan.textContent = totalFound;
@@ -89,6 +94,7 @@ title: Услуги и цены
     } else {
       statsDiv.style.display = 'none';
       noResultsDiv.style.display = 'none';
+      // ВОССТАНАВЛИВАЕМ все при пустом поиске
       tables.forEach(table => {
         table.style.display = '';
         const rows = table.querySelectorAll('tr');
@@ -99,8 +105,10 @@ title: Услуги и цены
     }
   }
   
+  // Основной обработчик
   searchInput.addEventListener('input', filterTables);
   
+  // Подсветка активного поля
   searchInput.addEventListener('focus', function() {
     this.style.borderColor = '#e94560';
     this.style.boxShadow = '0 0 0 3px rgba(233, 69, 96, 0.1)';
@@ -113,7 +121,7 @@ title: Услуги и цены
 })();
 </script>
 
-<!--**📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж)** | **📞 [+375 (29) 725-69-82](tel:+375297256982)**-->
+**📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж)** | **📞 [+375 (29) 725-69-82](tel:+375297256982)**
 
 ---
 
@@ -175,16 +183,4 @@ title: Услуги и цены
 
 💡 **Бесплатная диагностика — платишь только за ремонт!**
 
-**[← На главную](./)** | **[💬 Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
-
-<script>
-(function() {
-  if (window.innerWidth <= 768) {
-    var btn = document.createElement('a');
-    btn.href = 'tel:+375297256982';
-    btn.innerHTML = '<span style="font-size:22px;">📞</span> <span style="font-weight:600;">Позвонить</span>';
-    btn.style.cssText = 'position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#e94560 0%,#c9183a 100%);color:white;padding:14px 24px;border-radius:50px;text-decoration:none;z-index:9999;box-shadow:0 6px 20px rgba(233,69,96,0.4);display:flex;align-items:center;gap:10px;font-size:16px;border:2px solid rgba(255,255,255,0.2);';
-    document.body.appendChild(btn);
-  }
-})();
-</script>
+**[← На главную](./)** | **[💬 Записаться в Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
