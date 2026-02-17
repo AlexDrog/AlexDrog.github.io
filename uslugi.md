@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Услуги и цены
+permalink: /uslugi/
 ---
 
 # 📋 Прайс-лист
@@ -30,160 +31,206 @@ title: Услуги и цены
 
 <script>
 (function() {
-  const searchInput = document.getElementById('searchInput');
-  const clearBtn = document.getElementById('clearBtn');
-  const statsDiv = document.getElementById('searchStats');
-  const noResultsDiv = document.getElementById('noResults');
-  const countSpan = document.getElementById('foundCount');
-  
-  function findHeader(table) {
-    let element = table.previousElementSibling;
-    while (element && element.tagName !== 'H2') {
-      element = element.previousElementSibling;
+  // Ждем загрузки DOM
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearBtn');
+    const statsDiv = document.getElementById('searchStats');
+    const noResultsDiv = document.getElementById('noResults');
+    const countSpan = document.getElementById('foundCount');
+    
+    if (!searchInput) return; // Защита если элемент не найден
+    
+    function findHeader(table) {
+      let element = table.previousElementSibling;
+      while (element && element.tagName !== 'H2') {
+        element = element.previousElementSibling;
+      }
+      return element;
     }
-    return element;
-  }
-  
-  function filterTables() {
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    const tables = document.querySelectorAll('.price-table');
-    let totalFound = 0;
-    let hasVisibleTables = false;
     
-    clearBtn.style.display = searchTerm.length > 0 ? 'block' : 'none';
-    
-    tables.forEach(table => {
-      const rows = table.querySelectorAll('tr');
-      let tableHasVisibleRows = false;
+    function filterTables() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      const tables = document.querySelectorAll('.price-table');
+      let totalFound = 0;
+      let hasVisibleTables = false;
       
-      rows.forEach((row) => {
-        if (row.querySelector('th')) return;
+      clearBtn.style.display = searchTerm.length > 0 ? 'block' : 'none';
+      
+      tables.forEach(table => {
+        const rows = table.querySelectorAll('tr');
+        let tableHasVisibleRows = false;
         
-        const text = row.innerText.toLowerCase();
-        const isMatch = text.includes(searchTerm);
+        rows.forEach((row) => {
+          if (row.querySelector('th')) return;
+          
+          const text = row.innerText.toLowerCase();
+          const isMatch = text.includes(searchTerm);
+          
+          row.style.display = isMatch ? '' : 'none';
+          
+          if (isMatch) {
+            totalFound++;
+            tableHasVisibleRows = true;
+          }
+        });
         
-        row.style.display = isMatch ? '' : 'none';
+        const sectionHeader = findHeader(table);
         
-        if (isMatch) {
-          totalFound++;
-          tableHasVisibleRows = true;
+        if (tableHasVisibleRows) {
+          hasVisibleTables = true;
+          table.style.display = '';
+          if (sectionHeader) sectionHeader.style.display = '';
+        } else {
+          table.style.display = 'none';
+          if (sectionHeader) sectionHeader.style.display = 'none';
         }
       });
       
-      const sectionHeader = findHeader(table);
-      
-      if (tableHasVisibleRows) {
-        hasVisibleTables = true;
-        table.style.display = '';
-        if (sectionHeader) sectionHeader.style.display = '';
+      if (searchTerm.length > 0) {
+        statsDiv.style.display = 'block';
+        countSpan.textContent = totalFound;
+        noResultsDiv.style.display = hasVisibleTables ? 'none' : 'block';
       } else {
-        table.style.display = 'none';
-        if (sectionHeader) sectionHeader.style.display = 'none';
+        statsDiv.style.display = 'none';
+        noResultsDiv.style.display = 'none';
+        tables.forEach(table => {
+          table.style.display = '';
+          const rows = table.querySelectorAll('tr');
+          rows.forEach(row => row.style.display = '');
+          const sectionHeader = findHeader(table);
+          if (sectionHeader) sectionHeader.style.display = '';
+        });
       }
+    }
+    
+    searchInput.addEventListener('input', filterTables);
+    
+    searchInput.addEventListener('focus', function() {
+      this.style.borderColor = '#e94560';
+      this.style.boxShadow = '0 0 0 3px rgba(233, 69, 96, 0.1)';
     });
     
-    if (searchTerm.length > 0) {
-      statsDiv.style.display = 'block';
-      countSpan.textContent = totalFound;
-      noResultsDiv.style.display = hasVisibleTables ? 'none' : 'block';
-    } else {
-      statsDiv.style.display = 'none';
-      noResultsDiv.style.display = 'none';
-      tables.forEach(table => {
-        table.style.display = '';
-        const rows = table.querySelectorAll('tr');
-        rows.forEach(row => row.style.display = '');
-        const sectionHeader = findHeader(table);
-        if (sectionHeader) sectionHeader.style.display = '';
-      });
-    }
-  }
-  
-  searchInput.addEventListener('input', filterTables);
-  
-  searchInput.addEventListener('focus', function() {
-    this.style.borderColor = '#e94560';
-    this.style.boxShadow = '0 0 0 3px rgba(233, 69, 96, 0.1)';
-  });
-  
-  searchInput.addEventListener('blur', function() {
-    this.style.borderColor = '#ddd';
-    this.style.boxShadow = 'none';
+    searchInput.addEventListener('blur', function() {
+      this.style.borderColor = '#ddd';
+      this.style.boxShadow = 'none';
+    });
+    
+    // Поиск по Enter
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        filterTables();
+      }
+    });
   });
 })();
 </script>
 
-<!--**📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж)** | **📞 [+375 (29) 725-69-82](tel:+375297256982)**-->
-
 ---
 
+{% assign prices = site.data.prices %}
+
+{% if prices.soft and prices.soft.size > 0 %}
 <h2 id="soft">💿 Программное обеспечение</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
-{% for item in site.data.prices.soft %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.soft %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
+{% if prices.computers and prices.computers.size > 0 %}
 <h2 id="computers">🖥️ Компьютеры и ноутбуки</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
-{% for item in site.data.prices.computers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.computers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
+{% if prices.phones and prices.phones.size > 0 %}
 <h2 id="phones">📱 Смартфоны и планшеты</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in site.data.prices.phones %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.phones %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
+{% if prices.navigators and prices.navigators.size > 0 %}
 <h2 id="auto">🗺️ Навигаторы и автоэлектроника</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in site.data.prices.navigators %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.navigators %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
+{% if prices.network and prices.network.size > 0 %}
 <h2 id="network">🌐 Сети и интернет</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in site.data.prices.network %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.network %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
+{% if prices.printers and prices.printers.size > 0 %}
 <h2 id="printers">🖨️ Принтеры и МФУ</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in site.data.prices.printers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.printers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
+{% if prices.recovery and prices.recovery.size > 0 %}
 <h2 id="recovery">💾 Восстановление данных</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in site.data.prices.recovery %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.recovery %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
+{% if prices.electronics and prices.electronics.size > 0 %}
 <h2 id="electronics">🔧 Электроника и мелкая техника</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in site.data.prices.electronics %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.electronics %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
+{% if prices.remote and prices.remote.size > 0 %}
 <h2 id="remote">💻 Удалённая помощь и консультации</h2>
 <table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in site.data.prices.remote %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for item in prices.remote %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
+{% endif %}
 
 ---
 
-💡 **Бесплатная диагностика — платишь только за ремонт!**
+<div style="background: #e8f4f8; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8; margin: 20px 0;">
+  <strong>💡 Бесплатная диагностика — платишь только за ремонт!</strong><br>
+  <small>Цены актуальны на {{ site.time | date: "%d.%m.%Y" }}</small>
+</div>
 
-**[← На главную](./)** | **[💬 Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
+<div style="text-align: center; margin: 30px 0;">
+  <a href="{{ site.baseurl }}/" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #16213e; color: white; text-decoration: none; border-radius: 5px;">← На главную</a>
+  <a href="https://t.me/alexdrog81" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px;">💬 Telegram</a>
+  <a href="tel:+375297256982" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #e94560; color: white; text-decoration: none; border-radius: 5px;">📞 Позвонить</a>
+</div>
 
 <script>
+// Мобильная кнопка звонка
 (function() {
-  if (window.innerWidth <= 768) {
+  // Проверяем ширину экрана
+  if (window.innerWidth <= 768 && !document.getElementById('mobile-call-btn')) {
     var btn = document.createElement('a');
+    btn.id = 'mobile-call-btn';
     btn.href = 'tel:+375297256982';
     btn.innerHTML = '<span style="font-size:22px;">📞</span> <span style="font-weight:600;">Позвонить</span>';
-    btn.style.cssText = 'position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#e94560 0%,#c9183a 100%);color:white;padding:14px 24px;border-radius:50px;text-decoration:none;z-index:9999;box-shadow:0 6px 20px rgba(233,69,96,0.4);display:flex;align-items:center;gap:10px;font-size:16px;border:2px solid rgba(255,255,255,0.2);';
+    btn.style.cssText = 'position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#e94560 0%,#c9183a 100%);color:white;padding:14px 24px;border-radius:50px;text-decoration:none;z-index:9999;box-shadow:0 6px 20px rgba(233,69,96,0.4);display:flex;align-items:center;gap:10px;font-size:16px;border:2px solid rgba(255,255,255,0.2);transition: transform 0.2s;';
+    
+    // Эффект при наведении
+    btn.onmouseover = function() { this.style.transform = 'scale(1.05)'; };
+    btn.onmouseout = function() { this.style.transform = 'scale(1)'; };
+    
     document.body.appendChild(btn);
   }
 })();
