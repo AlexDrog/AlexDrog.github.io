@@ -36,6 +36,15 @@ title: Услуги и цены
   const noResultsDiv = document.getElementById('noResults');
   const countSpan = document.getElementById('foundCount');
   
+  function findHeader(table) {
+    // Ищем h2 перед таблицей (может быть разделитель hr между ними)
+    let element = table.previousElementSibling;
+    while (element && element.tagName !== 'H2') {
+      element = element.previousElementSibling;
+    }
+    return element;
+  }
+  
   function filterTables() {
     const searchTerm = searchInput.value.toLowerCase().trim();
     const tables = document.querySelectorAll('.price-table');
@@ -50,7 +59,7 @@ title: Услуги и цены
       let tableHasVisibleRows = false;
       
       rows.forEach((row) => {
-        // Пропускаем заголовок (первая строка с th)
+        // Пропускаем заголовок таблицы (первая строка с th)
         if (row.querySelector('th')) return;
         
         const text = row.innerText.toLowerCase();
@@ -64,13 +73,17 @@ title: Услуги и цены
         }
       });
       
-      // Скрываем/показываем заголовок секции (h2 перед таблицей)
-      const sectionHeader = table.previousElementSibling;
-      if (sectionHeader && sectionHeader.tagName === 'H2') {
-        sectionHeader.style.display = tableHasVisibleRows ? '' : 'none';
-      }
+      const sectionHeader = findHeader(table);
       
-      if (tableHasVisibleRows) hasVisibleTables = true;
+      // ПОЛНОСТЬЮ скрываем таблицу и заголовок, если нет данных
+      if (tableHasVisibleRows) {
+        hasVisibleTables = true;
+        table.style.display = '';
+        if (sectionHeader) sectionHeader.style.display = '';
+      } else {
+        table.style.display = 'none';
+        if (sectionHeader) sectionHeader.style.display = 'none';
+      }
     });
     
     // Обновляем статистику
@@ -81,14 +94,13 @@ title: Услуги и цены
     } else {
       statsDiv.style.display = 'none';
       noResultsDiv.style.display = 'none';
-      // Показываем все строки при пустом поиске
+      // ВОССТАНАВЛИВАЕМ все при пустом поиске
       tables.forEach(table => {
+        table.style.display = '';
         const rows = table.querySelectorAll('tr');
         rows.forEach(row => row.style.display = '');
-        const sectionHeader = table.previousElementSibling;
-        if (sectionHeader && sectionHeader.tagName === 'H2') {
-          sectionHeader.style.display = '';
-        }
+        const sectionHeader = findHeader(table);
+        if (sectionHeader) sectionHeader.style.display = '';
       });
     }
   }
