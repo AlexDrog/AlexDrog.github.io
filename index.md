@@ -9,7 +9,7 @@ layout: default
 ### 📞 [+375 (29) 725-69-82](tel:+375297256982)
 
 **Александр**  
-&lt;span style="display: inline-block; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 5px; box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);"&gt;🛠️ С {{ 'now' | date: '%Y' | minus: 2008 }} лет опыта (с 2008)&lt;/span&gt;  
+&lt;span id="exp-badge" style="display: inline-block; background: linear-gradient(135deg, #e94560 0%, #ff6b6b 100%); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-top: 5px; box-shadow: 0 2px 8px rgba(233, 69, 96, 0.3);"&gt;🛠️ С &lt;span id="years-count"&gt;17&lt;/span&gt; лет опыта (с 2008)&lt;/span&gt;  
 *Мастер по ремонту*
 
 📍 **[г. Дрогичин, ул. Ленина, 141 а](https://yandex.ru/maps/?text= г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)** (2 этаж)
@@ -31,7 +31,7 @@ layout: default
 - **Чистка ноутбуков** — от пыли с заменой термопасты, термовкладок.
 
 &lt;p&gt;
-&lt;a href="./uslugi.md" class="btn"&gt;Прайс и услуги&lt;/a&gt;
+&lt;a href="./uslugi" class="btn"&gt;Прайс и услуги&lt;/a&gt;
 &lt;a href="https://t.me/alexdrog81 " class="btn"&gt;Telegram&lt;/a&gt;
 &lt;a href="tel:+375297256982" class="btn"&gt;Позвонить&lt;/a&gt;
 &lt;/p&gt;
@@ -67,3 +67,7 @@ layout: default
 ✅ **Гарантия** — от 1 месяца на все виды работ  
 ✅ **Быстро** — большинство работ в день обращения  
 ✅ **Сложные случаи** — то, что отказались делать другие
+
+&lt;script&gt;
+document.getElementById('years-count').textContent = new Date().getFullYear() - 2008;
+&lt;/script&gt;
