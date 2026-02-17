@@ -15,7 +15,7 @@ layout: default
 
 🗺️ [Яндекс Карты](https://yandex.ru/maps/?text=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а) • [Google Maps](https://www.google.com/maps/search/?api=1&query=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)
 
-💬 [Telegram](https://t.me/alexdrog81) • [Viber](viber://chat?number=375297256982)
+💬 [Telegram](https://t.me/@AlexDrog81) • [Viber](viber://chat?number=375297256982)
 
 
 
