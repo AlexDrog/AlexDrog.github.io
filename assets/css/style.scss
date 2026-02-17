@@ -167,4 +167,27 @@ $accent-orange: #e94560;
   .gallery-grid {
     grid-template-columns: 1fr;
   }
+/* Равномерные таблицы на странице услуг */
+.main-content table {
+  width: 100%;
+  table-layout: fixed;
 }
+
+/* Первая колонка (Услуга) — 50% */
+.main-content table th:first-child,
+.main-content table td:first-child {
+  width: 50%;
+}
+
+/* Вторая колонка (Цена) — 25% */
+.main-content table th:nth-child(2),
+.main-content table td:nth-child(2) {
+  width: 25%;
+  text-align: center; /* Цены по центру */
+}
+
+/* Третья колонка (Примечание/Срок) — 25% */
+.main-content table th:nth-child(3),
+.main-content table td:nth-child(3) {
+  width: 25%;
+}}
