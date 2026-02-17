@@ -10,19 +10,19 @@ title: Услуги и цены
 ---
 
 <h2>🖥️ Компьютеры и ноутбуки</h2>
-<table>
+<table class="price-table">
 <tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
 {% for item in site.data.prices.computers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
 
 <h2>📱 Смартфоны и планшеты</h2>
-<table>
+<table class="price-table">
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
 {% for item in site.data.prices.phones %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
 
 <h2>🗺️ Навигаторы</h2>
-<table>
+<table class="price-table">
 <tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
 {% for item in site.data.prices.navigators %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
 </table>
