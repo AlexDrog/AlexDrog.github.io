@@ -30,7 +30,7 @@ layout: default
 - **Чистка ноутбуков** — от пыли с заменой термопасты, термовкладок.
 
 <p>
-<a href="./uslugi" class="btn">Прайс и услуги</a>
+<a href="./uslugi/" class="btn">Прайс и услуги</a>
 <a href="https://t.me/alexdrog81" class="btn">Telegram</a>
 <a href="tel:+375297256982" class="btn">Позвонить</a>
 </p>
