@@ -1,61 +1,61 @@
-.page-header {
-  background: 
-    linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
-    url('/assets/images/zdanie.JPG?v=5');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  padding: 2rem 1rem 4rem 1rem;
-  border-bottom: 4px solid $accent-orange;
-  text-align: center;
-  
-  h1 {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-    color: white;
-    font-size: 2rem;
-    margin-top: 0;
-    border-bottom: none;
-  }
-  
-  h3 {
-    color: #e94560;
-    font-size: 1.8rem;
-    margin: 10px 0;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    border-bottom: none;
-    
-    a {
-      color: #e94560;
-      text-decoration: none;
-    }
-  }
-  
-  /* Адрес под телефоном в шапке */
-  &::after {
-    content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Пн-Пт 10:00-19:00, Сб 11:00-17:00';
-    display: block;
-    color: rgba(255,255,255,0.95);
-    font-size: 1rem;
-    margin-top: 15px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-    line-height: 1.4;
-  }
-}
+---
+layout: default
+---
 
-/* Логотип круглый */
-.page-header::before {
-  content: '';
-  display: block;
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 15px auto;
-  background: url('/assets/images/logo.png') center/contain no-repeat;
-  background-color: white;
-  border-radius: 50%;
-  border: 3px solid #e94560;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-}
+# Ремонт компьютерной и мобильной техники в Дрогичине
+
+### 📞 [+375 (29) 725-69-82](tel:+375297256982)
+
+**Решаю сложные случаи, которые отказываются другие.**
+
+- **Ремонт материнских плат** — замена разъёмов, восстановление после залива
+- **Разблокировка** — FRP, Google-аккаунты, Mi-Account (без потери данных)
+- **Прошивка** — китайские смартфоны, восстановление «кирпичей»
+- **Обновление карт** — Navitel, Garmin, IGO (весь мир)
+- **Чистка ноутбуков** — от пыли с заменой термопасты
+
+&lt;p&gt;
+&lt;a href="./uslugi" class="btn"&gt;Прайс и услуги&lt;/a&gt;
+&lt;a href="https://t.me/alexdrog81" class="btn"&gt;Telegram&lt;/a&gt;
+&lt;a href="tel:+375297256982" class="btn"&gt;Позвонить&lt;/a&gt;
+&lt;/p&gt;
+
+---
+
+## 📍 Адрес и режим работы
+
+**г. Дрогичин, ул. Ленина, 141 а** (второй этаж)
+
+🕐 **Пн-Пт:** 10:00-19:00  
+🕐 **Сб:** 11:00-17:00
+
+## Примеры работ (клик для увеличения)
+
+&lt;div class="gallery-grid"&gt;
+
+&lt;a href="#photo1" class="gallery-thumb"&gt;
+&lt;img src="./assets/images/termopasta.jpg" alt="Замена термопасты"&gt;
+&lt;/a&gt;
+&lt;div id="photo1" class="lightbox"&gt;
+&lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+&lt;img src="./assets/images/termopasta.jpg" alt="Замена термопасты"&gt;
+&lt;div class="lightbox-caption"&gt;Чистка ноутбука и замена термопасты&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;a href="#photo2" class="gallery-thumb"&gt;
+&lt;img src="./assets/images/redmi9a.jpg" alt="Разблокировка"&gt;
+&lt;/a&gt;
+&lt;div id="photo2" class="lightbox"&gt;
+&lt;a href="#" class="close-btn"&gt;&times;&lt;/a&gt;
+&lt;img src="./assets/images/redmi9a.jpg" alt="Разблокировка"&gt;
+&lt;div class="lightbox-caption"&gt;Xiaomi Redmi 9A — удаление Mi-Account&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+## Почему обращаются ко мне
+
+✅ **Бесплатная диагностика** — платишь только за ремонт  
+✅ **Гарантия** — от 1 месяца на все виды работ  
+✅ **Быстро** — большинство работ в день обращения  
+✅ **Сложные случаи** — то, что отказались делать другие
