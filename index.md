@@ -2,8 +2,7 @@
 layout: default
 ---
 
-&lt;
-div align="center"&gt;
+&lt;div align="center"&gt;
 
 # Ремонт компьютерной и мобильной техники в Дрогичине
 
