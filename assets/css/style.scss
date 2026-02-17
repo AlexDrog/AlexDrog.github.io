@@ -7,6 +7,9 @@ $primary-dark: #1a1a2e;
 $primary-blue: #16213e;
 $accent-orange: #e94560;
 
+// ============================================
+// ШАПКА (твоя текущая)
+// ============================================
 .page-header {
   background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), url('/assets/images/zdanie.JPG?v=6');
   background-size: cover;
@@ -49,6 +52,190 @@ $accent-orange: #e94560;
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
+// ============================================
+// НАВИГАЦИЯ УСЛУГ (новое меню под шапкой)
+// ============================================
+.service-navbar {
+  background: $primary-dark;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 3px solid $accent-orange;
+  
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  
+  li {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    
+    &:not(:last-child) {
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+  }
+  
+  // Верхние пункты меню
+  > .nav-container > ul > li > a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 8px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    height: 70px;
+    box-sizing: border-box;
+    
+    &:hover {
+      background: rgba(233, 69, 96, 0.2);
+      color: white;
+    }
+  }
+  
+  .nav-icon {
+    font-size: 22px;
+    margin-bottom: 5px;
+    display: block;
+    transition: transform 0.3s;
+  }
+  
+  li:hover .nav-icon {
+    transform: translateY(-3px);
+  }
+  
+  // Мобильная стрелка (скрыта на десктопе)
+  .mobile-arrow {
+    display: none;
+    margin-left: auto;
+    font-size: 12px;
+    transition: transform 0.3s;
+  }
+}
+
+// ============================================
+// ВЫПАДАЮЩЕЕ МЕНЮ
+// ============================================
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  min-width: 320px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  border-radius: 0 0 8px 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-top: 3px solid $accent-orange;
+  text-align: left;
+  overflow: hidden;
+  
+  // Широкое меню (2 колонки)
+  &.wide {
+    min-width: 600px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    
+    .dropdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+  }
+  
+  // Появление при наведении
+  .service-navbar li:hover & {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    
+    &.wide {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
+}
+
+// Заголовок внутри выпадашки
+.dropdown-header {
+  background: $primary-blue;
+  color: white;
+  padding: 12px 20px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  grid-column: 1 / -1;
+  border-bottom: 2px solid $accent-orange;
+}
+
+// Пункты меню с ценами
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  color: $primary-dark;
+  text-decoration: none;
+  font-size: 14px;
+  border-bottom: 1px solid #ecf0f1;
+  transition: all 0.2s;
+  line-height: 1.3;
+  
+  &:hover {
+    background: #f8f9fa;
+    color: $accent-orange;
+    padding-left: 25px;
+  }
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  // Цена (красный тег как на скриншоте GSMMaster)
+  .price-tag {
+    color: $accent-orange;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+    margin-left: 15px;
+    background: rgba(233, 69, 96, 0.1);
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid rgba(233, 69, 96, 0.3);
+    transition: all 0.2s;
+  }
+  
+  &:hover .price-tag {
+    background: $accent-orange;
+    color: white;
+    border-color: $accent-orange;
+  }
+}
+
+// ============================================
+// ОСНОВНОЙ КОНТЕНТ (твой текущий)
+// ============================================
 .main-content {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   line-height: 1.6;
@@ -56,65 +243,67 @@ $accent-orange: #e94560;
   padding: 2rem 1rem;
 }
 
-.main-content h1, .main-content h2, .main-content h3 {
+.main-content h1, 
+.main-content h2, 
+.main-content h3 {
   color: $primary-blue;
   border-bottom: 2px solid $accent-orange;
   padding-bottom: 0.3em;
   margin-top: 2rem;
+  
+  // Якоря для плавной прокрутки
+  &[id] {
+    scroll-margin-top: 90px; // Отступ для фиксированного меню
+  }
 }
 
-/* ТАБЛИЦЫ — ЖЕСТКАЯ ФИКСАЦИЯ 50%-25%-25% */
+// ============================================
+// ТАБЛИЦЫ (твои текущие)
+// ============================================
 .price-table {
   width: 100%;
   max-width: 100%;
   border-collapse: collapse;
   margin: 1.5rem 0;
   table-layout: fixed;
+  
+  col:first-child { width: 50%; }
+  col:nth-child(2) { width: 25%; }
+  col:nth-child(3) { width: 25%; }
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    vertical-align: top;
+    box-sizing: border-box;
+  }
+  
+  th:first-child, td:first-child { text-align: left; }
+  
+  th:nth-child(2), td:nth-child(2) {
+    text-align: center;
+    font-weight: bold;
+    color: $accent-orange;
+  }
+  
+  th:nth-child(3), td:nth-child(3) { text-align: left; }
+  
+  th {
+    background: $primary-blue;
+    color: white;
+    font-weight: 600;
+    border-bottom: 2px solid $accent-orange;
+  }
+  
+  tr:hover { background-color: #f5f5f5; }
 }
 
-.price-table col:first-child { width: 50%; }
-.price-table col:nth-child(2) { width: 25%; }
-.price-table col:nth-child(3) { width: 25%; }
-
-.price-table th,
-.price-table td {
-  padding: 12px;
-  border: 1px solid #ddd;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  vertical-align: top;
-  box-sizing: border-box;
-}
-
-.price-table th:first-child,
-.price-table td:first-child {
-  text-align: left;
-}
-
-.price-table th:nth-child(2),
-.price-table td:nth-child(2) {
-  text-align: center;
-  font-weight: bold;
-  color: $accent-orange;
-}
-
-.price-table th:nth-child(3),
-.price-table td:nth-child(3) {
-  text-align: left;
-}
-
-.price-table th {
-  background: $primary-blue;
-  color: white;
-  font-weight: 600;
-  border-bottom: 2px solid $accent-orange;
-}
-
-.price-table tr:hover {
-  background-color: #f5f5f5;
-}
-
+// ============================================
+// КНОПКИ (твои текущие)
+// ============================================
 .btn {
   display: inline-block;
   margin: 0.5rem 0.5rem 0.5rem 0;
@@ -127,14 +316,18 @@ $accent-orange: #e94560;
   border: 2px solid $accent-orange;
   border-radius: 4px;
   text-decoration: none;
+  transition: all 0.3s;
+  
+  &:hover {
+    background-color: darken($accent-orange, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+  }
 }
 
-.btn:hover {
-  background-color: #c9183a;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
-}
-
+// ============================================
+// ГАЛЕРЕЯ (твоя текущая)
+// ============================================
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -150,18 +343,19 @@ $accent-orange: #e94560;
   cursor: zoom-in;
   border: 2px solid transparent;
   display: block;
-}
-
-.gallery-thumb:hover {
-  border-color: #e94560;
-  transform: translateY(-5px);
-}
-
-.gallery-thumb img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  display: block;
+  transition: all 0.3s;
+  
+  &:hover {
+    border-color: $accent-orange;
+    transform: translateY(-5px);
+  }
+  
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
 }
 
 .lightbox {
@@ -175,16 +369,14 @@ $accent-orange: #e94560;
   z-index: 9999;
   justify-content: center;
   align-items: center;
-}
-
-.lightbox:target {
-  display: flex;
-}
-
-.lightbox img {
-  max-width: 90%;
-  max-height: 80vh;
-  border: 3px solid #e94560;
+  
+  &:target { display: flex; }
+  
+  img {
+    max-width: 90%;
+    max-height: 80vh;
+    border: 3px solid $accent-orange;
+  }
 }
 
 .close-btn {
@@ -196,8 +388,115 @@ $accent-orange: #e94560;
   text-decoration: none;
 }
 
-@media screen and (max-width: 768px) {
+// ============================================
+// АДАПТИВНОСТЬ
+// ============================================
+@media screen and (max-width: 968px) {
   .page-header h1 { font-size: 1.5rem; }
+  
+  // Мобильное меню (аккордеон)
+  .service-navbar {
+    position: relative;
+    
+    ul { flex-direction: column; }
+    
+    li {
+      width: 100%;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      
+      &:not(:last-child) { border-right: none; }
+    }
+    
+    > .nav-container > ul > li > a {
+      flex-direction: row;
+      justify-content: flex-start;
+      height: auto;
+      padding: 15px 20px;
+      font-size: 14px;
+      
+      .nav-icon {
+        margin-right: 15px;
+        margin-bottom: 0;
+        font-size: 20px;
+      }
+    }
+    
+    .mobile-arrow { 
+      display: inline-block; 
+      margin-left: auto;
+    }
+    
+    li.active .mobile-arrow { transform: rotate(180deg); }
+  }
+  
+  .dropdown-menu, 
+  .dropdown-menu.wide {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+    min-width: auto;
+    width: 100%;
+    box-shadow: none;
+    border-top: none;
+    border-radius: 0;
+    
+    .dropdown-grid { grid-template-columns: 1fr; }
+  }
+  
+  .dropdown-item {
+    padding-left: 60px;
+    background: rgba(255,255,255,0.05);
+    color: white;
+    border-bottom-color: rgba(255,255,255,0.1);
+    
+    .price-tag {
+      background: rgba(233, 69, 96, 0.3);
+      color: white;
+    }
+    
+    &:hover {
+      background: rgba(233, 69, 96, 0.2);
+      color: white;
+      padding-left: 65px;
+    }
+  }
+  
+  .dropdown-header {
+    background: rgba(0,0,0,0.3);
+  }
+  
+  // Активное состояние для мобильных
+  .service-navbar li.active .dropdown-menu {
+    display: block;
+    animation: slideDown 0.3s ease;
+  }
+  
+  @keyframes slideDown {
+    from { opacity: 0; max-height: 0; }
+    to { opacity: 1; max-height: 1000px; }
+  }
+  
+  // Контент
+  .main-content h2[id] { scroll-margin-top: 10px; }
   .btn { display: block; width: 100%; text-align: center; margin: 0.5rem 0; }
   .gallery-grid { grid-template-columns: 1fr; }
+}
+
+@media screen and (max-width: 480px) {
+  .service-navbar > .nav-container > ul > li > a {
+    font-size: 12px;
+    padding: 12px 15px;
+  }
+  
+  .dropdown-item {
+    font-size: 13px;
+    padding: 12px 15px 12px 50px;
+    
+    .price-tag {
+      font-size: 12px;
+      padding: 3px 6px;
+    }
+  }
 }
