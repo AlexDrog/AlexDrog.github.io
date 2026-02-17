@@ -1,0 +1,15 @@
+computers:
+  - name: Диагностика
+    price: Бесплатно
+    time: 15 мин
+  - name: Чистка + замена термопасты
+    price: от 50 BYN
+    time: 1-2 часа
+
+phones:
+  - name: Замена дисплея
+    price: от 60 BYN
+    note: Оригинал/копия
+  - name: Разблокировка FRP
+    price: от 50 BYN
+    note: Без потери данных
