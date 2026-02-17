@@ -184,3 +184,15 @@ title: Услуги и цены
 💡 **Бесплатная диагностика — платишь только за ремонт!**
 
 **[← На главную](./)** | **[💬 Записаться в Telegram](https://t.me/alexdrog81)** | **[📞 Позвонить](tel:+375297256982)**
+<script>
+(function() {
+  if (window.innerWidth <= 768) {
+    var btn = document.createElement('a');
+    btn.href = 'tel:+375297256982';
+    btn.innerHTML = '<span style="font-size:22px;">📞</span> <span style="font-weight:600;">Позвонить</span>';
+    btn.style.cssText = 'position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#e94560 0%,#c9183a 100%);color:white;padding:14px 24px;border-radius:50px;text-decoration:none;z-index:9999;box-shadow:0 6px 20px rgba(233,69,96,0.4);display:flex;align-items:center;gap:10px;font-size:16px;border:2px solid rgba(255,255,255,0.2);';
+    document.body.appendChild(btn);
+    document.body.style.paddingBottom = '80px';
+  }
+})();
+</script>
