@@ -2,46 +2,7 @@
 layout: default
 ---
 
-&lt;style&gt;
-  .btn-group {
-    margin: 25px 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
-  }
-  .btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background: #e94560;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 600;
-    transition: all 0.3s;
-    border: 2px solid #e94560;
-  }
-  .btn:hover {
-    background: white;
-    color: #e94560;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
-  }
-  .btn-secondary {
-    background: #16213e;
-    border-color: #16213e;
-  }
-  .btn-secondary:hover {
-    color: #16213e;
-  }
-  .btn-success {
-    background: #27ae60;
-    border-color: #27ae60;
-  }
-  .btn-success:hover {
-    color: #27ae60;
-  }
-&lt;/style&gt;
+
 
 # Ремонт компьютерной и мобильной техники в Дрогичине
 
@@ -50,27 +11,29 @@ layout: default
 **Александр**  
 *Мастер по ремонту*
 
-📍 **[г. Дрогичин, ул. Ленина, 141 а](https://yandex.ru/maps/?text=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)** (2 этаж)
+📍 **[г. Дрогичин, ул. Ленина, 141 а](https://yandex.ru/maps/?text= г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)** (2 этаж)
 
-🗺️ [Яндекс Карты](https://yandex.ru/maps/?text=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а) • [Google Maps](https://www.google.com/maps/search/?api=1&query=г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)
+🗺️ [Яндекс Карты](https://yandex.ru/maps/?text= г.%20Дрогичин,%20ул.%20Ленина,%20141%20а) • [Google Maps](https://www.google.com/maps/search/?api=1&query= г.%20Дрогичин,%20ул.%20Ленина,%20141%20а)
 
-💬 [Telegram](https://t.me/AlexDrog81) • [Viber](viber://chat?number=375297256982)
+💬 [Telegram](https://t.me/@AlexDrog81 ) • [Viber](viber://chat?number=375297256982)
+
+
 
 ---
 
 **Решаю сложные случаи, от которых отказываются другие.**
 
 - **Ремонт и настройка ПК и ноутбуков** — замена разъёмов, установка ОС и драйверов
-- **Разблокировка** — FRP, Google-аккаунты, Mi-Account, Huawei ID
+- **Разблокировка** — FRP, Google-аккаунты, Mi-Account,Huawei ID
 - **Прошивка** — смартфоны, восстановление «кирпичей»
-- **Обновление карт** — Navitel, IGO (весь мир)
-- **Чистка ноутбуков** — от пыли с заменой термопасты, термовкладок
+- **Обновление карт** — Navitel,  IGO (весь мир)
+- **Чистка ноутбуков** — от пыли с заменой термопасты, термовкладок.
 
-&lt;div class="btn-group"&gt;
-  &lt;a href="/uslugi/" class="btn"&gt;📋 Услуги и цены&lt;/a&gt;
-  &lt;a href="https://t.me/AlexDrog81" class="btn btn-secondary"&gt;💬 Telegram&lt;/a&gt;
-  &lt;a href="tel:+375297256982" class="btn btn-success"&gt;📞 Позвонить&lt;/a&gt;
-&lt;/div&gt;
+<p>
+<a href="./uslugi/" class="btn">Прайс и услуги</a>
+<a href="https://t.me/alexdrog81 " class="btn">Telegram</a>
+<a href="tel:+375297256982" class="btn">Позвонить</a>
+</p>
 
 ---
 
@@ -81,21 +44,21 @@ layout: default
 🕐 Пн-Пт: 10:00-18:00  
 🕐 Обед: 12:00-13:00  
 🕐 Сб-Вс: 10:00-14:00  
-&lt;span style="color: #e94560; font-weight: bold;"&gt;🕐 Понедельник: ВЫХОДНОЙ&lt;/span&gt;
+<span style="color: #e94560; font-weight: bold;">🕐 Понедельник: ВЫХОДНОЙ</span>
 
 ## Примеры работ
 
-&lt;details&gt;&lt;summary&gt;&lt;h3 style="display:inline; cursor:pointer;"&gt;🔧 Замена термопасты в ноутбуке&lt;/h3&gt;&lt;/summary&gt;&lt;div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🔴 ДО&lt;/div&gt;&lt;a href="#t1" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/termopasta.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Перегрев 95°C&lt;/p&gt;&lt;/div&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🟢 ПОСЛЕ&lt;/div&gt;&lt;a href="#t2" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/temp_posle.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;65°C, тихая работа&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+<details><summary><h3 style="display:inline; cursor:pointer;">🔧 Замена термопасты в ноутбуке</h3></summary><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"><div style="text-align:center;"><div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🔴 ДО</div><a href="#t1" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/termopasta.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Перегрев 95°C</p></div><div style="text-align:center;"><div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🟢 ПОСЛЕ</div><a href="#t2" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/temp_posle.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">65°C, тихая работа</p></div></div></details>
 
-&lt;details&gt;&lt;summary&gt;&lt;h3 style="display:inline; cursor:pointer;"&gt;📱 Замена дисплейного модуля&lt;/h3&gt;&lt;/summary&gt;&lt;div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🔴 ДО&lt;/div&gt;&lt;a href="#d1" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/bitka.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Разбитый экран&lt;/p&gt;&lt;/div&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🟢 ПОСЛЕ&lt;/div&gt;&lt;a href="#d2" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/bitka_pos.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Новый дисплей&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+<details><summary><h3 style="display:inline; cursor:pointer;">📱 Замена дисплейного модуля</h3></summary><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"><div style="text-align:center;"><div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🔴 ДО</div><a href="#d1" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/bitka.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Разбитый экран</p></div><div style="text-align:center;"><div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🟢 ПОСЛЕ</div><a href="#d2" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/bitka_pos.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Новый дисплей</p></div></div></details>
 
-&lt;details&gt;&lt;summary&gt;&lt;h3 style="display:inline; cursor:pointer;"&gt;🗺️ Обновление карт навигации&lt;/h3&gt;&lt;/summary&gt;&lt;div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🔴 ДО&lt;/div&gt;&lt;a href="#n1" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/igo_do.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Устаревшие карты&lt;/p&gt;&lt;/div&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🟢 ПОСЛЕ&lt;/div&gt;&lt;a href="#n2" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/igo_pos.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;IGO 2025Q2&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+<details><summary><h3 style="display:inline; cursor:pointer;">🗺️ Обновление карт навигации</h3></summary><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"><div style="text-align:center;"><div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🔴 ДО</div><a href="#n1" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/igo_do.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Устаревшие карты</p></div><div style="text-align:center;"><div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🟢 ПОСЛЕ</div><a href="#n2" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/igo_pos.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">IGO 2025Q2</p></div></div></details>
 
-&lt;details&gt;&lt;summary&gt;&lt;h3 style="display:inline; cursor:pointer;"&gt;🔓 Снятие Google аккаунта (FRP)&lt;/h3&gt;&lt;/summary&gt;&lt;div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🔴 ДО&lt;/div&gt;&lt;a href="#g1" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/frp.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Блокировка FRP&lt;/p&gt;&lt;/div&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🟢 ПОСЛЕ&lt;/div&gt;&lt;a href="#g2" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/frp_pos.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Полный доступ&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+<details><summary><h3 style="display:inline; cursor:pointer;">🔓 Снятие Google аккаунта (FRP)</h3></summary><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"><div style="text-align:center;"><div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🔴 ДО</div><a href="#g1" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/frp.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Блокировка FRP</p></div><div style="text-align:center;"><div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🟢 ПОСЛЕ</div><a href="#g2" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/frp_pos.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Полный доступ</p></div></div></details>
 
-&lt;details&gt;&lt;summary&gt;&lt;h3 style="display:inline; cursor:pointer;"&gt;🔓 Снятие Mi аккаунта&lt;/h3&gt;&lt;/summary&gt;&lt;div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🔴 ДО&lt;/div&gt;&lt;a href="#m1" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/redmi9a.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Запрос пароля&lt;/p&gt;&lt;/div&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🟢 ПОСЛЕ&lt;/div&gt;&lt;a href="#m2" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/redmi9a_posle.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Аккаунт удалён&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+<details><summary><h3 style="display:inline; cursor:pointer;">🔓 Снятие Mi аккаунта</h3></summary><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"><div style="text-align:center;"><div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🔴 ДО</div><a href="#m1" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/redmi9a.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Запрос пароля</p></div><div style="text-align:center;"><div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🟢 ПОСЛЕ</div><a href="#m2" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/redmi9a_posle.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Аккаунт удалён</p></div></div></details>
 
-&lt;details&gt;&lt;summary&gt;&lt;h3 style="display:inline; cursor:pointer;"&gt;🛑 Убрать рекламу на смартфоне&lt;/h3&gt;&lt;/summary&gt;&lt;div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🔴 ДО&lt;/div&gt;&lt;a href="#a1" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/reklama.png" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Всплывающая реклама&lt;/p&gt;&lt;/div&gt;&lt;div style="text-align:center;"&gt;&lt;div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;"&gt;🟢 ПОСЛЕ&lt;/div&gt;&lt;a href="#a2" class="gallery-thumb" style="display:block; margin:0;"&gt;&lt;img src="./assets/images/reklama_pos.png" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"&gt;&lt;/a&gt;&lt;p style="font-size:0.9em; color:#666; margin-top:5px;"&gt;Чистая система&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/details&gt;
+<details><summary><h3 style="display:inline; cursor:pointer;">🛑 Убрать рекламу на смартфоне</h3></summary><div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:15px;"><div style="text-align:center;"><div style="background:#e74c3c; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🔴 ДО</div><a href="#a1" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/reklama.png" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Всплывающая реклама</p></div><div style="text-align:center;"><div style="background:#27ae60; color:white; padding:8px; font-weight:bold; border-radius:4px 4px 0 0;">🟢 ПОСЛЕ</div><a href="#a2" class="gallery-thumb" style="display:block; margin:0;"><img src="./assets/images/reklama_pos.png" style="width:100%; height:180px; object-fit:cover; border-radius:0 0 4px 4px;"></a><p style="font-size:0.9em; color:#666; margin-top:5px;">Чистая система</p></div></div></details>
 
 ## Почему обращаются ко мне
 
