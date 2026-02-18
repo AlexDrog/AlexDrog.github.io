@@ -8,7 +8,6 @@
     
     {% seo %}
     
-    <!-- Мгновенная установка темы -->
     <script>
         (function() {
             try {
@@ -50,95 +49,54 @@
         body {
             background-color: var(--bg) !important;
             color: var(--text) !important;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
-        /* ШАПКА - ИСПРАВЛЕНО: добавлен !important и правильный путь через Jekyll */
+        /* ШАПКА - ИСПРАВЛЕНО: фото на всю ширину без повторений */
         .page-header {
-            color: #fff;
-            text-align: center;
-            background-color: #159957;
-            background-image: linear-gradient(120deg, #155799, #159957);
-            padding: 5rem 6rem;
-        }
-        
-        /* Перекрываем стандартные стили темы Cayman */
-        .page-header {
-            position: relative !important;
-            background-image: linear-gradient(rgba(21, 87, 153, 0.7), rgba(21, 153, 87, 0.7)), 
-                              url('{{ '/assets/images/zdanie.JPG' | relative_url }}') !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-            min-height: 400px !important;
+            background-image: linear-gradient(rgba(21, 87, 153, 0.5), rgba(21, 153, 87, 0.5)), 
+                              url('/assets/images/zdanie.JPG') !important;
+            background-size: cover !important;      /* На всю ширину без повторений */
+            background-position: center !important; /* Центрируем */
+            background-repeat: no-repeat !important;/* Запрещаем повтор */
+            background-attachment: scroll !important;/* Фиксируем или нет */
+            min-height: 450px !important;           /* Увеличил высоту */
+            width: 100% !important;
             display: flex !important;
             flex-direction: column !important;
             justify-content: center !important;
             align-items: center !important;
+            text-align: center !important;
+            padding: 3rem 1rem !important;
+            color: #fff !important;
+            position: relative !important;
         }
         
-        /* Темная тема */
+        /* Темная тема - темнее градиент */
         [data-theme="dark"] .page-header {
-            background-image: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
-                              url('{{ '/assets/images/zdanie.JPG' | relative_url }}') !important;
-            background-color: #0d1117 !important;
+            background-image: linear-gradient(rgba(13, 17, 23, 0.8), rgba(22, 27, 34, 0.9)), 
+                              url('/assets/images/zdanie.JPG') !important;
         }
         
-        /* Белый текст в шапке всегда */
+        /* Текст поверх фото */
         .page-header h1, 
         .page-header h2 {
             color: #fff !important;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8) !important;
+            margin: 0.5rem 0 !important;
+            z-index: 2 !important;
+            position: relative !important;
         }
         
-        .main-content h1, 
-        .main-content h2, 
-        .main-content h3 {
-            color: var(--heading) !important;
-        }
-        
-        .main-content a {
-            color: var(--link) !important;
-        }
-        
-        details {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 12px;
-            transition: all 0.3s;
-        }
-        
-        summary {
-            color: var(--heading);
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        summary h3 { 
-            display: inline; 
-            margin: 0;
-        }
-        
-        .btn {
-            display: inline-block;
-            margin: 5px;
-            padding: 0.75rem 1rem;
-            background-color: rgba(255,255,255,0.2);
+        .page-header .btn {
+            background: rgba(255,255,255,0.25) !important;
+            border: 2px solid rgba(255,255,255,0.6) !important;
             color: #fff !important;
-            border: 1px solid rgba(255,255,255,0.5);
-            border-radius: 0.3rem;
-            text-decoration: none;
-            transition: all 0.3s;
+            margin-top: 1rem !important;
+            z-index: 2 !important;
+            position: relative !important;
         }
         
-        .btn:hover {
-            background-color: rgba(255,255,255,0.3);
-            text-decoration: none;
-        }
-        
-        /* Кнопка переключения темы */
+        /* Кнопка переключения */
         #theme-toggle {
             position: fixed;
             top: 15px;
@@ -152,12 +110,6 @@
             height: 45px;
             font-size: 20px;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        #theme-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255,255,255,0.3);
         }
         
         [data-theme="dark"] #theme-toggle {
@@ -165,45 +117,36 @@
             border-color: rgba(255,255,255,0.2);
         }
         
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
+        .main-content h1, .main-content h2, .main-content h3 {
+            color: var(--heading) !important;
         }
         
-        .gallery-item { 
-            text-align: center; 
-            background: var(--bg);
-            border-radius: 4px;
-            overflow: hidden;
+        details {
+            background: var(--card);
             border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
         }
         
+        summary { color: var(--heading); font-weight: 600; cursor: pointer; }
+        summary h3 { display: inline; margin: 0; }
+        
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .gallery-item { text-align: center; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
         .label-red { background: #e74c3c; color: white; padding: 8px; font-weight: bold; }
         .label-green { background: #27ae60; color: white; padding: 8px; font-weight: bold; }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .highlight { color: #e94560; font-weight: bold; }
+        .gallery-item img { width: 100%; height: 180px; object-fit: cover; display: block; }
         
         @media (max-width: 600px) {
             .gallery-grid { grid-template-columns: 1fr; }
-            .page-header { 
-                padding: 3rem 1rem !important; 
-                min-height: 300px !important;
-            }
+            .page-header { min-height: 350px !important; }
         }
     </style>
 </head>
 
 <body>
-    <button id="theme-toggle" title="Нажать для смены, удержать 3 сек для сброса">🌙</button>
+    <button id="theme-toggle" title="Нажать для смены темы, удержать 3 сек для сброса">🌙</button>
 
     <section class="page-header">
         <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
@@ -221,59 +164,47 @@
         {{ content }}
         
         <footer class="site-footer">
-            {% if site.github.is_project_page %}
-                <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
-            {% endif %}
             <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
         </footer>
     </section>
 
     <script>
-        const THEME_KEY = 'user_theme_choice';
         const btn = document.getElementById('theme-toggle');
-        const metaTheme = document.getElementById('meta-theme-color');
         
-        function updateButtonIcon() {
-            const current = document.documentElement.getAttribute('data-theme');
-            btn.textContent = current === 'dark' ? '☀️' : '🌙';
-            if (metaTheme) metaTheme.content = current === 'dark' ? '#0d1117' : '#ffffff';
+        function updateIcon() {
+            const t = document.documentElement.getAttribute('data-theme');
+            btn.textContent = t === 'dark' ? '☀️' : '🌙';
         }
         
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
+        function toggle() {
+            const t = document.documentElement.getAttribute('data-theme');
+            const next = t === 'dark' ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem(THEME_KEY, next);
-            updateButtonIcon();
-            if (navigator.vibrate) navigator.vibrate(50);
+            localStorage.setItem('user_theme_choice', next);
+            updateIcon();
         }
         
-        function resetToAuto() {
-            localStorage.removeItem(THEME_KEY);
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.setAttribute('data-theme', systemDark ? 'dark' : 'light');
-            updateButtonIcon();
-            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-            alert('Тема сброшена на автоматическую');
+        function reset() {
+            localStorage.removeItem('user_theme_choice');
+            const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
+            updateIcon();
+            alert('Автоматическая тема');
         }
         
-        updateButtonIcon();
+        updateIcon();
+        btn.addEventListener('click', toggle);
         
-        btn.addEventListener('click', toggleTheme);
-        
-        let pressTimer;
-        btn.addEventListener('mousedown', () => pressTimer = setTimeout(resetToAuto, 3000));
-        btn.addEventListener('mouseup', () => clearTimeout(pressTimer));
-        btn.addEventListener('mouseleave', () => clearTimeout(pressTimer));
-        btn.addEventListener('touchstart', (e) => {
-            pressTimer = setTimeout(resetToAuto, 3000);
-        });
-        btn.addEventListener('touchend', () => clearTimeout(pressTimer));
+        let timer;
+        btn.addEventListener('mousedown', () => timer = setTimeout(reset, 3000));
+        btn.addEventListener('mouseup', () => clearTimeout(timer));
+        btn.addEventListener('touchstart', () => timer = setTimeout(reset, 3000));
+        btn.addEventListener('touchend', () => clearTimeout(timer));
         
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem(THEME_KEY)) {
+            if (!localStorage.getItem('user_theme_choice')) {
                 document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-                updateButtonIcon();
+                updateIcon();
             }
         });
     </script>
