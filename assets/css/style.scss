@@ -8,6 +8,30 @@ $primary-blue: #16213e;
 $accent-orange: #e94560;
 
 // ============================================
+// ОТКЛЮЧЕНИЕ ГРАДИЕНТА ТЕМЫ (ДОБАВЛЕНО)
+// ============================================
+body, html {
+  background: #0f172a !important;
+  background-image: none !important;
+  background-color: #0f172a !important;
+}
+
+.page-header, .main-content, .site-footer {
+  background-image: none !important;
+  background: #0f172a !important;
+}
+
+// Убираем псевдоэлементы с градиентами из темы
+body::before, 
+body::after,
+.page-header::before,
+.page-header::after {
+  background: none !important;
+  background-image: none !important;
+  content: none !important;
+}
+
+// ============================================
 // МЕНЮ НАВИГАЦИИ (ПОЛНАЯ ШИРИНА)
 // ============================================
 .service-navbar {
@@ -191,12 +215,8 @@ $accent-orange: #e94560;
 }
 
 // ============================================
-// ТАБЛИЦЫ И КНОПКИ (только специфичные стили)
+// ТАБЛИЦЫ И КНОПКИ
 // ============================================
-
-// Исправление: не трогаем .main-content и h1-h3, 
-// чтобы не конфликтовать с default.html
-
 .price-table {
   width: 100%;
   max-width: 100%;
@@ -256,7 +276,7 @@ $accent-orange: #e94560;
 }
 
 // ============================================
-// МОБИЛЬНАЯ АДАПТАЦИЯ (только меню)
+// МОБИЛЬНАЯ АДАПТАЦИЯ
 // ============================================
 @media screen and (max-width: 968px) {
   .service-navbar {
@@ -318,5 +338,11 @@ $accent-orange: #e94560;
     width: 100%; 
     text-align: center; 
     margin: 0.5rem 0; 
+  }
+  
+  // Фон на мобильном тоже без градиента
+  body, html {
+    background: #0f172a !important;
+    background-image: none !important;
   }
 }
