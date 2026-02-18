@@ -1,422 +1,316 @@
-<!DOCTYPE html>
-<html lang="{{ site.lang | default: 'ru-RU' }}">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0f172a" id="meta-theme-color">
+<style>
+    :root {
+        --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --bg-body: #0f172a;
+        --text-color: #f8fafc;
+        --text-secondary: #94a3b8;
+        --border-color: #1e293b;
+        --video-bg: #1e293b;
+    }
     
-    <!-- Open Graph для миниатюры в мессенджерах -->
-    <meta property="og:title" content="Ремонт смартфонов и ноутбуков | г. Дрогичин">
-    <meta property="og:description" content="Профессиональный ремонт техники. Сложные разблокировки, восстановление после воды, прошивка, обновление навигаторов. Выезд и диагностика.">
-    <meta property="og:image" content="https://alexdrog.github.io/assets/images/preview.jpg">
-    <meta property="og:url" content="https://alexdrog.github.io/">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="ru_RU">
-    <meta property="og:site_name" content="Ремонт техники Дрогичин">
+    [data-theme="light"] {
+        --bg-body: #f8fafc;
+        --text-color: #0f172a;
+        --text-secondary: #64748b;
+        --border-color: #e2e8f0;
+    }
     
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Ремонт смартфонов и ноутбуков в Дрогичине">
-    <meta name="twitter:description" content="Профессиональный ремонт техники. Сложные разблокировки, прошивка.">
-    <meta name="twitter:image" content="https://alexdrog.github.io/assets/images/preview.jpg">
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     
-    {% seo %}
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+        background: var(--bg-body) !important;
+        background-image: none !important;
+    }
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    body {
+        font-family: var(--font-primary);
+        background-color: var(--bg-body);
+        color: var(--text-color);
+        line-height: 1.6;
+    }
     
-    <script>
-        (function() {
-            const saved = localStorage.getItem('user_theme_choice');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = saved ? saved : (systemDark ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
-    </script>
+    .page-header, .main-content, .site-footer {
+        background-image: none !important;
+    }
     
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    /* ШАПКА */
+    .page-header {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        margin-top: 0;
+        background: var(--video-bg);
+        overflow: hidden;
+    }
     
-    <style>
-        :root {
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            --bg-body: #0f172a;
-            --text-color: #f8fafc;
-            --text-secondary: #94a3b8;
-            --border-color: #1e293b;
-            --video-bg: #1e293b;
-        }
-        
-        [data-theme="light"] {
-            --bg-body: #f8fafc;
-            --text-color: #0f172a;
-            --text-secondary: #64748b;
-            --border-color: #e2e8f0;
-        }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html, body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            background: var(--bg-body) !important;
-            background-image: none !important;
-        }
-        
-        body {
-            font-family: var(--font-primary);
-            background-color: var(--bg-body);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        .page-header, .main-content, .site-footer {
-            background-image: none !important;
-        }
-        
-        .page-header {
-            width: 100vw;
-            position: relative;
-            left: 50%;
-            right: 50%;
-            margin-left: -50vw;
-            margin-right: -50vw;
-            margin-top: 0;
-            background: var(--video-bg);
-            overflow: hidden;
-        }
-        
+    .header-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 500px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .video-side {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--video-bg);
+    }
+    
+    .video-side video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+    /* ============================================
+       ТЕКСТОВЫЙ БЛОК СО СТЕКЛОМ ЗОЛОТИСТЫМ
+       ============================================ */
+    .text-side {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center; /* Центрируем по горизонтали */
+        padding: 2rem;
+        position: relative;
+    }
+    
+    /* Стеклянный прямоугольник на фоне */
+    .glass-box {
+        background: rgba(255, 215, 0, 0.12); /* Золотистый полупрозрачный */
+        backdrop-filter: blur(25px) saturate(180%);
+        -webkit-backdrop-filter: blur(25px) saturate(180%);
+        border: 2px solid rgba(255, 215, 0, 0.35); /* Золотая рамка */
+        border-radius: 20px;
+        padding: 3rem 2.5rem;
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2),
+            0 0 20px rgba(255, 215, 0, 0.15); /* Золотое свечение */
+        max-width: 90%;
+        width: 100%;
+    }
+    
+    /* Увеличенные шрифты для максимальной читаемости */
+    .glass-box h1 {
+        font-size: clamp(2.8rem, 5vw, 4.2rem); /* Очень крупный */
+        font-weight: 900;
+        color: #ffffff !important;
+        line-height: 1.05;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+        text-shadow: 
+            0 3px 6px rgba(0,0,0,0.5),
+            0 0 20px rgba(255, 215, 0, 0.3); /* Золотая тень */
+        text-align: center;
+    }
+    
+    .glass-box .address {
+        font-size: clamp(1.4rem, 2.5vw, 1.9rem); /* Крупный адрес */
+        color: rgba(255, 255, 255, 0.95) !important;
+        font-weight: 600;
+        margin-bottom: 2rem;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        text-align: center;
+        letter-spacing: 0.5px;
+    }
+    
+    .glass-box .tagline {
+        font-size: clamp(1.2rem, 2vw, 1.5rem); /* Крупный слоган */
+        color: #ffd700 !important; /* Золотой цвет текста */
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        line-height: 1.4;
+        text-align: center;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .glass-box .services-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .glass-box .services-list li {
+        color: rgba(255, 255, 255, 0.95) !important;
+        font-size: clamp(1.05rem, 1.5vw, 1.25rem); /* Крупный текст */
+        margin-bottom: 0.9rem;
+        padding-left: 1.8rem;
+        position: relative;
+        line-height: 1.5;
+        font-weight: 500;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+    
+    .glass-box .services-list li::before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: #ffd700; /* Золотые маркеры */
+        font-size: 1.2rem;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    /* КНОПКИ */
+    .floating-btn {
+        position: fixed;
+        z-index: 9999;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transition: all 0.2s ease;
+        text-decoration: none;
+        top: 20px;
+    }
+    
+    #theme-toggle {
+        right: 20px;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(10px);
+        color: white;
+        font-size: 1.25rem;
+    }
+    
+    #theme-toggle:hover {
+        transform: scale(1.1);
+        background: rgba(15, 23, 42, 0.9);
+    }
+    
+    #telegram-btn {
+        left: 20px;
+        background: rgba(220, 38, 38, 0.95);
+        color: white;
+    }
+    
+    #telegram-btn:hover {
+        transform: scale(1.1);
+        background: rgba(220, 38, 38, 1);
+        box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+    }
+    
+    #phone-btn {
+        left: 20px;
+        background: rgba(220, 38, 38, 0.95);
+        color: white;
+        display: none;
+    }
+    
+    #phone-btn:hover {
+        transform: scale(1.1);
+        background: rgba(220, 38, 38, 1);
+        box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+    }
+    
+    #telegram-btn svg,
+    #phone-btn svg {
+        width: 24px;
+        height: 24px;
+        stroke: white;
+        stroke-width: 2;
+        fill: none;
+    }
+    
+    #phone-btn svg {
+        fill: white;
+        stroke: none;
+    }
+    
+    /* ОСНОВНОЙ КОНТЕНТ */
+    .main-content {
+        max-width: 64rem;
+        padding: 4rem 2rem;
+        margin: 0 auto;
+        background: var(--bg-body) !important;
+        color: var(--text-color);
+    }
+    
+    .site-footer {
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        text-align: center;
+        background: var(--bg-body) !important;
+    }
+    
+    /* МОБИЛЬНАЯ */
+    @media (max-width: 968px) {
         .header-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 500px;
-            width: 100%;
-            margin: 0;
-            padding: 0;
+            grid-template-columns: 1fr;
+            min-height: 100vh;
         }
         
         .video-side {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            background: var(--video-bg);
-        }
-        
-        .video-side video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
+            z-index: 1;
         }
         
         .text-side {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 3rem;
-            background: rgba(30, 41, 59, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .text-side h1 {
-            font-size: clamp(1.8rem, 3vw, 2.8rem);
-            font-weight: 800;
-            color: #ffffff !important;
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-        }
-        
-        .text-side .address {
-            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-weight: 500;
-            margin-bottom: 2rem;
-        }
-        
-        .tagline {
-            font-size: 1.1rem;
-            color: #ffffff !important;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-        }
-        
-        .services-list {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .services-list li {
-            color: rgba(255, 255, 255, 0.85) !important;
-            font-size: 0.95rem;
-            margin-bottom: 0.6rem;
-            padding-left: 1.2rem;
             position: relative;
-            line-height: 1.4;
+            z-index: 2;
+            justify-content: flex-start;
+            padding-top: 100px;
+            padding-bottom: 2rem;
         }
         
-        .services-list li::before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: rgba(255, 255, 255, 0.6);
+        .glass-box {
+            padding: 2rem 1.5rem;
+            max-width: 95%;
+            backdrop-filter: blur(20px);
         }
+        
+        .glass-box h1 {
+            font-size: clamp(2.2rem, 8vw, 2.8rem);
+            margin-bottom: 0.8rem;
+        }
+        
+        .glass-box .address {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .glass-box .tagline {
+            font-size: 1.1rem;
+        }
+        
+        .glass-box .services-list li {
+            font-size: 1rem;
+            margin-bottom: 0.7rem;
+        }
+        
+        #telegram-btn { display: none !important; }
+        #phone-btn { display: flex !important; }
         
         .floating-btn {
-            position: fixed;
-            z-index: 9999;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.2s ease;
-            text-decoration: none;
-            top: 20px;
+            top: 10px;
+            width: 44px;
+            height: 44px;
         }
         
-        #theme-toggle {
-            right: 20px;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
-            color: white;
-            font-size: 1.25rem;
-        }
-        
-        #theme-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(15, 23, 42, 0.9);
-        }
-        
-        #telegram-btn {
-            left: 20px;
-            background: rgba(220, 38, 38, 0.95);
-            color: white;
-        }
-        
-        #telegram-btn:hover {
-            transform: scale(1.1);
-            background: rgba(220, 38, 38, 1);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
-        }
-        
-        #phone-btn {
-            left: 20px;
-            background: rgba(220, 38, 38, 0.95);
-            color: white;
-            display: none;
-        }
-        
-        #phone-btn:hover {
-            transform: scale(1.1);
-            background: rgba(220, 38, 38, 1);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
-        }
-        
-        #telegram-btn svg,
-        #phone-btn svg {
-            width: 24px;
-            height: 24px;
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-        }
-        
-        #phone-btn svg {
-            fill: white;
-            stroke: none;
-        }
-        
-        .main-content {
-            max-width: 64rem;
-            padding: 4rem 2rem;
-            margin: 0 auto;
-            background: var(--bg-body) !important;
-            color: var(--text-color);
-        }
-        
-        .site-footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            text-align: center;
-            background: var(--bg-body) !important;
-        }
-        
-        .site-footer a {
-            color: var(--text-secondary);
-        }
-        
-        @media (max-width: 968px) {
-            .page-header {
-                padding: 0;
-            }
-            
-            .header-content {
-                grid-template-columns: 1fr;
-                min-height: 100vh;
-                width: 100%;
-            }
-            
-            .video-side {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 1;
-            }
-            
-            .video-side video {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-            
-            .text-side {
-                position: relative;
-                z-index: 2;
-                justify-content: flex-start;
-                align-items: center;
-                text-align: center;
-                padding: 90px 1.5rem 2rem 1.5rem;
-                background: rgba(30, 41, 59, 0.6);
-                backdrop-filter: blur(2px);
-                -webkit-backdrop-filter: blur(2px);
-                border-left: none;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                min-height: 100vh;
-            }
-            
-            .text-side h1 {
-                font-size: clamp(1.6rem, 5vw, 2.2rem);
-                margin-bottom: 0.5rem;
-            }
-            
-            .text-side .address {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-                margin-bottom: 0.8rem;
-            }
-            
-            .services-list li {
-                font-size: 0.9rem;
-                margin-bottom: 0.4rem;
-            }
-            
-            #telegram-btn { display: none !important; }
-            #phone-btn { display: flex !important; }
-            
-            .floating-btn {
-                top: 10px;
-                width: 44px;
-                height: 44px;
-            }
-            
-            #theme-toggle { right: 10px; }
-            #phone-btn { left: 10px; }
-            
-            #phone-btn svg,
-            #telegram-btn svg {
-                width: 22px;
-                height: 22px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <a href="https://t.me/AlexDrog1981" target="_blank" rel="noopener noreferrer" class="floating-btn" id="telegram-btn" title="Написать в Telegram">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </a>
-    
-    <a href="tel:+375297256982" class="floating-btn" id="phone-btn" title="Позвонить">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-        </svg>
-    </a>
-    
-    <button class="floating-btn" id="theme-toggle" title="Сменить тему">🌙</button>
-
-    <section class="page-header">
-        <div class="header-content">
-            <div class="video-side">
-                <video 
-                    autoplay 
-                    muted 
-                    loop 
-                    playsinline
-                    poster="{{ '/assets/images/hero-bg.jpg' | relative_url }}"
-                >
-                    <source src="{{ '/assets/videos/phone-repair.mp4' | relative_url }}" type="video/mp4">
-                </video>
-            </div>
-            
-            <div class="text-side">
-                <h1>Ремонт смартфонов<br>и ноутбуков</h1>
-                <p class="address">г. Дрогичин, ул. Ленина 141а</p>
-                
-                <div class="services-text">
-                    <p class="tagline">Решаю сложные случаи, от которых отказываются другие.</p>
-                    <ul class="services-list">
-                        <li>Ремонт и настройка ПК и ноутбуков</li>
-                        <li>Разблокировка FRP, Google-аккаунты, Mi-Account</li>
-                        <li>Прошивка смартфонов</li>
-                        <li>Обновление карт — Navitel, IGO</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="main-content">
-        {{ content }}
-        
-        <footer class="site-footer">
-            {% if site.github.is_project_page %}
-                <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> · 
-            {% endif %}
-            Сгенерировано с помощью GitHub Pages
-        </footer>
-    </section>
-
-    <script>
-        const btn = document.getElementById('theme-toggle');
-        const icons = { dark: '☀️', light: '🌙' };
-        
-        function updateIcon() {
-            const theme = document.documentElement.getAttribute('data-theme');
-            btn.textContent = icons[theme] || '🌙';
-        }
-        
-        btn.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('user_theme_choice', next);
-            updateIcon();
-        });
-        
-        updateIcon();
-    </script>
-</body>
-</html>
+        #theme-toggle { right: 10px; }
+        #phone-btn { left: 10px; }
+    }
+</style>
