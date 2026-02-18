@@ -8,7 +8,6 @@
     
     {% seo %}
     
-    <!-- ИСПРАВЛЕНО: убраны пробелы в URL -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -28,19 +27,18 @@
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             
-            /* Light theme glass - прозрачное светлое стекло */
+            /* Light theme glass */
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-text: #0f172a;
             --glass-text-secondary: #334155;
             --accent: #10b981;
             
-            /* Фон страницы */
             --bg-body: #f8fafc;
         }
         
         [data-theme="dark"] {
-            /* Dark theme glass - прозрачное темное стекло */
+            /* Dark theme glass */
             --glass-bg: rgba(15, 23, 42, 0.6);
             --glass-border: rgba(255, 255, 255, 0.15);
             --glass-text: #f8fafc;
@@ -59,7 +57,7 @@
         }
         
         /* ============================================
-           ШАПКА - ЛОГОТИП ЗАКОММЕНТИРОВАН
+           ШАПКА - УБИРАЕМ ЛОГОТИП ПОЛНОСТЬЮ
            ============================================ */
         .page-header {
             position: relative;
@@ -68,7 +66,11 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            background: url('/assets/images/hero-header-400.jpg') center/cover no-repeat;
+            /* ИСПРАВЛЕНО: путь с relative_url + fallback градиент */
+            background: 
+                linear-gradient(135deg, rgba(15,23,42,0.4) 0%, rgba(30,41,59,0.3) 100%),
+                url('{{ "/assets/images/hero-header-400.jpg" | relative_url }}') center/cover no-repeat,
+                linear-gradient(135deg, #1e3a5f 0%, #0f766e 100%);
             isolation: isolate;
         }
         
@@ -77,19 +79,21 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(15,23,42,0.8) 0%, rgba(30,41,59,0.7) 100%);
+            background: linear-gradient(135deg, rgba(15,23,42,0.7) 0%, rgba(30,41,59,0.6) 100%);
             z-index: 0;
         }
         
-        /* ЗАКОММЕНТИРОВАНО: скрытие круглого логотипа logo.png
-           ============================================
-        .page-header::after,
-        .page-header-content::before,
-        .page-header-content::after {
+        /* УБИРАЕМ ВСЕ ЛОГОТИПЫ: img, псевдоэлементы, аватары */
+        .page-header img,
+        .page-header .logo,
+        .page-header .avatar,
+        .page-header .project-logo,
+        .page-header::after {
             display: none !important;
             content: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
         }
-           ============================================ */
         
         /* ============================================
            BENTO GRID
@@ -105,7 +109,6 @@
             z-index: 2;
         }
         
-        /* Стеклянная карточка - ПРОЗРАЧНАЯ */
         .bento-card {
             background: var(--glass-bg);
             backdrop-filter: blur(16px) saturate(180%);
@@ -117,7 +120,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        /* Главная карточка */
         .bento-card.main {
             grid-row: span 2;
             display: flex;
@@ -142,7 +144,6 @@
             line-height: 1.6;
         }
         
-        /* Карточка телефона */
         .bento-card.phone {
             background: rgba(16, 185, 129, 0.15);
             border-color: rgba(16, 185, 129, 0.4);
@@ -186,7 +187,6 @@
             transform: scale(1.05);
         }
         
-        /* Карточка инфо */
         .bento-card.info {
             display: flex;
             flex-direction: column;
@@ -278,7 +278,6 @@
             margin-bottom: 1rem;
         }
         
-        /* Footer */
         .site-footer {
             margin-top: 4rem;
             padding-top: 2rem;
@@ -295,19 +294,16 @@
 
     <section class="page-header">
         <div class="bento-container">
-            <!-- Главная карточка -->
             <div class="bento-card main">
                 <h1>{{ site.title | default: "Ремонт смартфонов и ноутбуков" }}</h1>
                 <p>{{ site.description | default: "Профессиональный ремонт техники в Дрогичине. Сложные разблокировки, восстановление после воды, замена комплектующих." }}</p>
             </div>
             
-            <!-- Телефон -->
             <div class="bento-card phone" onclick="location.href='tel:+375297256982'">
                 <span class="label">Позвонить</span>
                 <a href="tel:+375297256982">+375 (29) 725-69-82</a>
             </div>
             
-            <!-- Адрес -->
             <div class="bento-card info">
                 <div class="info-row">
                     <span>📍</span>
