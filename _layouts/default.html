@@ -52,67 +52,95 @@
             padding: 0;
         }
         
-        /* СВЕТЛАЯ ТЕМА - ФОТО С ЛЕГКИМ ЗАТЕМНЕНИЕМ */
-html:not([data-theme="dark"]) .page-header,
-[data-theme="light"] .page-header {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)), 
-                url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
-    color: #fff !important;
-    text-align: center !important;
-    padding: 5rem 6rem !important;
-    min-height: 400px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
-}
-        
-        /* ТЕМНАЯ ТЕМА - ФОТО С ЗАТЕМНЕНИЕМ */
-        [data-theme="dark"] .page-header {
-            background: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
+        /* ШАПКА С ФОТО */
+        html:not([data-theme="dark"]) .page-header,
+        [data-theme="light"] .page-header {
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
                         url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
             color: #fff !important;
             text-align: center !important;
-            padding: 5rem 6rem !important;
-            min-height: 400px !important;
+            padding: 4rem 2rem !important;
+            min-height: 500px !important;
             display: flex !important;
             flex-direction: column !important;
             justify-content: center !important;
             align-items: center !important;
+            position: relative !important;
         }
         
-        .page-header h1 {
-            font-size: 3.25rem;
-            margin: 0 0 0.1rem 0 !important;
+        [data-theme="dark"] .page-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+                        url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
             color: #fff !important;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
-            font-weight: normal;
+            text-align: center !important;
+            padding: 4rem 2rem !important;
+            min-height: 500px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            position: relative !important;
+        }
+        
+        /* СТЕКЛЯННАЯ КАРТОЧКА */
+        .page-header-content {
+            background: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            padding: 3rem 4rem !important;
+            border-radius: 20px !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+            max-width: 800px !important;
+            width: 90% !important;
+            position: relative !important;
+            z-index: 2 !important;
+        }
+        
+        [data-theme="dark"] .page-header-content {
+            background: rgba(0, 0, 0, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        /* Типографика */
+        .page-header h1 {
+            font-size: 3.5rem !important;
+            font-weight: 800 !important;
+            margin: 0 0 1rem 0 !important;
+            color: #fff !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+            line-height: 1.1 !important;
+            letter-spacing: -1px !important;
         }
         
         .page-header h2 {
-            font-size: 1.25rem;
-            opacity: 0.9;
+            font-size: 1.3rem !important;
+            font-weight: 400 !important;
             margin: 0 0 2rem 0 !important;
-            font-weight: normal;
-            color: #fff !important;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
+            color: rgba(255,255,255,0.95) !important;
+            line-height: 1.6 !important;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3) !important;
         }
         
+        /* Кнопки в шапке */
         .page-header .btn {
             display: inline-block;
             margin: 0.5rem;
-            padding: 0.75rem 1rem;
-            color: rgba(255,255,255,0.9) !important;
-            background-color: rgba(255,255,255,0.2) !important;
-            border: 1px solid rgba(255,255,255,0.3) !important;
-            border-radius: 0.3rem;
-            text-decoration: none;
-            transition: all 0.2s;
+            padding: 0.8rem 1.5rem;
+            color: #fff !important;
+            background: rgba(255,255,255,0.2) !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            border-radius: 50px !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            backdrop-filter: blur(5px) !important;
         }
         
         .page-header .btn:hover {
-            background-color: rgba(255,255,255,0.3) !important;
-            text-decoration: none;
+            background: rgba(255,255,255,0.3) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
         }
         
         /* Кнопка переключения темы */
@@ -130,6 +158,12 @@ html:not([data-theme="dark"]) .page-header,
             font-size: 20px;
             cursor: pointer;
             color: #fff;
+            transition: all 0.3s;
+        }
+        
+        #theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3);
         }
         
         [data-theme="dark"] #theme-toggle {
@@ -234,16 +268,35 @@ html:not([data-theme="dark"]) .page-header,
             text-align: center;
         }
         
+        /* Мобильная адаптация */
         @media (max-width: 600px) {
-            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
             html:not([data-theme="dark"]) .page-header,
             [data-theme="light"] .page-header,
             [data-theme="dark"] .page-header { 
                 padding: 3rem 1rem !important; 
-                min-height: 300px !important;
+                min-height: 400px !important;
             }
-            .main-content { padding: 2rem 1rem; }
-            .page-header h1 { font-size: 2rem; }
+            
+            .page-header-content {
+                padding: 2rem 1.5rem !important;
+                width: 95% !important;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem !important;
+            }
+            
+            .page-header h2 {
+                font-size: 1.1rem !important;
+            }
+            
+            .main-content { 
+                padding: 2rem 1rem; 
+            }
         }
     </style>
 </head>
@@ -252,15 +305,17 @@ html:not([data-theme="dark"]) .page-header,
     <button id="theme-toggle" title="Нажать для смены темы, удержать 3 сек для сброса">🌙</button>
 
     <section class="page-header">
-        <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
-        <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-        {% if site.github.is_project_page %}
-            <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
-        {% endif %}
-        {% if site.show_downloads %}
-            <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
-            <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
-        {% endif %}
+        <div class="page-header-content">
+            <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
+            <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
+            {% if site.github.is_project_page %}
+                <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
+            {% endif %}
+            {% if site.show_downloads %}
+                <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
+                <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
+            {% endif %}
+        </div>
     </section>
 
     <section class="main-content">
