@@ -1,164 +1,393 @@
-remote_theme: pages-themes/cayman@v0.2.0
-plugins:
-  - jekyll-remote-theme
-
-title: "Ремонт смартфонов и ноутбуков"
-description: "Профессиональный ремонт компьютеров, ноутбуков и смартфонов. Прошивка, разблокировка, обновление навигаторов. Выезд и диагностика.г. Дрогичин, ул. Ленина 141а | 📞 +375 (29) 725-69-82<br>"
-name: "Ремонт смартфонов и ПК"
-
-description: >
-  Ремонт смартфонов и компьютеров в Дрогичине. 
-  Разблокировка графического ключа, FRP, Mi Account, удаление рекламы, 
-  прошивка, замена дисплеев и разъемов, установка Windows. 
-
-keywords: >
-  ремонт смартфонов Дрогичин, разблокировка графического ключа, 
-  удаление рекламы с телефона, прошивка телефона Дрогичин, 
-  замена дисплея iPhone, замена разъема зарядки, 
-  установка Windows Дрогичин, ремонт компьютеров, 
-  FRP unlock, Mi Account unlock, сервисный центр Дрогичин
-
-author: "AlexDrog"
-email: 7256982@mail.ru
-telegram: "@AlexDrog1981"
-phone: "+375 (29) 7256982"  # для отображения на сайте
-phone_tel: "+375297256982"  # для ссылок tel: (без пробелов и скобок)
-
-# ==========================================
-# РЕГИОН И ЛОКАЛИЗАЦИЯ
-# ==========================================
-
-city: "Дрогичин"
-region: "Брестская область"
-country: "Беларусь"
-country_code: "BY"
-postal_code: "225820"
-timezone: "Europe/Minsk"
-
-latitude: "52.1889"
-longitude: "25.1475"
-
-address: "ул. Ленина, 141а"
-address_full: "г. Дрогичин, ул. Ленина 141а, Брестская область, Беларусь"
-
-# ==========================================
-# РЕЖИМ РАБОТЫ
-# ==========================================
-
-working_hours:
-  monday: "Выходной"
-  tuesday: "10:00-18:00"
-  wednesday: "10:00-18:00"
-  thursday: "10:00-18:00"
-  friday: "10:00-18:00"
-  saturday: "10:00-14:00"
-  sunday: "10:00-14:00"
-  
-# Schema.org формат (Tu=вторник, Mo=понедельник)
-# Пн выходной, Вт-Пт 10-18, Сб-Вс 10-14
-opening_hours: "Tu-Fr 10:00-18:00, Sa-Su 10:00-14:00"
-
-# ==========================================
-# СПИСОК УСЛУГ
-# ==========================================
-
-services:
-  - name: "Разблокировка"
-    description: "Графический ключ, FRP, Mi Account, iCloud"
-    icon: "🔓"
-    url: "/services/unlock/"
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: 'ru-RU' }}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color">
     
-  - name: "Удаление рекламы"
-    description: "Очистка от вирусов и рекламных баннеров"
-    icon: "🛡️"
-    url: "/services/ad-remove/"
+    {% seo %}
     
-  - name: "Прошивка"
-    description: "Перепрошивка Android и iPhone"
-    icon: "📱"
-    url: "/services/firmware/"
+    <script>
+        (function() {
+            try {
+                const saved = localStorage.getItem('user_theme_choice');
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = saved ? saved : (systemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
     
-  - name: "Замена дисплея"
-    description: "Оригинальные экраны iPhone, Samsung, Xiaomi"
-    icon: "📲"
-    url: "/services/display/"
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     
-  - name: "Замена разъема"
-    description: "Разъем зарядки и аудио (Type-C, Lightning, microUSB)"
-    icon: "🔌"
-    url: "/services/connector/"
-    
-  - name: "Windows и ПК"
-    description: "Установка Windows, ремонт ПК и ноутбуков"
-    icon: "💻"
-    url: "/services/computer/"
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #606c71;
+            --heading: #159957;
+            --link: #1e6bb8;
+            --border: #dce6f0;
+            --card: #f3f6fa;
+        }
+        
+        [data-theme="dark"] {
+            --bg: #0d1117;
+            --text: #c9d1d9;
+            --heading: #7ee787;
+            --link: #58a6ff;
+            --border: #30363d;
+            --card: #161b22;
+        }
+        
+        body {
+            background-color: var(--bg) !important;
+            color: var(--text) !important;
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+        }
+        
+        /* ШАПКА С ФОТО */
+        html:not([data-theme="dark"]) .page-header,
+        [data-theme="light"] .page-header {
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
+                        url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
+            color: #fff !important;
+            text-align: center !important;
+            padding: 4rem 2rem !important;
+            min-height: 500px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            position: relative !important;
+        }
+        
+        [data-theme="dark"] .page-header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+                        url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
+            color: #fff !important;
+            text-align: center !important;
+            padding: 4rem 2rem !important;
+            min-height: 500px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            position: relative !important;
+        }
+        
+        /* СТЕКЛЯННАЯ КАРТОЧКА */
+        .page-header-content {
+            background: rgba(255, 255, 255, 0.15) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            padding: 3rem 4rem !important;
+            border-radius: 20px !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+            max-width: 800px !important;
+            width: 90% !important;
+            position: relative !important;
+            z-index: 2 !important;
+        }
+        
+        [data-theme="dark"] .page-header-content {
+            background: rgba(0, 0, 0, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        /* Типографика */
+        .page-header h1 {
+            font-size: 3rem !important;
+            font-weight: 800 !important;
+            margin: 0 0 1rem 0 !important;
+            color: #fff !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3) !important;
+            line-height: 1.2 !important;
+            letter-spacing: -1px !important;
+        }
+        
+        .page-header h2 {
+            font-size: 1.25rem !important;
+            font-weight: 400 !important;
+            margin: 0 !important;
+            color: rgba(255,255,255,0.95) !important;
+            line-height: 1.6 !important;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.3) !important;
+        }
+        
+        /* Ссылка на телефон */
+        .page-header h2 a {
+            color: #fff !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+            border-bottom: 1px dashed rgba(255,255,255,0.5) !important;
+            transition: all 0.3s !important;
+        }
+        
+        .page-header h2 a:hover {
+            border-bottom: 1px solid #fff !important;
+            text-decoration: none !important;
+        }
+        
+        /* Кнопки в шапке */
+        .page-header .btn {
+            display: inline-block;
+            margin: 1.5rem 0.5rem 0 0.5rem;
+            padding: 0.8rem 1.5rem;
+            color: #fff !important;
+            background: rgba(255,255,255,0.2) !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            border-radius: 50px !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+            transition: all 0.3s ease !important;
+            backdrop-filter: blur(5px) !important;
+        }
+        
+        .page-header .btn:hover {
+            background: rgba(255,255,255,0.3) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+        }
+        
+        /* Кнопка переключения темы */
+        #theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 9999;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            cursor: pointer;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        
+        #theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3);
+        }
+        
+        [data-theme="dark"] #theme-toggle {
+            background: rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.2);
+        }
+        
+        /* Основной контент */
+        .main-content {
+            max-width: 64rem;
+            padding: 2rem 6rem;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+        
+        .main-content h1, 
+        .main-content h2, 
+        .main-content h3 {
+            color: var(--heading) !important;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+        
+        .main-content a {
+            color: var(--link) !important;
+            text-decoration: none;
+        }
+        
+        .main-content a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Спойлеры */
+        details {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        
+        summary {
+            color: var(--heading);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        summary h3 { 
+            display: inline; 
+            margin: 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .gallery-item { 
+            text-align: center; 
+            background: var(--bg);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .label-red { 
+            background: #e74c3c; 
+            color: white; 
+            padding: 8px; 
+            font-weight: bold; 
+        }
+        
+        .label-green { 
+            background: #27ae60; 
+            color: white; 
+            padding: 8px; 
+            font-weight: bold; 
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .highlight { 
+            color: #e94560; 
+            font-weight: bold; 
+        }
+        
+        /* Подвал */
+        .site-footer {
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: solid 1px var(--border);
+            font-size: 0.9rem;
+            color: var(--text);
+            text-align: center;
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 600px) {
+            .gallery-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            html:not([data-theme="dark"]) .page-header,
+            [data-theme="light"] .page-header,
+            [data-theme="dark"] .page-header { 
+                padding: 3rem 1rem !important; 
+                min-height: 450px !important;
+            }
+            
+            .page-header-content {
+                padding: 2rem 1.5rem !important;
+                width: 95% !important;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem !important;
+            }
+            
+            .page-header h2 {
+                font-size: 1.1rem !important;
+            }
+            
+            .main-content { 
+                padding: 2rem 1rem; 
+            }
+        }
+    </style>
+</head>
 
-# ==========================================
-# URL И ПУТИ
-# ==========================================
+<body>
+    <button id="theme-toggle" title="Нажать для смены темы, удержать 3 сек для сброса">🌙</button>
 
-# ВАЖНО: убрал пробелы в конце!
-url: "https://alexdrog.github.io"
-# После покупки домена заменить на: url: "https://drog.by"
+    <section class="page-header">
+        <div class="page-header-content">
+            <h1 class="project-name">{{ site.title | default: "Ремонт смартфонов и ноутбуков" }}</h1>
+            <h2 class="project-tagline">{{ site.description | default: "г. Дрогичин, ул. Ленина 141а | 📞 +375 (29) 725-69-82<br>Работаю без выходных. Сложные разблокировки, восстановление после воды, прошивка." }}</h2>
+            {% if site.github.is_project_page %}
+                <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
+            {% endif %}
+            {% if site.show_downloads %}
+                <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
+                <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
+            {% endif %}
+        </div>
+    </section>
 
-# Если репозиторий на GitHub называется alexdrog.github.io - оставь пустым
-# Если название другое (например repair-site), впиши: baseurl: "/repair-site"
-baseurl: ""
+    <section class="main-content">
+        {{ content }}
+        
+        <footer class="site-footer">
+            {% if site.github.is_project_page %}
+                <span class="site-footer-owner">
+                    <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> 
+                    is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.
+                </span>
+            {% endif %}
+            <span class="site-footer-credits">
+                This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.
+            </span>
+        </footer>
+    </section>
 
-lang: "ru"
-
-# ==========================================
-# СОЦСЕТИ (исправил номера)
-# ==========================================
-
-social:
-  telegram: "https://t.me/AlexDrog1981"
-  # Правильные ссылки с твоим номером +375297256982:
-  whatsapp: "https://wa.me/375297256982"
-  viber: "viber://chat?number=+375297256982"
-  vk: ""
-  instagram: ""
-  youtube: ""
-
-# ==========================================
-# JEKYLL НАСТРОЙКИ
-# ==========================================
-
-plugins:
-  - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-feed
-
-markdown: kramdown
-kramdown:
-  input: GFM
-  hard_wrap: false
-
-exclude:
-  - README.md
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor
-  - .sass-cache
-  - .jekyll-cache
-
-include:
-  - _pages
-
-# ==========================================
-# SEO
-# ==========================================
-
-logo: "/assets/images/logo.png"
-image: "/assets/images/og-image.jpg"
-
-# ==========================================
-# ДОПОЛНИТЕЛЬНО
-# ==========================================
-
-tagline: "Работаем с 2008 года — то, что отказались делать другие"
-founding_year: "2008"
-price_range: "$$"
-currency: "BYN"
-payment_methods: "Наличные, Карта, Оплата по реквизитам"
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        
+        function updateIcon() {
+            const t = document.documentElement.getAttribute('data-theme');
+            btn.textContent = t === 'dark' ? '☀️' : '🌙';
+        }
+        
+        function toggle() {
+            const t = document.documentElement.getAttribute('data-theme');
+            const next = t === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('user_theme_choice', next);
+            updateIcon();
+        }
+        
+        function reset() {
+            localStorage.removeItem('user_theme_choice');
+            const d = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', d ? 'dark' : 'light');
+            updateIcon();
+            alert('Автоматическая тема');
+        }
+        
+        updateIcon();
+        btn.addEventListener('click', toggle);
+        
+        let timer;
+        btn.addEventListener('mousedown', () => timer = setTimeout(reset, 3000));
+        btn.addEventListener('mouseup', () => clearTimeout(timer));
+        btn.addEventListener('mouseleave', () => clearTimeout(timer));
+        btn.addEventListener('touchstart', () => timer = setTimeout(reset, 3000));
+        btn.addEventListener('touchend', () => clearTimeout(timer));
+        
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('user_theme_choice')) {
+                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                updateIcon();
+            }
+        });
+    </script>
+</body>
+</html>
