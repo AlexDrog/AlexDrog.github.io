@@ -64,7 +64,7 @@
         .header-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 400px;
+            min-height: 500px; /* Увеличил высоту для текста услуг */
             width: 100%;
             margin: 0;
             padding: 0;
@@ -85,6 +85,7 @@
             display: block;
         }
         
+        /* ТЕКСТОВЫЙ БЛОК — ВСЕГДА СВЕТЛЫЙ */
         .text-side {
             display: flex;
             flex-direction: column;
@@ -97,23 +98,58 @@
         }
         
         .text-side h1 {
-            font-size: clamp(2rem, 3vw, 3rem);
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
             font-weight: 800;
-            color: #ffffff;
+            color: #ffffff !important; /* Принудительно белый */
             line-height: 1.1;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
             text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
         
         .text-side .address {
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.9) !important; /* Принудительно светлый */
             font-weight: 500;
+            margin-bottom: 2rem;
+        }
+        
+        /* Список услуг — всегда светлый */
+        .services-text {
+            margin-top: 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            color: #ffffff !important;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .services-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .services-list li {
+            color: rgba(255, 255, 255, 0.85) !important;
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            padding-left: 1.2rem;
+            position: relative;
+            line-height: 1.4;
+        }
+        
+        .services-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.6);
         }
         
         /* ============================================
-           СИММЕТРИЧНЫЕ КНОПКИ
+           КНОПКИ (симметричные)
            ============================================ */
         .floating-btn {
             position: fixed;
@@ -132,20 +168,7 @@
             top: 20px;
         }
         
-        /* Кнопка Telegram — слева */
-        #call-button {
-            left: 20px;
-            background: rgba(220, 38, 38, 0.95);
-            color: white;
-        }
-        
-        #call-button:hover {
-            transform: scale(1.1);
-            background: rgba(220, 38, 38, 1);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
-        }
-        
-        /* Кнопка темы — справа */
+        /* Кнопка ТЕМЫ — справа (видна всегда) */
         #theme-toggle {
             right: 20px;
             background: rgba(15, 23, 42, 0.6);
@@ -159,13 +182,46 @@
             background: rgba(15, 23, 42, 0.9);
         }
         
+        /* Кнопка TELEGRAM — слева (только ПК) */
+        #telegram-btn {
+            left: 20px;
+            background: rgba(220, 38, 38, 0.95);
+            color: white;
+        }
+        
+        #telegram-btn:hover {
+            transform: scale(1.1);
+            background: rgba(220, 38, 38, 1);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+        
+        /* Кнопка ЗВОНКА — слева (только мобильные) */
+        #phone-btn {
+            left: 20px;
+            background: rgba(220, 38, 38, 0.95);
+            color: white;
+            display: none; /* Скрыта на ПК */
+        }
+        
+        #phone-btn:hover {
+            transform: scale(1.1);
+            background: rgba(220, 38, 38, 1);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+        }
+        
         /* Иконки */
-        #call-button svg {
+        #telegram-btn svg,
+        #phone-btn svg {
             width: 24px;
             height: 24px;
             stroke: white;
-            stroke-width: 2.5;
+            stroke-width: 2;
             fill: none;
+        }
+        
+        #phone-btn svg {
+            fill: white;
+            stroke: none;
         }
         
         /* МОБИЛЬНАЯ ВЕРСИЯ */
@@ -195,15 +251,15 @@
                 object-fit: cover;
             }
             
-            /* ТЕКСТ ПОДНЯТ МАКСИМАЛЬНО ВВЕРХ */
+            /* Текст поднят вверх под кнопки */
             .text-side {
                 position: relative;
                 z-index: 2;
-                justify-content: flex-start; /* Прижимаем к верху */
+                justify-content: flex-start;
                 align-items: center;
                 text-align: center;
-                padding: 80px 2rem 2rem 2rem; /* Отступ сверху 80px (под кнопки) */
-                background: rgba(30, 41, 59, 0.5);
+                padding: 90px 1.5rem 2rem 1.5rem;
+                background: rgba(30, 41, 59, 0.6);
                 backdrop-filter: blur(2px);
                 -webkit-backdrop-filter: blur(2px);
                 border-left: none;
@@ -212,33 +268,41 @@
             }
             
             .text-side h1 {
-                font-size: clamp(1.8rem, 6vw, 2.5rem);
-                margin-bottom: 1rem;
-                text-shadow: 0 3px 10px rgba(0,0,0,0.8);
+                font-size: clamp(1.6rem, 5vw, 2.2rem);
+                margin-bottom: 0.5rem;
             }
             
             .text-side .address {
-                font-size: 1.2rem;
-                color: rgba(255, 255, 255, 0.95);
-                text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
             }
             
-            /* Кнопки на мобильном */
+            .tagline {
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .services-list li {
+                font-size: 0.9rem;
+                margin-bottom: 0.4rem;
+            }
+            
+            /* Переключаем кнопки */
+            #telegram-btn { display: none !important; }
+            #phone-btn { display: flex !important; }
+            
+            /* Кнопки ближе к краям на мобильном */
             .floating-btn {
                 top: 10px;
                 width: 44px;
                 height: 44px;
             }
             
-            #call-button {
-                left: 10px;
-            }
+            #theme-toggle { right: 10px; }
+            #phone-btn { left: 10px; }
             
-            #theme-toggle {
-                right: 10px;
-            }
-            
-            #call-button svg {
+            #phone-btn svg,
+            #telegram-btn svg {
                 width: 22px;
                 height: 22px;
             }
@@ -272,17 +336,26 @@
 </head>
 
 <body>
-    <!-- Кнопка Telegram — слева -->
-    <a href="https://t.me/AlexDrog1981" target="_blank" rel="noopener noreferrer" class="floating-btn" id="call-button" title="Написать в Telegram" aria-label="Написать в Telegram">
+    <!-- Кнопка Telegram — только для ПК -->
+    <a href="https://t.me/AlexDrog1981" target="_blank" rel="noopener noreferrer" class="floating-btn" id="telegram-btn" title="Написать в Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </a>
     
+    <!-- Кнопка Звонка — только для мобильных -->
+    <a href="tel:+375297256982" class="floating-btn" id="phone-btn" title="Позвонить">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+    </a>
+    
+    <!-- Кнопка темы -->
     <button class="floating-btn" id="theme-toggle" title="Сменить тему">🌙</button>
 
     <section class="page-header">
         <div class="header-content">
+            <!-- Видео слева -->
             <div class="video-side">
                 <video 
                     autoplay 
@@ -295,9 +368,21 @@
                 </video>
             </div>
             
+            <!-- Текст справа -->
             <div class="text-side">
                 <h1>Ремонт смартфонов<br>и ноутбуков</h1>
                 <p class="address">г. Дрогичин, ул. Ленина 141а</p>
+                
+                <!-- УСЛУГИ (всегда светлый текст) -->
+                <div class="services-text">
+                    <p class="tagline">Решаю сложные случаи, от которых отказываются другие.</p>
+                    <ul class="services-list">
+                        <li>Ремонт и настройка ПК и ноутбуков</li>
+                        <li>Разблокировка FRP, Google-аккаунты, Mi-Account</li>
+                        <li>Прошивка смартфонов</li>
+                        <li>Обновление карт — Navitel, IGO</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
