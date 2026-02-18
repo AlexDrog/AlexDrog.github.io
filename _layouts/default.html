@@ -8,14 +8,12 @@
     
     {% seo %}
     
-    <!-- ВАЖНО: Этот скрипт должен быть ПЕРВЫМ, чтобы не было вспышки светлой темы -->
+    <!-- Мгновенная установка темы до отрисовки -->
     <script>
         (function() {
             try {
-                const key = 'user_theme_choice';
-                const saved = localStorage.getItem(key);
+                const saved = localStorage.getItem('user_theme_choice');
                 const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                // Если есть сохраненная тема — используем её, иначе берем системную
                 const theme = saved ? saved : (systemDark ? 'dark' : 'light');
                 document.documentElement.setAttribute('data-theme', theme);
             } catch (e) {
@@ -27,7 +25,6 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     
     <style>
-        /* Базовые переменные (светлая тема по умолчанию) */
         :root {
             --bg: #ffffff;
             --text: #606c71;
@@ -39,7 +36,6 @@
             --btn-color: #fff;
         }
         
-        /* Темная тема */
         [data-theme="dark"] {
             --bg: #0d1117;
             --text: #c9d1d9;
@@ -51,21 +47,29 @@
             --btn-color: #fff;
         }
         
-        /* Применение переменных */
         body {
             background-color: var(--bg) !important;
             color: var(--text) !important;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         
+        /* ШАПКА С ФОНОМ ЗДАНИЯ */
         .page-header {
+            position: relative;
+            background-image: linear-gradient(rgba(21, 87, 153, 0.7), rgba(21, 153, 87, 0.7)), 
+                              url('./assets/images/zdanie.jpg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
             background-color: #159957 !important;
-            background-image: linear-gradient(120deg, #155799, #159957) !important;
+            padding: 5rem 6rem;
         }
         
+        /* Темная тема — затемняем фото сильнее */
         [data-theme="dark"] .page-header {
-            background-image: linear-gradient(120deg, #0d1117, #161b22) !important;
-            background-color: #161b22 !important;
+            background-image: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
+                              url('./assets/images/zdanie.jpg') !important;
+            background-color: #0d1117 !important;
         }
         
         .main-content h1, 
@@ -107,9 +111,11 @@
             border-radius: 0.3rem;
             text-decoration: none;
             border: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
         }
         
-        /* Кнопка переключения */
+        /* Кнопка переключения темы */
         #theme-toggle {
             position: fixed;
             top: 15px;
@@ -131,7 +137,6 @@
             background: rgba(255,255,255,0.3);
         }
         
-        /* Для мобильных, когда шапка темная */
         [data-theme="dark"] #theme-toggle {
             background: rgba(0,0,0,0.3);
             border-color: rgba(255,255,255,0.2);
@@ -166,12 +171,12 @@
         
         @media (max-width: 600px) {
             .gallery-grid { grid-template-columns: 1fr; }
+            .page-header { padding: 3rem 1rem; }
         }
     </style>
 </head>
 
 <body>
-    <!-- Кнопка переключения -->
     <button id="theme-toggle" title="Нажать для смены, удержать 3 сек для сброса">🌙</button>
 
     <section class="page-header">
@@ -197,32 +202,26 @@
         </footer>
     </section>
 
-    <!-- Скрипт управления (уже без инициализации, она в head) -->
     <script>
         const THEME_KEY = 'user_theme_choice';
         const btn = document.getElementById('theme-toggle');
         const metaTheme = document.getElementById('meta-theme-color');
         
-        // Устанавливаем иконку кнопки в зависимости от текущей темы
         function updateButtonIcon() {
             const current = document.documentElement.getAttribute('data-theme');
             btn.textContent = current === 'dark' ? '☀️' : '🌙';
             if (metaTheme) metaTheme.content = current === 'dark' ? '#0d1117' : '#ffffff';
         }
         
-        // Переключить вручную
         function toggleTheme() {
             const current = document.documentElement.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
-            
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem(THEME_KEY, next);
             updateButtonIcon();
-            
             if (navigator.vibrate) navigator.vibrate(50);
         }
         
-        // Сброс на автоматику
         function resetToAuto() {
             localStorage.removeItem(THEME_KEY);
             const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -232,13 +231,10 @@
             alert('Тема сброшена на автоматическую');
         }
         
-        // Установить иконку при загрузке
         updateButtonIcon();
         
-        // Обработчики кнопки
         btn.addEventListener('click', toggleTheme);
         
-        // Долгий тап для сброса
         let pressTimer;
         btn.addEventListener('mousedown', () => pressTimer = setTimeout(resetToAuto, 3000));
         btn.addEventListener('mouseup', () => clearTimeout(pressTimer));
@@ -248,7 +244,6 @@
         });
         btn.addEventListener('touchend', () => clearTimeout(pressTimer));
         
-        // Слушатель системной темы (работает только если нет ручного выбора)
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem(THEME_KEY)) {
                 document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
