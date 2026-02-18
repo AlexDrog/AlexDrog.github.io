@@ -8,10 +8,6 @@ $primary-blue: #16213e;
 $accent-orange: #e94560;
 
 // ============================================
-// ШАПКА УДАЛЕНА (теперь в default.html)
-// ============================================
-
-// ============================================
 // МЕНЮ НАВИГАЦИИ (ПОЛНАЯ ШИРИНА)
 // ============================================
 .service-navbar {
@@ -123,6 +119,7 @@ $accent-orange: #e94560;
   border-top: 3px solid $accent-orange;
   text-align: left;
   overflow: hidden;
+  z-index: 1001;
   
   &.wide {
     min-width: 600px;
@@ -194,25 +191,11 @@ $accent-orange: #e94560;
 }
 
 // ============================================
-// ОСТАЛЬНЫЕ СТИЛИ (контент)
+// ТАБЛИЦЫ И КНОПКИ (только специфичные стили)
 // ============================================
-.main-content {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.6;
-  max-width: 900px;
-  padding: 2rem 1rem;
-}
 
-.main-content h1, 
-.main-content h2, 
-.main-content h3 {
-  color: $primary-blue;
-  border-bottom: 2px solid $accent-orange;
-  padding-bottom: 0.3em;
-  margin-top: 2rem;
-  
-  &[id] { scroll-margin-top: 90px; }
-}
+// Исправление: не трогаем .main-content и h1-h3, 
+// чтобы не конфликтовать с default.html
 
 .price-table {
   width: 100%;
@@ -273,7 +256,7 @@ $accent-orange: #e94560;
 }
 
 // ============================================
-// МОБИЛЬНАЯ АДАПТАЦИЯ (макс. 968px)
+// МОБИЛЬНАЯ АДАПТАЦИЯ (только меню)
 // ============================================
 @media screen and (max-width: 968px) {
   .service-navbar {
@@ -329,8 +312,6 @@ $accent-orange: #e94560;
     padding-left: 60px;
     background: #f8f9fa;
   }
-  
-  .main-content h2[id] { scroll-margin-top: 10px; }
   
   .btn { 
     display: block; 
