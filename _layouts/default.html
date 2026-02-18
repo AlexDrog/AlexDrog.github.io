@@ -8,6 +8,7 @@
     
     {% seo %}
     
+    <!-- Убраны пробелы в URL -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -26,7 +27,7 @@
     <style>
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            --bg-body: #f8fafc;
+            --bg-body: #0f172a; /* Сразу темный фон */
             --video-bg: #1e293b;
         }
         
@@ -40,12 +41,20 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            background: #0f172a !important; /* Убираем градиент */
+            background-image: none !important;
         }
         
         body {
-    background-color: var(--bg-body) !important;
-    background-image: none !important;
-}
+            font-family: var(--font-primary);
+            background-color: var(--bg-body);
+            line-height: 1.6;
+        }
+        
+        /* Убираем возможный градиент от Jekyll темы */
+        .page-header, .main-content, .site-footer {
+            background-image: none !important;
+        }
         
         /* ШАПКА */
         .page-header {
@@ -63,7 +72,7 @@
         .header-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 500px; /* Увеличил высоту для текста услуг */
+            min-height: 500px;
             width: 100%;
             margin: 0;
             padding: 0;
@@ -99,7 +108,7 @@
         .text-side h1 {
             font-size: clamp(1.8rem, 3vw, 2.8rem);
             font-weight: 800;
-            color: #ffffff !important; /* Принудительно белый */
+            color: #ffffff !important;
             line-height: 1.1;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
@@ -108,7 +117,7 @@
         
         .text-side .address {
             font-size: clamp(1.1rem, 1.5vw, 1.3rem);
-            color: rgba(255, 255, 255, 0.9) !important; /* Принудительно светлый */
+            color: rgba(255, 255, 255, 0.9) !important;
             font-weight: 500;
             margin-bottom: 2rem;
         }
@@ -199,7 +208,7 @@
             left: 20px;
             background: rgba(220, 38, 38, 0.95);
             color: white;
-            display: none; /* Скрыта на ПК */
+            display: none;
         }
         
         #phone-btn:hover {
@@ -311,38 +320,31 @@
             max-width: 64rem;
             padding: 4rem 2rem;
             margin: 0 auto;
-            color: #0f172a;
-        }
-        
-        [data-theme="dark"] .main-content {
-            color: #f8fafc;
+            color: #f8fafc; /* Светлый текст для темного фона */
+            background: #0f172a !important; /* Убираем градиент */
         }
         
         .site-footer {
             margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 1px solid #e2e8f0;
-            color: #64748b;
+            border-top: 1px solid #1e293b;
+            color: #94a3b8;
             font-size: 0.875rem;
             text-align: center;
-        }
-        
-        [data-theme="dark"] .site-footer {
-            border-top-color: #1e293b;
-            color: #94a3b8;
+            background: #0f172a !important;
         }
     </style>
 </head>
 
 <body>
-    <!-- Кнопка Telegram — только для ПК -->
+    <!-- Кнопка Telegram — только для ПК (убран пробел в URL) -->
     <a href="https://t.me/AlexDrog1981" target="_blank" rel="noopener noreferrer" class="floating-btn" id="telegram-btn" title="Написать в Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </a>
     
-    <!-- Кнопка Звонка — только для мобильных -->
+    <!-- Кнопка Звонка — только для мобильных (убран пробел в URL) -->
     <a href="tel:+375297256982" class="floating-btn" id="phone-btn" title="Позвонить">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
