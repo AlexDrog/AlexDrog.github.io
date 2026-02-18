@@ -8,9 +8,9 @@
     
     {% seo %}
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com  ">
+    <link rel="preconnect" href="https://fonts.gstatic.com  " crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400  ;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         (function() {
@@ -27,18 +27,19 @@
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             
-            /* ВЕРНУЛ КАК БЫЛО - светлая тема */
+            /* Light theme glass - прозрачное светлое стекло */
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-text: #0f172a;
             --glass-text-secondary: #334155;
             --accent: #10b981;
             
+            /* Фон страницы */
             --bg-body: #f8fafc;
         }
         
         [data-theme="dark"] {
-            /* ВЕРНУЛ КАК БЫЛО - темная тема */
+            /* Dark theme glass - прозрачное темное стекло */
             --glass-bg: rgba(15, 23, 42, 0.6);
             --glass-border: rgba(255, 255, 255, 0.15);
             --glass-text: #f8fafc;
@@ -57,7 +58,7 @@
         }
         
         /* ============================================
-           ШАПКА - УБИРАЕМ КРУГ/ЛОГОТИП
+           ШАПКА - УБИРАЕМ ЛОГОТИП И КРУГ
            ============================================ */
         .page-header {
             position: relative;
@@ -70,6 +71,7 @@
             isolation: isolate;
         }
         
+        /* Затемняющий оверлей */
         .page-header::before {
             content: '';
             position: absolute;
@@ -78,18 +80,53 @@
             z-index: 0;
         }
         
-        /* Убираем ВСЕ круги/логотипы */
+        /* УБИРАЕМ КРУГ и логотип - явное скрытие всех псевдоэлементов */
         .page-header::after,
-        .bento-container::before,
-        .bento-container::after,
-        .bento-card::before,
-        .bento-card::after,
-        .page-header img,
-        .page-header .logo,
-        .page-header .avatar,
-        .project-name::before {
+        .page-header-content::before,
+        .page-header-content::after {
             display: none !important;
             content: none !important;
+        }
+        
+        /* ============================================
+           ЦВЕТА ТЕКСТА В ШАПКЕ - читаемые на обеих темах
+           ============================================ */
+        .page-header .bento-card {
+            color: #ffffff;
+        }
+        
+        .page-header .bento-card.main h1 {
+            color: #ffffff !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+        
+        .page-header .bento-card.main p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+        }
+        
+        .page-header .bento-card.phone .label {
+            color: rgba(255, 255, 255, 0.9) !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        .page-header .bento-card.phone a {
+            color: #6ee7b7 !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+        
+        .page-header .bento-card.info {
+            color: #ffffff;
+        }
+        
+        .page-header .info-row {
+            color: rgba(255, 255, 255, 0.9) !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        .page-header .info-row strong {
+            color: #ffffff !important;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
         
         /* ============================================
@@ -106,41 +143,42 @@
             z-index: 2;
         }
         
-        /* ============================================
-           СТЕКЛО В ШАПКЕ - принудительно тёмное (как в dark theme)
-           чтобы текст читался на обеих темах
-           ============================================ */
-        .page-header .bento-card {
-            background: rgba(15, 23, 42, 0.6); /* Как было в dark theme */
+        /* Стеклянная карточка - ПРОЗРАЧНАЯ */
+        .bento-card {
+            background: var(--glass-bg);
             backdrop-filter: blur(16px) saturate(180%);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Как было в dark theme */
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        /* ТЕКСТ В ШАПКЕ - принудительно светлый */
-        .page-header .bento-card.main h1 {
+        /* Главная карточка */
+        .bento-card.main {
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+        }
+        
+        .bento-card.main h1 {
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 800;
             line-height: 1.1;
-            color: #ffffff !important;
             margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6);
         }
         
-        .page-header .bento-card.main p {
+        .bento-card.main p {
             font-size: clamp(1rem, 1.5vw, 1.25rem);
-            color: rgba(255, 255, 255, 0.9) !important;
             line-height: 1.6;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
         }
         
-        /* Карточка телефона - вернул как был */
-        .page-header .bento-card.phone {
+        /* Карточка телефона */
+        .bento-card.phone {
             background: rgba(16, 185, 129, 0.15);
             border-color: rgba(16, 185, 129, 0.4);
             display: flex;
@@ -151,60 +189,52 @@
             cursor: pointer;
         }
         
-        [data-theme="dark"] .page-header .bento-card.phone {
+        [data-theme="dark"] .bento-card.phone {
             background: rgba(52, 211, 153, 0.15);
             border-color: rgba(52, 211, 153, 0.3);
         }
         
-        .page-header .bento-card.phone:hover {
+        .bento-card.phone:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px -5px rgba(16, 185, 129, 0.4);
         }
         
-        .page-header .bento-card.phone .label {
+        .bento-card.phone .label {
             font-size: 0.875rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.8) !important;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
         
-        .page-header .bento-card.phone a {
+        .bento-card.phone a {
             font-size: clamp(1.25rem, 2vw, 1.75rem);
             font-weight: 700;
-            color: #34d399 !important;
             text-decoration: none;
             transition: transform 0.2s;
             display: inline-block;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
-        .page-header .bento-card.phone a:hover {
+        .bento-card.phone a:hover {
             transform: scale(1.05);
-            color: #6ee7b7 !important;
         }
         
         /* Карточка инфо */
-        .page-header .bento-card.info {
+        .bento-card.info {
             display: flex;
             flex-direction: column;
             justify-content: center;
             gap: 0.75rem;
         }
         
-        .page-header .info-row {
+        .info-row {
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            color: rgba(255, 255, 255, 0.85) !important;
             font-size: 0.95rem;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
         }
         
-        .page-header .info-row strong {
-            color: #ffffff !important;
+        .info-row strong {
             display: block;
             font-weight: 600;
             margin-bottom: 0.2rem;
@@ -221,22 +251,20 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
             backdrop-filter: blur(10px);
             cursor: pointer;
             font-size: 1.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             transition: transform 0.2s;
-            color: #fff;
         }
         
         #theme-toggle:hover {
             transform: scale(1.1);
-            background: rgba(0, 0, 0, 0.5);
         }
         
         /* ============================================
@@ -252,19 +280,19 @@
                 grid-template-columns: 1fr;
             }
             
-            .page-header .bento-card.main {
+            .bento-card.main {
                 grid-row: auto;
                 padding: 2rem;
                 text-align: center;
             }
             
-            .page-header .bento-card {
+            .bento-card {
                 padding: 1.5rem;
             }
         }
         
         /* ============================================
-           ОСТАЛЬНОЙ КОНТЕНТ - как был (использует переменные)
+           КОНТЕНТ
            ============================================ */
         .main-content {
             max-width: 64rem;
@@ -298,16 +326,19 @@
 
     <section class="page-header">
         <div class="bento-container">
+            <!-- Главная карточка -->
             <div class="bento-card main">
                 <h1>{{ site.title | default: "Ремонт смартфонов и ноутбуков" }}</h1>
                 <p>{{ site.description | default: "Профессиональный ремонт техники в Дрогичине. Сложные разблокировки, восстановление после воды, замена комплектующих." }}</p>
             </div>
             
+            <!-- Телефон -->
             <div class="bento-card phone" onclick="location.href='tel:+375297256982'">
                 <span class="label">Позвонить</span>
                 <a href="tel:+375297256982">+375 (29) 725-69-82</a>
             </div>
             
+            <!-- Адрес -->
             <div class="bento-card info">
                 <div class="info-row">
                     <span>📍</span>
