@@ -4,186 +4,327 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#ffffff" id="meta-theme-color">
+    <meta name="theme-color" content="#0f172a" id="meta-theme-color">
     
     {% seo %}
     
-    <!-- ВАЖНО: Этот скрипт должен быть ПЕРВЫМ, чтобы не было вспышки светлой темы -->
+    <!-- ИСПРАВЛЕНО: убраны пробелы в URL -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <script>
         (function() {
-            try {
-                const key = 'user_theme_choice';
-                const saved = localStorage.getItem(key);
-                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                // Если есть сохраненная тема — используем её, иначе берем системную
-                const theme = saved ? saved : (systemDark ? 'dark' : 'light');
-                document.documentElement.setAttribute('data-theme', theme);
-            } catch (e) {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
+            const saved = localStorage.getItem('user_theme_choice');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved ? saved : (systemDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
         })();
     </script>
     
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     
     <style>
-        /* Базовые переменные (светлая тема по умолчанию) */
         :root {
-            --bg: #ffffff;
-            --text: #606c71;
-            --heading: #159957;
-            --link: #1e6bb8;
-            --border: #dce6f0;
-            --card: #f3f6fa;
-            --btn-bg: #159957;
-            --btn-color: #fff;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            
+            /* Light theme glass - прозрачное светлое стекло */
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --glass-text: #0f172a;
+            --glass-text-secondary: #334155;
+            --accent: #10b981;
+            
+            /* Фон страницы */
+            --bg-body: #f8fafc;
         }
         
-        /* Темная тема */
         [data-theme="dark"] {
-            --bg: #0d1117;
-            --text: #c9d1d9;
-            --heading: #7ee787;
-            --link: #58a6ff;
-            --border: #30363d;
-            --card: #161b22;
-            --btn-bg: #238636;
-            --btn-color: #fff;
+            /* Dark theme glass - прозрачное темное стекло */
+            --glass-bg: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-text: #f8fafc;
+            --glass-text-secondary: #cbd5e1;
+            --accent: #34d399;
+            
+            --bg-body: #020617;
         }
         
-        /* Применение переменных */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: var(--bg) !important;
-            color: var(--text) !important;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: var(--font-primary);
+            background-color: var(--bg-body);
+            line-height: 1.6;
         }
         
+        /* ============================================
+           ШАПКА - ЛОГОТИП ЗАКОММЕНТИРОВАН
+           ============================================ */
         .page-header {
-            background-color: #159957 !important;
-            background-image: linear-gradient(120deg, #155799, #159957) !important;
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: url('/assets/images/hero-header-400.jpg') center/cover no-repeat;
+            isolation: isolate;
         }
         
-        [data-theme="dark"] .page-header {
-            background-image: linear-gradient(120deg, #0d1117, #161b22) !important;
-            background-color: #161b22 !important;
+        /* Затемняющий оверлей */
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(15,23,42,0.8) 0%, rgba(30,41,59,0.7) 100%);
+            z-index: 0;
+        }
+        
+        /* ЗАКОММЕНТИРОВАНО: скрытие круглого логотипа logo.png
+           ============================================
+        .page-header::after,
+        .page-header-content::before,
+        .page-header-content::after {
+            display: none !important;
+            content: none !important;
+        }
+           ============================================ */
+        
+        /* ============================================
+           BENTO GRID
+           ============================================ */
+        .bento-container {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Стеклянная карточка - ПРОЗРАЧНАЯ */
+        .bento-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Главная карточка */
+        .bento-card.main {
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+        }
+        
+        .bento-card.main h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--glass-text);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .bento-card.main p {
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
+            color: var(--glass-text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Карточка телефона */
+        .bento-card.phone {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        [data-theme="dark"] .bento-card.phone {
+            background: rgba(52, 211, 153, 0.15);
+            border-color: rgba(52, 211, 153, 0.3);
+        }
+        
+        .bento-card.phone:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -5px rgba(16, 185, 129, 0.4);
+        }
+        
+        .bento-card.phone .label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--glass-text-secondary);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .bento-card.phone a {
+            font-size: clamp(1.25rem, 2vw, 1.75rem);
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        
+        .bento-card.phone a:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Карточка инфо */
+        .bento-card.info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+        
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--glass-text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .info-row strong {
+            color: var(--glass-text);
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        
+        /* ============================================
+           КНОПКА ТЕМЫ
+           ============================================ */
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+        }
+        
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        /* ============================================
+           МОБИЛЬНАЯ ВЕРСИЯ
+           ============================================ */
+        @media (max-width: 968px) {
+            .page-header {
+                min-height: auto;
+                padding: 6rem 1rem 2rem;
+            }
+            
+            .bento-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .bento-card.main {
+                grid-row: auto;
+                padding: 2rem;
+                text-align: center;
+            }
+            
+            .bento-card {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* ============================================
+           КОНТЕНТ
+           ============================================ */
+        .main-content {
+            max-width: 64rem;
+            padding: 4rem 2rem;
+            margin: 0 auto;
+            color: var(--glass-text);
         }
         
         .main-content h1, 
         .main-content h2, 
         .main-content h3 {
-            color: var(--heading) !important;
+            color: var(--glass-text);
+            margin-top: 3rem;
+            margin-bottom: 1rem;
         }
         
-        .main-content a {
-            color: var(--link) !important;
-        }
-        
-        details {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 12px;
-            transition: all 0.3s;
-        }
-        
-        summary {
-            color: var(--heading);
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        summary h3 { 
-            display: inline; 
-            margin: 0;
-        }
-        
-        .btn {
-            display: inline-block;
-            margin: 5px;
-            padding: 0.75rem 1rem;
-            background-color: var(--btn-bg) !important;
-            color: var(--btn-color) !important;
-            border-radius: 0.3rem;
-            text-decoration: none;
-            border: 1px solid var(--border);
-        }
-        
-        /* Кнопка переключения */
-        #theme-toggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 9999;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255,255,255,0.5);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        #theme-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(255,255,255,0.3);
-        }
-        
-        /* Для мобильных, когда шапка темная */
-        [data-theme="dark"] #theme-toggle {
-            background: rgba(0,0,0,0.3);
-            border-color: rgba(255,255,255,0.2);
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .gallery-item { 
-            text-align: center; 
-            background: var(--bg);
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-        }
-        
-        .label-red { background: #e74c3c; color: white; padding: 8px; font-weight: bold; }
-        .label-green { background: #27ae60; color: white; padding: 8px; font-weight: bold; }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .highlight { color: #e94560; font-weight: bold; }
-        
-        @media (max-width: 600px) {
-            .gallery-grid { grid-template-columns: 1fr; }
+        /* Footer */
+        .site-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--glass-text-secondary);
+            font-size: 0.875rem;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <!-- Кнопка переключения -->
-    <button id="theme-toggle" title="Нажать для смены, удержать 3 сек для сброса">🌙</button>
+    <button id="theme-toggle" title="Сменить тему (удерживайте 3сек для сброса)">🌙</button>
 
     <section class="page-header">
-        <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
-        <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
-        {% if site.github.is_project_page %}
-            <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
-        {% endif %}
-        {% if site.show_downloads %}
-            <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
-            <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
-        {% endif %}
+        <div class="bento-container">
+            <!-- Главная карточка -->
+            <div class="bento-card main">
+                <h1>{{ site.title | default: "Ремонт смартфонов и ноутбуков" }}</h1>
+                <p>{{ site.description | default: "Профессиональный ремонт техники в Дрогичине. Сложные разблокировки, восстановление после воды, замена комплектующих." }}</p>
+            </div>
+            
+            <!-- Телефон -->
+            <div class="bento-card phone" onclick="location.href='tel:+375297256982'">
+                <span class="label">Позвонить</span>
+                <a href="tel:+375297256982">+375 (29) 725-69-82</a>
+            </div>
+            
+            <!-- Адрес -->
+            <div class="bento-card info">
+                <div class="info-row">
+                    <span>📍</span>
+                    <div>
+                        <strong>Адрес</strong>
+                        г. Дрогичин, ул. Ленина, 141а (2 этаж)
+                    </div>
+                </div>
+                <div class="info-row">
+                    <span>🕐</span>
+                    <div>
+                        <strong>Режим работы</strong>
+                        Вт-Пт: 10:00–18:00, Сб-Вс: 10:00–14:00
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="main-content">
@@ -191,70 +332,41 @@
         
         <footer class="site-footer">
             {% if site.github.is_project_page %}
-                <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
+                <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> · 
             {% endif %}
-            <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+            Сгенерировано с помощью GitHub Pages
         </footer>
     </section>
 
-    <!-- Скрипт управления (уже без инициализации, она в head) -->
     <script>
-        const THEME_KEY = 'user_theme_choice';
         const btn = document.getElementById('theme-toggle');
-        const metaTheme = document.getElementById('meta-theme-color');
+        const icons = { dark: '☀️', light: '🌙' };
         
-        // Устанавливаем иконку кнопки в зависимости от текущей темы
-        function updateButtonIcon() {
-            const current = document.documentElement.getAttribute('data-theme');
-            btn.textContent = current === 'dark' ? '☀️' : '🌙';
-            if (metaTheme) metaTheme.content = current === 'dark' ? '#0d1117' : '#ffffff';
+        function updateIcon() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            btn.textContent = icons[theme] || '🌙';
         }
         
-        // Переключить вручную
-        function toggleTheme() {
+        btn.addEventListener('click', () => {
             const current = document.documentElement.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
-            
             document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem(THEME_KEY, next);
-            updateButtonIcon();
-            
-            if (navigator.vibrate) navigator.vibrate(50);
-        }
-        
-        // Сброс на автоматику
-        function resetToAuto() {
-            localStorage.removeItem(THEME_KEY);
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.setAttribute('data-theme', systemDark ? 'dark' : 'light');
-            updateButtonIcon();
-            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-            alert('Тема сброшена на автоматическую');
-        }
-        
-        // Установить иконку при загрузке
-        updateButtonIcon();
-        
-        // Обработчики кнопки
-        btn.addEventListener('click', toggleTheme);
-        
-        // Долгий тап для сброса
-        let pressTimer;
-        btn.addEventListener('mousedown', () => pressTimer = setTimeout(resetToAuto, 3000));
-        btn.addEventListener('mouseup', () => clearTimeout(pressTimer));
-        btn.addEventListener('mouseleave', () => clearTimeout(pressTimer));
-        btn.addEventListener('touchstart', (e) => {
-            pressTimer = setTimeout(resetToAuto, 3000);
+            localStorage.setItem('user_theme_choice', next);
+            updateIcon();
         });
-        btn.addEventListener('touchend', () => clearTimeout(pressTimer));
         
-        // Слушатель системной темы (работает только если нет ручного выбора)
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem(THEME_KEY)) {
-                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-                updateButtonIcon();
-            }
-        });
+        let timer;
+        btn.addEventListener('mousedown', () => timer = setTimeout(() => {
+            localStorage.removeItem('user_theme_choice');
+            const system = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = system ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            updateIcon();
+            alert('Автоматическая тема');
+        }, 3000));
+        btn.addEventListener('mouseup', () => clearTimeout(timer));
+        
+        updateIcon();
     </script>
 </body>
 </html>
