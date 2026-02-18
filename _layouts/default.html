@@ -27,7 +27,7 @@
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             --bg-body: #f8fafc;
-            --header-bg: #0f172a; /* Темно-синий как на видео */
+            --video-bg: #1e293b; /* Точный серый как на видео */
         }
         
         [data-theme="dark"] {
@@ -43,97 +43,16 @@
         }
         
         /* ============================================
-           ШАПКА
+           ПЛАВАЮЩИЕ КНОПКИ (видны на всех страницах)
            ============================================ */
-        .page-header {
-            position: relative;
-            width: 100%;
-            background: var(--header-bg);
-            overflow: hidden;
-        }
-        
-        .header-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* РОВНО 50/50 */
-            min-height: 450px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        
-        /* ЛЕВАЯ ПОЛОВИНА - ВИДЕО */
-        .video-side {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            background: var(--header-bg); /* Фон пока грузится видео */
-        }
-        
-        .video-side video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            filter: none; /* Без замутнения */
-        }
-        
-        /* ПРАВАЯ ПОЛОВИНА - ТЕКСТ С ЭФФЕКТОМ СТЕКЛА */
-        .text-side {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 3rem 4rem;
-            background: rgba(15, 23, 42, 0.25); /* Полупрозрачный фон как на видео */
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-        
-        /* Дополнительный слой для глубины */
-        .text-side::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
-            pointer-events: none;
-        }
-        
-        .text-side h1 {
-            font-size: clamp(2.2rem, 3.5vw, 3.2rem);
-            font-weight: 800;
-            color: #ffffff;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .text-side .address {
-            font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 500;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* ============================================
-           КНОПКА ТЕМЫ
-           ============================================ */
-        #theme-toggle {
+        #theme-toggle,
+        #call-button {
             position: fixed;
-            top: 20px;
-            right: 20px;
             z-index: 9999;
             width: 48px;
             height: 48px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
             cursor: pointer;
             font-size: 1.25rem;
             display: flex;
@@ -142,6 +61,15 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: transform 0.2s;
             color: white;
+            text-decoration: none;
+        }
+        
+        /* Кнопка темы — справа */
+        #theme-toggle {
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
         }
         
         #theme-toggle:hover {
@@ -149,22 +77,96 @@
             background: rgba(15, 23, 42, 0.9);
         }
         
+        /* Кнопка звонка — слева */
+        #call-button {
+            top: 20px;
+            left: 20px;
+            background: rgba(16, 185, 129, 0.9); /* Зелёный акцент */
+            backdrop-filter: blur(10px);
+        }
+        
+        #call-button:hover {
+            transform: scale(1.1);
+            background: rgba(16, 185, 129, 1);
+        }
+        
         /* ============================================
-           МОБИЛЬНАЯ ВЕРСИЯ (< 968px)
+           ШАПКА — НА ВСЮ ШИРИНУ БЕЗ РАМОК
+           ============================================ */
+        .page-header {
+            position: relative;
+            width: 100%;
+            background: var(--video-bg);
+            overflow: hidden;
+        }
+        
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* РОВНО 50/50 */
+            min-height: 400px; /* Уменьшенная высота */
+            width: 100%; /* На всю ширину без ограничений */
+            margin: 0; /* Без отступов */
+        }
+        
+        /* ЛЕВАЯ ПОЛОВИНА — ВИДЕО */
+        .video-side {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: var(--video-bg);
+        }
+        
+        .video-side video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* ПРАВАЯ ПОЛОВИНА — ТЕКСТ СО СТЕКЛОМ */
+        .text-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 3rem;
+            /* Цвет точно как фон видео + эффект стекла */
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .text-side h1 {
+            font-size: clamp(2rem, 3vw, 3rem);
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+        }
+        
+        .text-side .address {
+            font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        /* ============================================
+           МОБИЛЬНАЯ ВЕРСИЯ
            ============================================ */
         @media (max-width: 968px) {
             .page-header {
-                padding: 0; /* Убираем отступы */
+                padding: 0;
             }
             
             .header-content {
                 grid-template-columns: 1fr;
-                min-height: 100vh; /* На всю высоту экрана */
-                max-width: 100%; /* На всю ширину */
-                margin: 0;
+                min-height: 100vh;
+                width: 100%;
             }
             
-            /* Видео на весь экран без рамок */
             .video-side {
                 position: absolute;
                 top: 0;
@@ -178,10 +180,8 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                filter: none; /* Четкое видео без замутнения */
             }
             
-            /* Текст поверх видео */
             .text-side {
                 position: relative;
                 z-index: 2;
@@ -189,9 +189,10 @@
                 align-items: center;
                 text-align: center;
                 padding: 2rem;
-                background: rgba(15, 23, 42, 0.4); /* Темный полупрозрачный фон */
-                backdrop-filter: blur(8px); /* Легкое стекло для читаемости */
-                -webkit-backdrop-filter: blur(8px);
+                background: rgba(30, 41, 59, 0.5);
+                /* УМЕНЬШЕН blur до 2px */
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
                 border-left: none;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
                 min-height: 100vh;
@@ -200,14 +201,19 @@
             .text-side h1 {
                 font-size: clamp(1.8rem, 6vw, 2.5rem);
                 margin-bottom: 1rem;
-                text-shadow: 0 3px 6px rgba(0,0,0,0.8); /* Жесткая тень для контраста */
-                color: #ffffff;
+                text-shadow: 0 3px 10px rgba(0,0,0,0.8);
             }
             
             .text-side .address {
                 font-size: 1.2rem;
                 color: rgba(255, 255, 255, 0.95);
-                text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+                text-shadow: 0 2px 6px rgba(0,0,0,0.8);
+            }
+            
+            /* Кнопки чуть ниже на мобильном чтобы не перекрывать системный статус бар */
+            #theme-toggle,
+            #call-button {
+                top: 10px;
             }
         }
         
@@ -242,11 +248,15 @@
 </head>
 
 <body>
+    <!-- Кнопка звонка — слева сверху, на всех страницах -->
+    <a href="tel:+375297256982" id="call-button" title="Позвонить">📞</a>
+    
+    <!-- Кнопка темы — справа сверху -->
     <button id="theme-toggle" title="Сменить тему">🌙</button>
 
     <section class="page-header">
         <div class="header-content">
-            <!-- ЛЕВАЯ ПОЛОВИНА - ВИДЕО -->
+            <!-- ЛЕВАЯ ПОЛОВИНА — ВИДЕО -->
             <div class="video-side">
                 <video 
                     autoplay 
@@ -259,7 +269,7 @@
                 </video>
             </div>
             
-            <!-- ПРАВАЯ ПОЛОВИНА - ТЕКСТ СО СТЕКЛОМ -->
+            <!-- ПРАВАЯ ПОЛОВИНА — ТЕКСТ -->
             <div class="text-side">
                 <h1>Ремонт смартфонов<br>и ноутбуков</h1>
                 <p class="address">г. Дрогичин, ул. Ленина 141а</p>
