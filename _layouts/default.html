@@ -8,6 +8,7 @@
     
     {% seo %}
     
+    <!-- ИСПРАВЛЕНО: убраны пробелы в URL -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -26,6 +27,7 @@
     <style>
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            /* Цвета для КОНТЕНТА (не для шапки) */
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-text: #0f172a;
@@ -52,7 +54,7 @@
         }
         
         /* ============================================
-           ШАПКА - ЗДЕСЬ ФОН
+           ШАПКА - ФОН И ТЕКСТ (текст всегда белый!)
            ============================================ */
         .page-header {
             position: relative;
@@ -61,33 +63,32 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            /* Проверьте имя файла: hero-bg.jpg или hero-header-400.jpg */
             background: 
-                linear-gradient(135deg, rgba(15,23,42,0.4) 0%, rgba(30,41,59,0.3) 100%),
+                linear-gradient(135deg, rgba(15,23,42,0.5) 0%, rgba(30,41,59,0.4) 100%),
                 url('{{ "/assets/images/hero-bg.jpg" | relative_url }}') center/cover no-repeat,
                 linear-gradient(135deg, #1e3a5f 0%, #0f766e 100%);
             isolation: isolate;
         }
         
-        /* Если картинка не загрузится, будет виден этот градиент ^ (#1e3a5f → #0f766e) */
-        
         .page-header::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(15,23,42,0.7) 0%, rgba(30,41,59,0.6) 100%);
+            background: linear-gradient(135deg, rgba(15,23,42,0.6) 0%, rgba(30,41,59,0.5) 100%);
             z-index: 0;
         }
         
+        /* Скрываем логотипы из темы */
         .page-header img,
         .page-header .logo,
         .page-header .avatar,
-        .page-header .project-logo {
+        .page-header .project-logo,
+        .page-header > h1:first-child {
             display: none !important;
         }
         
         /* ============================================
-           BENTO GRID
+           BENTO GRID - ВСЕГДА СВЕТЛЫЕ ЦВЕТА (т.к. фон темный)
            ============================================ */
         .bento-container {
             display: grid;
@@ -101,10 +102,10 @@
         }
         
         .bento-card {
-            background: var(--glass-bg);
+            background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
             backdrop-filter: blur(16px) saturate(180%);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 2rem;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
@@ -119,25 +120,27 @@
             padding: 3rem;
         }
         
+        /* ЖЁСТКО ЗАДАНЫ БЕЛЫЕ ЦВЕТА для шапки */
         .bento-card.main h1 {
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 800;
             line-height: 1.1;
-            color: var(--glass-text);
+            color: #ffffff !important;
             margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
         
         .bento-card.main p {
             font-size: clamp(1rem, 1.5vw, 1.25rem);
-            color: var(--glass-text-secondary);
+            color: rgba(255, 255, 255, 0.9) !important;
             line-height: 1.6;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
         
         .bento-card.phone {
-            background: rgba(16, 185, 129, 0.15);
-            border-color: rgba(16, 185, 129, 0.4);
+            background: rgba(52, 211, 153, 0.15);
+            border-color: rgba(52, 211, 153, 0.4);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -146,21 +149,17 @@
             cursor: pointer;
         }
         
-        [data-theme="dark"] .bento-card.phone {
-            background: rgba(52, 211, 153, 0.15);
-            border-color: rgba(52, 211, 153, 0.3);
-        }
-        
         .bento-card.phone:hover {
             transform: translateY(-4px);
             box-shadow: 0 20px 40px -5px rgba(16, 185, 129, 0.4);
+            background: rgba(52, 211, 153, 0.25);
         }
         
         .bento-card.phone .label {
             font-size: 0.875rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--glass-text-secondary);
+            color: rgba(255, 255, 255, 0.8) !important;
             margin-bottom: 0.5rem;
             font-weight: 600;
         }
@@ -168,14 +167,17 @@
         .bento-card.phone a {
             font-size: clamp(1.25rem, 2vw, 1.75rem);
             font-weight: 700;
-            color: var(--accent);
+            color: #34d399 !important; /* Ярко-зелёный */
             text-decoration: none;
-            transition: transform 0.2s;
+            transition: all 0.2s;
             display: inline-block;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         .bento-card.phone a:hover {
             transform: scale(1.05);
+            color: #ffffff !important;
+            text-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
         }
         
         .bento-card.info {
@@ -189,15 +191,18 @@
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            color: var(--glass-text-secondary);
+            color: rgba(255, 255, 255, 0.85) !important;
             font-size: 0.95rem;
         }
         
         .info-row strong {
-            color: var(--glass-text);
+            color: #ffffff !important;
             display: block;
             font-weight: 600;
             margin-bottom: 0.2rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         /* ============================================
@@ -211,20 +216,22 @@
             width: 48px;
             height: 48px;
             border-radius: 50%;
-            border: 1px solid var(--glass-border);
-            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(15, 23, 42, 0.6);
             backdrop-filter: blur(10px);
             cursor: pointer;
             font-size: 1.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s, background 0.3s;
+            color: white;
         }
         
         #theme-toggle:hover {
             transform: scale(1.1);
+            background: rgba(15, 23, 42, 0.8);
         }
         
         /* ============================================
@@ -233,7 +240,7 @@
         @media (max-width: 968px) {
             .page-header {
                 min-height: auto;
-                padding: 6rem 1rem 2rem;
+                padding: 5rem 1rem 2rem;
             }
             
             .bento-container {
@@ -252,7 +259,7 @@
         }
         
         /* ============================================
-           КОНТЕНТ
+           КОНТЕНТ (здесь работают переменные темы)
            ============================================ */
         .main-content {
             max-width: 64rem;
