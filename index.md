@@ -134,7 +134,7 @@ layout: default
     width: 100%;
     height: 320px;
     object-fit: cover;
-    object-position: center 40%; /* Центрируем лицо (верхняя часть) */
+    object-position: center 60%; /* Центрируем лицо (верхняя часть) */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     display: block;
