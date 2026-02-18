@@ -2,406 +2,188 @@
 <html lang="{{ site.lang | default: 'ru-RU' }}">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#0f172a" id="meta-theme-color">
+    <meta name="theme-color" content="#ffffff" id="meta-theme-color">
     
     {% seo %}
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <!-- ВАЖНО: Этот скрипт должен быть ПЕРВЫМ, чтобы не было вспышки светлой темы -->
     <script>
         (function() {
-            const saved = localStorage.getItem('user_theme_choice');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = saved ? saved : (systemDark ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
+            try {
+                const key = 'user_theme_choice';
+                const saved = localStorage.getItem(key);
+                const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                // Если есть сохраненная тема — используем её, иначе берем системную
+                const theme = saved ? saved : (systemDark ? 'dark' : 'light');
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
         })();
     </script>
     
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     
     <style>
+        /* Базовые переменные (светлая тема по умолчанию) */
         :root {
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --accent: #10b981;
-            --bg-body: #f8fafc;
-            --glass-text: #0f172a;
-            --glass-text-secondary: #1e293b;
+            --bg: #ffffff;
+            --text: #606c71;
+            --heading: #159957;
+            --link: #1e6bb8;
+            --border: #dce6f0;
+            --card: #f3f6fa;
+            --btn-bg: #159957;
+            --btn-color: #fff;
         }
         
+        /* Темная тема */
         [data-theme="dark"] {
-            --glass-bg: rgba(15, 23, 42, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --accent: #34d399;
-            --bg-body: #020617;
-            --glass-text: #ffffff;
-            --glass-text-secondary: #e2e8f0;
+            --bg: #0d1117;
+            --text: #c9d1d9;
+            --heading: #7ee787;
+            --link: #58a6ff;
+            --border: #30363d;
+            --card: #161b22;
+            --btn-bg: #238636;
+            --btn-color: #fff;
         }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+        /* Применение переменных */
         body {
-            font-family: var(--font-primary);
-            background-color: var(--bg-body);
-            line-height: 1.6;
+            background-color: var(--bg) !important;
+            color: var(--text) !important;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
-        /* ============================================
-           ШАПКА - ФОН + УДАЛЕНИЕ ВСЕХ КРУГОВ/ЛОГО
-           ============================================ */
         .page-header {
-            position: relative;
-            min-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            /* Fallback цвет + градиент если фото не грузится */
-            background-color: #1e293b;
-            background-image: 
-                linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.75) 100%),
-                url('{{ "/assets/images/hero-header-400.jpg" | relative_url }}');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            isolation: isolate;
+            background-color: #159957 !important;
+            background-image: linear-gradient(120deg, #155799, #159957) !important;
         }
         
-        /* УБИРАЕМ ЛЮБЫЕ КРУГИ/ЛОГОТИПЫ В ШАПКЕ */
-        .page-header img,
-        .page-header svg,
-        .page-header [class*="logo"],
-        .page-header [class*="avatar"],
-        .page-header [class*="circle"],
-        .page-header [class*="round"],
-        .header-logo,
-        .site-logo,
-        .avatar,
-        .profile-pic,
-        .bento-container > img,
-        .bento-container > svg {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            width: 0 !important;
-            height: 0 !important;
-            position: absolute !important;
-            z-index: -9999 !important;
-        }
-        
-        /* ============================================
-           BENTO GRID - БЕЗ ТЕЛЕФОНА
-           ============================================ */
-        .bento-container {
-            display: grid;
-            /* Теперь только 2 карточки: main и info */
-            grid-template-columns: 1.5fr 1fr;
-            grid-template-rows: auto;
-            gap: 1.5rem;
-            max-width: 1200px;
-            width: 100%;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .bento-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .bento-card.main {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 3rem;
-        }
-        
-        .bento-card.main h1 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            color: var(--glass-text);
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-        
-        .bento-card.main .subtitle {
-            font-size: clamp(1rem, 1.3vw, 1.2rem);
-            color: var(--glass-text-secondary);
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.2);
-        }
-        
-        .bento-card.main .description {
-            font-size: clamp(0.95rem, 1.2vw, 1.1rem);
-            color: var(--glass-text-secondary);
-            line-height: 1.6;
-            font-weight: 500;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-        
-        /* Карточка инфо - выровнена по высоте с main */
-        .bento-card.info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-        
-        .info-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            color: var(--glass-text-secondary);
-            font-size: 1rem;
-            font-weight: 600;
-            line-height: 1.5;
-        }
-        
-        .info-row strong {
-            color: var(--glass-text);
-            display: block;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-            font-size: 1.1rem;
-        }
-        
-        #theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 1px solid var(--glass-border);
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            cursor: pointer;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: transform 0.2s;
-        }
-        
-        #theme-toggle:hover {
-            transform: scale(1.1);
-        }
-        
-        /* ============================================
-           АДАПТАЦИЯ ТАБЛИЦ ДЛЯ МОБИЛЬНЫХ
-           ============================================ */
-        .main-content {
-            max-width: 64rem;
-            padding: 4rem 2rem;
-            margin: 0 auto;
-            color: var(--glass-text);
-        }
-        
-        .main-content table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            display: block;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            white-space: nowrap;
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            font-size: 0.95rem;
-        }
-        
-        .main-content thead {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-        }
-        
-        .main-content th,
-        .main-content td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--glass-border);
-            white-space: normal;
-            min-width: 100px;
-        }
-        
-        .main-content th {
-            font-weight: 700;
-            color: var(--glass-text);
-            background: rgba(0,0,0,0.05);
-            white-space: nowrap;
-        }
-        
-        [data-theme="dark"] .main-content th {
-            background: rgba(255,255,255,0.05);
-        }
-        
-        /* Мобильные таблицы */
-        @media (max-width: 640px) {
-            .main-content table {
-                display: block;
-                width: 100%;
-                border: 0;
-                background: transparent;
-                font-size: 0.9rem;
-            }
-            
-            .main-content thead {
-                display: none;
-            }
-            
-            .main-content tbody,
-            .main-content tr {
-                display: block;
-                width: 100%;
-            }
-            
-            .main-content tr {
-                margin-bottom: 1rem;
-                border: 1px solid var(--glass-border);
-                border-radius: 16px;
-                padding: 1rem;
-                background: var(--glass-bg);
-                backdrop-filter: blur(10px);
-                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            }
-            
-            .main-content td {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 0.6rem 0;
-                border-bottom: 1px solid rgba(0,0,0,0.1);
-                text-align: right;
-                min-width: auto;
-                font-size: 0.9rem;
-            }
-            
-            [data-theme="dark"] .main-content td {
-                border-bottom-color: rgba(255,255,255,0.1);
-            }
-            
-            .main-content td:last-child {
-                border-bottom: 0;
-            }
-            
-            .main-content td:before {
-                content: attr(data-label);
-                font-weight: 700;
-                text-align: left;
-                color: var(--accent);
-                padding-right: 1rem;
-                flex-shrink: 0;
-                font-size: 0.85rem;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-            }
-            
-            .main-content td:first-child {
-                font-weight: 800;
-                font-size: 1.05rem;
-                color: var(--glass-text);
-                justify-content: center;
-                border-bottom: 2px solid var(--glass-border);
-                padding-bottom: 0.75rem;
-                margin-bottom: 0.5rem;
-            }
-            
-            .main-content td:first-child:before {
-                display: none;
-            }
-        }
-        
-        /* ============================================
-           МОБИЛЬНАЯ ВЕРСИЯ
-           ============================================ */
-        @media (max-width: 968px) {
-            .page-header {
-                min-height: auto;
-                padding: 6rem 1rem 2rem;
-                background-attachment: scroll; /* Отключаем fixed для мобильных */
-            }
-            
-            .bento-container {
-                grid-template-columns: 1fr; /* Одна колонка на мобильном */
-            }
-            
-            .bento-card.main {
-                padding: 2rem;
-                text-align: center;
-            }
-            
-            .bento-card {
-                padding: 1.5rem;
-            }
+        [data-theme="dark"] .page-header {
+            background-image: linear-gradient(120deg, #0d1117, #161b22) !important;
+            background-color: #161b22 !important;
         }
         
         .main-content h1, 
         .main-content h2, 
         .main-content h3 {
-            color: var(--glass-text);
-            margin-top: 3rem;
-            margin-bottom: 1rem;
+            color: var(--heading) !important;
         }
         
-        .site-footer {
-            margin-top: 4rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--glass-border);
-            color: var(--glass-text-secondary);
-            font-size: 0.875rem;
-            text-align: center;
+        .main-content a {
+            color: var(--link) !important;
+        }
+        
+        details {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+        
+        summary {
+            color: var(--heading);
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        summary h3 { 
+            display: inline; 
+            margin: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            margin: 5px;
+            padding: 0.75rem 1rem;
+            background-color: var(--btn-bg) !important;
+            color: var(--btn-color) !important;
+            border-radius: 0.3rem;
+            text-decoration: none;
+            border: 1px solid var(--border);
+        }
+        
+        /* Кнопка переключения */
+        #theme-toggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 9999;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.5);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.3);
+        }
+        
+        /* Для мобильных, когда шапка темная */
+        [data-theme="dark"] #theme-toggle {
+            background: rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.2);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .gallery-item { 
+            text-align: center; 
+            background: var(--bg);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .label-red { background: #e74c3c; color: white; padding: 8px; font-weight: bold; }
+        .label-green { background: #27ae60; color: white; padding: 8px; font-weight: bold; }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .highlight { color: #e94560; font-weight: bold; }
+        
+        @media (max-width: 600px) {
+            .gallery-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
-    <button id="theme-toggle" aria-label="Переключить тему" title="Сменить тему (удерживайте 3сек для сброса)">🌙</button>
+    <!-- Кнопка переключения -->
+    <button id="theme-toggle" title="Нажать для смены, удержать 3 сек для сброса">🌙</button>
 
     <section class="page-header">
-        <div class="bento-container">
-            <!-- Главная карточка -->
-            <div class="bento-card main">
-                <h1>Ремонт смартфонов и ноутбуков</h1>
-                <p class="subtitle">г. Дрогичин, ул. Ленина 141а | 📞 +375 (29) 725-69-82</p>
-                <p class="description">Сложные разблокировки, восстановление после воды, прошивка.</p>
-            </div>
-            
-            <!-- ТЕЛЕФОН УБРАН -->
-            
-            <!-- Адрес и время -->
-            <div class="bento-card info">
-                <div class="info-row">
-                    <span>📍</span>
-                    <div>
-                        <strong>Адрес</strong>
-                        г. Дрогичин, ул. Ленина, 141а (2 этаж)
-                    </div>
-                </div>
-                <div class="info-row">
-                    <span>🕐</span>
-                    <div>
-                        <strong>Режим работы</strong>
-                        Вт-Пт: 10:00–18:00, Сб-Вс: 10:00–14:00
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1 class="project-name">{{ site.title | default: site.github.repository_name }}</h1>
+        <h2 class="project-tagline">{{ site.description | default: site.github.project_tagline }}</h2>
+        {% if site.github.is_project_page %}
+            <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
+        {% endif %}
+        {% if site.show_downloads %}
+            <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
+            <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
+        {% endif %}
     </section>
 
     <section class="main-content">
@@ -409,62 +191,69 @@
         
         <footer class="site-footer">
             {% if site.github.is_project_page %}
-                <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> · 
+                <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
             {% endif %}
-            Сгенерировано с помощью GitHub Pages
+            <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
         </footer>
     </section>
 
+    <!-- Скрипт управления (уже без инициализации, она в head) -->
     <script>
+        const THEME_KEY = 'user_theme_choice';
         const btn = document.getElementById('theme-toggle');
-        const icons = { dark: '☀️', light: '🌙' };
+        const metaTheme = document.getElementById('meta-theme-color');
         
-        function updateIcon() {
-            const theme = document.documentElement.getAttribute('data-theme');
-            btn.textContent = icons[theme] || '🌙';
+        // Устанавливаем иконку кнопки в зависимости от текущей темы
+        function updateButtonIcon() {
+            const current = document.documentElement.getAttribute('data-theme');
+            btn.textContent = current === 'dark' ? '☀️' : '🌙';
+            if (metaTheme) metaTheme.content = current === 'dark' ? '#0d1117' : '#ffffff';
         }
         
-        btn.addEventListener('click', () => {
+        // Переключить вручную
+        function toggleTheme() {
             const current = document.documentElement.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
+            
             document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('user_theme_choice', next);
-            updateIcon();
+            localStorage.setItem(THEME_KEY, next);
+            updateButtonIcon();
+            
+            if (navigator.vibrate) navigator.vibrate(50);
+        }
+        
+        // Сброс на автоматику
+        function resetToAuto() {
+            localStorage.removeItem(THEME_KEY);
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', systemDark ? 'dark' : 'light');
+            updateButtonIcon();
+            if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            alert('Тема сброшена на автоматическую');
+        }
+        
+        // Установить иконку при загрузке
+        updateButtonIcon();
+        
+        // Обработчики кнопки
+        btn.addEventListener('click', toggleTheme);
+        
+        // Долгий тап для сброса
+        let pressTimer;
+        btn.addEventListener('mousedown', () => pressTimer = setTimeout(resetToAuto, 3000));
+        btn.addEventListener('mouseup', () => clearTimeout(pressTimer));
+        btn.addEventListener('mouseleave', () => clearTimeout(pressTimer));
+        btn.addEventListener('touchstart', (e) => {
+            pressTimer = setTimeout(resetToAuto, 3000);
         });
+        btn.addEventListener('touchend', () => clearTimeout(pressTimer));
         
-        let timer;
-        btn.addEventListener('mousedown', () => {
-            timer = setTimeout(() => {
-                localStorage.removeItem('user_theme_choice');
-                const system = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const theme = system ? 'dark' : 'light';
-                document.documentElement.setAttribute('data-theme', theme);
-                updateIcon();
-                alert('Автоматическая тема');
-            }, 3000);
-        });
-        btn.addEventListener('mouseup', () => clearTimeout(timer));
-        btn.addEventListener('mouseleave', () => clearTimeout(timer));
-        
-        updateIcon();
-        
-        // Скрипт для адаптации таблиц
-        document.addEventListener('DOMContentLoaded', function() {
-            const tables = document.querySelectorAll('.main-content table');
-            tables.forEach(table => {
-                const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.trim());
-                if (headers.length === 0) return;
-                
-                const rows = table.querySelectorAll('tbody tr');
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    cells.forEach((cell, index) => {
-                        if (headers[index]) {
-                            cell.setAttribute('data-label', headers[index]);
-                        }
-                    });
-                });
-            });
+        // Слушатель системной темы (работает только если нет ручного выбора)
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem(THEME_KEY)) {
+                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                updateButtonIcon();
+            }
         });
     </script>
 </body>
