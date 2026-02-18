@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0f172a" id="meta-theme-color">
     
+    <!-- Open Graph для миниатюры в мессенджерах -->
+    <meta property="og:title" content="Ремонт смартфонов и ноутбуков | г. Дрогичин">
+    <meta property="og:description" content="Профессиональный ремонт техники. Сложные разблокировки, восстановление после воды, прошивка, обновление навигаторов. Выезд и диагностика.">
+    <meta property="og:image" content="https://alexdrog.github.io/assets/images/preview.jpg">
+    <meta property="og:url" content="https://alexdrog.github.io/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:site_name" content="Ремонт техники Дрогичин">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ремонт смартфонов и ноутбуков в Дрогичине">
+    <meta name="twitter:description" content="Профессиональный ремонт техники. Сложные разблокировки, прошивка.">
+    <meta name="twitter:image" content="https://alexdrog.github.io/assets/images/preview.jpg">
+    
     {% seo %}
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,12 +72,10 @@
             line-height: 1.6;
         }
         
-        /* Убираем градиент от темы */
         .page-header, .main-content, .site-footer {
             background-image: none !important;
         }
         
-        /* ШАПКА */
         .page-header {
             width: 100vw;
             position: relative;
@@ -99,7 +112,6 @@
             display: block;
         }
         
-        /* ТЕКСТОВЫЙ БЛОК — ВСЕГДА СВЕТЛЫЙ (на фоне видео) */
         .text-side {
             display: flex;
             flex-direction: column;
@@ -157,9 +169,6 @@
             color: rgba(255, 255, 255, 0.6);
         }
         
-        /* ============================================
-           КНОПКИ (симметричные)
-           ============================================ */
         .floating-btn {
             position: fixed;
             z-index: 9999;
@@ -229,9 +238,6 @@
             stroke: none;
         }
         
-        /* ============================================
-           ОСНОВНОЙ КОНТЕНТ (адаптируется под тему)
-           ============================================ */
         .main-content {
             max-width: 64rem;
             padding: 4rem 2rem;
@@ -254,7 +260,6 @@
             color: var(--text-secondary);
         }
         
-        /* МОБИЛЬНАЯ */
         @media (max-width: 968px) {
             .page-header {
                 padding: 0;
@@ -338,7 +343,6 @@
 </head>
 
 <body>
-    <!-- Убраны пробелы в URL -->
     <a href="https://t.me/AlexDrog1981" target="_blank" rel="noopener noreferrer" class="floating-btn" id="telegram-btn" title="Написать в Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
