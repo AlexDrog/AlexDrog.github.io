@@ -47,7 +47,7 @@ $accent-orange: #e94560;
   .page-header {
     // ФОН ДЛЯ ПЛАНШЕТОВ (строка 45)
     background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
-                      url('assets/images/hero-header-fullhd.jpg');
+                      url('assets/images/hero-bg.jpg');
     background-position: center 25%;
     padding: 1.5rem 1rem 3rem 1rem;
     
@@ -60,7 +60,7 @@ $accent-orange: #e94560;
   .page-header {
     // ФОН ДЛЯ МОБИЛЬНЫХ (строка 57)
     background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
-                      url('assets/images/hero-header-wide.jpg');
+                      url('assets/images/hero-bg.jpg');
     background-position: center top;
     padding: 1rem 1rem 2.5rem 1rem;
     min-height: 300px;
