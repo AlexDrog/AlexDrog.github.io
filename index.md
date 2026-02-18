@@ -47,13 +47,24 @@ layout: default
   
   .btn {
     display: inline-block;
-    padding: 8px 16px;
-    margin: 5px 5px 5px 0;
+    padding: 12px 24px;
+    margin: 5px;
     background-color: var(--btn-bg) !important;
     color: var(--btn-color) !important;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 600;
+  }
+  
+  /* Увеличенная центрированная кнопка */
+  .btn-large {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem auto;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 14px 20px;
   }
   
   details {
@@ -121,7 +132,7 @@ layout: default
   .photos-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 25px;
     margin: 1.5rem 0;
     align-items: start;
   }
@@ -134,7 +145,7 @@ layout: default
     width: 100%;
     height: 320px;
     object-fit: cover;
-    object-position: center 40%; /* Центрируем лицо (верхняя часть) */
+    object-position: center 40%;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     display: block;
@@ -155,16 +166,36 @@ layout: default
     opacity: 0.8;
   }
   
-  /* Мобильная версия - одна колонка */
+  /* Ссылки под фото */
+  .photo-links {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .photo-links a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  
+  .photo-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Мобильная версия */
   @media (max-width: 768px) {
     .gallery-grid { grid-template-columns: 1fr; }
     .photos-row { 
       grid-template-columns: 1fr; 
-      gap: 15px;
+      gap: 20px;
     }
     .photo-card img {
       height: 280px;
       object-position: center 40%;
+    }
+    .btn-large {
+      max-width: 100%;
+      margin: 1.5rem auto;
     }
   }
 </style>
@@ -193,13 +224,17 @@ layout: default
 
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
 
-<!-- Блок с фото: ПК - два столбца, моб - одна колонка -->
+<!-- Блок с фото -->
 <div class="photos-row">
   <div class="photo-card">
     <img src="{{ '/assets/images/alex.jpg' | relative_url }}" alt="Александр - мастер по ремонту">
     <div class="photo-label">
       Александр<br>
       <small>Мастер по ремонту</small>
+    </div>
+    <div class="photo-links">
+      💬 <a href="https://t.me/AlexDrog81">Telegram</a> • 
+      <a href="viber://chat?number=375297256982">Viber</a>
     </div>
   </div>
   
@@ -209,36 +244,17 @@ layout: default
       г. Дрогичин, ул. Ленина, 141а<br>
       <small>2 этаж</small>
     </div>
+    <div class="photo-links">
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
+    </div>
   </div>
 </div>
 
-<p>🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
-<a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a></p>
+<!-- Кнопка прайса по центру широкая -->
+<a href="./uslugi/" class="btn btn-large">Прайс и услуги</a>
 
-<p>💬 <a href="https://t.me/AlexDrog81 ">Telegram</a> • 
-<a href="viber://chat?number=375297256982">Viber</a></p>
-
-<hr>
-
-<p><strong>Решаю сложные случаи, от которых отказываются другие.</strong></p>
-
-<ul>
-  <li><strong>Ремонт и настройка ПК и ноутбуков</strong> — замена разъёмов, установка ОС и драйверов</li>
-  <li><strong>Разблокировка</strong> — FRP, Google-аккаунты, Mi-Account, Huawei ID</li>
-  <li><strong>Прошивка</strong> — смартфоны, восстановление «кирпичей»</li>
-  <li><strong>Обновление карт</strong> — Navitel, IGO (весь мир)</li>
-  <li><strong>Чистка ноутбуков</strong> — от пыли с заменой термопасты, термовкладок</li>
-</ul>
-
-<p>
-  <a href="./uslugi/" class="btn">Прайс и услуги</a>
-  <a href="https://t.me/AlexDrog81 " class="btn">Telegram</a>
-  <a href="tel:+375297256982" class="btn">Позвонить</a>
-</p>
-
-<h2>📍 Адрес и режим работы</h2>
-
-<p><strong>г. Дрогичин, ул. Ленина, 141 а</strong> (второй этаж)</p>
+<h2>Режим работы:</h2>
 
 <p>
 🕐 Пн-Пт: 10:00-18:00<br>
