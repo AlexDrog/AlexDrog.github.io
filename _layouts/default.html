@@ -8,10 +8,9 @@
     
     {% seo %}
     
-    <!-- ИСПРАВЛЕНО: убраны пробелы в URL -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         (function() {
@@ -27,12 +26,9 @@
     <style>
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            /* Цвета для КОНТЕНТА (не для шапки) */
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-text: #0f172a;
-            --glass-text-secondary: #334155;
-            --accent: #10b981;
             --bg-body: #f8fafc;
         }
         
@@ -40,8 +36,6 @@
             --glass-bg: rgba(15, 23, 42, 0.6);
             --glass-border: rgba(255, 255, 255, 0.15);
             --glass-text: #f8fafc;
-            --glass-text-secondary: #cbd5e1;
-            --accent: #34d399;
             --bg-body: #020617;
         }
         
@@ -54,155 +48,123 @@
         }
         
         /* ============================================
-           ШАПКА - ФОН И ТЕКСТ (текст всегда белый!)
+           ШАПКА С ГРАДИЕНТНЫМ ФОНОМ (под цвет видео)
            ============================================ */
         .page-header {
             position: relative;
-            min-height: 600px;
+            min-height: 700px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
-            background: 
-                linear-gradient(135deg, rgba(15,23,42,0.5) 0%, rgba(30,41,59,0.4) 100%),
-                url('{{ "/assets/images/hero-bg.jpg" | relative_url }}') center/cover no-repeat,
-                linear-gradient(135deg, #1e3a5f 0%, #0f766e 100%);
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            overflow: hidden;
             isolation: isolate;
         }
         
+        /* Декоративный градиент поверх фона */
         .page-header::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(15,23,42,0.6) 0%, rgba(30,41,59,0.5) 100%);
+            background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.3) 0%, rgba(15, 23, 42, 0.8) 100%);
             z-index: 0;
         }
         
-        /* Скрываем логотипы из темы */
-        .page-header img,
-        .page-header .logo,
-        .page-header .avatar,
-        .page-header .project-logo,
-        .page-header > h1:first-child {
-            display: none !important;
-        }
-        
         /* ============================================
-           BENTO GRID - ВСЕГДА СВЕТЛЫЕ ЦВЕТА (т.к. фон темный)
+           СЕТКА: СЛЕВА ВИДЕО, СПРАВА ТЕКСТ
            ============================================ */
         .bento-container {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            grid-template-rows: auto auto;
-            gap: 1.5rem;
-            max-width: 1200px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2.5rem;
+            max-width: 1400px;
             width: 100%;
             position: relative;
             z-index: 2;
+            align-items: center;
         }
         
-        .bento-card {
-            background: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .bento-card.main {
-            grid-row: span 2;
+        /* Карточка с видео слева */
+        .bento-card.video-card {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            max-height: 600px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 3rem;
-        }
-        
-        /* ЖЁСТКО ЗАДАНЫ БЕЛЫЕ ЦВЕТА для шапки */
-        .bento-card.main h1 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 800;
-            line-height: 1.1;
-            color: #ffffff !important;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.02em;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-        }
-        
-        .bento-card.main p {
-            font-size: clamp(1rem, 1.5vw, 1.25rem);
-            color: rgba(255, 255, 255, 0.9) !important;
-            line-height: 1.6;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-        
-        .bento-card.phone {
-            background: rgba(52, 211, 153, 0.15);
-            border-color: rgba(52, 211, 153, 0.4);
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            cursor: pointer;
         }
         
-        .bento-card.phone:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px -5px rgba(16, 185, 129, 0.4);
-            background: rgba(52, 211, 153, 0.25);
+        .video-card video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         
-        .bento-card.phone .label {
-            font-size: 0.875rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.8) !important;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+        /* Карточка с текстом справа */
+        .bento-card.main-card {
+            background: rgba(15, 23, 42, 0.7); /* Тёмный фон под цвет видео */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 3.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
         }
         
-        .bento-card.phone a {
-            font-size: clamp(1.25rem, 2vw, 1.75rem);
-            font-weight: 700;
-            color: #34d399 !important; /* Ярко-зелёный */
-            text-decoration: none;
-            transition: all 0.2s;
-            display: inline-block;
+        /* УВЕЛИЧЕННЫЙ ТЕКСТ */
+        .main-card h1 {
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        
+        .main-card .subtitle {
+            font-size: clamp(1.3rem, 2vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
+            font-weight: 500;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
-        .bento-card.phone a:hover {
-            transform: scale(1.05);
-            color: #ffffff !important;
-            text-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
-        }
-        
-        .bento-card.info {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        /* Контактная кнопка внутри текста (опционально) */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
             gap: 0.75rem;
+            margin-top: 1rem;
+            padding: 1.25rem 2.5rem;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
-        .info-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-            color: rgba(255, 255, 255, 0.85) !important;
-            font-size: 0.95rem;
-        }
-        
-        .info-row strong {
-            color: #ffffff !important;
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
         }
         
         /* ============================================
@@ -231,49 +193,64 @@
         
         #theme-toggle:hover {
             transform: scale(1.1);
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.9);
         }
         
         /* ============================================
-           МОБИЛЬНАЯ ВЕРСИЯ
+           МОБИЛЬНАЯ ВЕРСИЯ (< 968px)
+           - Убран эффект стекла (простой полупрозрачный фон)
+           - Видео всегда показывается
            ============================================ */
         @media (max-width: 968px) {
             .page-header {
                 min-height: auto;
-                padding: 5rem 1rem 2rem;
+                padding: 6rem 1rem 3rem;
             }
             
             .bento-container {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
-            .bento-card.main {
-                grid-row: auto;
+            /* Убран блюр, просто темный полупрозрачный фон */
+            .bento-card.video-card,
+            .bento-card.main-card {
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                background: rgba(15, 23, 42, 0.9);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                aspect-ratio: auto;
+                max-height: none;
+            }
+            
+            .video-card {
+                order: 1; /* Видео сверху */
+                padding: 1rem;
+            }
+            
+            .main-card {
+                order: 2; /* Текст снизу */
                 padding: 2rem;
                 text-align: center;
             }
             
-            .bento-card {
-                padding: 1.5rem;
+            .main-card h1 {
+                font-size: clamp(2rem, 8vw, 2.8rem);
+            }
+            
+            .main-card .subtitle {
+                font-size: 1.1rem;
             }
         }
         
         /* ============================================
-           КОНТЕНТ (здесь работают переменные темы)
+           ОСНОВНОЙ КОНТЕНТ
            ============================================ */
         .main-content {
             max-width: 64rem;
             padding: 4rem 2rem;
             margin: 0 auto;
             color: var(--glass-text);
-        }
-        
-        .main-content h1, 
-        .main-content h2, 
-        .main-content h3 {
-            color: var(--glass-text);
-            margin-top: 3rem;
-            margin-bottom: 1rem;
         }
         
         .site-footer {
@@ -292,30 +269,33 @@
 
     <section class="page-header">
         <div class="bento-container">
-            <div class="bento-card main">
+            <!-- СЛЕВА: ВИДЕО -->
+            <div class="bento-card video-card">
+                <video 
+                    autoplay 
+                    muted 
+                    loop 
+                    playsinline
+                    poster="{{ '/assets/images/hero-bg.jpg' | relative_url }}"
+                >
+                    <source src="{{ '/assets/videos/phone-repair.mp4' | relative_url }}" type="video/mp4">
+                </video>
+            </div>
+            
+            <!-- СПРАВА: УВЕЛИЧЕННЫЙ ТЕКСТ -->
+            <div class="bento-card main-card">
                 <h1>{{ site.title | default: "Ремонт смартфонов и ноутбуков" }}</h1>
-                <p>{{ site.description | default: "Профессиональный ремонт техники в Дрогичине. Сложные разблокировки, восстановление после воды, замена комплектующих." }}</p>
-            </div>
-            
-            <div class="bento-card phone" onclick="location.href='tel:+375297256982'">
-                <span class="label">Позвонить</span>
-                <a href="tel:+375297256982">+375 (29) 725-69-82</a>
-            </div>
-            
-            <div class="bento-card info">
-                <div class="info-row">
-                    <span>📍</span>
-                    <div>
-                        <strong>Адрес</strong>
-                        г. Дрогичин, ул. Ленина, 141а (2 этаж)
-                    </div>
-                </div>
-                <div class="info-row">
-                    <span>🕐</span>
-                    <div>
-                        <strong>Режим работы</strong>
-                        Вт-Пт: 10:00–18:00, Сб-Вс: 10:00–14:00
-                    </div>
+                <p class="subtitle">
+                    {{ site.description | default: "Профессиональный ремонт техники в Дрогичине. Сложные разблокировки, восстановление после воды, замена комплектующих." }}
+                </p>
+                
+                <a href="tel:+375297256982" class="cta-button">
+                    📞 Позвонить: +375 (29) 725-69-82
+                </a>
+                
+                <div style="margin-top: 1.5rem; font-size: 0.95rem; color: rgba(255,255,255,0.7);">
+                    <div style="margin-bottom: 0.5rem;">📍 г. Дрогичин, ул. Ленина, 141а (2 этаж)</div>
+                    <div>🕐 Вт-Пт: 10:00–18:00, Сб-Вс: 10:00–14:00</div>
                 </div>
             </div>
         </div>
@@ -333,6 +313,7 @@
     </section>
 
     <script>
+        // Тема
         const btn = document.getElementById('theme-toggle');
         const icons = { dark: '☀️', light: '🌙' };
         
