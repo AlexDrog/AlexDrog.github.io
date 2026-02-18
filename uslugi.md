@@ -215,7 +215,9 @@ permalink: /uslugi/
   <a href="https://t.me/alexdrog81" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px;">💬 Telegram</a>
   <a href="tel:+375297256982" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #e94560; color: white; text-decoration: none; border-radius: 5px;">📞 Позвонить</a>
 </div>
-
+#mobile-call-btn {
+    display: none !important;
+}
 <script>
 // Мобильная кнопка звонка
 (function() {
