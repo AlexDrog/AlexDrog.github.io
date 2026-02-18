@@ -2,7 +2,6 @@
 <html lang="{{ site.lang | default: 'ru-RU' }}">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0f172a" id="meta-theme-color">
     
@@ -51,58 +50,38 @@
             line-height: 1.6;
         }
         
-        /* ============================================
-           ШАПКА - УМЕНЬШЕНА ДО 450px (на 1/4 меньше)
-           ============================================ */
         .page-header {
             position: relative;
-            min-height: 450px; /* УМЕНЬШИЛИ с 600px */
+            min-height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
+            padding: 2rem;
+            background: url('/assets/images/hero-header-400.jpg') center/cover no-repeat;
             isolation: isolate;
-            overflow: hidden;
         }
         
-        /* Фоновое изображение - БЕЗ ЛОГОТИПА */
         .page-header::before {
             content: '';
             position: absolute;
             inset: 0;
-            width: 100%;
-            height: 100%;
-            background: url('/assets/images/hero-header-400.jpg') center/cover no-repeat;
-            border-radius: 0; /* Убрали круг */
-            margin: 0;
-            z-index: -3;
-        }
-        
-        /* Затемнение */
-        .page-header::after {
-            content: '';
-            position: absolute;
-            inset: 0;
             background: linear-gradient(135deg, rgba(15,23,42,0.8) 0%, rgba(30,41,59,0.7) 100%);
-            z-index: -2;
+            z-index: 0;
         }
         
-        /* Убираем любые другие псевдоэлементы с шапки */
+        .page-header::after,
         .page-header-content::before,
         .page-header-content::after {
             display: none !important;
-            content: none !important;
+            content: '' !important;
         }
         
-        /* ============================================
-           BENTO GRID (адаптирован под меньшую высоту)
-           ============================================ */
         .bento-container {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
             grid-template-rows: auto auto;
-            gap: 1.25rem;
-            max-width: 1100px; /* Чуть уже для пропорции */
+            gap: 1.5rem;
+            max-width: 1200px;
             width: 100%;
             position: relative;
             z-index: 2;
@@ -114,7 +93,7 @@
             -webkit-backdrop-filter: blur(16px) saturate(180%);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 1.5rem; /* Уменьшили */
+            padding: 2rem;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -124,26 +103,25 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 2rem; /* Уменьшили с 3rem */
+            padding: 3rem;
         }
         
         .bento-card.main h1 {
-            font-size: clamp(1.5rem, 3vw, 2.5rem); /* Уменьшили максимум */
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 800;
             line-height: 1.1;
             color: var(--glass-text);
-            margin-bottom: 1rem; /* Уменьшили */
+            margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .bento-card.main p {
-            font-size: clamp(0.95rem, 1.2vw, 1.1rem); /* Компактнее */
+            font-size: clamp(1rem, 1.5vw, 1.25rem);
             color: var(--glass-text-secondary);
-            line-height: 1.5; /* Компактнее */
+            line-height: 1.6;
         }
         
-        /* Карточка телефона */
         .bento-card.phone {
             background: rgba(16, 185, 129, 0.15);
             border-color: rgba(16, 185, 129, 0.4);
@@ -153,6 +131,7 @@
             justify-content: center;
             text-align: center;
             cursor: pointer;
+            text-decoration: none;
         }
         
         [data-theme="dark"] .bento-card.phone {
@@ -166,67 +145,61 @@
         }
         
         .bento-card.phone .label {
-            font-size: 0.8rem; /* Меньше */
+            font-size: 0.875rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--glass-text-secondary);
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
             font-weight: 600;
         }
         
-        .bento-card.phone a {
-            font-size: clamp(1.1rem, 1.8vw, 1.5rem); /* Уменьшили */
+        .bento-card.phone .phone-number {
+            font-size: clamp(1.25rem, 2vw, 1.75rem);
             font-weight: 700;
             color: var(--accent);
-            text-decoration: none;
             transition: transform 0.2s;
             display: inline-block;
         }
         
-        .bento-card.phone a:hover {
+        .bento-card.phone:hover .phone-number {
             transform: scale(1.05);
         }
         
-        /* Карточка инфо */
         .bento-card.info {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 0.5rem; /* Уменьшили */
+            gap: 0.75rem;
         }
         
         .info-row {
             display: flex;
             align-items: flex-start;
-            gap: 0.5rem;
+            gap: 0.75rem;
             color: var(--glass-text-secondary);
-            font-size: 0.9rem; /* Меньше */
+            font-size: 0.95rem;
         }
         
         .info-row strong {
             color: var(--glass-text);
             display: block;
             font-weight: 600;
-            margin-bottom: 0.1rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.2rem;
         }
         
-        /* ============================================
-           КНОПКА ТЕМЫ
-           ============================================ */
         #theme-toggle {
             position: fixed;
-            top: 15px;
-            right: 15px;
+            top: 20px;
+            right: 20px;
             z-index: 9999;
-            width: 44px;
-            height: 44px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             border: 1px solid var(--glass-border);
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -238,37 +211,30 @@
             transform: scale(1.1);
         }
         
-        /* ============================================
-           МОБИЛЬНАЯ ВЕРСИЯ (компактная)
-           ============================================ */
         @media (max-width: 968px) {
             .page-header {
                 min-height: auto;
-                padding: 5rem 1rem 1.5rem;
+                padding: 6rem 1rem 2rem;
             }
             
             .bento-container {
                 grid-template-columns: 1fr;
-                gap: 1rem;
             }
             
             .bento-card.main {
                 grid-row: auto;
-                padding: 1.5rem;
+                padding: 2rem;
                 text-align: center;
             }
             
             .bento-card {
-                padding: 1.25rem;
+                padding: 1.5rem;
             }
         }
         
-        /* ============================================
-           КОНТЕНТ
-           ============================================ */
         .main-content {
             max-width: 64rem;
-            padding: 3rem 2rem; /* Уменьшили сверху */
+            padding: 4rem 2rem;
             margin: 0 auto;
             color: var(--glass-text);
         }
@@ -277,12 +243,12 @@
         .main-content h2, 
         .main-content h3 {
             color: var(--glass-text);
-            margin-top: 2.5rem;
+            margin-top: 3rem;
             margin-bottom: 1rem;
         }
         
         .site-footer {
-            margin-top: 3rem;
+            margin-top: 4rem;
             padding-top: 2rem;
             border-top: 1px solid var(--glass-border);
             color: var(--glass-text-secondary);
@@ -293,7 +259,7 @@
 </head>
 
 <body>
-    <button id="theme-toggle" title="Сменить тему (удерживайте 3сек для сброса)">🌙</button>
+    <button id="theme-toggle" aria-label="Переключить тему" title="Сменить тему (удерживайте 3сек для сброса)">🌙</button>
 
     <section class="page-header">
         <div class="bento-container">
@@ -302,10 +268,10 @@
                 <p>{{ site.description | default: "Профессиональный ремонт техники в Дрогичине. Сложные разблокировки, восстановление после воды, замена комплектующих." }}</p>
             </div>
             
-            <div class="bento-card phone" onclick="location.href='tel:+375297256982'">
+            <a href="tel:+375297256982" class="bento-card phone">
                 <span class="label">Позвонить</span>
-                <a href="tel:+375297256982">+375 (29) 725-69-82</a>
-            </div>
+                <span class="phone-number">+375 (29) 725-69-82</span>
+            </a>
             
             <div class="bento-card info">
                 <div class="info-row">
@@ -355,15 +321,18 @@
         });
         
         let timer;
-        btn.addEventListener('mousedown', () => timer = setTimeout(() => {
-            localStorage.removeItem('user_theme_choice');
-            const system = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = system ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', theme);
-            updateIcon();
-            alert('Автоматическая тема');
-        }, 3000));
+        btn.addEventListener('mousedown', () => {
+            timer = setTimeout(() => {
+                localStorage.removeItem('user_theme_choice');
+                const system = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = system ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+                updateIcon();
+                alert('Автоматическая тема');
+            }, 3000);
+        });
         btn.addEventListener('mouseup', () => clearTimeout(timer));
+        btn.addEventListener('mouseleave', () => clearTimeout(timer));
         
         updateIcon();
     </script>
