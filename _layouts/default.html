@@ -27,7 +27,7 @@
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             --bg-body: #f8fafc;
-            --video-bg: #1e293b; /* Точный серый как на видео */
+            --video-bg: #1e293b;
         }
         
         [data-theme="dark"] {
@@ -36,76 +36,39 @@
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        /* СБРОС ОТСТУПОВ — УБИРАЕТ ПОЛОСКИ */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
         body {
             font-family: var(--font-primary);
             background-color: var(--bg-body);
             line-height: 1.6;
         }
         
-        /* ============================================
-           ПЛАВАЮЩИЕ КНОПКИ (видны на всех страницах)
-           ============================================ */
-        #theme-toggle,
-        #call-button {
-            position: fixed;
-            z-index: 9999;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
-            color: white;
-            text-decoration: none;
-        }
-        
-        /* Кнопка темы — справа */
-        #theme-toggle {
-            top: 20px;
-            right: 20px;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
-        }
-        
-        #theme-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(15, 23, 42, 0.9);
-        }
-        
-        /* Кнопка звонка — слева */
-        #call-button {
-            top: 20px;
-            left: 20px;
-            background: rgba(16, 185, 129, 0.9); /* Зелёный акцент */
-            backdrop-filter: blur(10px);
-        }
-        
-        #call-button:hover {
-            transform: scale(1.1);
-            background: rgba(16, 185, 129, 1);
-        }
-        
-        /* ============================================
-           ШАПКА — НА ВСЮ ШИРИНУ БЕЗ РАМОК
-           ============================================ */
+        /* ШАПКА НА ВСЮ ШИРИНУ БЕЗ ОТСТУПОВ */
         .page-header {
+            width: 100vw;
             position: relative;
-            width: 100%;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 0;
             background: var(--video-bg);
             overflow: hidden;
         }
         
         .header-content {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* РОВНО 50/50 */
-            min-height: 400px; /* Уменьшенная высота */
-            width: 100%; /* На всю ширину без ограничений */
-            margin: 0; /* Без отступов */
+            grid-template-columns: 1fr 1fr;
+            min-height: 400px;
+            width: 100%;
+            margin: 0;
+            padding: 0;
         }
         
         /* ЛЕВАЯ ПОЛОВИНА — ВИДЕО */
@@ -130,7 +93,6 @@
             flex-direction: column;
             justify-content: center;
             padding: 3rem;
-            /* Цвет точно как фон видео + эффект стекла */
             background: rgba(30, 41, 59, 0.85);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
@@ -153,9 +115,51 @@
             font-weight: 500;
         }
         
-        /* ============================================
-           МОБИЛЬНАЯ ВЕРСИЯ
-           ============================================ */
+        /* ПЛАВАЮЩИЕ КНОПКИ */
+        #theme-toggle,
+        #call-button {
+            position: fixed;
+            z-index: 9999;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+            color: white;
+            text-decoration: none;
+        }
+        
+        #theme-toggle {
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+        }
+        
+        #theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(15, 23, 42, 0.9);
+        }
+        
+        #call-button {
+            top: 20px;
+            left: 20px;
+            background: rgba(16, 185, 129, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        #call-button:hover {
+            transform: scale(1.1);
+            background: rgba(16, 185, 129, 1);
+        }
+        
+        /* МОБИЛЬНАЯ */
         @media (max-width: 968px) {
             .page-header {
                 padding: 0;
@@ -190,7 +194,6 @@
                 text-align: center;
                 padding: 2rem;
                 background: rgba(30, 41, 59, 0.5);
-                /* УМЕНЬШЕН blur до 2px */
                 backdrop-filter: blur(2px);
                 -webkit-backdrop-filter: blur(2px);
                 border-left: none;
@@ -210,16 +213,12 @@
                 text-shadow: 0 2px 6px rgba(0,0,0,0.8);
             }
             
-            /* Кнопки чуть ниже на мобильном чтобы не перекрывать системный статус бар */
             #theme-toggle,
             #call-button {
                 top: 10px;
             }
         }
         
-        /* ============================================
-           КОНТЕНТ
-           ============================================ */
         .main-content {
             max-width: 64rem;
             padding: 4rem 2rem;
@@ -248,15 +247,11 @@
 </head>
 
 <body>
-    <!-- Кнопка звонка — слева сверху, на всех страницах -->
     <a href="tel:+375297256982" id="call-button" title="Позвонить">📞</a>
-    
-    <!-- Кнопка темы — справа сверху -->
     <button id="theme-toggle" title="Сменить тему">🌙</button>
 
     <section class="page-header">
         <div class="header-content">
-            <!-- ЛЕВАЯ ПОЛОВИНА — ВИДЕО -->
             <div class="video-side">
                 <video 
                     autoplay 
@@ -269,7 +264,6 @@
                 </video>
             </div>
             
-            <!-- ПРАВАЯ ПОЛОВИНА — ТЕКСТ -->
             <div class="text-side">
                 <h1>Ремонт смартфонов<br>и ноутбуков</h1>
                 <p class="address">г. Дрогичин, ул. Ленина 141а</p>
