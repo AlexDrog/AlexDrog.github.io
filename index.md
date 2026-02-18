@@ -117,8 +117,43 @@ layout: default
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
   
+  /* Стили для фото мастера (без фона, круглое) */
+  .master-photo {
+    text-align: center;
+    margin: 1.5rem 0 1rem 0;
+  }
+  
+  .master-photo img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--border);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: block;
+    margin: 0 auto;
+  }
+  
+  /* Стили для фото здания */
+  .building-photo {
+    margin: 1rem 0;
+    text-align: center;
+  }
+  
+  .building-photo img {
+    max-width: 100%;
+    width: 450px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: block;
+    margin: 0 auto;
+  }
+  
   @media (max-width: 600px) {
     .gallery-grid { grid-template-columns: 1fr; }
+    .building-photo img { width: 100%; }
+    .master-photo img { width: 140px; height: 140px; }
   }
 </style>
 
@@ -148,15 +183,25 @@ layout: default
 
 <h3>📞 <a href="tel:+375297256982">+375 (29) 725-69-82</a></h3>
 
+<!-- Фото мастера (без фона, круглое) -->
+<div class="master-photo">
+  <img src="{{ '/assets/images/alex.jpg' | relative_url }}" alt="Александр - мастер по ремонту">
+</div>
+
 <p><strong>Александр</strong><br>
 <em>Мастер по ремонту</em></p>
 
-<p>📍 <strong><a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">г. Дрогичин, ул. Ленина, 141 а</a></strong> (2 этаж)</p>
+<p>📍 <strong><a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">г. Дрогичин, ул. Ленина, 141 а</a></strong> (2 этаж)</p>
 
-<p>🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
-<a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a></p>
+<!-- Фото здания -->
+<div class="building-photo">
+  <img src="{{ '/assets/images/zdanie.JPG' | relative_url }}" alt="Здание мастерской">
+</div>
 
-<p>💬 <a href="https://t.me/AlexDrog81">Telegram</a> • 
+<p>🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
+<a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a></p>
+
+<p>💬 <a href="https://t.me/AlexDrog81 ">Telegram</a> • 
 <a href="viber://chat?number=375297256982">Viber</a></p>
 
 <hr>
@@ -173,7 +218,7 @@ layout: default
 
 <p>
   <a href="./uslugi/" class="btn">Прайс и услуги</a>
-  <a href="https://t.me/AlexDrog81" class="btn">Telegram</a>
+  <a href="https://t.me/AlexDrog81 " class="btn">Telegram</a>
   <a href="tel:+375297256982" class="btn">Позвонить</a>
 </p>
 
