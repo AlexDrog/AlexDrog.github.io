@@ -8,6 +8,7 @@
     
     {% seo %}
     
+    <!-- ИСПРАВЛЕНО: убраны пробелы в URL -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +28,7 @@
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             
-            /* Light theme glass */
+            /* Light theme glass - НЕ МЕНЯТЬ */
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-text: #0f172a;
@@ -38,7 +39,7 @@
         }
         
         [data-theme="dark"] {
-            /* Dark theme glass */
+            /* Dark theme glass - НЕ МЕНЯТЬ */
             --glass-bg: rgba(15, 23, 42, 0.6);
             --glass-border: rgba(255, 255, 255, 0.15);
             --glass-text: #f8fafc;
@@ -57,7 +58,7 @@
         }
         
         /* ============================================
-           ШАПКА - УБИРАЕМ ЛОГОТИП ПОЛНОСТЬЮ
+           ШАПКА С BENTO-GRID (управляется здесь)
            ============================================ */
         .page-header {
             position: relative;
@@ -66,7 +67,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            /* ИСПРАВЛЕНО: путь с relative_url + fallback градиент */
+            /* Фон задается здесь: fallback градиент + картинка */
             background: 
                 linear-gradient(135deg, rgba(15,23,42,0.4) 0%, rgba(30,41,59,0.3) 100%),
                 url('{{ "/assets/images/hero-bg.jpg" | relative_url }}') center/cover no-repeat,
@@ -83,16 +84,12 @@
             z-index: 0;
         }
         
-        /* УБИРАЕМ ВСЕ ЛОГОТИПЫ: img, псевдоэлементы, аватары */
+        /* Скрываем возможные логотипы из других источников */
         .page-header img,
         .page-header .logo,
         .page-header .avatar,
-        .page-header .project-logo,
-        .page-header::after {
+        .page-header .project-logo {
             display: none !important;
-            content: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
         }
         
         /* ============================================
