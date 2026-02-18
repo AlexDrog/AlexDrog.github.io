@@ -8,39 +8,46 @@ $primary-blue: #16213e;
 $accent-orange: #e94560;
 
 // ============================================
-// ШАПКА (твоя)
+// ШАПКА (обновленная с 3D разборкой iPhone)
 // ============================================
 .page-header {
-  background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), url('/assets/images/hero-header-400.jpg?v=6');
+  background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
+              url('/assets/images/hero-header-400.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: center 30%; /* Фокус на разборку телефона */
   background-repeat: no-repeat;
   position: relative;
   padding: 2rem 1rem 4rem 1rem;
   border-bottom: 4px solid $accent-orange;
   text-align: center;
-}
+  
+  // Логотип (круг)
+  &::before {
+    content: '';
+    display: block;
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 15px auto;
+    background: url('/assets/images/logo.png') center/contain no-repeat;
+    background-color: white;
+    border-radius: 50%;
+    border: 3px solid $accent-orange;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 2;
+  }
 
-.page-header::before {
-  content: '';
-  display: block;
-  width: 90px;
-  height: 90px;
-  margin: 0 auto 15px auto;
-  background: url('/assets/images/logo.png') center/contain no-repeat;
-  background-color: white;
-  border-radius: 50%;
-  border: 3px solid $accent-orange;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-}
-
-.page-header::after {
-  content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Вт-Пт 10:00-18:00, Сб-Вс 10:00-14:00';
-  display: block;
-  color: rgba(255,255,255,0.95);
-  font-size: 1rem;
-  margin-top: 15px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  // Адрес под заголовком
+  &::after {
+    content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Вт-Пт 10:00-18:00, Сб-Вс 10:00-14:00';
+    display: block;
+    color: rgba(255,255,255,0.95);
+    font-size: 1rem;
+    margin-top: 15px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .page-header h1 {
@@ -50,6 +57,53 @@ $accent-orange: #e94560;
   font-size: 2rem;
   margin-top: 0;
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  position: relative;
+  z-index: 2;
+}
+
+// ============================================
+// АДАПТИВНЫЕ ФОНЫ ДЛЯ РАЗНЫХ УСТРОЙСТВ
+// ============================================
+
+/* Планшеты (768px - 1024px) */
+@media screen and (max-width: 1024px) {
+  .page-header {
+    background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
+                      url('/assets/images/hero-header-fullhd.jpg');
+    background-position: center 25%;
+    padding: 1.5rem 1rem 3rem 1rem;
+    
+    h1 { font-size: 1.8rem; }
+  }
+}
+
+/* Мобильные телефоны (до 768px) */
+@media screen and (max-width: 768px) {
+  .page-header {
+    background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
+                      url('/assets/images/hero-header-wide.jpg');
+    background-position: center top; /* Показываем верхнюю часть разборки */
+    padding: 1rem 1rem 2.5rem 1rem;
+    min-height: 300px;
+    
+    h1 { 
+      font-size: 1.4rem; 
+      line-height: 1.3;
+    }
+    
+    &::after {
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+  }
+}
+
+/* Retina/4K экраны (высокая плотность пикселей) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) and (min-width: 1025px) {
+  .page-header {
+    background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
+                      url('/assets/images/hero-header-fullhd.jpg');
+  }
 }
 
 // ============================================
@@ -235,7 +289,7 @@ $accent-orange: #e94560;
 }
 
 // ============================================
-// ОСТАЛЬНЫЕ СТИЛИ (твои)
+// ОСТАЛЬНЫЕ СТИЛИ (контент)
 // ============================================
 .main-content {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -313,7 +367,9 @@ $accent-orange: #e94560;
   }
 }
 
-// Мобильная адаптация меню
+// ============================================
+// МОБИЛЬНАЯ АДАПТАЦИЯ (макс. 968px)
+// ============================================
 @media screen and (max-width: 968px) {
   .service-navbar {
     width: 100%;
@@ -370,5 +426,27 @@ $accent-orange: #e94560;
   }
   
   .main-content h2[id] { scroll-margin-top: 10px; }
-  .btn { display: block; width: 100%; text-align: center; margin: 0.5rem 0; }
+  
+  .btn { 
+    display: block; 
+    width: 100%; 
+    text-align: center; 
+    margin: 0.5rem 0; 
+  }
+}
+
+// ============================================
+// МАЛЕНЬКИЕ МОБИЛЬНЫЕ (до 480px)
+// ============================================
+@media screen and (max-width: 480px) {
+  .page-header {
+    background-position: 65% top; /* Сдвиг вправо для центрирования разборки */
+    
+    &::before {
+      width: 70px;
+      height: 70px;
+    }
+    
+    h1 { font-size: 1.2rem; }
+  }
 }
