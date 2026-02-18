@@ -8,46 +8,23 @@ $primary-blue: #16213e;
 $accent-orange: #e94560;
 
 // ============================================
-// ШАПКА (обновленная с 3D разборкой iPhone)
+// ШАПКА (фон прописан здесь)
 // ============================================
 .page-header {
+  // ФОН ЗДЕСЬ (строка 14) - исправлен путь (убран / в начале)
   background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
-              url('/assets/images/hero-header-400.jpg');
+              url('assets/images/hero-header-400.jpg');
   background-size: cover;
-  background-position: center 30%; /* Фокус на разборку телефона */
+  background-position: center 30%;
   background-repeat: no-repeat;
   position: relative;
   padding: 2rem 1rem 4rem 1rem;
   border-bottom: 4px solid $accent-orange;
   text-align: center;
   
-  // Логотип (круг)
-  &::before {
-    content: '';
-    display: block;
-    width: 90px;
-    height: 90px;
-    margin: 0 auto 15px auto;
-    background: url('/assets/images/logo.png') center/contain no-repeat;
-    background-color: white;
-    border-radius: 50%;
-    border: 3px solid $accent-orange;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    position: relative;
-    z-index: 2;
-  }
-
-  // Адрес под заголовком
-  &::after {
-    content: '📍 г. Дрогичин, ул. Ленина, 141 а (2 этаж) | Вт-Пт 10:00-18:00, Сб-Вс 10:00-14:00';
-    display: block;
-    color: rgba(255,255,255,0.95);
-    font-size: 1rem;
-    margin-top: 15px;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-    position: relative;
-    z-index: 2;
-  }
+  // КРУГ УБРАН (блок ::before удалён)
+  
+  // АДРЕС УБРАН (блок ::after удалён)
 }
 
 .page-header h1 {
@@ -62,14 +39,15 @@ $accent-orange: #e94560;
 }
 
 // ============================================
-// АДАПТИВНЫЕ ФОНЫ ДЛЯ РАЗНЫХ УСТРОЙСТВ
+// АДАПТИВНЫЕ ФОНЫ (тоже здесь прописаны)
 // ============================================
 
 /* Планшеты (768px - 1024px) */
 @media screen and (max-width: 1024px) {
   .page-header {
+    // ФОН ДЛЯ ПЛАНШЕТОВ (строка 45)
     background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
-                      url('/assets/images/hero-header-fullhd.jpg');
+                      url('assets/images/hero-header-fullhd.jpg');
     background-position: center 25%;
     padding: 1.5rem 1rem 3rem 1rem;
     
@@ -80,9 +58,10 @@ $accent-orange: #e94560;
 /* Мобильные телефоны (до 768px) */
 @media screen and (max-width: 768px) {
   .page-header {
+    // ФОН ДЛЯ МОБИЛЬНЫХ (строка 57)
     background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
-                      url('/assets/images/hero-header-wide.jpg');
-    background-position: center top; /* Показываем верхнюю часть разборки */
+                      url('assets/images/hero-header-wide.jpg');
+    background-position: center top;
     padding: 1rem 1rem 2.5rem 1rem;
     min-height: 300px;
     
@@ -90,24 +69,20 @@ $accent-orange: #e94560;
       font-size: 1.4rem; 
       line-height: 1.3;
     }
-    
-    &::after {
-      font-size: 0.85rem;
-      margin-top: 10px;
-    }
   }
 }
 
-/* Retina/4K экраны (высокая плотность пикселей) */
+/* Retina/4K экраны */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) and (min-width: 1025px) {
   .page-header {
+    // ФОН ДЛЯ RETINA (строка 74)
     background-image: linear-gradient(rgba(26, 26, 46, 0.85), rgba(22, 33, 62, 0.9)), 
-                      url('/assets/images/hero-header-fullhd.jpg');
+                      url('assets/images/hero-header-fullhd.jpg');
   }
 }
 
 // ============================================
-// МЕНЮ НАВИГАЦИИ (ПОЛНАЯ ШИРИНА)
+// МЕНЮ НАВИГАЦИИ (без изменений)
 // ============================================
 .service-navbar {
   background: $primary-blue;
@@ -440,12 +415,8 @@ $accent-orange: #e94560;
 // ============================================
 @media screen and (max-width: 480px) {
   .page-header {
-    background-position: 65% top; /* Сдвиг вправо для центрирования разборки */
-    
-    &::before {
-      width: 70px;
-      height: 70px;
-    }
+    background-position: 65% top;
+    padding-top: 1.5rem;
     
     h1 { font-size: 1.2rem; }
   }
