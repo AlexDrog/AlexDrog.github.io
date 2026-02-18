@@ -10,7 +10,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         (function() {
@@ -25,15 +25,14 @@
     
     <style>
         :root {
-            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
             --bg-body: #0f172a;
             --text-color: #f8fafc;
             --text-secondary: #94a3b8;
             --border-color: #1e293b;
             --video-bg: #1e293b;
-            --gold-tint: rgba(251, 191, 36, 0.15);
-            --gold-border: rgba(251, 191, 36, 0.25);
-            --gold-glow: rgba(251, 191, 36, 0.3);
+            --accent-green: #22c55e;
+            --accent-green-hover: #16a34a;
         }
         
         [data-theme="light"] {
@@ -58,6 +57,8 @@
             background-color: var(--bg-body);
             color: var(--text-color);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         /* Убираем градиент от темы */
@@ -65,7 +66,9 @@
             background-image: none !important;
         }
         
-        /* ШАПКА */
+        /* ============================================
+           ШАПКА С ВИДЕО
+           ============================================ */
         .page-header {
             width: 100vw;
             position: relative;
@@ -81,7 +84,7 @@
         .header-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            min-height: 500px;
+            min-height: 600px;
             width: 100%;
             margin: 0;
             padding: 0;
@@ -102,198 +105,215 @@
             display: block;
         }
         
-        /* ТЕКСТОВЫЙ БЛОК — ЗОЛОТИСТОЕ СТЕКЛО (ПК) */
+        /* ============================================
+           ТЕКСТОВЫЙ БЛОК — МАКСИМАЛЬНАЯ ЧИТАБЕЛЬНОСТЬ 2025-2026
+           ============================================ */
         .text-side {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 3rem 3.5rem;
-            background: linear-gradient(135deg, 
-                rgba(30, 41, 59, 0.88) 0%, 
-                rgba(30, 41, 59, 0.82) 50%,
-                rgba(251, 191, 36, 0.12) 100%);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-left: 1px solid var(--gold-border);
-            box-shadow: 
-                inset 0 0 80px rgba(251, 191, 36, 0.08),
-                0 0 40px rgba(0, 0, 0, 0.4),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            padding: 4rem;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px) saturate(180%);
+            -webkit-backdrop-filter: blur(12px) saturate(180%);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
             position: relative;
         }
         
-        /* Золотистое свечение сверху (ПК) */
+        /* Усиленная тень для четкости текста на видео */
         .text-side::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                rgba(251, 191, 36, 0.6) 50%, 
-                transparent 100%);
-            box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+            z-index: 0;
         }
         
-        /* Заголовок */
+        .text-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Заголовок — крупный, жирный, максимально читаемый */
         .text-side h1 {
-            font-size: clamp(2.2rem, 3.5vw, 3.2rem);
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
             font-weight: 900;
             color: #ffffff !important;
-            line-height: 1.05;
-            margin-bottom: 0.8rem;
-            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.03em;
             text-shadow: 
                 0 2px 4px rgba(0,0,0,0.5),
                 0 4px 12px rgba(0,0,0,0.3),
-                0 0 40px rgba(0,0,0,0.4);
+                0 0 40px rgba(0,0,0,0.2);
+            text-transform: uppercase;
         }
         
-        .text-side h1 span {
-            display: block;
-            font-size: 0.9em;
-            margin-top: 0.2rem;
-        }
-        
-        /* Адрес — золотой */
+        /* Адрес — четкий, с хорошим контрастом */
         .text-side .address {
-            font-size: clamp(1.2rem, 1.6vw, 1.5rem);
-            color: #fbbf24 !important;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            text-shadow: 
-                0 2px 4px rgba(0,0,0,0.6),
-                0 0 20px rgba(251, 191, 36, 0.3);
+            font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+            color: rgba(255, 255, 255, 0.95) !important;
+            font-weight: 500;
+            margin-bottom: 2.5rem;
             letter-spacing: 0.02em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        /* Слоган */
-        .tagline-box {
-            background: linear-gradient(135deg, 
-                rgba(251, 191, 36, 0.15) 0%, 
-                rgba(251, 191, 36, 0.08) 100%);
-            border-left: 4px solid rgba(251, 191, 36, 0.6);
-            padding: 1rem 1.2rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0 8px 8px 0;
-            box-shadow: 
-                0 4px 15px rgba(0,0,0,0.2),
-                inset 0 0 20px rgba(251, 191, 36, 0.05);
+        .text-side .address::before {
+            content: "📍";
+            font-size: 1.2em;
         }
         
+        /* Теглайн — выделен цветом и весом */
         .tagline {
-            font-size: 1.25rem;
+            font-size: clamp(1.2rem, 1.8vw, 1.5rem);
             color: #ffffff !important;
             font-weight: 700;
-            line-height: 1.3;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 1.25rem;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            padding: 0.75rem 0;
+            border-top: 2px solid rgba(34, 197, 94, 0.6);
+            border-bottom: 2px solid rgba(34, 197, 94, 0.6);
+            display: inline-block;
         }
         
-        /* Список услуг */
+        /* Список услуг — улучшенная читабельность */
         .services-list {
             list-style: none;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
+            margin-top: 0.5rem;
         }
         
         .services-list li {
-            color: #f1f5f9 !important;
-            font-size: 1.05rem;
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.95) !important;
+            font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+            margin-bottom: 0.85rem;
             padding-left: 1.8rem;
             position: relative;
-            line-height: 1.4;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-            background: rgba(0,0,0,0.2);
-            padding: 0.7rem 0.7rem 0.7rem 2.5rem;
-            border-radius: 6px;
-            border-left: 2px solid rgba(251, 191, 36, 0.3);
-            transition: all 0.2s ease;
-        }
-        
-        .services-list li:hover {
-            background: rgba(251, 191, 36, 0.1);
-            transform: translateX(4px);
+            line-height: 1.5;
+            font-weight: 400;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            letter-spacing: 0.01em;
         }
         
         .services-list li::before {
-            content: "▸";
+            content: "✓";
             position: absolute;
-            left: 0.8rem;
-            color: #fbbf24;
+            left: 0;
+            color: var(--accent-green);
             font-weight: 700;
-            font-size: 1.2rem;
-            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+            font-size: 1.2em;
+            text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
+        }
+        
+        /* Дополнительная подпись */
+        .guarantee {
+            margin-top: 2rem;
+            padding: 1rem 1.25rem;
+            background: rgba(34, 197, 94, 0.15);
+            border-left: 4px solid var(--accent-green);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            line-height: 1.5;
+            backdrop-filter: blur(4px);
         }
         
         /* ============================================
-           ПЛАВАЮЩИЕ КНОПКИ
+           КНОПКИ (симметричные)
            ============================================ */
         .floating-btn {
             position: fixed;
             z-index: 9999;
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.2s ease;
+            box-shadow: 
+                0 4px 15px rgba(0,0,0,0.3),
+                0 0 0 1px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
             top: 20px;
         }
         
+        .floating-btn:hover {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(255,255,255,0.2);
+        }
+        
+        .floating-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Кнопка темы */
         #theme-toggle {
             right: 20px;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
             color: white;
-            font-size: 1.25rem;
+            font-size: 1.4rem;
+            border-color: rgba(255, 255, 255, 0.25);
         }
         
         #theme-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(30, 41, 59, 0.95);
         }
         
         /* Telegram — красная */
         #telegram-btn {
             left: 20px;
-            background: rgba(220, 38, 38, 0.95);
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
             color: white;
+            display: flex;
         }
         
         #telegram-btn:hover {
-            transform: scale(1.1);
-            background: rgba(220, 38, 38, 1);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
         }
         
-        /* Телефон — ЗЕЛЁНАЯ (изменено) */
+        /* Телефон — ЗЕЛЕНАЯ */
         #phone-btn {
             left: 20px;
-            background: rgba(34, 197, 94, 0.95);  /* зелёный */
+            background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-green-hover) 100%);
             color: white;
             display: none;
+            animation: pulse-green 2s infinite;
         }
         
         #phone-btn:hover {
-            transform: scale(1.1);
-            background: rgba(34, 197, 94, 1);
-            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);  /* зелёная тень */
+            background: linear-gradient(135deg, #4ade80 0%, var(--accent-green) 100%);
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.5);
+            animation: none;
+        }
+        
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
         
         #telegram-btn svg,
         #phone-btn svg {
-            width: 24px;
-            height: 24px;
+            width: 26px;
+            height: 26px;
             stroke: white;
             stroke-width: 2;
             fill: none;
@@ -302,6 +322,7 @@
         #phone-btn svg {
             fill: white;
             stroke: none;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
         }
         
         /* ============================================
@@ -330,7 +351,7 @@
         }
         
         /* ============================================
-           МОБИЛЬНАЯ ВЕРСИЯ — СПЛОШНОЙ ФОН, БЕЗ СТЕКЛА
+           МОБИЛЬНАЯ АДАПТАЦИЯ (без размытия!)
            ============================================ */
         @media (max-width: 968px) {
             .page-header {
@@ -358,134 +379,113 @@
                 object-fit: cover;
             }
             
+            /* Мобильный текстовый блок — БЕЗ размытия, БЕЛЫЙ ФОН для читабельности */
             .text-side {
                 position: relative;
                 z-index: 2;
                 justify-content: flex-start;
                 align-items: center;
                 text-align: center;
-                padding: 100px 1.5rem 2rem 1.5rem;
-                /* СПЛОШНОЙ ФОН без прозрачности */
-                background: #0f172a;
+                padding: 100px 1.5rem 3rem 1.5rem;
+                background: rgba(15, 23, 42, 0.85); /* Сплошной темный фон без блюра */
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                border: none;
-                box-shadow: none;
+                border-left: none;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
                 min-height: 100vh;
             }
             
-            /* Убрана золотая полоса сверху */
             .text-side::before {
-                display: none;
+                background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
             }
             
             .text-side h1 {
-                font-size: clamp(2rem, 8vw, 2.8rem);
-                margin-bottom: 1rem;
-                line-height: 1.1;
-                text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-            }
-            
-            .text-side h1 span {
-                display: block;
-                font-size: 0.85em;
-                margin-top: 0.3rem;
+                font-size: clamp(1.8rem, 6vw, 2.4rem);
+                margin-bottom: 0.75rem;
+                letter-spacing: -0.02em;
             }
             
             .text-side .address {
-                font-size: 1.15rem;
-                margin-bottom: 1.5rem;
-                color: #fbbf24 !important;
-                text-shadow: none;
-            }
-            
-            .tagline-box {
-                width: 100%;
-                max-width: 400px;
-                padding: 0.8rem 1rem;
-                margin-bottom: 1.5rem;
-                /* Сплошной фон без градиента */
-                background: #1e293b;
-                border-left: 4px solid #fbbf24;
-                border-radius: 0 8px 8px 0;
-                box-shadow: none;
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+                justify-content: center;
             }
             
             .tagline {
-                font-size: 1.1rem;
-                color: #ffffff !important;
-                text-shadow: none;
-            }
-            
-            .services-list {
-                width: 100%;
-                max-width: 400px;
-                gap: 0.6rem;
+                font-size: 1.15rem;
+                margin-bottom: 1.5rem;
+                padding: 0.6rem 0;
+                border-width: 1.5px;
             }
             
             .services-list li {
-                font-size: 0.95rem;
-                padding: 0.6rem 0.6rem 0.6rem 2.2rem;
+                font-size: 1rem;
+                margin-bottom: 0.75rem;
+                padding-left: 1.5rem;
                 text-align: left;
-                /* Сплошной фон */
-                background: #1e293b;
-                color: #f1f5f9 !important;
-                border-left: 2px solid #fbbf24;
-                border-radius: 6px;
-                text-shadow: none;
+                max-width: 320px;
+                margin-left: auto;
+                margin-right: auto;
             }
             
-            .services-list li::before {
-                left: 0.7rem;
-                color: #fbbf24;
-                text-shadow: none;
+            .guarantee {
+                margin-top: 1.5rem;
+                font-size: 0.9rem;
+                text-align: left;
             }
             
-            /* Управление видимостью кнопок */
+            /* Кнопки для мобильных */
             #telegram-btn { display: none !important; }
             #phone-btn { 
-                display: flex !important;
-                /* Зелёная кнопка на мобильной */
-                background: rgba(34, 197, 94, 0.95);
-            }
-            
-            #phone-btn:hover {
-                background: rgba(34, 197, 94, 1);
-                box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+                display: flex !important; 
+                animation: pulse-green 2s infinite;
             }
             
             .floating-btn {
-                top: 10px;
-                width: 44px;
-                height: 44px;
+                top: 12px;
+                width: 48px;
+                height: 48px;
             }
             
-            #theme-toggle { right: 10px; }
-            #phone-btn { left: 10px; }
+            #theme-toggle { right: 12px; }
+            #phone-btn { left: 12px; }
             
             #phone-btn svg,
             #telegram-btn svg {
-                width: 22px;
-                height: 22px;
+                width: 24px;
+                height: 24px;
+            }
+        }
+        
+        /* Предпочтения по уменьшению анимации */
+        @media (prefers-reduced-motion: reduce) {
+            .floating-btn {
+                transition: none;
+            }
+            #phone-btn {
+                animation: none;
             }
         }
     </style>
 </head>
 
 <body>
-    <a href="https://t.me/AlexDrog1981" target="_blank" rel="noopener noreferrer" class="floating-btn" id="telegram-btn" title="Написать в Telegram">
+    <!-- Кнопка Telegram (ПК) -->
+    <a href="https://t.me/AlexDrog1981" target="_blank" rel="noopener noreferrer" class="floating-btn" id="telegram-btn" title="Написать в Telegram" aria-label="Написать в Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </a>
     
-    <a href="tel:+375297256982" class="floating-btn" id="phone-btn" title="Позвонить">
+    <!-- Кнопка Звонка (Мобильные) — ЗЕЛЕНАЯ -->
+    <a href="tel:+375297256982" class="floating-btn" id="phone-btn" title="Позвонить" aria-label="Позвонить +375297256982">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
         </svg>
     </a>
     
-    <button class="floating-btn" id="theme-toggle" title="Сменить тему">🌙</button>
+    <!-- Кнопка смены темы -->
+    <button class="floating-btn" id="theme-toggle" title="Сменить тему" aria-label="Сменить тему оформления">🌙</button>
 
     <section class="page-header">
         <div class="header-content">
@@ -502,19 +502,23 @@
             </div>
             
             <div class="text-side">
-                <h1>Ремонт смартфонов<span>и ноутбуков</span></h1>
-                <p class="address">г. Дрогичин, ул. Ленина 141а</p>
-                
-                <div class="tagline-box">
-                    <p class="tagline">Решаю сложные случаи, от которых отказываются другие.</p>
+                <div class="text-content">
+                    <h1>Ремонт смартфонов<br>и ноутбуков</h1>
+                    <p class="address">г. Дрогичин, ул. Ленина 141а</p>
+                    
+                    <p class="tagline">Решаю сложные случаи, от которых отказываются другие</p>
+                    
+                    <ul class="services-list">
+                        <li>Ремонт и настройка ПК и ноутбуков</li>
+                        <li>Разблокировка FRP, Google-аккаунты, Mi-Account</li>
+                        <li>Прошивка смартфонов всех моделей</li>
+                        <li>Обновление карт — Navitel, IGO</li>
+                    </ul>
+                    
+                    <div class="guarantee">
+                        ⚡ Быстрый ремонт · 💯 Гарантия на работу · 🏠 Выезд при необходимости
+                    </div>
                 </div>
-                
-                <ul class="services-list">
-                    <li>Ремонт и настройка ПК и ноутбуков</li>
-                    <li>Разблокировка FRP, Google-аккаунты, Mi-Account</li>
-                    <li>Прошивка смартфонов</li>
-                    <li>Обновление карт — Navitel, IGO</li>
-                </ul>
             </div>
         </div>
     </section>
@@ -537,6 +541,7 @@
         function updateIcon() {
             const theme = document.documentElement.getAttribute('data-theme');
             btn.textContent = icons[theme] || '🌙';
+            btn.setAttribute('aria-label', theme === 'dark' ? 'Переключить на светлую тему' : 'Переключить на темную тему');
         }
         
         btn.addEventListener('click', () => {
