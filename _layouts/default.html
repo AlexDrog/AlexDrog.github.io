@@ -31,8 +31,6 @@
             --link: #1e6bb8;
             --border: #dce6f0;
             --card: #f3f6fa;
-            --btn-bg: #159957;
-            --btn-color: #fff;
         }
         
         [data-theme="dark"] {
@@ -42,8 +40,6 @@
             --link: #58a6ff;
             --border: #30363d;
             --card: #161b22;
-            --btn-bg: #238636;
-            --btn-color: #fff;
         }
         
         body {
@@ -56,8 +52,10 @@
             padding: 0;
         }
         
-        /* ШАПКА - ПОЛНЫЙ СБРОС и УСТАНОВКА ФОТО */
-        .page-header {
+        /* СВЕТЛАЯ ТЕМА - ЯВНО УКАЗЫВАЕМ ФОТО */
+        html:not([data-theme="dark"]) .page-header,
+        [data-theme="light"] .page-header {
+            background: url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
             color: #fff !important;
             text-align: center !important;
             padding: 5rem 6rem !important;
@@ -66,20 +64,20 @@
             flex-direction: column !important;
             justify-content: center !important;
             align-items: center !important;
-            
-            /* ПОЛНЫЙ СБРОС фона темы Cayman */
-            background: none !important;
-            background-color: transparent !important;
-            background-image: url('/assets/images/zdanie.JPG') !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
         }
         
-        /* Темная тема - затемнение поверх фото */
+        /* ТЕМНАЯ ТЕМА - ФОТО С ЗАТЕМНЕНИЕМ */
         [data-theme="dark"] .page-header {
-            background-image: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
-                        url('/assets/images/zdanie.JPG') !important;
+            background: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
+                        url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
+            color: #fff !important;
+            text-align: center !important;
+            padding: 5rem 6rem !important;
+            min-height: 400px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
         }
         
         .page-header h1 {
@@ -237,7 +235,9 @@
         
         @media (max-width: 600px) {
             .gallery-grid { grid-template-columns: 1fr; }
-            .page-header { 
+            html:not([data-theme="dark"]) .page-header,
+            [data-theme="light"] .page-header,
+            [data-theme="dark"] .page-header { 
                 padding: 3rem 1rem !important; 
                 min-height: 300px !important;
             }
