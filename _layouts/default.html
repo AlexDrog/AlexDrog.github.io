@@ -8,7 +8,6 @@
     
     {% seo %}
     
-    <!-- ИСПРАВЛЕНО: убраны пробелы в URL -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -27,25 +26,20 @@
     <style>
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            
-            /* Light theme glass - НЕ МЕНЯТЬ */
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --glass-text: #0f172a;
             --glass-text-secondary: #334155;
             --accent: #10b981;
-            
             --bg-body: #f8fafc;
         }
         
         [data-theme="dark"] {
-            /* Dark theme glass - НЕ МЕНЯТЬ */
             --glass-bg: rgba(15, 23, 42, 0.6);
             --glass-border: rgba(255, 255, 255, 0.15);
             --glass-text: #f8fafc;
             --glass-text-secondary: #cbd5e1;
             --accent: #34d399;
-            
             --bg-body: #020617;
         }
         
@@ -58,7 +52,7 @@
         }
         
         /* ============================================
-           ШАПКА С BENTO-GRID (управляется здесь)
+           ШАПКА - ЗДЕСЬ ФОН
            ============================================ */
         .page-header {
             position: relative;
@@ -67,7 +61,7 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            /* Фон задается здесь: fallback градиент + картинка */
+            /* Проверьте имя файла: hero-bg.jpg или hero-header-400.jpg */
             background: 
                 linear-gradient(135deg, rgba(15,23,42,0.4) 0%, rgba(30,41,59,0.3) 100%),
                 url('{{ "/assets/images/hero-bg.jpg" | relative_url }}') center/cover no-repeat,
@@ -75,7 +69,8 @@
             isolation: isolate;
         }
         
-        /* Затемняющий оверлей */
+        /* Если картинка не загрузится, будет виден этот градиент ^ (#1e3a5f → #0f766e) */
+        
         .page-header::before {
             content: '';
             position: absolute;
@@ -84,7 +79,6 @@
             z-index: 0;
         }
         
-        /* Скрываем возможные логотипы из других источников */
         .page-header img,
         .page-header .logo,
         .page-header .avatar,
