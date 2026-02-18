@@ -53,23 +53,29 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         
-        /* ШАПКА С ФОНОМ ЗДАНИЯ */
+        /* ШАПКА С ФОНОМ ЗДАНИЯ - ИСПРАВЛЕНО */
         .page-header {
             position: relative;
             background-image: linear-gradient(rgba(21, 87, 153, 0.7), rgba(21, 153, 87, 0.7)), 
-                              url('./assets/images/zdanie.JPG') !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-            background-color: #159957 !important;
+                              url('/assets/images/zdanie.JPG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #159957;
             padding: 5rem 6rem;
+            min-height: 400px;  /* Важно: фиксированная высота для видимости фото */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
         
         /* Темная тема — затемняем фото сильнее */
         [data-theme="dark"] .page-header {
             background-image: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
-                              url('./assets/images/zdanie.JPG') !important;
-            background-color: #0d1117 !important;
+                              url('/assets/images/zdanie.JPG');
+            background-color: #0d1117;
         }
         
         .main-content h1, 
@@ -106,8 +112,8 @@
             display: inline-block;
             margin: 5px;
             padding: 0.75rem 1rem;
-            background-color: var(--btn-bg) !important;
-            color: var(--btn-color) !important;
+            background-color: var(--btn-bg);
+            color: var(--btn-color);
             border-radius: 0.3rem;
             text-decoration: none;
             border: 1px solid var(--border);
@@ -171,7 +177,10 @@
         
         @media (max-width: 600px) {
             .gallery-grid { grid-template-columns: 1fr; }
-            .page-header { padding: 3rem 1rem; }
+            .page-header { 
+                padding: 3rem 1rem; 
+                min-height: 300px;  /* Меньше высота на мобильных */
+            }
         }
     </style>
 </head>
