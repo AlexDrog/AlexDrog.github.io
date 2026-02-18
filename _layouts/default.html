@@ -102,7 +102,7 @@
             display: block;
         }
         
-        /* ТЕКСТОВЫЙ БЛОК — ЗОЛОТИСТОЕ СТЕКЛО (с размытием на ПК) */
+        /* ТЕКСТОВЫЙ БЛОК — ЗОЛОТИСТОЕ СТЕКЛО (ПК) */
         .text-side {
             display: flex;
             flex-direction: column;
@@ -122,7 +122,7 @@
             position: relative;
         }
         
-        /* Золотистое свечение сверху */
+        /* Золотистое свечение сверху (ПК) */
         .text-side::before {
             content: '';
             position: absolute;
@@ -137,7 +137,7 @@
             box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
         }
         
-        /* Заголовок — максимально читаемый */
+        /* Заголовок */
         .text-side h1 {
             font-size: clamp(2.2rem, 3.5vw, 3.2rem);
             font-weight: 900;
@@ -157,7 +157,7 @@
             margin-top: 0.2rem;
         }
         
-        /* Адрес — выделен золотым */
+        /* Адрес — золотой */
         .text-side .address {
             font-size: clamp(1.2rem, 1.6vw, 1.5rem);
             color: #fbbf24 !important;
@@ -169,7 +169,7 @@
             letter-spacing: 0.02em;
         }
         
-        /* Слоган — на золотом фоне */
+        /* Слоган */
         .tagline-box {
             background: linear-gradient(135deg, 
                 rgba(251, 191, 36, 0.15) 0%, 
@@ -231,7 +231,7 @@
         }
         
         /* ============================================
-           КНОПКИ (симметричные)
+           ПЛАВАЮЩИЕ КНОПКИ
            ============================================ */
         .floating-btn {
             position: fixed;
@@ -263,6 +263,7 @@
             background: rgba(15, 23, 42, 0.9);
         }
         
+        /* Telegram — красная */
         #telegram-btn {
             left: 20px;
             background: rgba(220, 38, 38, 0.95);
@@ -275,17 +276,18 @@
             box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
         }
         
+        /* Телефон — ЗЕЛЁНАЯ (изменено) */
         #phone-btn {
             left: 20px;
-            background: rgba(220, 38, 38, 0.95);
+            background: rgba(34, 197, 94, 0.95);  /* зелёный */
             color: white;
             display: none;
         }
         
         #phone-btn:hover {
             transform: scale(1.1);
-            background: rgba(220, 38, 38, 1);
-            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+            background: rgba(34, 197, 94, 1);
+            box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);  /* зелёная тень */
         }
         
         #telegram-btn svg,
@@ -328,7 +330,7 @@
         }
         
         /* ============================================
-           МОБИЛЬНАЯ ВЕРСИЯ — БЕЗ РАЗМЫТИЯ
+           МОБИЛЬНАЯ ВЕРСИЯ — СПЛОШНОЙ ФОН, БЕЗ СТЕКЛА
            ============================================ */
         @media (max-width: 968px) {
             .page-header {
@@ -363,36 +365,25 @@
                 align-items: center;
                 text-align: center;
                 padding: 100px 1.5rem 2rem 1.5rem;
-                /* УБРАНО РАЗМЫТИЕ — только насыщенность и цвет */
+                /* СПЛОШНОЙ ФОН без прозрачности */
+                background: #0f172a;
                 backdrop-filter: none !important;
                 -webkit-backdrop-filter: none !important;
-                /* Усилен фон для компенсации отсутствия blur */
-                background: linear-gradient(180deg, 
-                    rgba(15, 23, 42, 0.92) 0%, 
-                    rgba(30, 41, 59, 0.88) 30%,
-                    rgba(30, 41, 59, 0.82) 60%,
-                    rgba(251, 191, 36, 0.15) 100%);
-                border-left: none;
-                border-top: 1px solid var(--gold-border);
-                box-shadow: 
-                    inset 0 0 60px rgba(251, 191, 36, 0.1),
-                    0 0 30px rgba(0, 0, 0, 0.5);
+                border: none;
+                box-shadow: none;
                 min-height: 100vh;
             }
             
+            /* Убрана золотая полоса сверху */
             .text-side::before {
-                top: 0;
-                height: 3px;
-                background: linear-gradient(90deg, 
-                    transparent 0%, 
-                    rgba(251, 191, 36, 0.8) 50%, 
-                    transparent 100%);
+                display: none;
             }
             
             .text-side h1 {
                 font-size: clamp(2rem, 8vw, 2.8rem);
                 margin-bottom: 1rem;
                 line-height: 1.1;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.8);
             }
             
             .text-side h1 span {
@@ -404,6 +395,8 @@
             .text-side .address {
                 font-size: 1.15rem;
                 margin-bottom: 1.5rem;
+                color: #fbbf24 !important;
+                text-shadow: none;
             }
             
             .tagline-box {
@@ -411,11 +404,17 @@
                 max-width: 400px;
                 padding: 0.8rem 1rem;
                 margin-bottom: 1.5rem;
-                border-left-width: 3px;
+                /* Сплошной фон без градиента */
+                background: #1e293b;
+                border-left: 4px solid #fbbf24;
+                border-radius: 0 8px 8px 0;
+                box-shadow: none;
             }
             
             .tagline {
                 font-size: 1.1rem;
+                color: #ffffff !important;
+                text-shadow: none;
             }
             
             .services-list {
@@ -428,15 +427,32 @@
                 font-size: 0.95rem;
                 padding: 0.6rem 0.6rem 0.6rem 2.2rem;
                 text-align: left;
-                background: rgba(0,0,0,0.35);
+                /* Сплошной фон */
+                background: #1e293b;
+                color: #f1f5f9 !important;
+                border-left: 2px solid #fbbf24;
+                border-radius: 6px;
+                text-shadow: none;
             }
             
             .services-list li::before {
                 left: 0.7rem;
+                color: #fbbf24;
+                text-shadow: none;
             }
             
+            /* Управление видимостью кнопок */
             #telegram-btn { display: none !important; }
-            #phone-btn { display: flex !important; }
+            #phone-btn { 
+                display: flex !important;
+                /* Зелёная кнопка на мобильной */
+                background: rgba(34, 197, 94, 0.95);
+            }
+            
+            #phone-btn:hover {
+                background: rgba(34, 197, 94, 1);
+                box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+            }
             
             .floating-btn {
                 top: 10px;
