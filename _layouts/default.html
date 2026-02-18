@@ -49,9 +49,14 @@
         body {
             background-color: var(--bg) !important;
             color: var(--text) !important;
+            font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
         }
         
-        /* ШАПКА - СВЕТЛАЯ ТЕМА: градиент более прозрачный (0.3 вместо 0.6) */
+        /* ШАПКА - ПОЛНЫЙ СБРОС и УСТАНОВКА ФОТО */
         .page-header {
             color: #fff !important;
             text-align: center !important;
@@ -61,32 +66,57 @@
             flex-direction: column !important;
             justify-content: center !important;
             align-items: center !important;
-            position: relative !important;
             
-            /* ИСПРАВЛЕНО: 0.3 вместо 0.6 чтобы фото было видно */
-            background: url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
+            /* ПОЛНЫЙ СБРОС фона темы Cayman */
+            background: none !important;
+            background-color: transparent !important;
+            background-image: url('/assets/images/zdanie.JPG') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
         }
         
-        /* Темная тема - темнее градиент */
+        /* Темная тема - затемнение поверх фото */
         [data-theme="dark"] .page-header {
-            background: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
-                        url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
+            background-image: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
+                        url('/assets/images/zdanie.JPG') !important;
         }
         
-        /* Текст поверх фото */
-        .page-header h1, .page-header h2 {
+        .page-header h1 {
+            font-size: 3.25rem;
+            margin: 0 0 0.1rem 0 !important;
             color: #fff !important;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
-            margin: 0.5rem 0 !important;
+            font-weight: normal;
+        }
+        
+        .page-header h2 {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin: 0 0 2rem 0 !important;
+            font-weight: normal;
+            color: #fff !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
         }
         
         .page-header .btn {
-            background: rgba(255,255,255,0.2) !important;
-            border: 1px solid rgba(255,255,255,0.5) !important;
-            color: #fff !important;
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: rgba(255,255,255,0.9) !important;
+            background-color: rgba(255,255,255,0.2) !important;
+            border: 1px solid rgba(255,255,255,0.3) !important;
+            border-radius: 0.3rem;
+            text-decoration: none;
+            transition: all 0.2s;
         }
         
-        /* Кнопка переключения */
+        .page-header .btn:hover {
+            background-color: rgba(255,255,255,0.3) !important;
+            text-decoration: none;
+        }
+        
+        /* Кнопка переключения темы */
         #theme-toggle {
             position: fixed;
             top: 15px;
@@ -100,6 +130,7 @@
             height: 45px;
             font-size: 20px;
             cursor: pointer;
+            color: #fff;
         }
         
         [data-theme="dark"] #theme-toggle {
@@ -107,10 +138,33 @@
             border-color: rgba(255,255,255,0.2);
         }
         
-        .main-content h1, .main-content h2, .main-content h3 {
-            color: var(--heading) !important;
+        /* Основной контент */
+        .main-content {
+            max-width: 64rem;
+            padding: 2rem 6rem;
+            margin: 0 auto;
+            font-size: 1.1rem;
         }
         
+        .main-content h1, 
+        .main-content h2, 
+        .main-content h3 {
+            color: var(--heading) !important;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+        }
+        
+        .main-content a {
+            color: var(--link) !important;
+            text-decoration: none;
+        }
+        
+        .main-content a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Спойлеры */
         details {
             background: var(--card);
             border: 1px solid var(--border);
@@ -119,18 +173,76 @@
             margin-bottom: 12px;
         }
         
-        summary { color: var(--heading); font-weight: 600; cursor: pointer; }
-        summary h3 { display: inline; margin: 0; }
+        summary {
+            color: var(--heading);
+            font-weight: 600;
+            cursor: pointer;
+        }
         
-        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-        .gallery-item { text-align: center; background: var(--bg); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-        .label-red { background: #e74c3c; color: white; padding: 8px; font-weight: bold; }
-        .label-green { background: #27ae60; color: white; padding: 8px; font-weight: bold; }
-        .gallery-item img { width: 100%; height: 180px; object-fit: cover; display: block; }
+        summary h3 { 
+            display: inline; 
+            margin: 0;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .gallery-item { 
+            text-align: center; 
+            background: var(--bg);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .label-red { 
+            background: #e74c3c; 
+            color: white; 
+            padding: 8px; 
+            font-weight: bold; 
+        }
+        
+        .label-green { 
+            background: #27ae60; 
+            color: white; 
+            padding: 8px; 
+            font-weight: bold; 
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .highlight { 
+            color: #e94560; 
+            font-weight: bold; 
+        }
+        
+        /* Подвал */
+        .site-footer {
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: solid 1px var(--border);
+            font-size: 0.9rem;
+            color: var(--text);
+            text-align: center;
+        }
         
         @media (max-width: 600px) {
             .gallery-grid { grid-template-columns: 1fr; }
-            .page-header { padding: 3rem 1rem !important; min-height: 300px !important; }
+            .page-header { 
+                padding: 3rem 1rem !important; 
+                min-height: 300px !important;
+            }
+            .main-content { padding: 2rem 1rem; }
+            .page-header h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -154,7 +266,15 @@
         {{ content }}
         
         <footer class="site-footer">
-            <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+            {% if site.github.is_project_page %}
+                <span class="site-footer-owner">
+                    <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> 
+                    is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.
+                </span>
+            {% endif %}
+            <span class="site-footer-credits">
+                This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.
+            </span>
         </footer>
     </section>
 
@@ -188,6 +308,7 @@
         let timer;
         btn.addEventListener('mousedown', () => timer = setTimeout(reset, 3000));
         btn.addEventListener('mouseup', () => clearTimeout(timer));
+        btn.addEventListener('mouseleave', () => clearTimeout(timer));
         btn.addEventListener('touchstart', () => timer = setTimeout(reset, 3000));
         btn.addEventListener('touchend', () => clearTimeout(timer));
         
