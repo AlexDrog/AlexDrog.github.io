@@ -113,46 +113,29 @@
         }
         
         /* ============================================
-           ПЛАВАЮЩИЕ КНОПКИ
+           СИММЕТРИЧНЫЕ КНОПКИ
            ============================================ */
-        #theme-toggle,
-        #call-button {
+        .floating-btn {
             position: fixed;
             z-index: 9999;
             width: 48px;
             height: 48px;
             border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.4);
             cursor: pointer;
-            font-size: 1.25rem;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: all 0.2s ease;
             text-decoration: none;
-        }
-        
-        /* Кнопка темы — справа, серая */
-        #theme-toggle {
             top: 20px;
-            right: 20px;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
         }
         
-        #theme-toggle:hover {
-            transform: scale(1.1);
-            background: rgba(15, 23, 42, 0.9);
-        }
-        
-        /* Кнопка звонка — слева, КРАСНАЯ с белой иконкой */
+        /* Кнопка Telegram — слева */
         #call-button {
-            top: 20px;
             left: 20px;
-            background: rgba(220, 38, 38, 0.95); /* Красный */
-            border: 2px solid rgba(255, 255, 255, 0.4);
+            background: rgba(220, 38, 38, 0.95);
             color: white;
         }
         
@@ -162,7 +145,21 @@
             box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
         }
         
-        /* Белая иконка телефона */
+        /* Кнопка темы — справа */
+        #theme-toggle {
+            right: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 1.25rem;
+        }
+        
+        #theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(15, 23, 42, 0.9);
+        }
+        
+        /* Иконки */
         #call-button svg {
             width: 24px;
             height: 24px;
@@ -171,7 +168,7 @@
             fill: none;
         }
         
-        /* МОБИЛЬНАЯ */
+        /* МОБИЛЬНАЯ ВЕРСИЯ */
         @media (max-width: 968px) {
             .page-header {
                 padding: 0;
@@ -198,13 +195,14 @@
                 object-fit: cover;
             }
             
+            /* ТЕКСТ ПОДНЯТ МАКСИМАЛЬНО ВВЕРХ */
             .text-side {
                 position: relative;
                 z-index: 2;
-                justify-content: center;
+                justify-content: flex-start; /* Прижимаем к верху */
                 align-items: center;
                 text-align: center;
-                padding: 2rem;
+                padding: 80px 2rem 2rem 2rem; /* Отступ сверху 80px (под кнопки) */
                 background: rgba(30, 41, 59, 0.5);
                 backdrop-filter: blur(2px);
                 -webkit-backdrop-filter: blur(2px);
@@ -225,11 +223,19 @@
                 text-shadow: 0 2px 6px rgba(0,0,0,0.8);
             }
             
-            #theme-toggle,
-            #call-button {
+            /* Кнопки на мобильном */
+            .floating-btn {
                 top: 10px;
                 width: 44px;
                 height: 44px;
+            }
+            
+            #call-button {
+                left: 10px;
+            }
+            
+            #theme-toggle {
+                right: 10px;
             }
             
             #call-button svg {
@@ -266,14 +272,14 @@
 </head>
 
 <body>
-    <!-- Плавающая кнопка звонка — КРАСНАЯ с белой иконкой -->
-    <a href="tel:+375297256982" id="call-button" title="Позвонить" aria-label="Позвонить">
+    <!-- Кнопка Telegram — слева -->
+    <a href="https://t.me/AlexDrog1981" target="_blank" rel="noopener noreferrer" class="floating-btn" id="call-button" title="Написать в Telegram" aria-label="Написать в Telegram">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
     </a>
     
-    <button id="theme-toggle" title="Сменить тему">🌙</button>
+    <button class="floating-btn" id="theme-toggle" title="Сменить тему">🌙</button>
 
     <section class="page-header">
         <div class="header-content">
