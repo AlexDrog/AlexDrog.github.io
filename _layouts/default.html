@@ -51,49 +51,40 @@
             color: var(--text) !important;
         }
         
-        /* ШАПКА - ИСПРАВЛЕНО: фото на всю ширину без повторений */
+        /* ШАПКА - ГЛАВНОЕ ИСПРАВЛЕНИЕ: перекрываем background полностью */
         .page-header {
-            background-image: linear-gradient(rgba(21, 87, 153, 0.5), rgba(21, 153, 87, 0.5)), 
-                              url('/assets/images/zdanie.JPG') !important;
-            background-size: cover !important;      /* На всю ширину без повторений */
-            background-position: center !important; /* Центрируем */
-            background-repeat: no-repeat !important;/* Запрещаем повтор */
-            background-attachment: scroll !important;/* Фиксируем или нет */
-            min-height: 450px !important;           /* Увеличил высоту */
-            width: 100% !important;
+            color: #fff !important;
+            text-align: center !important;
+            padding: 5rem 6rem !important;
+            min-height: 400px !important;
             display: flex !important;
             flex-direction: column !important;
             justify-content: center !important;
             align-items: center !important;
-            text-align: center !important;
-            padding: 3rem 1rem !important;
-            color: #fff !important;
             position: relative !important;
+            
+            /* ВАЖНО: background вместо background-image, чтобы перебить тему */
+            background: linear-gradient(rgba(21, 87, 153, 0.6), rgba(21, 153, 87, 0.6)), 
+                        url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
         }
         
-        /* Темная тема - темнее градиент */
+        /* Темная тема */
         [data-theme="dark"] .page-header {
-            background-image: linear-gradient(rgba(13, 17, 23, 0.8), rgba(22, 27, 34, 0.9)), 
-                              url('/assets/images/zdanie.JPG') !important;
+            background: linear-gradient(rgba(13, 17, 23, 0.85), rgba(22, 27, 34, 0.95)), 
+                        url('/assets/images/zdanie.JPG') center/cover no-repeat !important;
         }
         
-        /* Текст поверх фото */
-        .page-header h1, 
-        .page-header h2 {
+        /* Текст */
+        .page-header h1, .page-header h2 {
             color: #fff !important;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8) !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
             margin: 0.5rem 0 !important;
-            z-index: 2 !important;
-            position: relative !important;
         }
         
         .page-header .btn {
-            background: rgba(255,255,255,0.25) !important;
-            border: 2px solid rgba(255,255,255,0.6) !important;
+            background: rgba(255,255,255,0.2) !important;
+            border: 1px solid rgba(255,255,255,0.5) !important;
             color: #fff !important;
-            margin-top: 1rem !important;
-            z-index: 2 !important;
-            position: relative !important;
         }
         
         /* Кнопка переключения */
@@ -140,7 +131,7 @@
         
         @media (max-width: 600px) {
             .gallery-grid { grid-template-columns: 1fr; }
-            .page-header { min-height: 350px !important; }
+            .page-header { padding: 3rem 1rem !important; min-height: 300px !important; }
         }
     </style>
 </head>
