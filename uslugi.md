@@ -215,25 +215,3 @@ permalink: /uslugi/
   <a href="https://t.me/alexdrog81" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px;">💬 Telegram</a>
   <a href="tel:+375297256982" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #e94560; color: white; text-decoration: none; border-radius: 5px;">📞 Позвонить</a>
 </div>
-#mobile-call-btn {
-    display: none !important;
-}
-<script>
-// Мобильная кнопка звонка
-(function() {
-  // Проверяем ширину экрана
-  if (window.innerWidth <= 768 && !document.getElementById('mobile-call-btn')) {
-    var btn = document.createElement('a');
-    btn.id = 'mobile-call-btn';
-    btn.href = 'tel:+375297256982';
-    btn.innerHTML = '<span style="font-size:22px;">📞</span> <span style="font-weight:600;">Позвонить</span>';
-    btn.style.cssText = 'position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,#e94560 0%,#c9183a 100%);color:white;padding:14px 24px;border-radius:50px;text-decoration:none;z-index:9999;box-shadow:0 6px 20px rgba(233,69,96,0.4);display:flex;align-items:center;gap:10px;font-size:16px;border:2px solid rgba(255,255,255,0.2);transition: transform 0.2s;';
-    
-    // Эффект при наведении
-    btn.onmouseover = function() { this.style.transform = 'scale(1.05)'; };
-    btn.onmouseout = function() { this.style.transform = 'scale(1)'; };
-    
-    document.body.appendChild(btn);
-  }
-})();
-</script>
