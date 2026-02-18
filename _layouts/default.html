@@ -26,16 +26,10 @@
     <style>
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            --glass-bg: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.4);
-            --glass-text: #0f172a;
             --bg-body: #f8fafc;
         }
         
         [data-theme="dark"] {
-            --glass-bg: rgba(15, 23, 42, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-text: #f8fafc;
             --bg-body: #020617;
         }
         
@@ -48,123 +42,60 @@
         }
         
         /* ============================================
-           ШАПКА С ГРАДИЕНТНЫМ ФОНОМ (под цвет видео)
+           ШАПКА - ДВЕ РАВНЫЕ ПОЛОВИНЫ
            ============================================ */
         .page-header {
             position: relative;
-            min-height: 700px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            overflow: hidden;
-            isolation: isolate;
-        }
-        
-        /* Декоративный градиент поверх фона */
-        .page-header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.3) 0%, rgba(15, 23, 42, 0.8) 100%);
-            z-index: 0;
-        }
-        
-        /* ============================================
-           СЕТКА: СЛЕВА ВИДЕО, СПРАВА ТЕКСТ
-           ============================================ */
-        .bento-container {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            gap: 2.5rem;
-            max-width: 1400px;
             width: 100%;
-            position: relative;
-            z-index: 2;
-            align-items: center;
-        }
-        
-        /* Карточка с видео слева */
-        .bento-card.video-card {
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 1.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: #0f172a;
             overflow: hidden;
-            aspect-ratio: 9/16;
-            max-height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
-        .video-card video {
+        .header-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* РОВНО 50/50 */
+            min-height: 400px; /* Компактная шапка */
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* ЛЕВАЯ ПОЛОВИНА - ВИДЕО */
+        .video-side {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .video-side video {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: block;
         }
         
-        /* Карточка с текстом справа */
-        .bento-card.main-card {
-            background: rgba(15, 23, 42, 0.7); /* Тёмный фон под цвет видео */
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            padding: 3.5rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        /* ПРАВАЯ ПОЛОВИНА - ТЕКСТ */
+        .text-side {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 2rem;
+            padding: 3rem;
+            background: #0f172a; /* Тёмный фон под цвет видео */
         }
         
-        /* УВЕЛИЧЕННЫЙ ТЕКСТ */
-        .main-card h1 {
-            font-size: clamp(2.8rem, 5vw, 4.5rem);
-            font-weight: 900;
-            line-height: 1.05;
+        .text-side h1 {
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-weight: 800;
             color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
         
-        .main-card .subtitle {
-            font-size: clamp(1.3rem, 2vw, 1.8rem);
-            color: rgba(255, 255, 255, 0.85);
-            line-height: 1.5;
+        .text-side .address {
+            font-size: clamp(1.1rem, 1.5vw, 1.5rem);
+            color: #94a3b8; /* Серый цвет */
             font-weight: 500;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        
-        /* Контактная кнопка внутри текста (опционально) */
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 1rem;
-            padding: 1.25rem 2.5rem;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.25rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
-            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
         }
         
         /* ============================================
@@ -179,7 +110,7 @@
             height: 48px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(10px);
             cursor: pointer;
             font-size: 1.25rem;
@@ -187,90 +118,103 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background 0.3s;
+            transition: transform 0.2s;
             color: white;
         }
         
         #theme-toggle:hover {
             transform: scale(1.1);
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
         }
         
         /* ============================================
-           МОБИЛЬНАЯ ВЕРСИЯ (< 968px)
-           - Убран эффект стекла (простой полупрозрачный фон)
-           - Видео всегда показывается
+           МОБИЛЬНАЯ ВЕРСИЯ
+           Видео на всю ширину, текст поверх
            ============================================ */
         @media (max-width: 968px) {
-            .page-header {
-                min-height: auto;
-                padding: 6rem 1rem 3rem;
+            .header-content {
+                grid-template-columns: 1fr; /* Одна колонка */
+                min-height: 500px; /* Высота для телефона */
+                position: relative;
             }
             
-            .bento-container {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+            .video-side {
+                position: absolute;
+                inset: 0;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
             }
             
-            /* Убран блюр, просто темный полупрозрачный фон */
-            .bento-card.video-card,
-            .bento-card.main-card {
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                background: rgba(15, 23, 42, 0.9);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                aspect-ratio: auto;
-                max-height: none;
+            .video-side video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
             }
             
-            .video-card {
-                order: 1; /* Видео сверху */
-                padding: 1rem;
-            }
-            
-            .main-card {
-                order: 2; /* Текст снизу */
-                padding: 2rem;
+            /* Текст поверх видео */
+            .text-side {
+                position: relative;
+                z-index: 2;
+                background: rgba(15, 23, 42, 0.6); /* Полупрозрачный тёмный фон для читаемости */
+                justify-content: center;
+                align-items: center;
                 text-align: center;
+                padding: 2rem;
+                height: 100%;
+                backdrop-filter: blur(2px);
             }
             
-            .main-card h1 {
-                font-size: clamp(2rem, 8vw, 2.8rem);
+            .text-side h1 {
+                font-size: clamp(1.8rem, 7vw, 2.5rem);
+                margin-bottom: 1rem;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.5);
             }
             
-            .main-card .subtitle {
+            .text-side .address {
                 font-size: 1.1rem;
+                color: rgba(255, 255, 255, 0.9);
+                text-shadow: 0 1px 4px rgba(0,0,0,0.5);
             }
         }
         
         /* ============================================
-           ОСНОВНОЙ КОНТЕНТ
+           КОНТЕНТ
            ============================================ */
         .main-content {
             max-width: 64rem;
             padding: 4rem 2rem;
             margin: 0 auto;
-            color: var(--glass-text);
+            color: #0f172a;
+        }
+        
+        [data-theme="dark"] .main-content {
+            color: #f8fafc;
         }
         
         .site-footer {
             margin-top: 4rem;
             padding-top: 2rem;
-            border-top: 1px solid var(--glass-border);
-            color: var(--glass-text-secondary);
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
             font-size: 0.875rem;
             text-align: center;
+        }
+        
+        [data-theme="dark"] .site-footer {
+            border-top-color: #1e293b;
+            color: #94a3b8;
         }
     </style>
 </head>
 
 <body>
-    <button id="theme-toggle" title="Сменить тему (удерживайте 3сек для сброса)">🌙</button>
+    <button id="theme-toggle" title="Сменить тему">🌙</button>
 
     <section class="page-header">
-        <div class="bento-container">
-            <!-- СЛЕВА: ВИДЕО -->
-            <div class="bento-card video-card">
+        <div class="header-content">
+            <!-- ЛЕВАЯ ПОЛОВИНА - ВИДЕО БЕЗ РАМКИ -->
+            <div class="video-side">
                 <video 
                     autoplay 
                     muted 
@@ -282,21 +226,10 @@
                 </video>
             </div>
             
-            <!-- СПРАВА: УВЕЛИЧЕННЫЙ ТЕКСТ -->
-            <div class="bento-card main-card">
-                <h1>{{ site.title | default: "Ремонт смартфонов и ноутбуков" }}</h1>
-                <p class="subtitle">
-                    {{ site.description | default: "Профессиональный ремонт техники в Дрогичине. Сложные разблокировки, восстановление после воды, замена комплектующих." }}
-                </p>
-                
-                <a href="tel:+375297256982" class="cta-button">
-                    📞 Позвонить: +375 (29) 725-69-82
-                </a>
-                
-                <div style="margin-top: 1.5rem; font-size: 0.95rem; color: rgba(255,255,255,0.7);">
-                    <div style="margin-bottom: 0.5rem;">📍 г. Дрогичин, ул. Ленина, 141а (2 этаж)</div>
-                    <div>🕐 Вт-Пт: 10:00–18:00, Сб-Вс: 10:00–14:00</div>
-                </div>
+            <!-- ПРАВАЯ ПОЛОВИНА - ТОЛЬКО ТЕКСТ -->
+            <div class="text-side">
+                <h1>Ремонт смартфонов и ноутбуков</h1>
+                <p class="address">г. Дрогичин, ул. Ленина 141а</p>
             </div>
         </div>
     </section>
@@ -329,17 +262,6 @@
             localStorage.setItem('user_theme_choice', next);
             updateIcon();
         });
-        
-        let timer;
-        btn.addEventListener('mousedown', () => timer = setTimeout(() => {
-            localStorage.removeItem('user_theme_choice');
-            const system = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = system ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', theme);
-            updateIcon();
-            alert('Автоматическая тема');
-        }, 3000));
-        btn.addEventListener('mouseup', () => clearTimeout(timer));
         
         updateIcon();
     </script>
