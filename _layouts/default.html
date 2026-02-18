@@ -25,28 +25,21 @@
     <style>
         :root {
             --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            
-            /* === ЦВЕТА СТЕКОЛ - ФИКСИРОВАННЫЕ (не менять) === */
             --glass-bg: rgba(255, 255, 255, 0.25);
             --glass-border: rgba(255, 255, 255, 0.4);
             --accent: #10b981;
             --bg-body: #f8fafc;
-            
-            /* === УЛУЧШЕННАЯ ЧИТАБЕЛЬНОСТЬ === */
-            --glass-text: #0f172a;              /* Основной текст - темно-синий, почти черный */
-            --glass-text-secondary: #1e293b;     /* Вторичный - темнее для контраста (был #334155) */
+            --glass-text: #0f172a;
+            --glass-text-secondary: #1e293b;
         }
         
         [data-theme="dark"] {
-            /* === ЦВЕТА СТЕКОЛ - ФИКСИРОВАННЫЕ (не менять) === */
             --glass-bg: rgba(15, 23, 42, 0.6);
             --glass-border: rgba(255, 255, 255, 0.15);
             --accent: #34d399;
             --bg-body: #020617;
-            
-            /* === УЛУЧШЕННАЯ ЧИТАБЕЛЬНОСТЬ === */
-            --glass-text: #ffffff;               /* Белый для максимального контраста */
-            --glass-text-secondary: #e2e8f0;      /* Светло-серый (был #cbd5e1) */
+            --glass-text: #ffffff;
+            --glass-text-secondary: #e2e8f0;
         }
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -58,7 +51,7 @@
         }
         
         /* ============================================
-           ШАПКА - КРУГ/ЛОГОТИП УБРАН ПОЛНОСТЬЮ
+           ШАПКА - ФИКС ФОНА И УДАЛЕНИЕ КРУГА
            ============================================ */
         .page-header {
             position: relative;
@@ -67,28 +60,35 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            background: url('/assets/images/hero-header-400.jpg') center/cover no-repeat;
+            /* Фикс пути к фону через relative_url */
+            background: 
+                linear-gradient(135deg, rgba(15,23,42,0.8) 0%, rgba(30,41,59,0.7) 100%),
+                url('{{ "/assets/images/hero-header-400.jpg" | relative_url }}') center/cover no-repeat;
+            background-color: #0f172a; /* Fallback если фото не загрузится */
             isolation: isolate;
         }
         
-        .page-header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(15,23,42,0.8) 0%, rgba(30,41,59,0.7) 100%);
-            z-index: 0;
-        }
-        
-        /* УБИРАЕМ КРУГ/ЛОГОТИП - все псевдоэлементы скрыты */
+        /* УБИРАЕМ КРУГ/ЛОГОТИП ВСЕМИ СПОСОБАМИ */
         .page-header::after,
         .page-header-content::before,
         .page-header-content::after,
-        .page-header *::before,
-        .page-header *::after {
+        .bento-container::before,
+        .bento-container::after,
+        .page-header > img,
+        .page-header .logo,
+        .page-header .avatar,
+        .page-header .site-logo,
+        .page-header [class*="logo"],
+        .page-header [class*="avatar"],
+        .page-header [class*="circle"] {
             display: none !important;
             content: '' !important;
-            background: none !important;
-            border: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            width: 0 !important;
+            height: 0 !important;
+            position: absolute !important;
+            z-index: -9999 !important;
         }
         
         /* ============================================
@@ -124,7 +124,6 @@
             padding: 3rem;
         }
         
-        /* === УЛУЧШЕННАЯ ЧИТАБЕЛЬНОСТЬ === */
         .bento-card.main h1 {
             font-size: clamp(2rem, 4vw, 3.5rem);
             font-weight: 800;
@@ -132,7 +131,6 @@
             color: var(--glass-text);
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
-            /* Тень для читаемости на любом фоне */
             text-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
@@ -141,7 +139,6 @@
             color: var(--glass-text-secondary);
             font-weight: 600;
             margin-bottom: 0.75rem;
-            /* Усиленная тень */
             text-shadow: 0 1px 4px rgba(255,255,255,0.8);
             letter-spacing: 0.02em;
         }
@@ -162,7 +159,6 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
         
-        /* Карточка телефона */
         .bento-card.phone {
             background: rgba(16, 185, 129, 0.15);
             border-color: rgba(16, 185, 129, 0.4);
@@ -208,7 +204,6 @@
             transform: scale(1.05);
         }
         
-        /* Карточка инфо */
         .bento-card.info {
             display: flex;
             flex-direction: column;
@@ -234,7 +229,6 @@
             font-size: 1rem;
         }
         
-        /* Кнопка темы */
         #theme-toggle {
             position: fixed;
             top: 20px;
@@ -259,7 +253,129 @@
             transform: scale(1.1);
         }
         
-        /* Мобильная версия */
+        /* ============================================
+           АДАПТАЦИЯ ТАБЛИЦ ДЛЯ МОБИЛЬНЫХ
+           ============================================ */
+        .main-content {
+            max-width: 64rem;
+            padding: 4rem 2rem;
+            margin: 0 auto;
+            color: var(--glass-text);
+        }
+        
+        /* Горизонтальная прокрутка для широких таблиц */
+        .main-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+        }
+        
+        .main-content thead {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+        }
+        
+        .main-content th,
+        .main-content td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--glass-border);
+            white-space: normal;
+            min-width: 120px; /* Минимальная ширина колонки */
+        }
+        
+        .main-content th {
+            font-weight: 700;
+            color: var(--glass-text);
+            background: rgba(0,0,0,0.05);
+        }
+        
+        [data-theme="dark"] .main-content th {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        /* На мобильных - карточки вместо таблицы */
+        @media (max-width: 640px) {
+            .main-content table {
+                display: block;
+                width: 100%;
+                border: 0;
+                background: transparent;
+            }
+            
+            .main-content thead {
+                display: none;
+            }
+            
+            .main-content tbody,
+            .main-content tr {
+                display: block;
+                width: 100%;
+            }
+            
+            .main-content tr {
+                margin-bottom: 1rem;
+                border: 1px solid var(--glass-border);
+                border-radius: 16px;
+                padding: 1rem;
+                background: var(--glass-bg);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            }
+            
+            .main-content td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid rgba(0,0,0,0.1);
+                text-align: right;
+                min-width: auto;
+            }
+            
+            [data-theme="dark"] .main-content td {
+                border-bottom-color: rgba(255,255,255,0.1);
+            }
+            
+            .main-content td:last-child {
+                border-bottom: 0;
+            }
+            
+            /* Автоматические подписи из заголовков таблицы */
+            .main-content td:before {
+                content: attr(data-label);
+                font-weight: 700;
+                text-align: left;
+                color: var(--accent);
+                padding-right: 1rem;
+                flex-shrink: 0;
+            }
+            
+            /* Первая ячейка - заголовок карточки */
+            .main-content td:first-child {
+                font-weight: 800;
+                font-size: 1.1rem;
+                color: var(--glass-text);
+                justify-content: center;
+                border-bottom: 2px solid var(--glass-border);
+                padding-bottom: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .main-content td:first-child:before {
+                display: none;
+            }
+        }
+        
+        /* ============================================
+           МОБИЛЬНАЯ ВЕРСИЯ
+           ============================================ */
         @media (max-width: 968px) {
             .page-header {
                 min-height: auto;
@@ -279,13 +395,6 @@
             .bento-card {
                 padding: 1.5rem;
             }
-        }
-        
-        .main-content {
-            max-width: 64rem;
-            padding: 4rem 2rem;
-            margin: 0 auto;
-            color: var(--glass-text);
         }
         
         .main-content h1, 
@@ -312,20 +421,17 @@
 
     <section class="page-header">
         <div class="bento-container">
-            <!-- Главная карточка - идентично скриншоту -->
             <div class="bento-card main">
                 <h1>Ремонт смартфонов и ноутбуков</h1>
                 <p class="subtitle">г. Дрогичин, ул. Ленина 141а | 📞 +375 (29) 725-69-82</p>
                 <p class="description">Сложные разблокировки, восстановление после воды, прошивка.</p>
             </div>
             
-            <!-- Телефон -->
             <a href="tel:+375297256982" class="bento-card phone">
                 <span class="label">Позвонить</span>
                 <span class="phone-number">+375 (29) 725-69-82</span>
             </a>
             
-            <!-- Адрес -->
             <div class="bento-card info">
                 <div class="info-row">
                     <span>📍</span>
@@ -388,6 +494,25 @@
         btn.addEventListener('mouseleave', () => clearTimeout(timer));
         
         updateIcon();
+        
+        // Скрипт для адаптации таблиц (добавление data-label)
+        document.addEventListener('DOMContentLoaded', function() {
+            const tables = document.querySelectorAll('.main-content table');
+            tables.forEach(table => {
+                const headers = Array.from(table.querySelectorAll('th')).map(th => th.textContent.trim());
+                if (headers.length === 0) return;
+                
+                const rows = table.querySelectorAll('tbody tr');
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    cells.forEach((cell, index) => {
+                        if (headers[index]) {
+                            cell.setAttribute('data-label', headers[index]);
+                        }
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>
