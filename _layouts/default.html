@@ -353,6 +353,9 @@
         /* ============================================
            МОБИЛЬНАЯ АДАПТАЦИЯ (без размытия!)
            ============================================ */
+                /* ============================================
+           МОБИЛЬНАЯ (без эффекта стекла!)
+           ============================================ */
         @media (max-width: 968px) {
             .page-header {
                 padding: 0;
@@ -379,84 +382,75 @@
                 object-fit: cover;
             }
             
-            /* Мобильный текстовый блок — БЕЗ размытия, БЕЛЫЙ ФОН для читабельности */
+            /* УБРАН ЭФФЕКТ СТЕКЛА - backdrop-filter: none */
             .text-side {
                 position: relative;
                 z-index: 2;
                 justify-content: flex-start;
                 align-items: center;
                 text-align: center;
-                padding: 100px 1.5rem 3rem 1.5rem;
-                background: rgba(15, 23, 42, 0.85); /* Сплошной темный фон без блюра */
-                backdrop-filter: none !important;
-                -webkit-backdrop-filter: none !important;
+                padding: 90px 1.5rem 2rem 1.5rem;
+                background: rgba(15, 23, 42, 0.88); /* Плотный темный фон вместо стекла */
+                backdrop-filter: none !important; /* Отключаем размытие */
+                -webkit-backdrop-filter: none !important; /* Отключаем для Safari */
                 border-left: none;
                 border-top: 1px solid rgba(255, 255, 255, 0.1);
                 min-height: 100vh;
             }
             
-            .text-side::before {
-                background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
-            }
-            
             .text-side h1 {
-                font-size: clamp(1.8rem, 6vw, 2.4rem);
-                margin-bottom: 0.75rem;
-                letter-spacing: -0.02em;
+                font-size: clamp(1.6rem, 5vw, 2.2rem);
+                margin-bottom: 0.5rem;
             }
             
             .text-side .address {
-                font-size: 1.1rem;
-                margin-bottom: 2rem;
-                justify-content: center;
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
             }
             
             .tagline {
-                font-size: 1.15rem;
-                margin-bottom: 1.5rem;
-                padding: 0.6rem 0;
-                border-width: 1.5px;
+                font-size: 1rem;
+                margin-bottom: 0.8rem;
             }
             
             .services-list li {
-                font-size: 1rem;
-                margin-bottom: 0.75rem;
-                padding-left: 1.5rem;
-                text-align: left;
-                max-width: 320px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            
-            .guarantee {
-                margin-top: 1.5rem;
                 font-size: 0.9rem;
-                text-align: left;
+                margin-bottom: 0.4rem;
             }
             
-            /* Кнопки для мобильных */
+            /* Кнопки на мобильном */
             #telegram-btn { display: none !important; }
             #phone-btn { 
                 display: flex !important; 
-                animation: pulse-green 2s infinite;
+                left: 12px;
+                background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); /* ЗЕЛЕНАЯ */
+                animation: pulse 2s infinite;
+            }
+            
+            #phone-btn:hover {
+                background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            }
+            
+            @keyframes pulse {
+                0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+                70% { box-shadow: 0 0 0 12px rgba(34, 197, 94, 0); }
+                100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
             }
             
             .floating-btn {
-                top: 12px;
-                width: 48px;
-                height: 48px;
+                top: 10px;
+                width: 44px;
+                height: 44px;
             }
             
-            #theme-toggle { right: 12px; }
-            #phone-btn { left: 12px; }
+            #theme-toggle { right: 10px; }
             
             #phone-btn svg,
             #telegram-btn svg {
-                width: 24px;
-                height: 24px;
+                width: 22px;
+                height: 22px;
             }
         }
-        
         /* Предпочтения по уменьшению анимации */
         @media (prefers-reduced-motion: reduce) {
             .floating-btn {
