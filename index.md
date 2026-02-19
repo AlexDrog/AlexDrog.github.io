@@ -127,7 +127,7 @@ layout: default
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
   
-  /* ===== ЧАТ-СТРОКА ВМЕСТО ФОТО ===== */
+  /* ===== ЧАТ-СТРОКА С ОНЛАЙН-СТАТУСОМ ===== */
   .photos-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -173,34 +173,73 @@ layout: default
     height: 48px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid var(--btn-bg);
+    border: 3px solid var(--border);
     flex-shrink: 0;
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: border-color 0.3s;
   }
   
-  .chat-text {
+  .chat-avatar.online {
+    border-color: #2ea44f;
+    box-shadow: 0 2px 8px rgba(46, 164, 79, 0.3);
+  }
+  
+  .chat-avatar.offline {
+    border-color: #8b949e;
+  }
+  
+  .chat-info {
     flex: 1;
-    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .chat-name {
+    color: var(--heading);
     font-weight: 600;
     font-size: 1.05rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    line-height: 1.2;
   }
   
-  .online-indicator {
+  .chat-status {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+  
+  .status-online {
+    color: #2ea44f;
+  }
+  
+  .status-offline {
+    color: #8b949e;
+  }
+  
+  .online-dot {
     width: 8px;
     height: 8px;
     background: #2ea44f;
     border-radius: 50%;
     display: inline-block;
     animation: pulse 2s infinite;
+    box-shadow: 0 0 4px rgba(46, 164, 79, 0.5);
+  }
+  
+  .offline-dot {
+    width: 8px;
+    height: 8px;
+    background: #8b949e;
+    border-radius: 50%;
+    display: inline-block;
   }
   
   @keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
   }
   
   .chat-arrow {
@@ -306,8 +345,11 @@ layout: default
       width: 42px;
       height: 42px;
     }
-    .chat-text {
+    .chat-name {
       font-size: 0.95rem;
+    }
+    .chat-status {
+      font-size: 0.8rem;
     }
     .chat-options {
       flex-direction: column;
@@ -326,6 +368,75 @@ layout: default
 <button onclick="toggleTheme()" id="theme-toggle">🌙</button>
 
 <script>
+  // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА ПО РАСПИСАНИЮ ===
+  function checkOnlineStatus() {
+    const now = new Date();
+    const day = now.getDay(); // 0=вс, 1=пн, 2=вт...
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const time = hour + minute / 60;
+    
+    let isOnline = false;
+    let statusText = "";
+    
+    // Понедельник - выходной
+    if (day === 1) {
+      isOnline = false;
+      statusText = "Сегодня выходной, отвечу завтра";
+    }
+    // Вторник-пятница: 10:00-18:00 (обед 12:00-13:00)
+    else if (day >= 2 && day <= 5) {
+      if (time >= 10 && time < 12) {
+        isOnline = true;
+        statusText = "В сети";
+      } else if (time >= 13 && time < 18) {
+        isOnline = true;
+        statusText = "В сети";
+      } else if (time >= 12 && time < 13) {
+        isOnline = false;
+        statusText = "Обеденный перерыв до 13:00";
+      } else {
+        isOnline = false;
+        statusText = "Не в сети, отвечу завтра с 10:00";
+      }
+    }
+    // Суббота-воскресенье: 10:00-14:00
+    else if (day === 0 || day === 6) {
+      if (time >= 10 && time < 14) {
+        isOnline = true;
+        statusText = "В сети";
+      } else {
+        isOnline = false;
+        statusText = "Не в сети, приём завтра с 10:00";
+      }
+    }
+    
+    return { isOnline, statusText };
+  }
+  
+  // Применение статуса при загрузке
+  document.addEventListener('DOMContentLoaded', function() {
+    const status = checkOnlineStatus();
+    const avatar = document.getElementById('chat-avatar');
+    const dot = document.getElementById('status-dot');
+    const text = document.getElementById('status-text');
+    
+    if (avatar && dot && text) {
+      if (status.isOnline) {
+        avatar.classList.add('online');
+        avatar.classList.remove('offline');
+        dot.className = 'online-dot';
+        text.className = 'chat-status status-online';
+      } else {
+        avatar.classList.add('offline');
+        avatar.classList.remove('online');
+        dot.className = 'offline-dot';
+        text.className = 'chat-status status-offline';
+      }
+      text.innerHTML = '<span id="status-dot" class="' + (status.isOnline ? 'online-dot' : 'offline-dot') + '"></span>' + status.statusText;
+    }
+  });
+  
   function toggleTheme() {
     const html = document.documentElement;
     const isDark = html.getAttribute('data-theme') === 'dark';
@@ -348,15 +459,18 @@ layout: default
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
 
 <div class="photos-row">
-  <!-- ЧАТ-СТРОКА ВМЕСТО ФОТО -->
+  <!-- ЧАТ-СТРОКА С ОНЛАЙН-СТАТУСОМ -->
   <div class="chat-container">
     <details class="chat-details">
       <summary class="chat-summary">
-        <img src="{{ '/assets/images/alex.jpg' | relative_url }}" class="chat-avatar" alt="Александр">
-        <span class="chat-text">
-          <span class="online-indicator"></span>
-          Написать в мессенджер
-        </span>
+        <img src="{{ '/assets/images/alex.jpg' | relative_url }}" class="chat-avatar online" id="chat-avatar" alt="Александр">
+        <div class="chat-info">
+          <div class="chat-name">Александр</div>
+          <div class="chat-status status-online" id="status-text">
+            <span class="online-dot" id="status-dot"></span>
+            В сети
+          </div>
+        </div>
         <span class="chat-arrow">↓</span>
       </summary>
       <div class="chat-options">
@@ -369,7 +483,7 @@ layout: default
       </div>
     </details>
     <p style="text-align: center; margin-top: 8px; font-size: 0.9rem; color: var(--text); opacity: 0.8;">
-      Александр • Мастер по ремонту
+      Мастер по ремонту • <span style="color: #2ea44f;">Принимаю заказы</span>
     </p>
   </div>
   
