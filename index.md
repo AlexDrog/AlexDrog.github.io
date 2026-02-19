@@ -169,8 +169,8 @@ layout: default
   }
   
   .chat-avatar {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--border);
