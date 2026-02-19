@@ -7,31 +7,25 @@ permalink: /uslugi/
 # 📋 Прайс-лист
 
 <!-- ПОИСК ПО УСЛУГАМ -->
-<div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid #e94560;">
-  <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #16213e;">
-    🔍 Быстрый поиск услуги:
-  </label>
+<div class="search-container">
+  <label>🔍 Быстрый поиск услуги:</label>
   <div style="position: relative;">
-    <input type="text" id="searchInput" placeholder="Например: замена экрана, Windows, FRP..." 
-           style="width: 100%; padding: 12px 40px 12px 15px; border: 2px solid #ddd; border-radius: 4px; 
-                  font-size: 16px; box-sizing: border-box; transition: all 0.3s;">
+    <input type="text" id="searchInput" placeholder="Например: замена экрана, Windows, FRP...">
     <button id="clearBtn" onclick="document.getElementById('searchInput').value=''; document.getElementById('searchInput').dispatchEvent(new Event('input'));" 
             style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); 
-                   background: #ccc; color: white; border: none; border-radius: 50%; 
+                   background: #94a3b8; color: white; border: none; border-radius: 50%; 
                    width: 24px; height: 24px; cursor: pointer; font-size: 12px; display: none;">✕</button>
   </div>
-  <div id="searchStats" style="margin-top: 10px; font-size: 0.9em; color: #666; display: none;">
-    Найдено: <span id="foundCount" style="font-weight: bold; color: #e94560;">0</span> услуг
+  <div class="search-stats" id="searchStats" style="display: none;">
+    Найдено: <span id="foundCount">0</span> услуг
   </div>
-  <div id="noResults" style="display: none; margin-top: 15px; padding: 15px; background: #fff3cd; 
-                            border: 1px solid #ffeaa7; border-radius: 4px; color: #856404;">
+  <div class="no-results" id="noResults" style="display: none;">
     ❌ Ничего не найдено. Попробуйте: <b>ремонт</b>, <b>замена</b>, <b>Windows</b>, <b>разблокировка</b>
   </div>
 </div>
 
 <script>
 (function() {
-  // Ждем загрузки DOM
   document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     const clearBtn = document.getElementById('clearBtn');
@@ -39,7 +33,7 @@ permalink: /uslugi/
     const noResultsDiv = document.getElementById('noResults');
     const countSpan = document.getElementById('foundCount');
     
-    if (!searchInput) return; // Защита если элемент не найден
+    if (!searchInput) return;
     
     function findHeader(table) {
       let element = table.previousElementSibling;
@@ -106,17 +100,6 @@ permalink: /uslugi/
     
     searchInput.addEventListener('input', filterTables);
     
-    searchInput.addEventListener('focus', function() {
-      this.style.borderColor = '#e94560';
-      this.style.boxShadow = '0 0 0 3px rgba(233, 69, 96, 0.1)';
-    });
-    
-    searchInput.addEventListener('blur', function() {
-      this.style.borderColor = '#ddd';
-      this.style.boxShadow = 'none';
-    });
-    
-    // Поиск по Enter
     searchInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -205,13 +188,13 @@ permalink: /uslugi/
 
 ---
 
-<div style="background: #e8f4f8; padding: 15px; border-radius: 8px; border-left: 4px solid #17a2b8; margin: 20px 0;">
+<div class="info-highlight">
   <strong>💡 Бесплатная диагностика — платишь только за ремонт!</strong><br>
   <small>Цены актуальны на {{ site.time | date: "%d.%m.%Y" }}</small>
 </div>
 
-<div style="text-align: center; margin: 30px 0;">
-  <a href="{{ site.baseurl }}/" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #16213e; color: white; text-decoration: none; border-radius: 5px;">← На главную</a>
-  <a href="https://t.me/alexdrog81" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #0088cc; color: white; text-decoration: none; border-radius: 5px;">💬 Telegram</a>
-  <a href="tel:+375297256982" style="display: inline-block; margin: 5px; padding: 10px 20px; background: #e94560; color: white; text-decoration: none; border-radius: 5px;">📞 Позвонить</a>
+<div class="action-buttons">
+  <a href="{{ site.baseurl }}/" class="btn-action btn-home">← На главную</a>
+  <a href="https://t.me/alexdrog81" class="btn-action btn-telegram">💬 Telegram</a>
+  <a href="tel:+375297256982" class="btn-action btn-phone">📞 Позвонить</a>
 </div>
