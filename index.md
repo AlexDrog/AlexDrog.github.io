@@ -56,7 +56,6 @@ layout: default
     font-weight: 600;
   }
   
-  /* Увеличенная центрированная кнопка */
   .btn-large {
     display: block;
     width: 100%;
@@ -128,7 +127,6 @@ layout: default
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
   
-  /* Блок с фото мастера и здания */
   .photos-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -166,7 +164,6 @@ layout: default
     opacity: 0.8;
   }
   
-  /* Ссылки под фото */
   .photo-links {
     margin-top: 0.8rem;
     font-size: 0.95rem;
@@ -182,7 +179,6 @@ layout: default
     text-decoration: underline;
   }
   
-  /* Мобильная версия */
   @media (max-width: 768px) {
     .gallery-grid { grid-template-columns: 1fr; }
     .photos-row { 
@@ -224,7 +220,6 @@ layout: default
 
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
 
-<!-- Блок с фото -->
 <div class="photos-row">
   <div class="photo-card">
     <img src="{{ '/assets/images/alex.jpg' | relative_url }}" alt="Александр - мастер по ремонту">
@@ -233,7 +228,7 @@ layout: default
       <small>Мастер по ремонту</small>
     </div>
     <div class="photo-links">
-      💬 <a href="https://t.me/AlexDrog81">Telegram</a> • 
+      💬 <a href="https://t.me/AlexDrog81 ">Telegram</a> • 
       <a href="viber://chat?number=375297256982">Viber</a>
     </div>
   </div>
@@ -245,13 +240,12 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a>
     </div>
   </div>
 </div>
 
-<!-- Кнопка прайса по центру широкая -->
 <a href="./uslugi/" class="btn btn-large">Прайс и услуги</a>
 
 <h2>Режим работы:</h2>
@@ -263,103 +257,31 @@ layout: default
 <span class="highlight">🕐 Понедельник: ВЫХОДНОЙ</span>
 </p>
 
-<h2>Примеры работ</h2>
+<h2>Примеры работ <small style="font-size:0.6em;opacity:0.7;">(последние 10)</small></h2>
 
-<details open>
-  <summary><h3>🔧 Замена термопасты в ноутбуке</h3></summary>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <div class="label-red">🔴 ДО</div>
-      <img src="./assets/images/termopasta.jpg" alt="Перегрев">
-      <p>Перегрев 95°C</p>
-    </div>
-    <div class="gallery-item">
-      <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="./assets/images/temp_posle.jpg" alt="После чистки">
-      <p>65°C, тихая работа</p>
-    </div>
-  </div>
-</details>
+{% assign works = site.data.works | slice: -10, 10 | reverse %}
 
-<details>
-  <summary><h3>📱 Замена дисплейного модуля</h3></summary>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <div class="label-red">🔴 ДО</div>
-      <img src="./assets/images/bitka.jpg" alt="Разбитый экран">
-      <p>Разбитый экран</p>
+{% if works and works.size > 0 %}
+  {% for work in works limit:10 %}
+  <details {% if forloop.first %}open{% endif %}>
+    <summary><h3>🔧 {{ work.title }}</h3></summary>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <div class="label-red">🔴 ДО</div>
+        <img src="{{ work.before_img | relative_url }}" alt="До ремонта">
+        <p>До ремонта</p>
+      </div>
+      <div class="gallery-item">
+        <div class="label-green">🟢 ПОСЛЕ</div>
+        <img src="{{ work.after_img | relative_url }}" alt="После ремонта">
+        <p>После ремонта</p>
+      </div>
     </div>
-    <div class="gallery-item">
-      <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="./assets/images/bitka_pos.jpg" alt="Новый дисплей">
-      <p>Новый дисплей</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary><h3>🗺️ Обновление карт навигации</h3></summary>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <div class="label-red">🔴 ДО</div>
-      <img src="./assets/images/igo_do.jpg" alt="Устаревшие карты">
-      <p>Устаревшие карты</p>
-    </div>
-    <div class="gallery-item">
-      <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="./assets/images/igo_pos.jpg" alt="IGO 2025">
-      <p>IGO 2025Q2</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary><h3>🔓 Снятие Google аккаунта (FRP)</h3></summary>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <div class="label-red">🔴 ДО</div>
-      <img src="./assets/images/frp.jpg" alt="Блокировка FRP">
-      <p>Блокировка FRP</p>
-    </div>
-    <div class="gallery-item">
-      <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="./assets/images/frp_pos.jpg" alt="Разблокировано">
-      <p>Полный доступ</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary><h3>🔓 Снятие Mi аккаунта</h3></summary>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <div class="label-red">🔴 ДО</div>
-      <img src="./assets/images/redmi9a.jpg" alt="Запрос пароля">
-      <p>Запрос пароля</p>
-    </div>
-    <div class="gallery-item">
-      <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="./assets/images/redmi9a_posle.jpg" alt="Аккаунт удален">
-      <p>Аккаунт удалён</p>
-    </div>
-  </div>
-</details>
-
-<details>
-  <summary><h3>🛑 Убрать рекламу на смартфоне</h3></summary>
-  <div class="gallery-grid">
-    <div class="gallery-item">
-      <div class="label-red">🔴 ДО</div>
-      <img src="./assets/images/reklama.png" alt="Реклама">
-      <p>Всплывающая реклама</p>
-    </div>
-    <div class="gallery-item">
-      <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="./assets/images/reklama_pos.png" alt="Чистая система">
-      <p>Чистая система</p>
-    </div>
-  </div>
-</details>
+  </details>
+  {% endfor %}
+{% else %}
+  <p style="text-align: center; color: var(--text); opacity: 0.7;">Примеры работ скоро появятся...</p>
+{% endif %}
 
 <h2>Почему обращаются ко мне</h2>
 
