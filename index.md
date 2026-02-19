@@ -107,6 +107,13 @@ layout: default
     height: 180px;
     object-fit: cover;
     display: block;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .gallery-item img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
   
   .highlight { color: #e94560; font-weight: bold; }
@@ -173,7 +180,7 @@ layout: default
     height: 64px;
     border-radius: 50%;
     object-fit: cover;
-    object-position: center 30%;  /* фото опущено вниз */
+    object-position: center 30%;
     border: 3px solid var(--border);
     flex-shrink: 0;
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
@@ -412,6 +419,95 @@ layout: default
     display: none !important;
   }
   
+  /* ===== LIGHTBOX ДЛЯ ПРОСМОТРА ФОТО ===== */
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    backdrop-filter: blur(10px);
+  }
+  
+  .lightbox-overlay.active {
+    display: flex;
+  }
+  
+  .lightbox-container {
+    position: relative;
+    max-width: 95%;
+    max-height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  
+  .lightbox-caption {
+    color: white;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 0 20px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+  
+  .lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    z-index: 10001;
+    line-height: 1;
+  }
+  
+  .lightbox-close:hover {
+    opacity: 1;
+  }
+  
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    padding: 20px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+    user-select: none;
+    font-weight: bold;
+  }
+  
+  .lightbox-nav:hover {
+    opacity: 1;
+  }
+  
+  .lightbox-prev { left: 20px; }
+  .lightbox-next { right: 20px; }
+  
   @media (max-width: 768px) {
     .gallery-grid { grid-template-columns: 1fr; }
     .photos-row { 
@@ -421,7 +517,7 @@ layout: default
     .chat-avatar {
       width: 56px;
       height: 56px;
-      object-position: center 30%;  /* и для мобильной тоже */
+      object-position: center 30%;
     }
     .chat-name {
       font-size: 0.95rem;
@@ -449,6 +545,16 @@ layout: default
       border-left: none;
       border-right: none;
     }
+    .lightbox-nav { 
+      display: none; 
+    }
+    .lightbox-caption { 
+      font-size: 0.9rem; 
+    }
+    .lightbox-close {
+      top: -40px;
+      font-size: 2.5rem;
+    }
   }
 </style>
 
@@ -458,7 +564,7 @@ layout: default
   // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА ПО РАСПИСАНИЮ ===
   function checkOnlineStatus() {
     const now = new Date();
-    const day = now.getDay(); // 0=вс, 1=пн, 2=вт...
+    const day = now.getDay();
     const hour = now.getHours();
     const minute = now.getMinutes();
     const time = hour + minute / 60;
@@ -466,12 +572,10 @@ layout: default
     let isOnline = false;
     let statusText = "";
     
-    // Понедельник - выходной
     if (day === 1) {
       isOnline = false;
       statusText = "Сегодня выходной, отвечу завтра";
     }
-    // Вторник-пятница: 10:00-18:00 (обед 12:00-13:00)
     else if (day >= 2 && day <= 5) {
       if (time >= 10 && time < 12) {
         isOnline = true;
@@ -487,7 +591,6 @@ layout: default
         statusText = "Не в сети, отвечу завтра с 10:00";
       }
     }
-    // Суббота-воскресенье: 10:00-14:00
     else if (day === 0 || day === 6) {
       if (time >= 10 && time < 14) {
         isOnline = true;
@@ -501,7 +604,6 @@ layout: default
     return { isOnline, statusText };
   }
   
-  // Применение статуса при загрузке
   document.addEventListener('DOMContentLoaded', function() {
     const status = checkOnlineStatus();
     const avatar = document.getElementById('chat-avatar');
@@ -541,12 +643,70 @@ layout: default
     document.documentElement.setAttribute('data-theme', 'dark');
     document.getElementById('theme-toggle').textContent = '☀️';
   }
+  
+  // === LIGHTBOX ФУНКЦИОНАЛ ===
+  let currentImageIndex = 0;
+  let currentGalleryImages = [];
+  
+  function openLightbox(imgElement) {
+    const overlay = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const caption = document.getElementById('lightbox-caption');
+    
+    const details = imgElement.closest('details');
+    currentGalleryImages = details ? details.querySelectorAll('.gallery-item img') : [];
+    currentImageIndex = Array.from(currentGalleryImages).indexOf(imgElement);
+    
+    lightboxImg.src = imgElement.src;
+    caption.textContent = imgElement.alt || '';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeLightbox(event) {
+    if (event && event.target !== event.currentTarget && !event.target.classList.contains('lightbox-close')) return;
+    
+    const overlay = document.getElementById('lightbox');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  function changeImage(direction) {
+    if (currentGalleryImages.length === 0) return;
+    
+    currentImageIndex += direction;
+    
+    if (currentImageIndex >= currentGalleryImages.length) {
+      currentImageIndex = 0;
+    } else if (currentImageIndex < 0) {
+      currentImageIndex = currentGalleryImages.length - 1;
+    }
+    
+    const img = currentGalleryImages[currentImageIndex];
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-caption').textContent = img.alt || '';
+  }
+  
+  document.addEventListener('keydown', function(e) {
+    const overlay = document.getElementById('lightbox');
+    if (!overlay.classList.contains('active')) return;
+    
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+  });
+  
+  document.addEventListener('click', function(e) {
+    if (e.target.matches('.gallery-item img')) {
+      e.preventDefault();
+      openLightbox(e.target);
+    }
+  });
 </script>
 
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
 
 <div class="photos-row">
-  <!-- ЧАТ-СТРОКА С ОНЛАЙН-СТАТУСОМ -->
   <div class="chat-container">
     <details class="chat-details">
       <summary class="chat-summary">
@@ -561,7 +721,7 @@ layout: default
         <span class="chat-arrow">↓</span>
       </summary>
       <div class="chat-options">
-        <a href="https://t.me/AlexDrog81 " class="chat-btn telegram" target="_blank">
+        <a href="https://t.me/AlexDrog81" class="chat-btn telegram" target="_blank">
           📱 Telegram
         </a>
         <a href="viber://chat?number=375297256982" class="chat-btn viber">
@@ -581,8 +741,8 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
     </div>
   </div>
 </div>
@@ -608,12 +768,12 @@ layout: default
   <div class="gallery-grid">
     <div class="gallery-item">
       <div class="label-red">🔴 ДО</div>
-      <img src="{{ work.before_img | relative_url }}" alt="До ремонта">
+      <img src="{{ work.before_img | relative_url }}" alt="До ремонта: {{ work.title }}">
       <p>{{ work.desc_before | default: "До ремонта" }}</p>
     </div>
     <div class="gallery-item">
       <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="{{ work.after_img | relative_url }}" alt="После ремонта">
+      <img src="{{ work.after_img | relative_url }}" alt="После ремонта: {{ work.title }}">
       <p>{{ work.desc_after | default: "После ремонта" }}</p>
     </div>
   </div>
@@ -633,12 +793,21 @@ layout: default
 ✅ <strong>Сложные случаи</strong> — то, что отказались делать другие
 </p>
 
-<!-- ===== ФУТЕР СО СТАТИСТИКОЙ ===== -->
+<!-- Lightbox модальное окно -->
+<div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
+  <div class="lightbox-container" onclick="event.stopPropagation()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</span>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="">
+    <span class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</span>
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+</div>
+
 <div class="site-footer-stats">
-  <!-- Информер Яндекс.Метрики -->
   <div class="metrika-informer">
-    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer " target="_blank" rel="nofollow">
-      <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews " 
+    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer" target="_blank" rel="nofollow">
+      <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews" 
            style="width:88px; height:31px; border:0;" 
            alt="Яндекс.Метрика" 
            title="Сейчас онлайн: посетителей / просмотров за сегодня" />
