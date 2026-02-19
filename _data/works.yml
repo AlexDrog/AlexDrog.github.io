@@ -1,8 +1,8 @@
 - id: 1
-  title: Замена разъема Huawei
-  category: repair
-  before_img: assets/works/work_1_20260219_140547_before.jpg
-  after_img: assets/works/work_1_20260219_140547_after.jpg
-  desc_before: До ремонта
-  desc_after: После ремонта
-  date: '2026-02-19'
+  title: "Замена разъема Huawei"
+  category: "repair"
+  before_img: "assets/works/work_1_20260219_140547_before.jpg"
+  after_img: "assets/works/work_1_20260219_140547_after.jpg"
+  desc_before: "До ремонта"
+  desc_after: "После ремонта"
+  date: "2026-02-19"
