@@ -259,26 +259,7 @@ layout: default
 
 <h2>Примеры работ <small style="font-size:0.6em;opacity:0.7;">(последние 10)</small></h2>
 
-<!-- ОТЛАДКА: Удали эти блоки после проверки -->
-<div style="background:#ff0000;color:#fff;padding:10px;margin:10px 0;border-radius:5px;">
-  <strong>DEBUG 1:</strong> site.data.works = {{ site.data.works | inspect }}
-</div>
-
-<div style="background:#0000ff;color:#fff;padding:10px;margin:10px 0;border-radius:5px;">
-  <strong>DEBUG 2:</strong> site.data.works.size = {{ site.data.works.size }}
-</div>
-
-{% assign works = site.data.works | slice: -10, 10 | reverse %}
-
-<div style="background:#008000;color:#fff;padding:10px;margin:10px 0;border-radius:5px;">
-  <strong>DEBUG 3:</strong> works после slice = {{ works | inspect }}
-</div>
-
-<div style="background:#ffa500;color:#fff;padding:10px;margin:10px 0;border-radius:5px;">
-  <strong>DEBUG 4:</strong> works.size = {{ works.size }} | forloop работает: 
-  {% for work in works %}ЕСТЬ{% endfor %}
-</div>
-<!-- КОНЕЦ ОТЛАДКИ -->
+{% assign works = site.data.works | reverse | slice: 0, 10 %}
 
 {% for work in works %}
 <details {% if forloop.first %}open{% endif %}>
@@ -298,9 +279,9 @@ layout: default
 </details>
 {% endfor %}
 
-{% unless forloop.first %}
+{% if works.size == 0 %}
 <p style="text-align: center; color: var(--text); opacity: 0.7;">Примеры работ скоро появятся...</p>
-{% endunless %}
+{% endif %}
 
 <h2>Почему обращаются ко мне</h2>
 
