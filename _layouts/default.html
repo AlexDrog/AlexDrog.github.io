@@ -8,6 +8,18 @@
     
     {% seo %}
     
+    <!-- Open Graph для Viber/Telegram/WhatsApp -->
+    <meta property="og:title" content="{{ page.title | default: 'Ремонт смартфонов и ноутбуков в Дрогичине' }}">
+    <meta property="og:description" content="{{ page.description | default: 'Решаю сложные случаи, от которых отказываются другие. Гарантия, выезд, диагностика бесплатно.' }}">
+    <meta property="og:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ru_RU">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -328,6 +340,21 @@
             color: var(--text-secondary);
         }
         
+        .footer-phone {
+            display: inline-block;
+            margin-top: 8px;
+            color: var(--accent-green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        
+        .footer-phone:hover {
+            color: var(--text-primary);
+            transform: scale(1.05);
+        }
+        
         /* МОБИЛЬНАЯ (без эффекта стекла) */
         @media (max-width: 968px) {
             .page-header {
@@ -415,6 +442,13 @@
                 width: 22px;
                 height: 22px;
             }
+            
+            .site-footer {
+                border-top: none;
+                margin-top: 2rem;
+                padding-top: 1rem;
+                margin-bottom: 80px;
+            }
         }
         
         @media (prefers-reduced-motion: reduce) {
@@ -483,12 +517,12 @@
         {{ content }}
         
         <footer class="site-footer">
-    {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> · 
-    {% endif %}
-    Разработка и сопровождение<br>
-    <a href="tel:+375292065065" class="footer-phone">📞 +375 29 2 065 065</a>
-</footer>
+            {% if site.github.is_project_page %}
+                <a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> · 
+            {% endif %}
+            Разработка и сопровождение<br>
+            <a href="tel:+375292065065" class="footer-phone">📞 +375 29 2 065 065</a>
+        </footer>
     </section>
 
     <script>
