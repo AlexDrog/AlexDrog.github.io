@@ -228,7 +228,7 @@ layout: default
       <small>Мастер по ремонту</small>
     </div>
     <div class="photo-links">
-      💬 <a href="https://t.me/AlexDrog81 ">Telegram</a> • 
+      💬 <a href="https://t.me/AlexDrog81">Telegram</a> • 
       <a href="viber://chat?number=375297256982">Viber</a>
     </div>
   </div>
@@ -240,8 +240,8 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
     </div>
   </div>
 </div>
@@ -261,26 +261,26 @@ layout: default
 
 {% assign works = site.data.works | slice: -10, 10 | reverse %}
 
-{% if works and works.size > 0 %}
-  {% for work in works limit:10 %}
-  <details {% if forloop.first %}open{% endif %}>
-    <summary><h3>🔧 {{ work.title }}</h3></summary>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <div class="label-red">🔴 ДО</div>
-        <img src="{{ work.before_img | relative_url }}" alt="До ремонта">
-        <p>До ремонта</p>
-      </div>
-      <div class="gallery-item">
-        <div class="label-green">🟢 ПОСЛЕ</div>
-        <img src="{{ work.after_img | relative_url }}" alt="После ремонта">
-        <p>После ремонта</p>
-      </div>
+{% for work in works %}
+<details {% if forloop.first %}open{% endif %}>
+  <summary><h3>🔧 {{ work.title }}</h3></summary>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <div class="label-red">🔴 ДО</div>
+      <img src="{{ work.before_img | relative_url }}" alt="До ремонта">
+      <p>{{ work.desc_before | default: "До ремонта" }}</p>
     </div>
-  </details>
-  {% endfor %}
-{% else %}
-  <p style="text-align: center; color: var(--text); opacity: 0.7;">Примеры работ скоро появятся...</p>
+    <div class="gallery-item">
+      <div class="label-green">🟢 ПОСЛЕ</div>
+      <img src="{{ work.after_img | relative_url }}" alt="После ремонта">
+      <p>{{ work.desc_after | default: "После ремонта" }}</p>
+    </div>
+  </div>
+</details>
+{% endfor %}
+
+{% if works.size == 0 %}
+<p style="text-align: center; color: var(--text); opacity: 0.7;">Примеры работ скоро появятся...</p>
 {% endif %}
 
 <h2>Почему обращаются ко мне</h2>
