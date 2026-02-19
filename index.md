@@ -228,7 +228,7 @@ layout: default
       <small>Мастер по ремонту</small>
     </div>
     <div class="photo-links">
-      💬 <a href="https://t.me/AlexDrog81 ">Telegram</a> • 
+      💬 <a href="https://t.me/AlexDrog81">Telegram</a> • 
       <a href="viber://chat?number=375297256982">Viber</a>
     </div>
   </div>
@@ -240,8 +240,8 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
     </div>
   </div>
 </div>
@@ -259,7 +259,26 @@ layout: default
 
 <h2>Примеры работ <small style="font-size:0.6em;opacity:0.7;">(последние 10)</small></h2>
 
+<!-- ОТЛАДКА: Удали эти блоки после проверки -->
+<div style="background:#ff0000;color:#fff;padding:10px;margin:10px 0;border-radius:5px;">
+  <strong>DEBUG 1:</strong> site.data.works = {{ site.data.works | inspect }}
+</div>
+
+<div style="background:#0000ff;color:#fff;padding:10px;margin:10px 0;border-radius:5px;">
+  <strong>DEBUG 2:</strong> site.data.works.size = {{ site.data.works.size }}
+</div>
+
 {% assign works = site.data.works | slice: -10, 10 | reverse %}
+
+<div style="background:#008000;color:#fff;padding:10px;margin:10px 0;border-radius:5px;">
+  <strong>DEBUG 3:</strong> works после slice = {{ works | inspect }}
+</div>
+
+<div style="background:#ffa500;color:#fff;padding:10px;margin:10px 0;border-radius:5px;">
+  <strong>DEBUG 4:</strong> works.size = {{ works.size }} | forloop работает: 
+  {% for work in works %}ЕСТЬ{% endfor %}
+</div>
+<!-- КОНЕЦ ОТЛАДКИ -->
 
 {% for work in works %}
 <details {% if forloop.first %}open{% endif %}>
@@ -279,9 +298,9 @@ layout: default
 </details>
 {% endfor %}
 
-{% if works.size == 0 %}
+{% unless forloop.first %}
 <p style="text-align: center; color: var(--text); opacity: 0.7;">Примеры работ скоро появятся...</p>
-{% endif %}
+{% endunless %}
 
 <h2>Почему обращаются ко мне</h2>
 
