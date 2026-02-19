@@ -680,3 +680,75 @@ body {
 [style*="background:#fff3cd"] {
   background: var(--warning-bg) !important;
 }
+// ============================================
+// АДАПТИВНЫЕ ТАБЛИЦЫ (мобильная версия)
+// ============================================
+@media screen and (max-width: 768px) {
+  .price-table {
+    // Изменяем пропорции столбцов: услуга уже, цена и примечание компактнее
+    col:first-child { width: 45%; }
+    col:nth-child(2) { width: 27%; }
+    col:nth-child(3) { width: 28%; }
+    
+    th, td {
+      padding: 10px 8px; // Уменьшаем отступы
+      font-size: 0.85rem; // Уменьшаем шрифт
+      line-height: 1.4;
+      word-wrap: break-word; // Перенос длинных слов
+      overflow-wrap: break-word;
+      hyphens: auto; // Автоматические переносы (если поддерживается)
+    }
+    
+    th {
+      font-size: 0.75rem; // Заголовки еще меньше
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    
+    // Цены не переносятся на вторую строку (чтобы не было "от\n1000")
+    td:nth-child(2) {
+      white-space: nowrap;
+      font-size: 0.9rem; // Цены чуть крупнее для читаемости
+    }
+    
+    // Примечание может быть мелким
+    td:nth-child(3) {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+  }
+}
+
+// Для очень маленьких экранов (< 480px) - еще агрессивнее
+@media screen and (max-width: 480px) {
+  .price-table {
+    col:first-child { width: 50%; } // Услуга занимает половину
+    col:nth-child(2) { width: 25%; }
+    col:nth-child(3) { width: 25%; }
+    
+    th, td {
+      padding: 8px 6px;
+      font-size: 0.8rem;
+    }
+    
+    // Убираем переносы в заголовках для экономии места
+    th {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+// Запасной вариант: если таблица всё равно не влезает - горизонтальный скролл
+@media screen and (max-width: 360px) {
+  .price-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1rem; // Растягиваем на всю ширину экрана
+    
+    .price-table {
+      min-width: 320px; // Минимальная ширина таблицы
+    }
+  }
+}
