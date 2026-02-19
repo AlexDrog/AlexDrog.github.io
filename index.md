@@ -127,6 +127,7 @@ layout: default
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
   
+  /* ===== ЧАТ-СТРОКА ВМЕСТО ФОТО ===== */
   .photos-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -135,6 +136,122 @@ layout: default
     align-items: start;
   }
   
+  .chat-container {
+    width: 100%;
+  }
+  
+  .chat-details {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  
+  .chat-details[open] {
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  
+  .chat-summary {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    list-style: none;
+    gap: 12px;
+    user-select: none;
+  }
+  
+  .chat-summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  .chat-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--btn-bg);
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  
+  .chat-text {
+    flex: 1;
+    color: var(--text);
+    font-weight: 600;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .online-indicator {
+    width: 8px;
+    height: 8px;
+    background: #2ea44f;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  .chat-arrow {
+    color: var(--text);
+    transition: transform 0.3s;
+    font-size: 1.2rem;
+    opacity: 0.6;
+  }
+  
+  .chat-details[open] .chat-arrow {
+    transform: rotate(180deg);
+  }
+  
+  .chat-options {
+    display: flex;
+    gap: 12px;
+    padding: 0 20px 16px;
+    margin-top: -5px;
+  }
+  
+  .chat-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: 24px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    color: white !important;
+    transition: all 0.2s;
+    border: none;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  
+  .chat-btn.telegram {
+    background: linear-gradient(135deg, #0088cc, #00a8e8);
+  }
+  
+  .chat-btn.viber {
+    background: linear-gradient(135deg, #7360f2, #9b8af5);
+  }
+  
+  .chat-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  
+  /* Карточка здания */
   .photo-card {
     text-align: center;
   }
@@ -160,8 +277,8 @@ layout: default
   
   .photo-label small {
     font-weight: 400;
-    color: var(--text-secondary);
-    opacity: 0.8;
+    color: var(--text);
+    opacity: 0.7;
   }
   
   .photo-links {
@@ -185,9 +302,19 @@ layout: default
       grid-template-columns: 1fr; 
       gap: 20px;
     }
+    .chat-avatar {
+      width: 42px;
+      height: 42px;
+    }
+    .chat-text {
+      font-size: 0.95rem;
+    }
+    .chat-options {
+      flex-direction: column;
+      gap: 8px;
+    }
     .photo-card img {
       height: 280px;
-      object-position: center 40%;
     }
     .btn-large {
       max-width: 100%;
@@ -221,16 +348,29 @@ layout: default
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
 
 <div class="photos-row">
-  <div class="photo-card">
-    <img src="{{ '/assets/images/alex.jpg' | relative_url }}" alt="Александр - мастер по ремонту">
-    <div class="photo-label">
-      Александр<br>
-      <small>Мастер по ремонту</small>
-    </div>
-    <div class="photo-links">
-      💬 <a href="https://t.me/AlexDrog81">Telegram</a> • 
-      <a href="viber://chat?number=375297256982">Viber</a>
-    </div>
+  <!-- ЧАТ-СТРОКА ВМЕСТО ФОТО -->
+  <div class="chat-container">
+    <details class="chat-details">
+      <summary class="chat-summary">
+        <img src="{{ '/assets/images/alex.jpg' | relative_url }}" class="chat-avatar" alt="Александр">
+        <span class="chat-text">
+          <span class="online-indicator"></span>
+          Написать в мессенджер
+        </span>
+        <span class="chat-arrow">↓</span>
+      </summary>
+      <div class="chat-options">
+        <a href="https://t.me/AlexDrog81" class="chat-btn telegram" target="_blank">
+          📱 Telegram
+        </a>
+        <a href="viber://chat?number=375297256982" class="chat-btn viber">
+          💬 Viber
+        </a>
+      </div>
+    </details>
+    <p style="text-align: center; margin-top: 8px; font-size: 0.9rem; color: var(--text); opacity: 0.8;">
+      Александр • Мастер по ремонту
+    </p>
   </div>
   
   <div class="photo-card">
@@ -240,8 +380,8 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a>
     </div>
   </div>
 </div>
