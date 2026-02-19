@@ -343,8 +343,8 @@ layout: default
       gap: 20px;
     }
     .chat-avatar {
-      width: 46px;
-      height: 46px;
+      width: 56px;
+      height: 56px;
       object-position: center 30%;  /* и для мобильной тоже */
     }
     .chat-name {
