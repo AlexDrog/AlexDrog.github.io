@@ -752,3 +752,17 @@ body {
     }
   }
 }
+.footer-phone {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--accent-green);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+  
+  &:hover {
+    color: var(--text-primary);
+    transform: scale(1.05);
+  }
+}
