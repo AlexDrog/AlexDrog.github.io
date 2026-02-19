@@ -112,78 +112,31 @@ permalink: /uslugi/
 
 ---
 
-{% assign prices = site.data.prices %}
+{% assign sorted_prices = site.prices | sort: 'path' %}
 
-{% if prices.soft and prices.soft.size > 0 %}
-<h2 id="soft">💿 Программное обеспечение</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
-{% for item in prices.soft %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
+{% for category in sorted_prices %}
+<h2 id="{{ category.category_id | default: category.slug }}">{{ category.title }}</h2>
+<table class="price-table">
+<colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
+<thead>
+<tr><th>Услуга</th><th>Цена</th><th>Срок/Примечание</th></tr>
+</thead>
+<tbody>
+{% for service in category.services %}
+<tr>
+  <td>{{ service.name }}</td>
+  <td><strong>{{ service.price }}</strong></td>
+  <td>{{ service.note }}</td>
+</tr>
+{% endfor %}
+</tbody>
 </table>
-{% endif %}
+{% endfor %}
 
-{% if prices.computers and prices.computers.size > 0 %}
-<h2 id="computers">🖥️ Компьютеры и ноутбуки</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Срок</th></tr>
-{% for item in prices.computers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
-</table>
-{% endif %}
-
-{% if prices.phones and prices.phones.size > 0 %}
-<h2 id="phones">📱 Смартфоны и планшеты</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in prices.phones %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
-</table>
-{% endif %}
-
-{% if prices.navigators and prices.navigators.size > 0 %}
-<h2 id="auto">🗺️ Навигаторы и автоэлектроника</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in prices.navigators %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
-</table>
-{% endif %}
-
-{% if prices.network and prices.network.size > 0 %}
-<h2 id="network">🌐 Сети и интернет</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in prices.network %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
-</table>
-{% endif %}
-
-{% if prices.printers and prices.printers.size > 0 %}
-<h2 id="printers">🖨️ Принтеры и МФУ</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in prices.printers %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
-</table>
-{% endif %}
-
-{% if prices.recovery and prices.recovery.size > 0 %}
-<h2 id="recovery">💾 Восстановление данных</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in prices.recovery %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
-</table>
-{% endif %}
-
-{% if prices.electronics and prices.electronics.size > 0 %}
-<h2 id="electronics">🔧 Электроника и мелкая техника</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in prices.electronics %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
-</table>
-{% endif %}
-
-{% if prices.remote and prices.remote.size > 0 %}
-<h2 id="remote">💻 Удалённая помощь и консультации</h2>
-<table class="price-table"><colgroup><col style="width:50%"><col style="width:25%"><col style="width:25%"></colgroup>
-<tr><th>Услуга</th><th>Цена</th><th>Примечание</th></tr>
-{% for item in prices.remote %}<tr><td>{{ item.name }}</td><td><strong>{{ item.price }}</strong></td><td>{{ item.note }}</td></tr>{% endfor %}
-</table>
+{% if site.prices.size == 0 %}
+<p style="text-align: center; padding: 2rem; color: var(--text); opacity: 0.7;">
+  📝 Прайс-лист обновляется. Позвоните для уточнения цен.
+</p>
 {% endif %}
 
 ---
