@@ -9,3 +9,50 @@ plugins:
 url: "https://alexdrog.github.io"
 baseurl: ""
 show_downloads: false
+
+# === НОВОЕ: Коллекция для прайс-листа ===
+collections:
+  prices:
+    output: false
+
+# === НОВОЕ: Настройки Prose.io ===
+prose:
+  rooturl: '_prices'
+  media: 'assets/images'
+  ignore:
+    - /_layouts
+    - /_includes
+    - /_sass
+    - /assets
+    - /_data
+    - /_site
+    - index.md
+    - uslugi.md
+    - about.md
+    - CNAME
+    - Gemfile
+    - Gemfile.lock
+    - README.md
+  
+  metadata:
+    _prices:
+      - name: title
+        field:
+          element: text
+          label: "Название категории"
+          help: "Например: 📱 Смартфоны. Можно использовать эмодзи."
+          placeholder: "💿 Программное обеспечение"
+      
+      - name: category_id
+        field:
+          element: text
+          label: "ID категории (для ссылки)"
+          help: "Только латиница без пробелов: soft, computers, phones"
+          placeholder: "category_name"
+      
+      - name: services
+        field:
+          element: textarea
+          label: "Список услуг (YAML)"
+          help: "Каждая услуга с новой строки: - name: ..., price: ..., note: ..."
+          placeholder: "- name: Установка Windows\n  price: 60 BYN\n  note: 1-2 часа"
