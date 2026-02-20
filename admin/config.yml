@@ -1,0 +1,30 @@
+backend:
+  name: github
+  repo: AlexDrog/AlexDrog.github.io
+  branch: main
+  client_id: Ov23liO2Oa8AUgr8zC43
+
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+site_url: https://alexdrog.github.io
+display_url: alexdrog.github.io
+locale: 'ru'
+
+collections:
+  - name: "prices"
+    label: "Категории прайса"
+    folder: "_prices"
+    create: true
+    delete: true
+    slug: "{{category_id}}"
+    fields:
+      - {label: "Название категории", name: "title", widget: "string"}
+      - {label: "ID (латиницей)", name: "category_id", widget: "string", pattern: ['^[a-z0-9-]+$', 'Только a-z, 0-9, дефис']}
+      - label: "Услуги"
+        name: "services"
+        widget: "list"
+        fields:
+          - {label: "Название", name: "name", widget: "string"}
+          - {label: "Цена", name: "price", widget: "string"}
+          - {label: "Примечание", name: "note", widget: "string", required: false}
