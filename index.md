@@ -134,7 +134,6 @@ layout: default
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
   
-  /* ===== ЧАТ-СТРОКА С ОНЛАЙН-СТАТУСОМ ===== */
   .photos-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -298,7 +297,6 @@ layout: default
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
   
-  /* Карточка здания */
   .photo-card {
     text-align: center;
   }
@@ -343,7 +341,6 @@ layout: default
     text-decoration: underline;
   }
   
-  /* ===== ФУТЕР СО СТАТИСТИКОЙ ===== */
   .site-footer-stats {
     margin-top: 4rem;
     padding: 2rem;
@@ -395,7 +392,6 @@ layout: default
     transform: scale(1.05);
   }
   
-  /* ОБНОВЛЁННЫЙ БЛОК ONLINE С ЧИСЛОМ */
   .online-now {
     display: inline-flex;
     align-items: center;
@@ -427,12 +423,10 @@ layout: default
     flex-shrink: 0;
   }
   
-  /* ===== СКРЫВАЕМ СТАРЫЙ ФУТЕР ИЗ DEFAULT LAYOUT ===== */
   .site-footer {
     display: none !important;
   }
   
-  /* ===== LIGHTBOX ДЛЯ ПРОСМОТРА ФОТО ===== */
   .lightbox-overlay {
     display: none;
     position: fixed;
@@ -580,8 +574,50 @@ layout: default
 
 <button onclick="toggleTheme()" id="theme-toggle">🌙</button>
 
+<script type="module">
+  // === FIREBASE: РЕАЛЬНЫЙ СЧЁТЧИК ОНЛАЙН-ПОСЕТИТЕЛЕЙ ===
+  const firebaseConfig = {
+    apiKey: "AIzaSyDgSGIhDkfu1_l0Ryg0MeiLfVxp-lgiSsU",
+    authDomain: "alexdrog.firebaseapp.com",
+    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "alexdrog",
+    storageBucket: "alexdrog.firebasestorage.app",
+    messagingSenderId: "33899135860",
+    appId: "1:33899135860:web:396df092035fb19a11a221",
+    measurementId: "G-KJ7JQ8R476"
+  };
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  
+  const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+  const userRef = ref(db, 'online/' + sessionId);
+  
+  set(userRef, {
+    timestamp: serverTimestamp()
+  });
+  
+  onDisconnect(userRef).remove();
+  
+  const onlineRef = ref(db, 'online');
+  onValue(onlineRef, (snapshot) => {
+    const count = snapshot.size;
+    const counterElement = document.getElementById('online-count');
+    if (counterElement) {
+      counterElement.textContent = count;
+      counterElement.style.transform = 'scale(1.3)';
+      setTimeout(() => {
+        counterElement.style.transform = 'scale(1)';
+      }, 200);
+    }
+  });
+</script>
+
 <script>
-  // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА ПО РАСПИСАНИЮ ===
+  // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА МАСТЕРА ПО РАСПИСАНИЮ ===
   function checkOnlineStatus() {
     const now = new Date();
     const day = now.getDay();
@@ -664,7 +700,6 @@ layout: default
     document.getElementById('theme-toggle').textContent = '☀️';
   }
   
-  // === LIGHTBOX ФУНКЦИОНАЛ ===
   let currentImageIndex = 0;
   let currentGalleryImages = [];
   
@@ -722,86 +757,6 @@ layout: default
       openLightbox(e.target);
     }
   });
-
-  // === СЧЁТЧИК ОНЛАЙН ПОСЕТИТЕЛЕЙ ===
-  // ВАРИАНТ 1: РЕАЛЬНЫЙ СЧЁТЧИК ЧЕРЕЗ FIREBASE (Раскомментируйте и настройте)
-  /*
-  // Замените на вашу конфигурацию Firebase (База данных в режиме тестирования)
-  const firebaseConfig = {
-    apiKey: "ВАШ_API_KEY",
-    authDomain: "ВАШ_ПРОЕКТ.firebaseapp.com",
-    databaseURL: "https://ВАШ_ПРОЕКТ-default-rtdb.firebaseio.com",
-    projectId: "ВАШ_ПРОЕКТ",
-    storageBucket: "ВАШ_ПРОЕКТ.appspot.com",
-    messagingSenderId: "ВАШ_SENDER_ID",
-    appId: "ВАШ_APP_ID"
-  };
-
-  // Загрузка Firebase модулей
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  
-  // Уникальный ID сессии
-  const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-  const userRef = ref(db, 'online/' + sessionId);
-  
-  // При входе: записываем timestamp
-  set(userRef, {
-    timestamp: serverTimestamp()
-  });
-  
-  // При выходе/закрытии: удаляем запись
-  onDisconnect(userRef).remove();
-  
-  // Слушаем изменения количества онлайн
-  const onlineRef = ref(db, 'online');
-  onValue(onlineRef, (snapshot) => {
-    const count = snapshot.size;
-    const counterElement = document.getElementById('online-count');
-    if (counterElement) {
-      counterElement.textContent = count;
-      // Анимация изменения
-      counterElement.style.transform = 'scale(1.3)';
-      setTimeout(() => {
-        counterElement.style.transform = 'scale(1)';
-      }, 200);
-    }
-  });
-  */
-
-  // ВАРИАНТ 2: ИМИТАЦИЯ (Работает без настройки, для демонстрации)
-  (function simulateOnlineCounter() {
-    const counter = document.getElementById('online-count');
-    if (!counter) return;
-    
-    // Генерируем случайное число от 1 до 4 (для небольшого сайта реалистично)
-    function updateCount() {
-      // Число меняется с вероятностью 30%
-      if (Math.random() > 0.7) {
-        const current = parseInt(counter.textContent) || 1;
-        let change = Math.random() > 0.5 ? 1 : -1;
-        let newValue = current + change;
-        
-        // Ограничиваем от 1 до 4
-        if (newValue < 1) newValue = 1;
-        if (newValue > 4) newValue = 4;
-        
-        counter.textContent = newValue;
-        
-        // Анимация
-        counter.style.transform = 'scale(1.2)';
-        setTimeout(() => {
-          counter.style.transform = 'scale(1)';
-        }, 200);
-      }
-    }
-    
-    // Обновление каждые 30-60 секунд
-    setInterval(updateCount, Math.random() * 30000 + 30000);
-  })();
 </script>
 
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
@@ -893,7 +848,6 @@ layout: default
 ✅ <strong>Сложные случаи</strong> — то, что отказались делать другие
 </p>
 
-<!-- Lightbox модальное окно -->
 <div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
   <div class="lightbox-container" onclick="event.stopPropagation()">
     <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
@@ -919,7 +873,6 @@ layout: default
     <a href="tel:+375292065065" class="footer-phone">📞 +375 29 2 065 065</a>
   </div>
   
-  <!-- ОБНОВЛЁННЫЙ БЛОК С ЧИСЛОМ ONLINE -->
   <div class="online-now" title="Количество посетителей на сайте прямо сейчас">
     Сейчас онлайн: <span id="online-count">1</span>&nbsp;чел.
   </div>
