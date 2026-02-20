@@ -5,625 +5,771 @@ permalink: /uslugi/
 ---
 
 <style>
-/* === ПЕРЕМЕННЫЕ — мягкие цвета, нет резкой черноты === */
+/* === TECH-HUMAN 2025 DESIGN SYSTEM === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 :root {
-  --bg: #f1f5f9;           /* Мягкий серо-голубой фон */
-  --bg-card: #ffffff;       /* Белые карточки */
-  --bg-secondary: #f8fafc;  /* Очень светлый для заголовков */
-  --bg-hover: #e2e8f0;      /* Hover — мягкий серый */
-  --text: #475569;          /* Основной текст — серо-синий (не черный!) */
-  --text-secondary: #64748b;/* Вторичный — серый */
-  --text-muted: #94a3b8;    /* Приглушенный */
-  --border: #e2e8f0;        /* Границы — светло-серые */
-  --accent: #3b82f6;        /* Акцент — синий */
-  --accent-hover: #2563eb;
-  --shadow: rgba(0,0,0,0.04); /* Мягкая тень */
-  --success: #10b981;
-  --error-bg: #fef2f2;
-  --error-text: #dc2626;
-  --gradient-start: #60a5fa;
-  --gradient-end: #818cf8;
+  /* Цвета Tech-Human */
+  --bg: #F7F5F3;
+  --bg-warm: #F0EDE8;
+  --card: #FFFFFF;
+  --text: #1A1A1A;
+  --text-secondary: #6B6B6B;
+  --text-muted: #A3A3A3;
+  --accent: #FF5722;        /* Терракотовый */
+  --accent-hover: #E64A19;
+  --secondary: #6366F1;     /* Индиго */
+  --secondary-light: #818CF8;
+  --border: #E5E2DE;
+  --shadow: 0 20px 40px -15px rgba(0,0,0,0.08);
+  --shadow-hover: 0 30px 60px -20px rgba(0,0,0,0.12);
+  
+  /* Типографика Big Typography */
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-base: clamp(0.9rem, 0.85rem + 0.25vw, 1rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+  --text-2xl: clamp(2rem, 1.5rem + 2.5vw, 4rem);
+  --text-hero: clamp(3rem, 8vw, 6rem); /* 48-96px */
 }
 
 /* Темная тема */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0f172a;
-    --bg-card: #1e293b;
-    --bg-secondary: #334155;
-    --bg-hover: #475569;
-    --text: #e2e8f0;        /* Светло-серый, не белый */
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
-    --border: #334155;
-    --accent: #60a5fa;
-    --shadow: rgba(0,0,0,0.2);
-    --error-bg: #450a0a;
-    --error-text: #fca5a5;
+    --bg: #0F0F0F;
+    --bg-warm: #1A1A1A;
+    --card: #141414;
+    --text: #F5F5F5;
+    --text-secondary: #A3A3A3;
+    --border: #2A2A2A;
+    --accent: #FF7043;
   }
 }
 
-html[data-theme="dark"] {
-  --bg: #0f172a;
-  --bg-card: #1e293b;
-  --bg-secondary: #334155;
-  --text: #e2e8f0;
-  --border: #334155;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
+  font-family: var(--font-main);
   background-color: var(--bg);
   color: var(--text);
-  line-height: 1.5;
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* === НАВИГАЦИЯ — компактная === */
-.category-nav {
-  position: sticky;
-  top: 70px;
-  background: var(--bg-card);
-  padding: 0.75rem;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  box-shadow: 0 1px 3px var(--shadow);
-  z-index: 100;
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  border: 1px solid var(--border);
-  max-height: 160px;
-  overflow-y: auto;
-}
-
-.category-nav a {
-  padding: 0.4rem 0.9rem;
-  background: var(--bg-secondary);
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  color: var(--text-secondary);
-  font-weight: 500;
-  transition: all 0.2s;
-  border: 1px solid var(--border);
-}
-
-.category-nav a:hover {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
-}
-
-/* === АККОРДЕОН === */
-.category-accordion {
-  margin-bottom: 0.75rem;
-  border-radius: 12px;
+/* === BIG TYPOGRAPHY === */
+.page-header {
+  padding: 4rem 1.5rem 2rem;
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 1px 3px var(--shadow);
-  border: 1px solid var(--border);
-  background: var(--bg-card);
 }
 
-.category-accordion.hidden {
+.page-header h1 {
+  font-size: var(--text-hero);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-header p {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  max-width: 600px;
+  font-weight: 400;
+}
+
+/* === ASYMMETRIC LAYOUT === */
+.container-asymmetric {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-offset-left {
+  margin-left: 0;
+  margin-right: 5vw;
+}
+
+.section-offset-right {
+  margin-left: 5vw;
+  margin-right: 0;
+}
+
+.diagonal-break {
+  height: 100px;
+  background: linear-gradient(135deg, var(--bg) 50%, var(--bg-warm) 50%);
+  margin: 2rem 0;
+}
+
+/* === BENTO GRID === */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .bento-item-wide {
+    grid-column: span 2;
+  }
+  
+  .bento-item-tall {
+    grid-row: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* === BENTO CARDS === */
+.bento-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--secondary));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.bento-card:hover {
+  transform: translateY(-8px) rotate(0.5deg);
+  box-shadow: var(--shadow-hover);
+}
+
+.bento-card:hover::before {
+  opacity: 1;
+}
+
+.bento-card.hidden {
   display: none !important;
 }
 
-.category-header {
-  background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-  color: white;
-  padding: 0.875rem 1rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border: none;
-  width: 100%;
-  text-align: left;
-  margin: 0;
-}
-
-.category-header .arrow {
-  transition: transform 0.3s;
-  font-size: 0.75rem;
-  opacity: 0.8;
-}
-
-.category-header.active .arrow {
-  transform: rotate(180deg);
-}
-
-.category-content {
-  display: none;
-  background: var(--bg-card);
-}
-
-.category-content.active {
-  display: block;
-}
-
-/* === ТАБЛИЦА — МОБИЛЬНАЯ КОМПАКТНАЯ === */
-.price-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
-
-.price-table th {
-  background: var(--bg-secondary);
-  padding: 0.625rem 0.75rem;
-  text-align: left;
-  font-weight: 600;
-  color: var(--text-secondary);
-  border-bottom: 1px solid var(--border);
-  font-size: 0.8rem;
+.card-category {
+  font-size: var(--text-xs);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.price-table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--text);
-  vertical-align: top;
-}
-
-.price-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* Услуга — компактно */
-.service-name {
-  color: var(--accent);
-  cursor: pointer;
-  font-weight: 600;
-  text-decoration: none;
-  display: block;
-  line-height: 1.3;
-  margin-bottom: 0.25rem;
-}
-
-.service-name:active {
-  opacity: 0.7;
-}
-
-/* Цена — выделена */
-td strong {
+  letter-spacing: 0.1em;
   color: var(--accent);
   font-weight: 700;
-  white-space: nowrap;
 }
 
-/* Примечание — мелкое */
-td:last-child {
+.card-title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.card-price {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin: 0.5rem 0;
+}
+
+.card-note {
+  font-size: var(--text-base);
   color: var(--text-secondary);
-  font-size: 0.85rem;
+  flex-grow: 1;
 }
 
-/* === ПОИСК === */
-.search-container {
-  margin-bottom: 1rem;
-  background: var(--bg-card);
-  padding: 1rem;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  box-shadow: 0 1px 3px var(--shadow);
-}
-
-.search-container label {
-  display: block;
-  color: var(--text-secondary);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-.search-wrapper {
+/* === MICRO-INTERACTIONS (LIQUID BUTTONS) === */
+.liquid-btn {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: var(--text-base);
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.liquid-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+
+.liquid-btn:hover::before {
+  width: 300%;
+  height: 300%;
+}
+
+.liquid-btn:hover {
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px -10px var(--accent);
+}
+
+.liquid-btn:active {
+  transform: scale(0.95);
+}
+
+.liquid-btn-accent {
+  background: var(--accent);
+  color: white;
+}
+
+.liquid-btn-accent::before {
+  background: var(--secondary);
+}
+
+/* Ripple effect */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  transform: scale(0);
+  animation: ripple-animation 0.6s ease-out;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* === SEARCH BENTO === */
+.search-bento {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 20px;
+  z-index: 50;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 #searchInput {
-  width: 100%;
-  padding: 0.625rem 2.5rem 0.625rem 0.875rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 16px; /* Анти-зум iOS */
-  background: var(--bg-secondary);
-  color: var(--text);
+  flex: 1;
+  min-width: 200px;
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  font-size: var(--text-lg);
   font-family: inherit;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s;
 }
 
 #searchInput:focus {
   outline: none;
   border-color: var(--accent);
-  background: var(--bg-card);
-}
-
-#searchInput::placeholder {
-  color: var(--text-muted);
+  box-shadow: 0 0 0 4px rgba(255,87,34,0.1);
 }
 
 #clearBtn {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--text-muted);
-  color: white;
+  padding: 1rem 1.5rem;
+  background: var(--bg-warm);
   border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  font-weight: 600;
   cursor: pointer;
-  font-size: 12px;
+  transition: all 0.2s;
   display: none;
-  align-items: center;
-  justify-content: center;
+}
+
+#clearBtn:hover {
+  background: var(--accent);
+  color: white;
 }
 
 .search-stats {
-  margin-top: 0.5rem;
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  margin-top: 1rem;
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  font-weight: 500;
 }
 
-.no-results {
-  margin-top: 0.75rem;
-  padding: 0.75rem;
-  background: var(--error-bg);
-  border-radius: 8px;
-  color: var(--error-text);
-  text-align: center;
-  display: none;
-  font-size: 0.9rem;
-  border: 1px solid var(--border);
-}
-
-/* === МОДАЛЬНОЕ ОКНО (снизу) === */
-.messenger-modal {
+/* === MODAL (LIQUID DESIGN) === */
+.modal-overlay {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(20px);
   z-index: 1000;
-  justify-content: center;
   align-items: flex-end;
+  justify-content: center;
+  padding: 0;
 }
 
-.messenger-modal.active {
+.modal-overlay.active {
   display: flex;
+  animation: fadeIn 0.3s;
 }
 
-.messenger-content {
-  background: var(--bg-card);
-  padding: 1.25rem;
-  border-radius: 16px 16px 0 0;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: var(--card);
   width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
+  max-width: 500px;
+  border-radius: 32px 32px 0 0;
+  padding: 2.5rem;
+  transform: translateY(100%);
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   border: 1px solid var(--border);
   border-bottom: none;
-  animation: slideUp 0.25s ease-out;
 }
 
 @keyframes slideUp {
-  from { transform: translateY(100%); }
   to { transform: translateY(0); }
 }
 
-.messenger-title {
-  font-size: 1.1rem;
-  font-weight: 700;
+.modal-header {
+  font-size: var(--text-2xl);
+  font-weight: 800;
   margin-bottom: 0.5rem;
   color: var(--text);
-  text-align: center;
 }
 
-.messenger-service {
+.modal-service {
+  font-size: var(--text-xl);
   color: var(--accent);
-  font-weight: 600;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: var(--bg);
+  border-radius: 16px;
   text-align: center;
 }
 
-.messenger-buttons {
+.messenger-grid {
   display: grid;
-  gap: 0.625rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .messenger-btn {
+  padding: 1.25rem;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 600;
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+}
+
+.messenger-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(255,87,34,0.3);
+}
+
+.messenger-btn span:first-child {
+  font-size: 1.5rem;
+}
+
+.btn-cancel-full {
+  grid-column: span 2;
+  margin-top: 0.5rem;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn-cancel-full:hover {
+  background: var(--bg-warm);
+  color: var(--text);
+}
+
+/* === FLOATING CTA === */
+.floating-cta {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+}
+
+.floating-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -5px rgba(255,87,34,0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.875rem;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 0.95rem;
-  min-height: 48px;
 }
 
-.btn-tg { background: #0088cc; }
-.btn-viber { background: #7360f2; }
-.btn-whatsapp { background: #25d366; }
-.btn-phone { background: var(--success); }
-.btn-cancel { 
-  background: var(--bg-secondary); 
-  color: var(--text-secondary);
+.floating-btn:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 20px 40px -10px rgba(255,87,34,0.5);
+}
+
+/* === ASYMMETRIC SECTIONS === */
+.section-header {
+  padding: 3rem 0 1.5rem;
+  position: relative;
+}
+
+.section-header h2 {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  transform: rotate(-1deg);
+  display: inline-block;
+  background: var(--card);
+  padding: 0.5rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
   border: 1px solid var(--border);
-  margin-top: 0.25rem;
 }
 
-/* === ДЕСКТОП === */
-@media (min-width: 768px) {
-  .category-nav {
-    padding: 1rem;
-    gap: 0.625rem;
-    top: 80px;
+.section-header:nth-child(even) h2 {
+  transform: rotate(1deg);
+  margin-left: 10%;
+}
+
+/* === MOBILE OPTIMIZATIONS === */
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
-  .category-nav a {
-    padding: 0.5rem 1.1rem;
-    font-size: 0.9rem;
+  .bento-card {
+    padding: 1.5rem;
+    border-radius: 20px;
   }
   
-  .category-header {
-    padding: 1rem 1.25rem;
-    font-size: 1.05rem;
+  .section-offset-left,
+  .section-offset-right {
+    margin: 0;
   }
   
-  .price-table {
-    font-size: 1rem;
+  .page-header {
+    padding: 2rem 1rem 1rem;
   }
   
-  .price-table th {
-    padding: 0.875rem 1rem;
-    font-size: 0.85rem;
+  .floating-cta {
+    bottom: 1rem;
+    right: 1rem;
   }
   
-  .price-table td {
-    padding: 1rem;
+  .floating-btn {
+    width: 56px;
+    height: 56px;
   }
   
-  .search-container {
-    padding: 1.25rem;
+  .modal-content {
+    padding: 1.5rem;
+    border-radius: 24px 24px 0 0;
   }
   
-  .messenger-modal {
-    align-items: center;
-    padding: 1rem;
+  .messenger-grid {
+    grid-template-columns: 1fr;
   }
   
-  .messenger-content {
-    border-radius: 16px;
-    max-width: 400px;
-    max-height: 90vh;
-    animation: fadeIn 0.2s;
+  .messenger-btn {
+    flex-direction: row;
+    justify-content: center;
   }
   
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+  .btn-cancel-full {
+    grid-column: span 1;
   }
 }
 
-/* === МАЛЕНЬКИЕ МОБИЛЬНЫЕ === */
-@media (max-width: 380px) {
-  .price-table {
-    font-size: 0.85rem;
-  }
-  
-  .price-table td {
-    padding: 0.625rem 0.5rem;
-  }
-  
-  .service-name {
-    font-size: 0.9rem;
-  }
-  
-  td:last-child {
-    font-size: 0.8rem;
-  }
-  
-  .category-header {
-    padding: 0.75rem 0.875rem;
-    font-size: 0.9rem;
-  }
+/* === UTILITY === */
+.no-results-bento {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+  font-size: var(--text-lg);
+  background: var(--card);
+  border-radius: 24px;
+  border: 2px dashed var(--border);
 }
 </style>
 
-# 📋 Прайс-лист
-
-<div class="category-nav">
-  {% assign sorted_prices = site.prices | sort: 'path' %}
-  {% for category in sorted_prices %}
-    <a href="#{{ category.category_id | default: category.slug }}">{{ category.title }}</a>
-  {% endfor %}
-</div>
-
-<div class="search-container">
-  <label>🔍 Поиск услуги</label>
-  <div class="search-wrapper">
-    <input type="text" id="searchInput" placeholder="Например: экран, батарея..." autocomplete="off">
-    <button id="clearBtn" onclick="clearSearch()">✕</button>
-  </div>
-  <div class="search-stats" id="searchStats" style="display: none;">
-    Найдено: <span id="foundCount">0</span>
-  </div>
-  <div class="no-results" id="noResults">
-    Ничего не найдено. Попробуйте: <b>ремонт</b>, <b>замена</b>
+<!-- HERO SECTION -->
+<div class="page-header">
+  <div class="container-asymmetric">
+    <h1>Прайс-лист</h1>
+    <p>Ремонт смартфонов и ноутбуков в Дрогичине. Честные цены, гарантия качества.</p>
   </div>
 </div>
 
-{% assign sorted_prices = site.prices | sort: 'path' %}
+<div class="diagonal-break"></div>
 
-{% for category in sorted_prices %}
-<div class="category-accordion" data-category="{{ category.category_id | default: category.slug }}">
-  <button class="category-header" type="button">
-    <span>{{ category.title }}</span>
-    <span class="arrow">▼</span>
-  </button>
-  <div class="category-content">
-    <table class="price-table">
-      <thead>
-        <tr>
-          <th>Услуга</th>
-          <th>Цена</th>
-          <th>Срок</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for service in category.services %}
-        <tr data-service-name="{{ service.name }}" data-service-price="{{ service.price }}">
-          <td>
-            <span class="service-name" onclick="openMessengerModal('{{ service.name }}', '{{ service.price }}')">
-              {{ service.name }}
-            </span>
-          </td>
-          <td><strong>{{ service.price }}</strong></td>
-          <td>{{ service.note }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+<!-- SEARCH BENTO -->
+<div class="container-asymmetric section-offset-left">
+  <div class="search-bento">
+    <div class="search-input-wrapper">
+      <input type="text" id="searchInput" placeholder="Поиск услуги..." autocomplete="off">
+      <button id="clearBtn" onclick="clearSearch()">Очистить</button>
+    </div>
+    <div class="search-stats" id="searchStats" style="display: none;">
+      Найдено: <strong id="foundCount">0</strong> услуг
+    </div>
   </div>
 </div>
-{% endfor %}
 
-{% if site.prices.size == 0 %}
-<p style="text-align: center; padding: 2rem; color: var(--text-secondary); background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); margin: 1rem 0; font-size: 0.95rem;">
-  📝 Прайс-лист обновляется. Позвоните для уточнения цен.
-</p>
-{% endif %}
-
-<div style="text-align: center; margin: 1.5rem 0;">
-  <a href="{{ site.baseurl }}/" style="display: inline-block; padding: 0.75rem 1.25rem; background: var(--bg-card); color: var(--text); text-decoration: none; border-radius: 8px; border: 1px solid var(--border); font-weight: 500; margin: 0.25rem; font-size: 0.9rem;">← На главную</a>
-  <a href="tel:+375297256982" style="display: inline-block; padding: 0.75rem 1.25rem; background: var(--success); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 0.25rem; font-size: 0.9rem;">📞 Позвонить</a>
-</div>
-
-<div id="messengerModal" class="messenger-modal" onclick="closeMessengerModal(event)">
-  <div class="messenger-content" onclick="event.stopPropagation()">
-    <div class="messenger-title">Выберите способ связи</div>
-    <div class="messenger-service" id="modalServiceName">Услуга</div>
+<!-- SERVICES BENTO GRID -->
+<div class="container-asymmetric section-offset-right">
+  <div class="bento-grid" id="servicesGrid">
+    {% assign sorted_prices = site.prices | sort: 'path' %}
     
-    <div class="messenger-buttons">
-      <a href="#" id="tgLink" class="messenger-btn btn-tg" target="_blank">Telegram</a>
-      <a href="#" id="viberLink" class="messenger-btn btn-viber" target="_blank">Viber</a>
-      <a href="#" id="waLink" class="messenger-btn btn-whatsapp" target="_blank">WhatsApp</a>
-      <a href="#" id="phoneLink" class="messenger-btn btn-phone">Позвонить</a>
-      <button onclick="closeMessengerModal()" class="messenger-btn btn-cancel">Отмена</button>
+    {% for category in sorted_prices %}
+      {% for service in category.services %}
+      <div class="bento-card service-card" 
+           data-category="{{ category.title }}"
+           data-name="{{ service.name | downcase }}"
+           data-note="{{ service.note | downcase }}">
+        
+        <div class="card-category">{{ category.title }}</div>
+        <h3 class="card-title">{{ service.name }}</h3>
+        <div class="card-price">{{ service.price }}</div>
+        <p class="card-note">{{ service.note }}</p>
+        
+        <button class="liquid-btn liquid-btn-accent" onclick="openOrderModal('{{ service.name }}', '{{ service.price }}', event)">
+          Заказать →
+        </button>
+      </div>
+      {% endfor %}
+    {% endfor %}
+    
+    <div class="no-results-bento" id="noResults" style="display: none;">
+      😕 Ничего не найдено<br>
+      <small>Попробуйте: замена, экран, батарея</small>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING CTA -->
+<div class="floating-cta">
+  <button class="floating-btn" onclick="location.href='tel:+375297256982'" aria-label="Позвонить">
+    📞
+  </button>
+</div>
+
+<!-- ORDER MODAL -->
+<div id="orderModal" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-header">Выберите способ связи</div>
+    <div class="modal-service" id="modalService">Услуга</div>
+    
+    <div class="messenger-grid">
+      <a href="#" id="linkTG" class="messenger-btn" target="_blank">
+        <span>✈️</span>
+        <span>Telegram</span>
+      </a>
+      <a href="#" id="linkVB" class="messenger-btn" target="_blank">
+        <span>📞</span>
+        <span>Viber</span>
+      </a>
+      <a href="#" id="linkWA" class="messenger-btn" target="_blank">
+        <span>💬</span>
+        <span>WhatsApp</span>
+      </a>
+      <a href="#" id="linkPhone" class="messenger-btn">
+        <span>📱</span>
+        <span>Позвонить</span>
+      </a>
+      <button onclick="closeModal()" class="messenger-btn btn-cancel-full">
+        Отмена
+      </button>
     </div>
   </div>
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const headers = document.querySelectorAll('.category-header');
-  headers.forEach(header => {
-    header.addEventListener('click', () => {
-      header.classList.toggle('active');
-      header.nextElementSibling.classList.toggle('active');
-    });
-  });
-});
-
+// Search functionality
 const searchInput = document.getElementById('searchInput');
 const clearBtn = document.getElementById('clearBtn');
+const cards = document.querySelectorAll('.service-card');
+const noResults = document.getElementById('noResults');
+const searchStats = document.getElementById('searchStats');
+const foundCount = document.getElementById('foundCount');
 
-function filterTables() {
-  const searchTerm = searchInput.value.toLowerCase().trim();
-  const accordions = document.querySelectorAll('.category-accordion');
-  let totalFound = 0;
-  let hasAnyVisible = false;
+function filterServices() {
+  const term = searchInput.value.toLowerCase().trim();
+  let count = 0;
   
-  clearBtn.style.display = searchTerm.length > 0 ? 'flex' : 'none';
+  clearBtn.style.display = term ? 'flex' : 'none';
   
-  accordions.forEach(accordion => {
-    const rows = accordion.querySelectorAll('tbody tr');
-    const content = accordion.querySelector('.category-content');
-    const btn = accordion.querySelector('.category-header');
-    let categoryHasMatches = false;
+  cards.forEach(card => {
+    const name = card.getAttribute('data-name');
+    const note = card.getAttribute('data-note');
+    const match = name.includes(term) || note.includes(term);
     
-    rows.forEach((row) => {
-      const serviceName = row.getAttribute('data-service-name').toLowerCase();
-      const note = row.cells[2] ? row.cells[2].innerText.toLowerCase() : '';
-      const isMatch = serviceName.includes(searchTerm) || note.includes(searchTerm);
-      
-      if (searchTerm.length === 0 || isMatch) {
-        row.style.display = '';
-        if (isMatch) {
-          totalFound++;
-          categoryHasMatches = true;
-        }
-      } else {
-        row.style.display = 'none';
-      }
-    });
-    
-    if (searchTerm.length === 0) {
-      accordion.classList.remove('hidden');
-      btn.classList.remove('active');
-      content.classList.remove('active');
+    if (term === '' || match) {
+      card.style.display = 'flex';
+      if (term) count++;
     } else {
-      if (categoryHasMatches) {
-        accordion.classList.remove('hidden');
-        btn.classList.add('active');
-        content.classList.add('active');
-        hasAnyVisible = true;
-      } else {
-        accordion.classList.add('hidden');
-      }
+      card.style.display = 'none';
     }
   });
   
-  document.getElementById('searchStats').style.display = searchTerm.length > 0 ? 'block' : 'none';
-  document.getElementById('foundCount').textContent = totalFound;
-  document.getElementById('noResults').style.display = (searchTerm.length > 0 && !hasAnyVisible) ? 'block' : 'none';
+  if (term) {
+    searchStats.style.display = 'block';
+    foundCount.textContent = count;
+    noResults.style.display = count === 0 ? 'block' : 'none';
+  } else {
+    searchStats.style.display = 'none';
+    noResults.style.display = 'none';
+  }
 }
 
 function clearSearch() {
   searchInput.value = '';
-  filterTables();
+  filterServices();
   searchInput.focus();
 }
 
-searchInput.addEventListener('input', filterTables);
+searchInput.addEventListener('input', filterServices);
 
-function openMessengerModal(serviceName, price) {
-  const text = `Здравствуйте! Хочу заказать: ${serviceName}${price ? ' (' + price + ')' : ''}`;
+// Liquid button ripple effect
+function createRipple(event) {
+  const button = event.currentTarget;
+  const ripple = document.createElement('span');
+  const rect = button.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  const x = event.clientX - rect.left - size / 2;
+  const y = event.clientY - rect.top - size / 2;
+  
+  ripple.style.width = ripple.style.height = size + 'px';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  ripple.classList.add('ripple');
+  
+  button.appendChild(ripple);
+  
+  setTimeout(() => ripple.remove(), 600);
+}
+
+document.querySelectorAll('.liquid-btn').forEach(btn => {
+  btn.addEventListener('click', createRipple);
+});
+
+// Modal functionality
+function openOrderModal(service, price, event) {
+  if (event) createRipple(event);
+  
+  const modal = document.getElementById('orderModal');
+  const serviceDiv = document.getElementById('modalService');
+  
+  serviceDiv.textContent = price ? `${service} — ${price}` : service;
+  
+  const text = `Здравствуйте! Хочу заказать: ${service}${price ? ' (' + price + ')' : ''}`;
   const encoded = encodeURIComponent(text);
   
-  document.getElementById('modalServiceName').textContent = price ? `${serviceName} (${price})` : serviceName;
-  document.getElementById('tgLink').href = `https://t.me/alexdrog81?text=${encoded}`;
-  document.getElementById('viberLink').href = `viber://chat?number=+375297256982&draft=${encoded}`;
-  document.getElementById('waLink').href = `https://wa.me/375297256982?text=${encoded}`;
-  document.getElementById('phoneLink').href = `tel:+375297256982`;
+  document.getElementById('linkTG').href = `https://t.me/alexdrog81?text=${encoded}`;
+  document.getElementById('linkVB').href = `viber://chat?number=+375297256982&draft=${encoded}`;
+  document.getElementById('linkWA').href = `https://wa.me/375297256982?text=${encoded}`;
+  document.getElementById('linkPhone').href = `tel:+375297256982`;
   
-  document.getElementById('messengerModal').classList.add('active');
+  modal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
-function closeMessengerModal(event) {
-  if (!event || event.target.id === 'messengerModal' || event.target.tagName === 'BUTTON') {
-    document.getElementById('messengerModal').classList.remove('active');
+function closeModal(event) {
+  if (!event || event.target.id === 'orderModal' || event.target.tagName === 'BUTTON') {
+    document.getElementById('orderModal').classList.remove('active');
     document.body.style.overflow = '';
   }
 }
 
+// Close on escape
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeMessengerModal();
+  if (e.key === 'Escape') closeModal();
 });
+
+// Swipe to close on mobile
+let touchStartY = 0;
+const modalContent = document.querySelector('.modal-content');
+if (modalContent) {
+  modalContent.addEventListener('touchstart', e => {
+    touchStartY = e.touches[0].clientY;
+  });
+  modalContent.addEventListener('touchend', e => {
+    if (e.changedTouches[0].clientY - touchStartY > 100) {
+      closeModal();
+    }
+  });
+}
 </script>
