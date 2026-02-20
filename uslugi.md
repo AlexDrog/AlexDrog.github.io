@@ -5,37 +5,83 @@ permalink: /uslugi/
 ---
 
 <style>
+/* === ПЕРЕМЕННЫЕ ТЕМ === */
+:root {
+  --bg: #ffffff;
+  --bg-secondary: #f1f5f9;
+  --bg-hover: #f8fafc;
+  --text: #334155;
+  --text-secondary: #64748b;
+  --border: #e2e8f0;
+  --accent: #3b82f6;
+  --primary: #2563eb;
+  --shadow: rgba(0,0,0,0.1);
+  --error-bg: #fee2e2;
+  --error-text: #991b1b;
+}
+
+/* Темная тема — автоматически по системе или через атрибут */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-hover: #1e293b;
+    --text: #f8fafc;
+    --text-secondary: #94a3b8;
+    --border: #334155;
+    --accent: #60a5fa;
+    --primary: #3b82f6;
+    --shadow: rgba(0,0,0,0.3);
+    --error-bg: #450a0a;
+    --error-text: #fca5a5;
+  }
+}
+
+html[data-theme="dark"] {
+  --bg: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-hover: #1e293b;
+  --text: #f8fafc;
+  --text-secondary: #94a3b8;
+  --border: #334155;
+  --accent: #60a5fa;
+  --primary: #3b82f6;
+  --shadow: rgba(0,0,0,0.3);
+  --error-bg: #450a0a;
+  --error-text: #fca5a5;
+}
+
 /* Липкая навигация */
 .category-nav {
   position: sticky;
   top: 80px;
-  background: var(--bg, #ffffff);
+  background: var(--bg);
   padding: 1rem;
   border-radius: 12px;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px var(--shadow);
   z-index: 100;
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
-  border: 1px solid var(--border, #e2e8f0);
+  border: 1px solid var(--border);
 }
 
 .category-nav a {
   padding: 0.5rem 1rem;
-  background: var(--bg-secondary, #f1f5f9);
+  background: var(--bg-secondary);
   border-radius: 20px;
   text-decoration: none;
   font-size: 0.85rem;
   white-space: nowrap;
-  color: var(--text, #334155);
+  color: var(--text);
   transition: all 0.2s;
   border: 1px solid transparent;
 }
 
 .category-nav a:hover {
-  background: var(--accent, #3b82f6);
+  background: var(--accent);
   color: white;
   transform: translateY(-2px);
 }
@@ -45,9 +91,9 @@ permalink: /uslugi/
   margin-bottom: 1rem;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  border: 1px solid var(--border, #e2e8f0);
-  background: var(--bg, #ffffff);
+  box-shadow: 0 2px 8px var(--shadow);
+  border: 1px solid var(--border);
+  background: var(--bg);
   transition: all 0.3s;
 }
 
@@ -56,7 +102,7 @@ permalink: /uslugi/
 }
 
 .category-header {
-  background: linear-gradient(135deg, var(--primary, #3b82f6) 0%, var(--secondary, #6366f1) 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
   color: white;
   padding: 1rem 1.5rem;
   cursor: pointer;
@@ -89,7 +135,7 @@ permalink: /uslugi/
 .category-content {
   display: none;
   padding: 0;
-  background: var(--bg, #ffffff);
+  background: var(--bg);
 }
 
 .category-content.active {
@@ -109,23 +155,23 @@ permalink: /uslugi/
 }
 
 .price-table th {
-  background: var(--bg-secondary, #f1f5f9);
+  background: var(--bg-secondary);
   padding: 1rem;
   text-align: left;
   font-weight: 600;
-  color: var(--text, #334155);
-  border-bottom: 2px solid var(--border, #e2e8f0);
+  color: var(--text);
+  border-bottom: 2px solid var(--border);
 }
 
 .price-table td {
   padding: 1rem;
-  border-bottom: 1px solid var(--border, #e2e8f0);
-  color: var(--text, #334155);
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
 }
 
 /* Кликабельное название услуги */
 .service-name {
-  color: var(--accent, #3b82f6);
+  color: var(--accent);
   cursor: pointer;
   font-weight: 500;
   text-decoration: underline;
@@ -136,8 +182,8 @@ permalink: /uslugi/
 }
 
 .service-name:hover {
-  text-decoration-color: var(--accent, #3b82f6);
-  color: var(--primary, #2563eb);
+  text-decoration-color: var(--accent);
+  color: var(--primary);
 }
 
 .service-name::after {
@@ -153,7 +199,7 @@ permalink: /uslugi/
 }
 
 .price-table tbody tr:hover {
-  background-color: var(--bg-secondary, #f8fafc);
+  background-color: var(--bg-hover);
 }
 
 /* Модальное окно выбора мессенджера */
@@ -164,7 +210,7 @@ permalink: /uslugi/
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.7);
   z-index: 1000;
   justify-content: center;
   align-items: center;
@@ -182,28 +228,29 @@ permalink: /uslugi/
 }
 
 .messenger-content {
-  background: var(--bg, #ffffff);
+  background: var(--bg);
   padding: 2rem;
   border-radius: 16px;
   max-width: 400px;
   width: 90%;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  box-shadow: 0 20px 40px var(--shadow);
   text-align: center;
+  border: 1px solid var(--border);
 }
 
 .messenger-title {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text, #1e293b);
+  color: var(--text);
 }
 
 .messenger-service {
-  color: var(--accent, #3b82f6);
+  color: var(--accent);
   font-weight: 700;
   margin-bottom: 1.5rem;
   padding: 0.5rem;
-  background: var(--bg-secondary, #f1f5f9);
+  background: var(--bg-secondary);
   border-radius: 8px;
 }
 
@@ -230,7 +277,7 @@ permalink: /uslugi/
 
 .messenger-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .btn-tg { background: #0088cc; }
@@ -238,9 +285,10 @@ permalink: /uslugi/
 .btn-whatsapp { background: #25d366; }
 .btn-phone { background: #10b981; }
 .btn-cancel { 
-  background: var(--bg-secondary, #e2e8f0); 
-  color: var(--text, #64748b);
+  background: var(--bg-secondary); 
+  color: var(--text-secondary);
   margin-top: 0.5rem;
+  border: 1px solid var(--border);
 }
 
 .close-modal {
@@ -251,7 +299,7 @@ permalink: /uslugi/
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--text-secondary, #94a3b8);
+  color: var(--text-secondary);
 }
 
 /* Поиск */
@@ -259,20 +307,69 @@ permalink: /uslugi/
   margin-bottom: 2rem;
 }
 
+.search-container label {
+  color: var(--text);
+  font-weight: 500;
+}
+
 .search-stats {
   margin-top: 0.5rem;
-  color: var(--text-secondary, #64748b);
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
 .no-results {
   margin-top: 1rem;
   padding: 1.5rem;
-  background: #fee2e2;
+  background: var(--error-bg);
   border-radius: 8px;
-  color: #991b1b;
+  color: var(--error-text);
   text-align: center;
   display: none;
+  border: 1px solid var(--border);
+}
+
+/* Стили для поля поиска */
+#searchInput {
+  width: 100%;
+  padding: 0.75rem;
+  padding-right: 2.5rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color 0.2s;
+}
+
+#searchInput:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+#searchInput::placeholder {
+  color: var(--text-secondary);
+}
+
+#clearBtn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--text-secondary);
+  color: var(--bg);
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-size: 12px;
+  display: none;
+  transition: opacity 0.2s;
+}
+
+#clearBtn:hover {
+  opacity: 0.8;
 }
 
 /* Адаптивность */
@@ -322,13 +419,8 @@ permalink: /uslugi/
 <div class="search-container">
   <label>🔍 Быстрый поиск услуги:</label>
   <div style="position: relative; margin-top: 0.5rem;">
-    <input type="text" id="searchInput" placeholder="Например: замена экрана, Windows, FRP..." 
-           style="width: 100%; padding: 0.75rem; padding-right: 2.5rem; border: 2px solid var(--border, #e2e8f0); 
-                  border-radius: 8px; font-size: 1rem; background: var(--bg, #ffffff); color: var(--text, #334155);">
-    <button id="clearBtn" onclick="clearSearch()" 
-            style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); 
-                   background: #94a3b8; color: white; border: none; border-radius: 50%; 
-                   width: 24px; height: 24px; cursor: pointer; font-size: 12px; display: none;">✕</button>
+    <input type="text" id="searchInput" placeholder="Например: замена экрана, Windows, FRP...">
+    <button id="clearBtn" onclick="clearSearch()">✕</button>
   </div>
   <div class="search-stats" id="searchStats" style="display: none;">
     Найдено: <span id="foundCount">0</span> услуг
@@ -475,12 +567,10 @@ function filterTables() {
     });
     
     if (searchTerm.length === 0) {
-      // Поиск пуст - показываем все, закрываем аккордеоны
       accordion.classList.remove('hidden');
       btn.classList.remove('active');
       content.classList.remove('active');
     } else {
-      // Есть поисковый запрос
       if (categoryHasMatches) {
         accordion.classList.remove('hidden');
         btn.classList.add('active');
@@ -520,19 +610,12 @@ if (searchInput) {
 }
 
 // Модальное окно мессенджеров
-let currentService = '';
-let currentPrice = '';
-
 function openMessengerModal(serviceName, price) {
-  currentService = serviceName;
-  currentPrice = price;
-  
   const modal = document.getElementById('messengerModal');
   const serviceDiv = document.getElementById('modalServiceName');
   
   serviceDiv.textContent = price ? `${serviceName} (${price})` : serviceName;
   
-  // Формируем ссылки
   const text = `Здравствуйте! Хочу заказать: ${serviceName}${price ? ' (' + price + ')' : ''}`;
   const encodedText = encodeURIComponent(text);
   
@@ -552,7 +635,6 @@ function closeMessengerModal(event) {
   }
 }
 
-// Закрытие по Escape
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeMessengerModal();
