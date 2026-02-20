@@ -714,22 +714,36 @@ layout: default
     }
   });
   
-  function toggleTheme() {
-    const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    const newTheme = isDark ? 'light' : 'dark';
-    html.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.getElementById('theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+  // === УПРАВЛЕНИЕ ТЕМОЙ: Системная по умолчанию, ручное переключение в приоритете ===
+  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+  
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
   }
   
-  const saved = localStorage.getItem('theme');
-  if (saved) {
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('theme-toggle').textContent = saved === 'dark' ? '☀️' : '🌙';
-  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('theme-toggle').textContent = '☀️';
+  // При загрузке: сначала проверяем сохраненную, если нет - берем системную
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(systemDark.matches ? 'dark' : 'light');
+  }
+  
+  // Следим за изменением системной темы (работает только если не выбрана вручную)
+  systemDark.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      applyTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+  
+  // Ручное переключение (сохраняет выбор)
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const newTheme = current === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
   }
   
   let currentImageIndex = 0;
