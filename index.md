@@ -3,6 +3,7 @@ layout: default
 ---
 
 <script>
+  // === ТЕМА: При открытии — системная, при переключении — временно ===
   (function() {
     const saved = sessionStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -21,21 +22,21 @@ layout: default
 </script>
 
 <style>
-  /* === ЕДИНАЯ ЦВЕТОВАЯ СХЕМА С УСЛУГАМИ === */
+  /* === СИНХРОНИЗАЦИЯ С ЦВЕТАМИ УСЛУГ === */
   :root {
-    --bg: #f8fafc;           /* Как в uslugi */
-    --bg-card: #ffffff;       /* Как в uslugi */
-    --bg-secondary: #f1f5f9;  /* Как в uslugi */
-    --text: #334155;          /* Как в uslugi */
+    --bg: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-secondary: #f1f5f9;
+    --text: #334155;
     --text-secondary: #64748b;
-    --heading: #1e293b;
-    --link: #3b82f6;          /* Синий как в uslugi */
-    --border: #e2e8f0;        /* Как в uslugi */
-    --accent: #3b82f6;        /* Синий акцент как в uslugi */
-    --btn-bg: #10b981;        /* Зеленый для кнопок */
-    --btn-color: #ffffff;
+    --heading: #0f172a;
+    --border: #e2e8f0;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
     --success: #10b981;
     --shadow: rgba(0,0,0,0.04);
+    --gradient-start: #3b82f6;
+    --gradient-end: #6366f1;
   }
   
   [data-theme="dark"] {
@@ -45,17 +46,19 @@ layout: default
     --text: #e2e8f0;
     --text-secondary: #94a3b8;
     --heading: #f8fafc;
-    --link: #60a5fa;
     --border: #334155;
     --accent: #60a5fa;
-    --btn-bg: #059669;
+    --accent-hover: #3b82f6;
+    --success: #34d399;
     --shadow: rgba(0,0,0,0.2);
+    --gradient-start: #2563eb;
+    --gradient-end: #4f46e5;
   }
   
   body { 
     background-color: var(--bg) !important; 
     color: var(--text) !important;
-    transition: 0.3s;
+    transition: background-color 0.3s, color 0.3s;
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -63,28 +66,31 @@ layout: default
   
   h1, h2, h3 { 
     color: var(--heading) !important; 
+    border-color: var(--border) !important; 
     line-height: 1.3;
   }
   
-  a { color: var(--link) !important; }
+  a { color: var(--accent) !important; }
   
+  /* Кнопка Прайс и услуги — в стиле услуг */
   .btn {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 14px 28px;
     margin: 5px;
-    background-color: var(--btn-bg) !important;
-    color: var(--btn-color) !important;
-    border-radius: 8px;
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%) !important;
+    color: #ffffff !important;
+    border-radius: 12px;
     text-decoration: none;
     font-weight: 600;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
     border: none;
     cursor: pointer;
-    transition: all 0.2s;
   }
   
   .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
   }
   
   .btn-large {
@@ -94,17 +100,16 @@ layout: default
     margin: 2rem auto;
     text-align: center;
     font-size: 1.1rem;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    padding: 16px 24px;
   }
   
   details {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 1px 3px var(--shadow);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px var(--shadow);
   }
   
   summary { 
@@ -137,7 +142,7 @@ layout: default
     font-size: 0.9rem;
   }
   .label-green { 
-    background: #10b981; 
+    background: var(--success); 
     color: white; 
     padding: 8px; 
     font-weight: bold; 
@@ -155,7 +160,17 @@ layout: default
   
   .gallery-item img:hover { transform: scale(1.02); }
   
-  .highlight { color: #e85d04; font-weight: bold; }
+  /* Исправление: убираем белый фон, оставляем только цвет текста */
+  .highlight { 
+    color: #ef4444; 
+    font-weight: bold; 
+    background: transparent !important;
+  }
+  
+  [data-theme="dark"] .highlight {
+    color: #f87171;
+    background: transparent !important;
+  }
   
   #theme-toggle {
     position: fixed;
@@ -166,15 +181,15 @@ layout: default
     color: var(--text);
     border: 1px solid var(--border);
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
     font-size: 20px;
     cursor: pointer;
-    box-shadow: 0 2px 10px var(--shadow);
+    box-shadow: 0 4px 12px var(--shadow);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s;
+    transition: transform 0.2s;
   }
   
   #theme-toggle:hover {
@@ -194,8 +209,8 @@ layout: default
   .chat-details { 
     background: var(--bg-card); 
     border: 1px solid var(--border); 
-    border-radius: 24px; 
-    overflow: hidden; 
+    border-radius: 30px; 
+    overflow: hidden;
     box-shadow: 0 2px 8px var(--shadow);
   }
   
@@ -226,12 +241,12 @@ layout: default
   .chat-name { 
     color: var(--heading); 
     font-weight: 600; 
-    font-size: 1.1rem; 
+    font-size: 1.05rem; 
     margin-bottom: 4px;
   }
   
   .chat-status { 
-    font-size: 0.9rem; 
+    font-size: 0.85rem; 
     display: flex; 
     align-items: center; 
     gap: 6px; 
@@ -268,6 +283,7 @@ layout: default
     margin-left: auto; 
     font-size: 1.2rem;
     opacity: 0.6;
+    color: var(--text-secondary);
   }
   
   .chat-options { 
@@ -285,12 +301,10 @@ layout: default
     font-weight: 600; 
     color: white !important; 
     font-size: 0.9rem;
-    transition: transform 0.2s;
+    transition: transform 0.1s;
   }
   
-  .chat-btn:hover {
-    transform: translateY(-2px);
-  }
+  .chat-btn:active { transform: scale(0.98); }
   
   .chat-btn.telegram { background: linear-gradient(135deg, #0088cc, #00a8e8); }
   .chat-btn.viber { background: linear-gradient(135deg, #7360f2, #9b8af5); }
@@ -302,7 +316,7 @@ layout: default
     height: 320px; 
     object-fit: cover; 
     object-position: center 40%; 
-    border-radius: 12px; 
+    border-radius: 16px; 
     box-shadow: 0 4px 12px var(--shadow); 
     display: block;
     border: 1px solid var(--border);
@@ -321,11 +335,12 @@ layout: default
   .photo-links {
     margin-top: 0.5rem;
     font-size: 0.85rem;
+    color: var(--text-secondary);
   }
   
   .photo-links a { 
+    color: var(--accent) !important; 
     text-decoration: none;
-    opacity: 0.8;
   }
   
   .site-footer-stats {
@@ -346,7 +361,7 @@ layout: default
     font-size: 0.95rem;
     font-weight: 500;
     margin-top: 12px;
-    background: var(--bg);
+    background: var(--bg-secondary);
     padding: 8px 16px;
     border-radius: 20px;
     border: 1px solid var(--border);
@@ -385,38 +400,13 @@ layout: default
     justify-content: center;
   }
   
-  /* === ПЛАВАЮЩАЯ КНОПКА ЗВОНКА (как на главной) === */
-  .floating-call-btn {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    width: 64px;
-    height: 64px;
-    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    font-size: 28px;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: all 0.3s;
-  }
-  
-  .floating-call-btn:hover {
-    transform: scale(1.1) rotate(10deg);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  }
-  
+  /* === МОБИЛЬНАЯ ВЕРСИЯ === */
   @media (max-width: 768px) {
     h1 { 
       font-size: 1.5rem; 
       line-height: 1.25; 
       margin-bottom: 1rem;
+      word-wrap: break-word;
     }
     
     h2 { font-size: 1.25rem; }
@@ -460,7 +450,7 @@ layout: default
     
     .photo-card img { 
       height: 220px; 
-      border-radius: 8px;
+      border-radius: 12px;
     }
     
     #theme-toggle { 
@@ -473,11 +463,11 @@ layout: default
     
     .btn-large {
       margin: 1.5rem auto;
-      padding: 12px 16px;
+      padding: 14px 20px;
       font-size: 1rem;
     }
     
-    details { padding: 10px; }
+    details { padding: 12px; }
     summary h3 { font-size: 0.95rem; }
     
     .site-footer-stats { 
@@ -488,13 +478,11 @@ layout: default
       padding: 1.5rem 1rem;
     }
     
-    /* На мобильных плавающая кнопка меньше */
-    .floating-call-btn {
-      width: 56px;
-      height: 56px;
-      font-size: 24px;
-      bottom: 1rem;
-      right: 1rem;
+    /* Фикс для highlight на мобильной темной теме */
+    .highlight {
+      background: transparent !important;
+      padding: 0;
+      border-radius: 0;
     }
   }
   
@@ -512,8 +500,6 @@ layout: default
 </style>
 
 <button onclick="toggleTheme()" id="theme-toggle">🌙</button>
-
-<a href="tel:+375297256982" class="floating-call-btn" title="Позвонить">📞</a>
 
 <script type="module">
   const firebaseConfig = {
@@ -686,7 +672,7 @@ layout: default
   </div>
 </div>
 
-<a href="./uslugi/" class="btn btn-large">Прайс и услуги</a>
+<a href="./uslugi/" class="btn btn-large">📋 Прайс и услуги</a>
 
 <h2>Режим работы:</h2>
 <p>
@@ -696,7 +682,7 @@ layout: default
 <span class="highlight">🕐 Понедельник: ВЫХОДНОЙ</span>
 </p>
 
-<h2>Примеры работ <small style="font-size:0.6em;opacity:0.7;">(последние 10)</small></h2>
+<h2>Примеры работ <small style="font-size:0.6em;opacity:0.7;color:var(--text-secondary);">(последние 10)</small></h2>
 
 {% assign works = site.data.works | reverse | slice: 0, 10 %}
 
@@ -740,9 +726,9 @@ layout: default
     </a>
   </div>
   
-  <div style="color: var(--text); font-size: 0.875rem; line-height: 1.6;">
+  <div style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.6;">
     Разработка и сопровождение<br>
-    <a href="tel:+375292065065" style="color: var(--success); text-decoration: none; font-weight: 600; font-size: 1rem;">📞 +375 29 2 065 065</a>
+    <a href="tel:+375292065065" style="color: var(--accent); text-decoration: none; font-weight: 600; font-size: 1rem;">📞 +375 29 2 065 065</a>
   </div>
   
   <div class="online-now">
