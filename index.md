@@ -2,45 +2,32 @@
 layout: default
 ---
 
-<!-- Для мобильных: цвет адресной строки -->
-<meta name="theme-color" content="#155799" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
-
 <script>
-  // СКРИПТ ТЕМЫ - сразу, до стилей
+  // === ТЕМА: При открытии — системная, при переключении — временно ===
   (function() {
-    try {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = saved || (prefersDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      
-      // Обновляем theme-color динамически
-      const metaTheme = document.querySelector('meta[name="theme-color"]');
-      if (metaTheme) {
-        metaTheme.content = theme === 'dark' ? '#0d1117' : '#155799';
-      }
-    } catch(e) {}
+    // Проверяем, менял ли пользователь тему в ЭТОЙ сессии (пока открыт браузер)
+    const saved = sessionStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Если есть сохраненная — берем её (пользователь уже кликал), иначе — системная
+    const theme = saved || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
   })();
 
   window.toggleTheme = function() {
-    try {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      
-      // Обновляем цвет адресной строки на мобильном
-      const metaTheme = document.querySelector('meta[name="theme-color"]');
-      if (metaTheme) metaTheme.content = next === 'dark' ? '#0d1117' : '#155799';
-      
-      const btn = document.getElementById('theme-toggle');
-      if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
-    } catch(e) {}
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    sessionStorage.setItem('theme', next); // Сохраняем только на время сессии
+    
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
   };
 </script>
 
 <style>
+  /* ... все ваши стили без изменений ... */
+  
   :root {
     --bg: #ffffff;
     --text: #24292e;
@@ -68,30 +55,8 @@ layout: default
     transition: 0.3s;
   }
   
-  h1, h2, h3 { color: var(--heading) !important; }
+  h1, h2, h3 { color: var(--heading) !important; border-color: var(--border) !important; }
   a { color: var(--link) !important; }
-  
-  #theme-toggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 9999;
-    background: var(--btn-bg);
-    color: var(--btn-color);
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-    /* Для мобильных - увеличиваем область нажатия */
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Остальные стили без изменений... */
-  
   .page-header { background: linear-gradient(120deg, #155799, #159957) !important; }
   .main-content { background: var(--bg) !important; }
   
@@ -113,6 +78,7 @@ layout: default
     margin: 2rem auto;
     text-align: center;
     font-size: 1.1rem;
+    padding: 14px 20px;
   }
   
   details {
@@ -126,20 +92,8 @@ layout: default
   summary { color: var(--heading); font-weight: 600; cursor: pointer; }
   summary h3 { display: inline; margin: 0; }
   
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    margin-top: 15px;
-  }
-  
-  .gallery-item { 
-    text-align: center; 
-    background: var(--bg);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  
+  .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+  .gallery-item { text-align: center; background: var(--bg); border-radius: 4px; overflow: hidden; }
   .label-red { background: #e74c3c; color: white; padding: 8px; font-weight: bold; }
   .label-green { background: #27ae60; color: white; padding: 8px; font-weight: bold; }
   
@@ -149,37 +103,31 @@ layout: default
     object-fit: cover;
     display: block;
     cursor: pointer;
+    transition: transform 0.2s;
   }
   
   .highlight { color: #e94560; font-weight: bold; }
   
-  .photos-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-    margin: 1.5rem 0;
-    align-items: start;
-  }
-  
-  .chat-container { width: 100%; }
-  
-  .chat-details {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 30px;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-  
-  .chat-summary {
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
+  #theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+    background: var(--btn-bg);
+    color: var(--btn-color);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
     cursor: pointer;
-    list-style: none;
-    gap: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
+  
+  .photos-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 1.5rem 0; align-items: start; }
+  .chat-container { width: 100%; }
+  .chat-details { background: var(--card); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; }
+  .chat-summary { display: flex; align-items: center; padding: 12px 20px; cursor: pointer; list-style: none; gap: 12px; }
   
   .chat-avatar {
     width: 64px;
@@ -188,22 +136,12 @@ layout: default
     object-fit: cover;
     object-position: center 30%;
     border: 3px solid var(--border);
-    flex-shrink: 0;
   }
   
   .chat-avatar.online { border-color: #2ea44f; }
   .chat-avatar.offline { border-color: #8b949e; }
-  
   .chat-name { color: var(--heading); font-weight: 600; font-size: 1.05rem; }
-  
-  .chat-status {
-    font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 500;
-  }
-  
+  .chat-status { font-size: 0.85rem; display: flex; align-items: center; gap: 6px; font-weight: 500; }
   .status-online { color: #2ea44f; }
   .status-offline { color: #8b949e; }
   
@@ -228,40 +166,14 @@ layout: default
     100% { opacity: 1; transform: scale(1); }
   }
   
-  .chat-arrow { margin-left: auto; transition: transform 0.3s; }
-  .chat-details[open] .chat-arrow { transform: rotate(180deg); }
-  
-  .chat-options {
-    display: flex;
-    gap: 12px;
-    padding: 0 20px 16px;
-  }
-  
-  .chat-btn {
-    flex: 1;
-    padding: 12px;
-    border-radius: 24px;
-    text-align: center;
-    text-decoration: none;
-    font-weight: 600;
-    color: white !important;
-    font-size: 0.95rem;
-  }
-  
+  .chat-arrow { margin-left: auto; }
+  .chat-options { display: flex; gap: 12px; padding: 0 20px 16px; }
+  .chat-btn { flex: 1; padding: 12px; border-radius: 24px; text-align: center; text-decoration: none; font-weight: 600; color: white !important; }
   .chat-btn.telegram { background: linear-gradient(135deg, #0088cc, #00a8e8); }
   .chat-btn.viber { background: linear-gradient(135deg, #7360f2, #9b8af5); }
   
   .photo-card { text-align: center; }
-  
-  .photo-card img {
-    width: 100%;
-    height: 320px;
-    object-fit: cover;
-    object-position: center 40%;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-  
+  .photo-card img { width: 100%; height: 320px; object-fit: cover; object-position: center 40%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
   .photo-label { margin-top: 0.8rem; font-weight: 600; color: var(--text); font-size: 1.05rem; }
   .photo-label small { opacity: 0.7; }
   
@@ -290,15 +202,6 @@ layout: default
   
   #online-count { color: #2ea44f; font-weight: 700; font-size: 1.1rem; }
   
-  .online-now::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    background: #2ea44f;
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  
   .site-footer { display: none !important; }
   
   .lightbox-overlay {
@@ -315,45 +218,16 @@ layout: default
   }
   
   .lightbox-overlay.active { display: flex; }
+  .lightbox-img { max-width: 95%; max-height: 85vh; object-fit: contain; border-radius: 8px; }
+  .lightbox-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 40px; cursor: pointer; }
   
-  .lightbox-img {
-    max-width: 95%;
-    max-height: 85vh;
-    object-fit: contain;
-    border-radius: 8px;
-  }
-  
-  .lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    font-size: 3rem;
-    cursor: pointer;
-  }
-  
-  /* МОБИЛЬНАЯ ВЕРСИЯ */
   @media (max-width: 768px) {
     .gallery-grid { grid-template-columns: 1fr; }
     .photos-row { grid-template-columns: 1fr; gap: 20px; }
     .chat-avatar { width: 56px; height: 56px; }
     .photo-card img { height: 280px; }
-    
-    /* Кнопка темы больше для пальца */
-    #theme-toggle {
-      width: 50px;
-      height: 50px;
-      font-size: 24px;
-      top: 10px;
-      right: 10px;
-    }
-    
-    .site-footer-stats {
-      margin: 2rem -1rem 0;
-      border-radius: 0;
-      border-left: none;
-      border-right: none;
-    }
+    #theme-toggle { width: 50px; height: 50px; font-size: 24px; }
+    .site-footer-stats { margin: 2rem -1rem 0; border-radius: 0; border-left: none; border-right: none; }
   }
 </style>
 
@@ -378,7 +252,6 @@ layout: default
   try {
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-    
     const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     const userRef = ref(db, 'online/' + sessionId);
     
@@ -395,8 +268,9 @@ layout: default
 </script>
 
 <script>
-  // Установка иконки кнопки при загрузке
+  // Остальные скрипты
   document.addEventListener('DOMContentLoaded', function() {
+    // Устанавливаем иконку кнопки
     const btn = document.getElementById('theme-toggle');
     const current = document.documentElement.getAttribute('data-theme');
     if (btn) btn.textContent = current === 'dark' ? '☀️' : '🌙';
@@ -432,7 +306,6 @@ layout: default
     let statusText = "";
     
     if (day === 1) {
-      isOnline = false;
       statusText = "Сегодня выходной, отвечу завтра с 10:00";
     }
     else if (day >= 2 && day <= 5) {
@@ -462,12 +335,10 @@ layout: default
   let galleryImgs = [];
   
   function openLightbox(img) {
-    const overlay = document.getElementById('lightbox');
-    const bigImg = document.getElementById('lightbox-img');
     galleryImgs = img.closest('details').querySelectorAll('.gallery-item img');
     currentIdx = Array.from(galleryImgs).indexOf(img);
-    bigImg.src = img.src;
-    overlay.classList.add('active');
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
   }
   
   function closeLightbox() {
@@ -573,13 +444,13 @@ layout: default
 </p>
 
 <div id="lightbox" class="lightbox-overlay">
-  <span class="lightbox-close" style="position:absolute;top:20px;right:20px;color:white;font-size:40px;z-index:10001;">&times;</span>
-  <img id="lightbox-img" style="max-width:95%;max-height:80vh;">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" class="lightbox-img">
 </div>
 
 <div class="site-footer-stats">
-  <div class="metrika-informer">
-    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer" target="_blank" rel="nofollow">
+  <div style="margin-bottom: 1rem;">
+    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer" target="_blank">
       <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика">
     </a>
   </div>
