@@ -1,9 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
   repo: AlexDrog/AlexDrog.github.io
   branch: main
+  client_id: Ov23liO2Oa8AUgr8zC43
 
-# Добавляем эти две строки (обязательно!)
 media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
 
