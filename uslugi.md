@@ -5,9 +5,8 @@ permalink: /uslugi/
 ---
 
 <style>
-/* === СИСТЕМА ПЕРЕМЕННЫХ === */
+/* === ПЕРЕМЕННЫЕ === */
 :root {
-  /* Светлая тема (по умолчанию) */
   --bg: #f8fafc;
   --bg-card: #ffffff;
   --bg-secondary: #f1f5f9;
@@ -27,7 +26,6 @@ permalink: /uslugi/
   --gradient-end: #6366f1;
 }
 
-/* Тёмная тема */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0f172a;
@@ -70,60 +68,60 @@ html[data-theme="dark"] {
   --gradient-end: #4f46e5;
 }
 
-/* === ОБЩИЕ СТИЛИ === */
 body {
   background-color: var(--bg);
   color: var(--text);
+  -webkit-text-size-adjust: 100%;
 }
 
-/* === НАВИГАЦИЯ ПО КАТЕГОРИЯМ === */
+/* === НАВИГАЦИЯ === */
 .category-nav {
   position: sticky;
   top: 80px;
   background: var(--bg-card);
-  padding: 1.25rem;
+  padding: 1rem;
   border-radius: 16px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   box-shadow: 0 4px 12px var(--shadow);
   z-index: 100;
   display: flex;
-  gap: 0.75rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
   border: 1px solid var(--border);
+  max-height: 200px;
+  overflow-y: auto;
 }
 
 .category-nav a {
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   background: var(--bg-secondary);
   border-radius: 50px;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   white-space: nowrap;
   color: var(--text);
   font-weight: 500;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s;
   border: 1px solid var(--border);
-  box-shadow: 0 1px 2px var(--shadow);
+  touch-action: manipulation;
 }
 
-.category-nav a:hover {
+.category-nav a:hover, .category-nav a:active {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow-hover);
+  transform: translateY(-1px);
 }
 
 /* === АККОРДЕОН === */
 .category-accordion {
-  margin-bottom: 1.25rem;
-  border-radius: 16px;
+  margin-bottom: 1rem;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 8px var(--shadow);
   border: 1px solid var(--border);
   background: var(--bg-card);
-  transition: all 0.3s;
 }
 
 .category-accordion.hidden {
@@ -133,29 +131,30 @@ body {
 .category-header {
   background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
   color: white;
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.25rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1rem;
   border: none;
   width: 100%;
   text-align: left;
-  transition: all 0.3s;
+  transition: all 0.2s;
   margin: 0;
+  min-height: 56px;
 }
 
-.category-header:hover {
-  opacity: 0.95;
-  transform: translateX(4px);
+.category-header:active {
+  opacity: 0.9;
 }
 
 .category-header .arrow {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 0.9rem;
-  opacity: 0.8;
+  transition: transform 0.3s;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
 }
 
 .category-header.active .arrow {
@@ -165,47 +164,41 @@ body {
 .category-content {
   display: none;
   background: var(--bg-card);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .category-content.active {
   display: block;
-  animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* === ТАБЛИЦА === */
 .price-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
+  border-collapse: collapse;
+  min-width: 600px; /* Минимальная ширина для читаемости */
 }
 
 .price-table th {
   background: var(--bg-secondary);
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1rem;
   text-align: left;
   font-weight: 600;
   color: var(--text);
   border-bottom: 2px solid var(--border);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .price-table td {
-  padding: 1.25rem;
+  padding: 1rem;
   border-bottom: 1px solid var(--border);
   color: var(--text);
   vertical-align: middle;
+  font-size: 0.95rem;
 }
 
-.price-table tbody tr {
-  transition: all 0.2s;
-}
-
-.price-table tbody tr:hover {
+.price-table tbody tr:active {
   background-color: var(--bg-hover);
 }
 
@@ -213,43 +206,28 @@ body {
   border-bottom: none;
 }
 
-/* === УСЛУГА (КЛИКАБЕЛЬНАЯ) === */
+/* === УСЛУГА === */
 .service-name {
   color: var(--accent);
   cursor: pointer;
   font-weight: 600;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: transparent;
   transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  display: inline;
   padding: 0.25rem 0;
-  border-bottom: 2px solid transparent;
 }
 
-.service-name:hover {
+.service-name:hover, .service-name:active {
+  text-decoration-color: var(--accent);
   color: var(--accent-hover);
-  border-bottom-color: var(--accent);
-}
-
-.service-name::after {
-  content: "→";
-  font-size: 0.8em;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: all 0.2s;
-}
-
-.service-name:hover::after {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 /* === ПОИСК === */
 .search-container {
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   background: var(--bg-card);
-  padding: 1.5rem;
+  padding: 1.25rem;
   border-radius: 16px;
   border: 1px solid var(--border);
   box-shadow: 0 2px 8px var(--shadow);
@@ -260,7 +238,7 @@ body {
   color: var(--text);
   font-weight: 600;
   margin-bottom: 0.75rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
 }
 
 .search-wrapper {
@@ -269,20 +247,21 @@ body {
 
 #searchInput {
   width: 100%;
-  padding: 1rem 3rem 1rem 1.25rem;
+  padding: 0.875rem 2.75rem 0.875rem 1rem;
   border: 2px solid var(--border);
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: 16px; /* Предотвращает зум на iOS */
   background: var(--bg);
   color: var(--text);
   transition: all 0.2s;
   font-family: inherit;
+  -webkit-appearance: none;
 }
 
 #searchInput:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
 #searchInput::placeholder {
@@ -291,32 +270,32 @@ body {
 
 #clearBtn {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   background: var(--text-muted);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   font-size: 14px;
   display: none;
-  transition: all 0.2s;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  touch-action: manipulation;
 }
 
-#clearBtn:hover {
-  background: var(--text-secondary);
-  transform: translateY(-50%) scale(1.1);
+#clearBtn:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
 .search-stats {
   margin-top: 0.75rem;
   color: var(--text-secondary);
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -324,14 +303,15 @@ body {
 
 .no-results {
   margin-top: 1rem;
-  padding: 1.25rem;
+  padding: 1rem;
   background: var(--error-bg);
-  border-radius: 12px;
+  border-radius: 10px;
   color: var(--error-text);
   text-align: center;
   display: none;
   border: 1px solid var(--border);
   font-weight: 500;
+  font-size: 0.95rem;
 }
 
 /* === МОДАЛЬНОЕ ОКНО === */
@@ -342,52 +322,53 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.7);
   z-index: 1000;
   justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(6px);
-  padding: 1rem;
+  align-items: flex-end; /* Прижимаем к низу на мобильных */
+  padding: 0;
 }
 
 .messenger-modal.active {
   display: flex;
-  animation: fadeIn 0.2s;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 .messenger-content {
   background: var(--bg-card);
-  padding: 2rem;
-  border-radius: 20px;
-  max-width: 420px;
+  padding: 1.5rem;
+  border-radius: 20px 20px 0 0; /* Скругление только сверху на мобильных */
   width: 100%;
-  box-shadow: 0 25px 50px -12px var(--shadow-hover);
-  text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 -10px 40px var(--shadow-hover);
   border: 1px solid var(--border);
-  position: relative;
+  border-bottom: none;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
 }
 
 .messenger-title {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: var(--text);
+  text-align: center;
 }
 
 .messenger-service {
   color: var(--accent);
   font-weight: 600;
-  margin-bottom: 1.5rem;
-  padding: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem;
   background: var(--bg-secondary);
   border-radius: 10px;
-  font-size: 1.05rem;
+  font-size: 1rem;
   word-break: break-word;
+  text-align: center;
 }
 
 .messenger-buttons {
@@ -405,17 +386,16 @@ body {
   text-decoration: none;
   font-weight: 600;
   color: white;
-  transition: all 0.2s;
+  transition: transform 0.1s;
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  box-shadow: 0 2px 4px var(--shadow);
+  min-height: 52px; /* Удобно для пальца */
+  touch-action: manipulation;
 }
 
-.messenger-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px var(--shadow-hover);
-  filter: brightness(1.1);
+.messenger-btn:active {
+  transform: scale(0.98);
 }
 
 .btn-tg { background: #0088cc; }
@@ -424,50 +404,85 @@ body {
 .btn-phone { background: var(--success); }
 .btn-cancel { 
   background: var(--bg-secondary); 
-  color: var(--text-secondary);
+  color: var(--text);
   border: 2px solid var(--border);
   margin-top: 0.5rem;
 }
 
-.btn-cancel:hover {
-  background: var(--bg-hover);
-  color: var(--text);
-}
-
-/* === АДАПТИВНОСТЬ === */
-@media (max-width: 768px) {
+/* === АДАПТИВНОСТЬ ДЛЯ ПК === */
+@media (min-width: 769px) {
   .category-nav {
-    top: 70px;
-    padding: 1rem;
-    gap: 0.5rem;
+    padding: 1.25rem;
+    gap: 0.75rem;
+    top: 90px;
   }
   
   .category-nav a {
-    font-size: 0.85rem;
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
   
   .category-header {
-    font-size: 1rem;
-    padding: 1rem 1.25rem;
+    padding: 1.25rem 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .price-table {
+    min-width: 100%;
   }
   
   .price-table th,
   .price-table td {
-    padding: 0.75rem;
-    font-size: 0.95rem;
+    padding: 1.25rem;
+    font-size: 1rem;
   }
   
-  .service-name::after {
-    display: none;
+  .messenger-modal {
+    align-items: center;
+    padding: 1rem;
+    background: rgba(0,0,0,0.5);
   }
   
   .messenger-content {
-    padding: 1.5rem;
+    border-radius: 20px;
+    max-width: 420px;
+    max-height: 85vh;
+    animation: fadeIn 0.2s;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+}
+
+/* === МОБИЛЬНЫЕ ОПТИМИЗАЦИИ === */
+@media (max-width: 480px) {
+  .category-nav {
+    top: 70px;
+    padding: 0.75rem;
+    gap: 0.4rem;
+    border-radius: 12px;
+  }
+  
+  .category-nav a {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.875rem;
   }
   
   .search-container {
-    padding: 1.25rem;
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .price-table th,
+  .price-table td {
+    padding: 0.75rem 0.625rem;
+    font-size: 0.9rem;
+  }
+  
+  .category-header {
+    padding: 0.875rem 1rem;
   }
 }
 </style>
@@ -486,14 +501,14 @@ body {
 <div class="search-container">
   <label>🔍 Быстрый поиск услуги</label>
   <div class="search-wrapper">
-    <input type="text" id="searchInput" placeholder="Например: замена экрана, Windows, FRP...">
+    <input type="text" id="searchInput" placeholder="Например: замена экрана..." autocomplete="off">
     <button id="clearBtn" onclick="clearSearch()" aria-label="Очистить">✕</button>
   </div>
   <div class="search-stats" id="searchStats" style="display: none;">
     <span>📊 Найдено: <strong id="foundCount">0</strong> услуг</span>
   </div>
   <div class="no-results" id="noResults">
-    ❌ Ничего не найдено. Попробуйте: <b>ремонт</b>, <b>замена</b>, <b>Windows</b>, <b>разблокировка</b>
+    ❌ Ничего не найдено. Попробуйте: <b>ремонт</b>, <b>экран</b>, <b>Windows</b>
   </div>
 </div>
 
@@ -508,15 +523,15 @@ body {
   <div class="category-content">
     <table class="price-table">
       <colgroup>
-        <col style="width:50%">
+        <col style="width:55%">
         <col style="width:20%">
-        <col style="width:30%">
+        <col style="width:25%">
       </colgroup>
       <thead>
         <tr>
           <th>Услуга</th>
           <th>Цена</th>
-          <th>Срок / Примечание</th>
+          <th>Срок</th>
         </tr>
       </thead>
       <tbody>
@@ -527,8 +542,8 @@ body {
               {{ service.name }}
             </span>
           </td>
-          <td><strong style="color: var(--accent);">{{ service.price }}</strong></td>
-          <td style="color: var(--text-secondary);">{{ service.note }}</td>
+          <td><strong style="color: var(--accent); white-space: nowrap;">{{ service.price }}</strong></td>
+          <td style="color: var(--text-secondary); font-size: 0.9rem;">{{ service.note }}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -538,22 +553,14 @@ body {
 {% endfor %}
 
 {% if site.prices.size == 0 %}
-<p style="text-align: center; padding: 3rem; color: var(--text-secondary); background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border);">
+<p style="text-align: center; padding: 2rem; color: var(--text-secondary); background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); margin: 2rem 0;">
   📝 Прайс-лист обновляется. Позвоните для уточнения цен.
 </p>
 {% endif %}
 
----
-
-<div class="info-highlight" style="background: var(--bg-card); padding: 1.5rem; border-radius: 12px; border-left: 4px solid var(--success); margin: 2rem 0; box-shadow: 0 2px 8px var(--shadow);">
-  <strong style="color: var(--text);">💡 Бесплатная диагностика — платишь только за ремонт!</strong><br>
-  <small style="color: var(--text-secondary);">Цены актуальны на {{ site.time | date: "%d.%m.%Y" }}</small>
-</div>
-
-<div class="action-buttons" style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
-  <a href="{{ site.baseurl }}/" style="padding: 0.75rem 1.5rem; background: var(--bg-secondary); color: var(--text); text-decoration: none; border-radius: 8px; border: 1px solid var(--border); font-weight: 500; transition: all 0.2s;">← На главную</a>
-  <a href="https://t.me/alexdrog81" style="padding: 0.75rem 1.5rem; background: #0088cc; color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.2s;">💬 Telegram</a>
-  <a href="tel:+375297256982" style="padding: 0.75rem 1.5rem; background: var(--success); color: white; text-decoration: none; border-radius: 8px; font-weight: 500; transition: all 0.2s;">📞 Позвонить</a>
+<div style="text-align: center; margin: 2rem 0;">
+  <a href="{{ site.baseurl }}/" style="display: inline-block; padding: 0.875rem 1.5rem; background: var(--bg-secondary); color: var(--text); text-decoration: none; border-radius: 10px; border: 1px solid var(--border); font-weight: 500; margin: 0.25rem;">← На главную</a>
+  <a href="tel:+375297256982" style="display: inline-block; padding: 0.875rem 1.5rem; background: var(--success); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; margin: 0.25rem;">📞 Позвонить</a>
 </div>
 
 <!-- МОДАЛЬНОЕ ОКНО -->
@@ -707,4 +714,19 @@ document.addEventListener('keydown', function(e) {
     closeMessengerModal();
   }
 });
+
+// Закрытие по свайпу вниз на мобильных
+let touchStartY = 0;
+const modalContent = document.querySelector('.messenger-content');
+if (modalContent) {
+  modalContent.addEventListener('touchstart', e => {
+    touchStartY = e.touches[0].clientY;
+  });
+  modalContent.addEventListener('touchend', e => {
+    const touchEndY = e.changedTouches[0].clientY;
+    if (touchEndY - touchStartY > 100) { // Свайп вниз больше 100px
+      closeMessengerModal();
+    }
+  });
+}
 </script>
