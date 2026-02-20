@@ -3,12 +3,11 @@ backend:
   repo: AlexDrog/AlexDrog.github.io
   branch: main
   client_id: Ov23liO2Oa8AUgr8zC43
-  # УБРАТЬ: base_url и auth_endpoint
 
 media_folder: "assets/img/uploads"
 public_folder: "/assets/img/uploads"
 
-site_url: https://alexdrog.github.io 
+site_url: https://alexdrog.github.io
 display_url: alexdrog.github.io
 locale: 'ru'
 
