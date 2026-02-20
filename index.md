@@ -5,11 +5,8 @@ layout: default
 <script>
   // === ТЕМА: При открытии — системная, при переключении — временно ===
   (function() {
-    // Проверяем, менял ли пользователь тему в ЭТОЙ сессии (пока открыт браузер)
     const saved = sessionStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    // Если есть сохраненная — берем её (пользователь уже кликал), иначе — системная
     const theme = saved || (prefersDark ? 'dark' : 'light');
     document.documentElement.setAttribute('data-theme', theme);
   })();
@@ -18,16 +15,13 @@ layout: default
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
-    sessionStorage.setItem('theme', next); // Сохраняем только на время сессии
-    
+    sessionStorage.setItem('theme', next);
     const btn = document.getElementById('theme-toggle');
     if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
   };
 </script>
 
 <style>
-  /* ... все ваши стили без изменений ... */
-  
   :root {
     --bg: #ffffff;
     --text: #24292e;
@@ -53,9 +47,16 @@ layout: default
     background-color: var(--bg) !important; 
     color: var(--text) !important;
     transition: 0.3s;
+    margin: 0;
+    padding: 0;
   }
   
-  h1, h2, h3 { color: var(--heading) !important; border-color: var(--border) !important; }
+  h1, h2, h3 { 
+    color: var(--heading) !important; 
+    border-color: var(--border) !important; 
+    line-height: 1.3;
+  }
+  
   a { color: var(--link) !important; }
   .page-header { background: linear-gradient(120deg, #155799, #159957) !important; }
   .main-content { background: var(--bg) !important; }
@@ -89,13 +90,41 @@ layout: default
     margin-bottom: 12px;
   }
   
-  summary { color: var(--heading); font-weight: 600; cursor: pointer; }
+  summary { 
+    color: var(--heading); 
+    font-weight: 600; 
+    cursor: pointer; 
+    list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
   summary h3 { display: inline; margin: 0; }
   
-  .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
-  .gallery-item { text-align: center; background: var(--bg); border-radius: 4px; overflow: hidden; }
-  .label-red { background: #e74c3c; color: white; padding: 8px; font-weight: bold; }
-  .label-green { background: #27ae60; color: white; padding: 8px; font-weight: bold; }
+  .gallery-grid { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 15px; 
+    margin-top: 15px; 
+  }
+  .gallery-item { 
+    text-align: center; 
+    background: var(--bg); 
+    border-radius: 4px; 
+    overflow: hidden; 
+  }
+  .label-red { 
+    background: #e74c3c; 
+    color: white; 
+    padding: 8px; 
+    font-weight: bold; 
+    font-size: 0.9rem;
+  }
+  .label-green { 
+    background: #27ae60; 
+    color: white; 
+    padding: 8px; 
+    font-weight: bold; 
+    font-size: 0.9rem;
+  }
   
   .gallery-item img {
     width: 100%;
@@ -105,6 +134,8 @@ layout: default
     cursor: pointer;
     transition: transform 0.2s;
   }
+  
+  .gallery-item img:hover { transform: scale(1.02); }
   
   .highlight { color: #e94560; font-weight: bold; }
   
@@ -122,12 +153,36 @@ layout: default
     font-size: 20px;
     cursor: pointer;
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
-  .photos-row { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin: 1.5rem 0; align-items: start; }
+  .photos-row { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 25px; 
+    margin: 1.5rem 0; 
+    align-items: start; 
+  }
+  
   .chat-container { width: 100%; }
-  .chat-details { background: var(--card); border: 1px solid var(--border); border-radius: 30px; overflow: hidden; }
-  .chat-summary { display: flex; align-items: center; padding: 12px 20px; cursor: pointer; list-style: none; gap: 12px; }
+  
+  .chat-details { 
+    background: var(--card); 
+    border: 1px solid var(--border); 
+    border-radius: 30px; 
+    overflow: hidden; 
+  }
+  
+  .chat-summary { 
+    display: flex; 
+    align-items: center; 
+    padding: 12px 20px; 
+    cursor: pointer; 
+    list-style: none; 
+    gap: 12px; 
+  }
   
   .chat-avatar {
     width: 64px;
@@ -136,12 +191,29 @@ layout: default
     object-fit: cover;
     object-position: center 30%;
     border: 3px solid var(--border);
+    flex-shrink: 0; /* Запрещаем сжимать на десктопе */
   }
   
   .chat-avatar.online { border-color: #2ea44f; }
   .chat-avatar.offline { border-color: #8b949e; }
-  .chat-name { color: var(--heading); font-weight: 600; font-size: 1.05rem; }
-  .chat-status { font-size: 0.85rem; display: flex; align-items: center; gap: 6px; font-weight: 500; }
+  
+  .chat-info { flex: 1; min-width: 0; }
+  
+  .chat-name { 
+    color: var(--heading); 
+    font-weight: 600; 
+    font-size: 1.05rem; 
+    margin-bottom: 4px;
+  }
+  
+  .chat-status { 
+    font-size: 0.85rem; 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    font-weight: 500; 
+  }
+  
   .status-online { color: #2ea44f; }
   .status-offline { color: #8b949e; }
   
@@ -151,6 +223,7 @@ layout: default
     background: #2ea44f;
     border-radius: 50%;
     animation: pulse 2s infinite;
+    flex-shrink: 0;
   }
   
   .offline-dot {
@@ -158,6 +231,7 @@ layout: default
     height: 8px;
     background: #8b949e;
     border-radius: 50%;
+    flex-shrink: 0;
   }
   
   @keyframes pulse {
@@ -166,16 +240,64 @@ layout: default
     100% { opacity: 1; transform: scale(1); }
   }
   
-  .chat-arrow { margin-left: auto; }
-  .chat-options { display: flex; gap: 12px; padding: 0 20px 16px; }
-  .chat-btn { flex: 1; padding: 12px; border-radius: 24px; text-align: center; text-decoration: none; font-weight: 600; color: white !important; }
+  .chat-arrow { 
+    margin-left: auto; 
+    font-size: 1.2rem;
+    opacity: 0.6;
+  }
+  
+  .chat-options { 
+    display: flex; 
+    gap: 12px; 
+    padding: 0 20px 16px; 
+  }
+  
+  .chat-btn { 
+    flex: 1; 
+    padding: 12px; 
+    border-radius: 24px; 
+    text-align: center; 
+    text-decoration: none; 
+    font-weight: 600; 
+    color: white !important; 
+    font-size: 0.9rem;
+  }
+  
   .chat-btn.telegram { background: linear-gradient(135deg, #0088cc, #00a8e8); }
   .chat-btn.viber { background: linear-gradient(135deg, #7360f2, #9b8af5); }
   
   .photo-card { text-align: center; }
-  .photo-card img { width: 100%; height: 320px; object-fit: cover; object-position: center 40%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-  .photo-label { margin-top: 0.8rem; font-weight: 600; color: var(--text); font-size: 1.05rem; }
-  .photo-label small { opacity: 0.7; }
+  
+  .photo-card img { 
+    width: 100%; 
+    height: 320px; 
+    object-fit: cover; 
+    object-position: center 40%; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+    display: block;
+  }
+  
+  .photo-label { 
+    margin-top: 0.8rem; 
+    font-weight: 600; 
+    color: var(--text); 
+    font-size: 1.05rem; 
+    line-height: 1.4;
+  }
+  
+  .photo-label small { opacity: 0.7; font-size: 0.9em; }
+  
+  .photo-links {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  
+  .photo-links a { 
+    color: var(--link) !important; 
+    text-decoration: none;
+  }
   
   .site-footer-stats {
     margin-top: 4rem;
@@ -219,22 +341,117 @@ layout: default
   
   .lightbox-overlay.active { display: flex; }
   .lightbox-img { max-width: 95%; max-height: 85vh; object-fit: contain; border-radius: 8px; }
-  .lightbox-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 40px; cursor: pointer; }
+  .lightbox-close { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    color: white; 
+    font-size: 40px; 
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   
+  /* === МОБИЛЬНАЯ ВЕРСИЯ (исправлено) === */
   @media (max-width: 768px) {
+    h1 { 
+      font-size: 1.5rem; 
+      line-height: 1.25; 
+      margin-bottom: 1rem;
+      word-wrap: break-word;
+    }
+    
+    h2 { font-size: 1.25rem; }
+    
     .gallery-grid { grid-template-columns: 1fr; }
-    .photos-row { grid-template-columns: 1fr; gap: 20px; }
-    .chat-avatar { width: 56px; height: 56px; }
-    .photo-card img { height: 280px; }
-    #theme-toggle { width: 50px; height: 50px; font-size: 24px; }
-    .site-footer-stats { margin: 2rem -1rem 0; border-radius: 0; border-left: none; border-right: none; }
+    
+    .photos-row { 
+      grid-template-columns: 1fr; 
+      gap: 20px; 
+      margin: 1rem 0;
+    }
+    
+    /* ФИКС ВЫТЯНУТОГО АВАТАРА */
+    .chat-avatar { 
+      width: 60px; 
+      height: 60px; 
+      min-width: 60px;  /* Фикс для Safari */
+      min-height: 60px;
+      flex-shrink: 0;   /* Запрещаем flexbox менять размер */
+      aspect-ratio: 1 / 1; /* Принудительно квадрат */
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    
+    .chat-summary { 
+      padding: 12px 16px; 
+      gap: 12px;
+    }
+    
+    .chat-name { font-size: 1rem; }
+    .chat-status { font-size: 0.8rem; }
+    
+    .chat-options { 
+      padding: 0 16px 12px; 
+      gap: 8px;
+    }
+    
+    .chat-btn { 
+      padding: 10px; 
+      font-size: 0.85rem; 
+    }
+    
+    .photo-card img { 
+      height: 220px; 
+      border-radius: 8px;
+    }
+    
+    #theme-toggle { 
+      width: 44px; 
+      height: 44px; 
+      font-size: 20px;
+      top: 10px;
+      right: 10px;
+    }
+    
+    .btn-large {
+      margin: 1.5rem auto;
+      padding: 12px 16px;
+      font-size: 1rem;
+    }
+    
+    details { padding: 10px; }
+    summary h3 { font-size: 0.95rem; }
+    
+    .site-footer-stats { 
+      margin: 2rem -1rem 0; 
+      border-radius: 0; 
+      border-left: none; 
+      border-right: none;
+      padding: 1.5rem 1rem;
+    }
+  }
+  
+  /* Очень маленькие экраны */
+  @media (max-width: 380px) {
+    .chat-avatar {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      min-height: 52px;
+    }
+    
+    .chat-name { font-size: 0.95rem; }
+    h1 { font-size: 1.35rem; }
   }
 </style>
 
 <button onclick="toggleTheme()" id="theme-toggle">🌙</button>
 
 <script type="module">
-  // FIREBASE
   const firebaseConfig = {
     apiKey: "AIzaSyDgSGIhDkfu1_l0Ryg0MeiLfVxp-lgiSsU",
     authDomain: "alexdrog.firebaseapp.com",
@@ -268,14 +485,11 @@ layout: default
 </script>
 
 <script>
-  // Остальные скрипты
   document.addEventListener('DOMContentLoaded', function() {
-    // Устанавливаем иконку кнопки
     const btn = document.getElementById('theme-toggle');
     const current = document.documentElement.getAttribute('data-theme');
     if (btn) btn.textContent = current === 'dark' ? '☀️' : '🌙';
     
-    // Статус мастера
     const status = checkOnlineStatus();
     const avatar = document.getElementById('chat-avatar');
     const text = document.getElementById('status-text');
@@ -330,7 +544,6 @@ layout: default
     return { isOnline, statusText };
   }
   
-  // Lightbox
   let currentIdx = 0;
   let galleryImgs = [];
   
@@ -339,10 +552,12 @@ layout: default
     currentIdx = Array.from(galleryImgs).indexOf(img);
     document.getElementById('lightbox-img').src = img.src;
     document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
   
   function closeLightbox() {
     document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
   }
   
   function changeImage(dir) {
@@ -360,6 +575,12 @@ layout: default
     if (e.target.matches('.lightbox-overlay, .lightbox-close')) {
       closeLightbox();
     }
+  });
+  
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
   });
 </script>
 
@@ -379,7 +600,7 @@ layout: default
         <span class="chat-arrow">↓</span>
       </summary>
       <div class="chat-options">
-        <a href="https://t.me/AlexDrog81 " class="chat-btn telegram" target="_blank">📱 Telegram</a>
+        <a href="https://t.me/AlexDrog81" class="chat-btn telegram" target="_blank">📱 Telegram</a>
         <a href="viber://chat?number=375297256982" class="chat-btn viber">💬 Viber</a>
       </div>
     </details>
@@ -421,11 +642,11 @@ layout: default
   <div class="gallery-grid">
     <div class="gallery-item">
       <div class="label-red">🔴 ДО</div>
-      <img src="{{ work.before_img | relative_url }}" alt="До ремонта">
+      <img src="{{ work.before_img | relative_url }}" alt="До ремонта" loading="lazy">
     </div>
     <div class="gallery-item">
       <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="{{ work.after_img | relative_url }}" alt="После ремонта">
+      <img src="{{ work.after_img | relative_url }}" alt="После ремонта" loading="lazy">
     </div>
   </div>
 </details>
@@ -445,12 +666,12 @@ layout: default
 
 <div id="lightbox" class="lightbox-overlay">
   <span class="lightbox-close">&times;</span>
-  <img id="lightbox-img" class="lightbox-img">
+  <img id="lightbox-img" class="lightbox-img" alt="Увеличенное фото">
 </div>
 
 <div class="site-footer-stats">
   <div style="margin-bottom: 1rem;">
-    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer" target="_blank">
+    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer" target="_blank" rel="noopener">
       <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика">
     </a>
   </div>
