@@ -5,7 +5,7 @@ permalink: /uslugi/
 ---
 
 <style>
-/* === ЕДИНАЯ ЦВЕТОВАЯ СХЕМА === */
+/* === СВЕТЛАЯ ТЕМА === */
 :root,
 html {
   --bg: #f8fafc;
@@ -26,6 +26,7 @@ html {
   --gradient-end: #6366f1;
 }
 
+/* ТЕМНАЯ ТЕМА */
 html[data-theme="dark"] {
   --bg: #0f172a;
   --bg-card: #1e293b;
@@ -38,6 +39,7 @@ html[data-theme="dark"] {
   --accent: #60a5fa;
   --accent-hover: #3b82f6;
   --shadow: rgba(0,0,0,0.2);
+  --success: #34d399;
   --error-bg: #450a0a;
   --error-text: #fca5a5;
   --gradient-start: #2563eb;
@@ -52,71 +54,30 @@ body {
 }
 
 /* === КНОПКА НА ГЛАВНУЮ === */
-.back-home-btn {
+.nav-back {
+  margin-bottom: 1.5rem;
+}
+
+.btn-back {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
+  gap: 8px;
+  padding: 10px 20px;
   background: var(--bg-card);
-  color: var(--text);
-  text-decoration: none;
-  border-radius: 50px;
+  color: var(--text) !important;
   border: 1px solid var(--border);
-  font-weight: 600;
-  margin-bottom: 1.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
   box-shadow: 0 2px 8px var(--shadow);
   transition: all 0.2s;
 }
 
-.back-home-btn:hover {
-  background: var(--accent);
-  color: white;
-  border-color: var(--accent);
+.btn-back:hover {
+  background: var(--bg-secondary);
   transform: translateX(-4px);
-}
-
-/* === ПЛАВАЮЩАЯ КНОПКА ЗВОНКА (как на главной) === */
-.floating-call-btn {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 64px;
-  height: 64px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 28px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  transition: all 0.3s;
-}
-
-.floating-call-btn:hover {
-  transform: scale(1.1) rotate(10deg);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-}
-
-/* На мобильных скрываем или делаем меньше */
-@media (max-width: 768px) {
-  .floating-call-btn {
-    width: 56px;
-    height: 56px;
-    font-size: 24px;
-    bottom: 1rem;
-    right: 1rem;
-  }
-  
-  .back-home-btn {
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-    padding: 0.6rem 1rem;
-  }
+  border-color: var(--accent);
 }
 
 /* === НАВИГАЦИЯ === */
@@ -437,11 +398,22 @@ td:last-child {
   .category-header {
     padding: 0.875rem 1rem;
   }
+  
+  .nav-back {
+    margin-bottom: 1rem;
+  }
+  
+  .btn-back {
+    width: 100%;
+    justify-content: center;
+  }
 }
 </style>
 
 <!-- КНОПКА НА ГЛАВНУЮ -->
-<a href="{{ site.baseurl }}/" class="back-home-btn">← На главную</a>
+<div class="nav-back">
+  <a href="{{ '/' | relative_url }}" class="btn-back">← На главную</a>
+</div>
 
 # 📋 Прайс-лист
 
@@ -500,9 +472,6 @@ td:last-child {
   </div>
 </div>
 {% endfor %}
-
-<!-- ПЛАВАЮЩАЯ КНОПКА ЗВОНКА -->
-<a href="tel:+375297256982" class="floating-call-btn" title="Позвонить">📞</a>
 
 <div id="orderModal" class="messenger-modal" onclick="closeModal(event)">
   <div class="messenger-content" onclick="event.stopPropagation()">
@@ -584,9 +553,9 @@ searchInput.addEventListener('input', filter);
 function openModal(service, price) {
   const text = `Здравствуйте! Хочу заказать: ${service}${price ? ' ('+price+')' : ''}`;
   document.getElementById('modalService').textContent = price ? `${service} — ${price}` : service;
-  document.getElementById('linkTG').href = `https://t.me/alexdrog81?text= ${encodeURIComponent(text)}`;
+  document.getElementById('linkTG').href = `https://t.me/alexdrog81?text=${encodeURIComponent(text)}`;
   document.getElementById('linkVB').href = `viber://chat?number=+375297256982&draft=${encodeURIComponent(text)}`;
-  document.getElementById('linkWA').href = `https://wa.me/375297256982?text= ${encodeURIComponent(text)}`;
+  document.getElementById('linkWA').href = `https://wa.me/375297256982?text=${encodeURIComponent(text)}`;
   document.getElementById('linkPhone').href = `tel:+375297256982`;
   document.getElementById('orderModal').classList.add('active');
   document.body.style.overflow = 'hidden';
