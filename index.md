@@ -572,6 +572,16 @@ layout: default
   }
 </style>
 
+<!-- === НЕМЕДЛЕННАЯ УСТАНОВКА ТЕМЫ (до рендеринга контента) === -->
+<script>
+  (function() {
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (systemDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
 <button onclick="toggleTheme()" id="theme-toggle">🌙</button>
 
 <script type="module">
@@ -688,6 +698,7 @@ layout: default
   }
   
   document.addEventListener('DOMContentLoaded', function() {
+    // Установка статуса мастера
     const status = checkOnlineStatus();
     const avatar = document.getElementById('chat-avatar');
     const dot = document.getElementById('status-dot');
@@ -707,6 +718,11 @@ layout: default
       }
       text.innerHTML = '<span id="status-dot" class="' + (status.isOnline ? 'online-dot' : 'offline-dot') + '"></span>' + status.statusText;
     }
+    
+    // Обновление иконки кнопки темы после загрузки DOM
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
   });
   
   // === УПРАВЛЕНИЕ ТЕМОЙ ===
@@ -716,13 +732,6 @@ layout: default
     document.documentElement.setAttribute('data-theme', theme);
     const btn = document.getElementById('theme-toggle');
     if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-  }
-  
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme) {
-    applyTheme(savedTheme);
-  } else {
-    applyTheme(systemDark.matches ? 'dark' : 'light');
   }
   
   systemDark.addEventListener('change', (e) => {
