@@ -579,7 +579,7 @@ layout: default
   const firebaseConfig = {
     apiKey: "AIzaSyDgSGIhDkfu1_l0Ryg0MeiLfVxp-lgiSsU",
     authDomain: "alexdrog.firebaseapp.com",
-    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app ",
+    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "alexdrog",
     storageBucket: "alexdrog.firebasestorage.app",
     messagingSenderId: "33899135860",
@@ -587,40 +587,45 @@ layout: default
     measurementId: "G-KJ7JQ8R476"
   };
 
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js ";
-  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js ";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  
-  const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-  const userRef = ref(db, 'online/' + sessionId);
-  
-  set(userRef, {
-    timestamp: serverTimestamp()
-  });
-  
-  onDisconnect(userRef).remove();
-  
-  const onlineRef = ref(db, 'online');
-  onValue(onlineRef, (snapshot) => {
-    const count = snapshot.size;
-    const counterElement = document.getElementById('online-count');
-    if (counterElement) {
-      counterElement.textContent = count;
-      counterElement.style.transform = 'scale(1.3)';
-      setTimeout(() => {
-        counterElement.style.transform = 'scale(1)';
-      }, 200);
-    }
-  });
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    
+    const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    const userRef = ref(db, 'online/' + sessionId);
+    
+    set(userRef, {
+      timestamp: serverTimestamp()
+    });
+    
+    onDisconnect(userRef).remove();
+    
+    const onlineRef = ref(db, 'online');
+    onValue(onlineRef, (snapshot) => {
+      const data = snapshot.val();
+      const count = data ? Object.keys(data).length : 0;
+      const counterElement = document.getElementById('online-count');
+      if (counterElement) {
+        counterElement.textContent = count;
+        counterElement.style.transform = 'scale(1.3)';
+        setTimeout(() => {
+          counterElement.style.transform = 'scale(1)';
+        }, 200);
+      }
+    });
+  } catch (e) {
+    console.error('Firebase error:', e);
+  }
 </script>
 
 <script>
   // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА МАСТЕРА ПО РАСПИСАНИЮ ===
   function checkOnlineStatus() {
     const now = new Date();
-    const day = now.getDay(); // 0=Вс, 1=Пн, 2=Вт, 3=Ср, 4=Чт, 5=Пт, 6=Сб
+    const day = now.getDay();
     const hour = now.getHours();
     const minute = now.getMinutes();
     const time = hour + minute / 60;
@@ -629,12 +634,10 @@ layout: default
     let statusText = "";
     
     if (day === 1) {
-      // Понедельник - всегда выходной
       isOnline = false;
       statusText = "Сегодня выходной, отвечу завтра с 10:00";
     }
     else if (day >= 2 && day <= 5) {
-      // Вторник-пятница: 10:00-18:00 (обед 12:00-13:00)
       if (time >= 10 && time < 12) {
         isOnline = true;
         statusText = "В сети";
@@ -645,23 +648,18 @@ layout: default
         isOnline = false;
         statusText = "Обеденный перерыв до 13:00";
       } else if (time < 10) {
-        // Утро перед началом работы - сегодня ещё будет работа
         isOnline = false;
         statusText = "Начинаю работу сегодня в 10:00";
       } else {
-        // После 18:00
         isOnline = false;
         if (day === 5) {
-          // Пятница вечер → следующий рабочий день суббота
           statusText = "Отвечу завтра (суббота) с 10:00";
         } else {
-          // Вт-Чт вечер → завтра
           statusText = "Отвечу завтра с 10:00";
         }
       }
     }
     else if (day === 6) {
-      // Суббота: 10:00-14:00
       if (time >= 10 && time < 14) {
         isOnline = true;
         statusText = "В сети";
@@ -669,13 +667,11 @@ layout: default
         isOnline = false;
         statusText = "Начинаю работу сегодня в 10:00";
       } else {
-        // После 14:00 в субботу → воскресенье
         isOnline = false;
         statusText = "Отвечу завтра (воскресенье) с 10:00";
       }
     }
     else if (day === 0) {
-      // Воскресенье: 10:00-14:00
       if (time >= 10 && time < 14) {
         isOnline = true;
         statusText = "В сети";
@@ -683,7 +679,6 @@ layout: default
         isOnline = false;
         statusText = "Начинаю работу сегодня в 10:00";
       } else {
-        // После 14:00 в воскресенье → понедельник выходной → вторник
         isOnline = false;
         statusText = "Отвечу во вторник с 10:00";
       }
@@ -714,7 +709,7 @@ layout: default
     }
   });
   
-  // === УПРАВЛЕНИЕ ТЕМОЙ: Системная по умолчанию, ручное переключение в приоритете ===
+  // === УПРАВЛЕНИЕ ТЕМОЙ ===
   const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
   
   function applyTheme(theme) {
@@ -723,7 +718,6 @@ layout: default
     if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
   }
   
-  // При загрузке: сначала проверяем сохраненную, если нет - берем системную
   const savedTheme = localStorage.getItem('theme');
   if (savedTheme) {
     applyTheme(savedTheme);
@@ -731,14 +725,12 @@ layout: default
     applyTheme(systemDark.matches ? 'dark' : 'light');
   }
   
-  // Следим за изменением системной темы (работает только если не выбрана вручную)
   systemDark.addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
       applyTheme(e.matches ? 'dark' : 'light');
     }
   });
   
-  // Ручное переключение (сохраняет выбор)
   function toggleTheme() {
     const current = document.documentElement.getAttribute('data-theme');
     const newTheme = current === 'dark' ? 'light' : 'dark';
@@ -746,6 +738,7 @@ layout: default
     localStorage.setItem('theme', newTheme);
   }
   
+  // === LIGHTBOX ===
   let currentImageIndex = 0;
   let currentGalleryImages = [];
   
