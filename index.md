@@ -2,53 +2,42 @@
 layout: default
 ---
 
-<!-- СКРИПТ ТЕМЫ - САМЫЙ ПЕРВЫЙ -->
+<!-- Для мобильных: цвет адресной строки -->
+<meta name="theme-color" content="#155799" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+
 <script>
-  console.log('=== THEME SCRIPT START ===');
-  
+  // СКРИПТ ТЕМЫ - сразу, до стилей
   (function() {
     try {
       const saved = localStorage.getItem('theme');
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-      console.log('saved:', saved);
-      console.log('prefersDark:', prefersDark);
-      
-      let theme;
-      if (saved) {
-        theme = saved;
-        console.log('Using saved theme:', theme);
-      } else {
-        theme = prefersDark ? 'dark' : 'light';
-        console.log('Using system theme:', theme);
-      }
-      
+      const theme = saved || (prefersDark ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
-      console.log('Theme set to:', document.documentElement.getAttribute('data-theme'));
       
-    } catch(e) {
-      console.error('Theme error:', e);
-    }
+      // Обновляем theme-color динамически
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) {
+        metaTheme.content = theme === 'dark' ? '#0d1117' : '#155799';
+      }
+    } catch(e) {}
   })();
 
   window.toggleTheme = function() {
-    console.log('Toggle clicked!');
     try {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
       
+      // Обновляем цвет адресной строки на мобильном
+      const metaTheme = document.querySelector('meta[name="theme-color"]');
+      if (metaTheme) metaTheme.content = next === 'dark' ? '#0d1117' : '#155799';
+      
       const btn = document.getElementById('theme-toggle');
       if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
-      console.log('Toggled to:', next);
-    } catch(e) {
-      console.error('Toggle error:', e);
-    }
+    } catch(e) {}
   };
-  
-  console.log('toggleTheme exists:', typeof window.toggleTheme);
-  console.log('=== THEME SCRIPT END ===');
 </script>
 
 <style>
@@ -79,22 +68,32 @@ layout: default
     transition: 0.3s;
   }
   
-  /* ... остальные стили без изменений ... */
-  
-  h1, h2, h3 { 
-    color: var(--heading) !important; 
-    border-color: var(--border) !important;
-  }
-  
+  h1, h2, h3 { color: var(--heading) !important; }
   a { color: var(--link) !important; }
   
-  .page-header {
-    background: linear-gradient(120deg, #155799, #159957) !important;
+  #theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+    background: var(--btn-bg);
+    color: var(--btn-color);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    /* Для мобильных - увеличиваем область нажатия */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
   
-  .main-content {
-    background: var(--bg) !important;
-  }
+  /* Остальные стили без изменений... */
+  
+  .page-header { background: linear-gradient(120deg, #155799, #159957) !important; }
+  .main-content { background: var(--bg) !important; }
   
   .btn {
     display: inline-block;
@@ -114,7 +113,6 @@ layout: default
     margin: 2rem auto;
     text-align: center;
     font-size: 1.1rem;
-    padding: 14px 20px;
   }
   
   details {
@@ -125,16 +123,8 @@ layout: default
     margin-bottom: 12px;
   }
   
-  summary {
-    color: var(--heading);
-    font-weight: 600;
-    cursor: pointer;
-  }
-  
-  summary h3 { 
-    display: inline; 
-    margin: 0;
-  }
+  summary { color: var(--heading); font-weight: 600; cursor: pointer; }
+  summary h3 { display: inline; margin: 0; }
   
   .gallery-grid {
     display: grid;
@@ -159,31 +149,9 @@ layout: default
     object-fit: cover;
     display: block;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .gallery-item img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
   
   .highlight { color: #e94560; font-weight: bold; }
-  
-  #theme-toggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    z-index: 9999;
-    background: var(--btn-bg);
-    color: var(--btn-color);
-    border: none;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  }
   
   .photos-row {
     display: grid;
@@ -193,9 +161,7 @@ layout: default
     align-items: start;
   }
   
-  .chat-container {
-    width: 100%;
-  }
+  .chat-container { width: 100%; }
   
   .chat-details {
     background: var(--card);
@@ -206,11 +172,6 @@ layout: default
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
   
-  .chat-details[open] {
-    border-radius: 20px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  }
-  
   .chat-summary {
     display: flex;
     align-items: center;
@@ -218,11 +179,6 @@ layout: default
     cursor: pointer;
     list-style: none;
     gap: 12px;
-    user-select: none;
-  }
-  
-  .chat-summary::-webkit-details-marker {
-    display: none;
   }
   
   .chat-avatar {
@@ -233,32 +189,12 @@ layout: default
     object-position: center 30%;
     border: 3px solid var(--border);
     flex-shrink: 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    transition: border-color 0.3s;
   }
   
-  .chat-avatar.online {
-    border-color: #2ea44f;
-    box-shadow: 0 2px 8px rgba(46, 164, 79, 0.3);
-  }
+  .chat-avatar.online { border-color: #2ea44f; }
+  .chat-avatar.offline { border-color: #8b949e; }
   
-  .chat-avatar.offline {
-    border-color: #8b949e;
-  }
-  
-  .chat-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  
-  .chat-name {
-    color: var(--heading);
-    font-weight: 600;
-    font-size: 1.05rem;
-    line-height: 1.2;
-  }
+  .chat-name { color: var(--heading); font-weight: 600; font-size: 1.05rem; }
   
   .chat-status {
     font-size: 0.85rem;
@@ -268,22 +204,15 @@ layout: default
     font-weight: 500;
   }
   
-  .status-online {
-    color: #2ea44f;
-  }
-  
-  .status-offline {
-    color: #8b949e;
-  }
+  .status-online { color: #2ea44f; }
+  .status-offline { color: #8b949e; }
   
   .online-dot {
     width: 8px;
     height: 8px;
     background: #2ea44f;
     border-radius: 50%;
-    display: inline-block;
     animation: pulse 2s infinite;
-    box-shadow: 0 0 4px rgba(46, 164, 79, 0.5);
   }
   
   .offline-dot {
@@ -291,7 +220,6 @@ layout: default
     height: 8px;
     background: #8b949e;
     border-radius: 50%;
-    display: inline-block;
   }
   
   @keyframes pulse {
@@ -300,22 +228,13 @@ layout: default
     100% { opacity: 1; transform: scale(1); }
   }
   
-  .chat-arrow {
-    color: var(--text);
-    transition: transform 0.3s;
-    font-size: 1.2rem;
-    opacity: 0.6;
-  }
-  
-  .chat-details[open] .chat-arrow {
-    transform: rotate(180deg);
-  }
+  .chat-arrow { margin-left: auto; transition: transform 0.3s; }
+  .chat-details[open] .chat-arrow { transform: rotate(180deg); }
   
   .chat-options {
     display: flex;
     gap: 12px;
     padding: 0 20px 16px;
-    margin-top: -5px;
   }
   
   .chat-btn {
@@ -326,31 +245,13 @@ layout: default
     text-decoration: none;
     font-weight: 600;
     color: white !important;
-    transition: all 0.2s;
-    border: none;
     font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
   }
   
-  .chat-btn.telegram {
-    background: linear-gradient(135deg, #0088cc, #00a8e8);
-  }
+  .chat-btn.telegram { background: linear-gradient(135deg, #0088cc, #00a8e8); }
+  .chat-btn.viber { background: linear-gradient(135deg, #7360f2, #9b8af5); }
   
-  .chat-btn.viber {
-    background: linear-gradient(135deg, #7360f2, #9b8af5);
-  }
-  
-  .chat-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-  
-  .photo-card {
-    text-align: center;
-  }
+  .photo-card { text-align: center; }
   
   .photo-card img {
     width: 100%;
@@ -359,38 +260,10 @@ layout: default
     object-position: center 40%;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    display: block;
-    border: 1px solid var(--border);
   }
   
-  .photo-label {
-    margin-top: 0.8rem;
-    font-weight: 600;
-    color: var(--text);
-    font-size: 1.05rem;
-    line-height: 1.4;
-  }
-  
-  .photo-label small {
-    font-weight: 400;
-    color: var(--text);
-    opacity: 0.7;
-  }
-  
-  .photo-links {
-    margin-top: 0.8rem;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-  
-  .photo-links a {
-    color: var(--link);
-    text-decoration: none;
-  }
-  
-  .photo-links a:hover {
-    text-decoration: underline;
-  }
+  .photo-label { margin-top: 0.8rem; font-weight: 600; color: var(--text); font-size: 1.05rem; }
+  .photo-label small { opacity: 0.7; }
   
   .site-footer-stats {
     margin-top: 4rem;
@@ -399,48 +272,6 @@ layout: default
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  }
-  
-  .metrika-informer {
-    display: inline-block;
-    margin-bottom: 1rem;
-    padding: 8px;
-    background: var(--bg);
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    transition: transform 0.2s;
-  }
-  
-  .metrika-informer:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  
-  .metrika-informer img {
-    display: block;
-    border-radius: 4px;
-  }
-  
-  .footer-text {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    line-height: 1.6;
-  }
-  
-  .footer-phone {
-    display: inline-block;
-    margin-top: 8px;
-    color: var(--btn-bg);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s;
-  }
-  
-  .footer-phone:hover {
-    color: var(--link);
-    transform: scale(1.05);
   }
   
   .online-now {
@@ -457,12 +288,7 @@ layout: default
     border: 1px solid var(--border);
   }
   
-  #online-count {
-    color: #2ea44f;
-    font-weight: 700;
-    font-size: 1.1rem;
-    min-width: 20px;
-  }
+  #online-count { color: #2ea44f; font-weight: 700; font-size: 1.1rem; }
   
   .online-now::before {
     content: "";
@@ -471,12 +297,9 @@ layout: default
     background: #2ea44f;
     border-radius: 50%;
     animation: pulse 2s infinite;
-    flex-shrink: 0;
   }
   
-  .site-footer {
-    display: none !important;
-  }
+  .site-footer { display: none !important; }
   
   .lightbox-overlay {
     display: none;
@@ -489,136 +312,47 @@ layout: default
     z-index: 10000;
     justify-content: center;
     align-items: center;
-    cursor: zoom-out;
-    backdrop-filter: blur(10px);
   }
   
-  .lightbox-overlay.active {
-    display: flex;
-  }
-  
-  .lightbox-container {
-    position: relative;
-    max-width: 95%;
-    max-height: 95%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  .lightbox-overlay.active { display: flex; }
   
   .lightbox-img {
-    max-width: 100%;
+    max-width: 95%;
     max-height: 85vh;
     object-fit: contain;
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  }
-  
-  .lightbox-caption {
-    color: white;
-    margin-top: 15px;
-    font-size: 1.1rem;
-    text-align: center;
-    padding: 0 20px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
   }
   
   .lightbox-close {
     position: absolute;
-    top: -50px;
-    right: 0;
+    top: 20px;
+    right: 20px;
     color: white;
     font-size: 3rem;
     cursor: pointer;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.8;
-    transition: opacity 0.3s;
-    z-index: 10001;
-    line-height: 1;
   }
   
-  .lightbox-close:hover {
-    opacity: 1;
-  }
-  
-  .lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: white;
-    font-size: 3rem;
-    cursor: pointer;
-    padding: 20px;
-    opacity: 0.6;
-    transition: opacity 0.3s;
-    user-select: none;
-    font-weight: bold;
-  }
-  
-  .lightbox-nav:hover {
-    opacity: 1;
-  }
-  
-  .lightbox-prev { left: 20px; }
-  .lightbox-next { right: 20px; }
-  
+  /* МОБИЛЬНАЯ ВЕРСИЯ */
   @media (max-width: 768px) {
     .gallery-grid { grid-template-columns: 1fr; }
-    .photos-row { 
-      grid-template-columns: 1fr; 
-      gap: 20px;
+    .photos-row { grid-template-columns: 1fr; gap: 20px; }
+    .chat-avatar { width: 56px; height: 56px; }
+    .photo-card img { height: 280px; }
+    
+    /* Кнопка темы больше для пальца */
+    #theme-toggle {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      top: 10px;
+      right: 10px;
     }
-    .chat-avatar {
-      width: 56px;
-      height: 56px;
-      object-position: center 30%;
-    }
-    .chat-name {
-      font-size: 0.95rem;
-    }
-    .chat-status {
-      font-size: 0.8rem;
-    }
-    .chat-options {
-      flex-direction: column;
-      gap: 8px;
-    }
-    .photo-card img {
-      height: 280px;
-    }
-    .btn-large {
-      max-width: 100%;
-      margin: 1.5rem auto;
-    }
+    
     .site-footer-stats {
-      margin-top: 2rem;
-      padding: 1.5rem 1rem;
-      margin-left: -1rem;
-      margin-right: -1rem;
+      margin: 2rem -1rem 0;
       border-radius: 0;
       border-left: none;
       border-right: none;
-    }
-    .lightbox-nav { 
-      display: none; 
-    }
-    .lightbox-caption { 
-      font-size: 0.9rem; 
-    }
-    .lightbox-close {
-      top: -40px;
-      font-size: 2.5rem;
-    }
-    .online-now {
-      font-size: 0.85rem;
-      padding: 6px 12px;
-    }
-    #online-count {
-      font-size: 1rem;
     }
   }
 </style>
@@ -648,59 +382,42 @@ layout: default
     const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
     const userRef = ref(db, 'online/' + sessionId);
     
-    set(userRef, {
-      timestamp: serverTimestamp()
-    });
-    
+    set(userRef, { timestamp: serverTimestamp() });
     onDisconnect(userRef).remove();
     
-    const onlineRef = ref(db, 'online');
-    onValue(onlineRef, (snapshot) => {
+    onValue(ref(db, 'online'), (snapshot) => {
       const data = snapshot.val();
       const count = data ? Object.keys(data).length : 0;
-      const counterElement = document.getElementById('online-count');
-      if (counterElement) {
-        counterElement.textContent = count;
-      }
+      const el = document.getElementById('online-count');
+      if (el) el.textContent = count;
     });
-  } catch (e) {
-    console.error('Firebase error:', e);
-  }
+  } catch (e) {}
 </script>
 
 <script>
-  // ОСТАЛЬНЫЕ СКРИПТЫ
+  // Установка иконки кнопки при загрузке
   document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded');
-    
-    // Обновляем иконку кнопки
     const btn = document.getElementById('theme-toggle');
     const current = document.documentElement.getAttribute('data-theme');
-    console.log('Current theme on DOM ready:', current);
-    
-    if (btn && current) {
-      btn.textContent = current === 'dark' ? '☀️' : '🌙';
-    }
+    if (btn) btn.textContent = current === 'dark' ? '☀️' : '🌙';
     
     // Статус мастера
     const status = checkOnlineStatus();
     const avatar = document.getElementById('chat-avatar');
-    const dot = document.getElementById('status-dot');
     const text = document.getElementById('status-text');
     
-    if (avatar && dot && text) {
+    if (avatar && text) {
       if (status.isOnline) {
         avatar.classList.add('online');
         avatar.classList.remove('offline');
-        dot.className = 'online-dot';
+        text.innerHTML = '<span class="online-dot"></span>В сети';
         text.className = 'chat-status status-online';
       } else {
         avatar.classList.add('offline');
         avatar.classList.remove('online');
-        dot.className = 'offline-dot';
+        text.innerHTML = '<span class="offline-dot"></span>' + status.statusText;
         text.className = 'chat-status status-offline';
       }
-      text.innerHTML = '<span id="status-dot" class="' + (status.isOnline ? 'online-dot' : 'offline-dot') + '"></span>' + status.statusText;
     }
   });
   
@@ -719,103 +436,58 @@ layout: default
       statusText = "Сегодня выходной, отвечу завтра с 10:00";
     }
     else if (day >= 2 && day <= 5) {
-      if (time >= 10 && time < 12) {
-        isOnline = true;
-        statusText = "В сети";
-      } else if (time >= 13 && time < 18) {
-        isOnline = true;
-        statusText = "В сети";
-      } else if (time >= 12 && time < 13) {
-        isOnline = false;
-        statusText = "Обеденный перерыв до 13:00";
-      } else if (time < 10) {
-        isOnline = false;
-        statusText = "Начинаю работу сегодня в 10:00";
-      } else {
-        isOnline = false;
-        if (day === 5) {
-          statusText = "Отвечу завтра (суббота) с 10:00";
-        } else {
-          statusText = "Отвечу завтра с 10:00";
-        }
-      }
+      if (time >= 10 && time < 12) isOnline = true;
+      else if (time >= 13 && time < 18) isOnline = true;
+      else if (time >= 12 && time < 13) statusText = "Обеденный перерыв до 13:00";
+      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
+      else statusText = day === 5 ? "Отвечу завтра (суббота) с 10:00" : "Отвечу завтра с 10:00";
     }
     else if (day === 6) {
-      if (time >= 10 && time < 14) {
-        isOnline = true;
-        statusText = "В сети";
-      } else if (time < 10) {
-        isOnline = false;
-        statusText = "Начинаю работу сегодня в 10:00";
-      } else {
-        isOnline = false;
-        statusText = "Отвечу завтра (воскресенье) с 10:00";
-      }
+      if (time >= 10 && time < 14) isOnline = true;
+      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
+      else statusText = "Отвечу завтра (воскресенье) с 10:00";
     }
     else if (day === 0) {
-      if (time >= 10 && time < 14) {
-        isOnline = true;
-        statusText = "В сети";
-      } else if (time < 10) {
-        isOnline = false;
-        statusText = "Начинаю работу сегодня в 10:00";
-      } else {
-        isOnline = false;
-        statusText = "Отвечу во вторник с 10:00";
-      }
+      if (time >= 10 && time < 14) isOnline = true;
+      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
+      else statusText = "Отвечу во вторник с 10:00";
     }
     
+    if (isOnline) statusText = "В сети";
     return { isOnline, statusText };
   }
   
-  // LIGHTBOX
-  let currentImageIndex = 0;
-  let currentGalleryImages = [];
+  // Lightbox
+  let currentIdx = 0;
+  let galleryImgs = [];
   
-  function openLightbox(imgElement) {
+  function openLightbox(img) {
     const overlay = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const caption = document.getElementById('lightbox-caption');
-    
-    const details = imgElement.closest('details');
-    currentGalleryImages = details ? details.querySelectorAll('.gallery-item img') : [];
-    currentImageIndex = Array.from(currentGalleryImages).indexOf(imgElement);
-    
-    lightboxImg.src = imgElement.src;
-    caption.textContent = imgElement.alt || '';
+    const bigImg = document.getElementById('lightbox-img');
+    galleryImgs = img.closest('details').querySelectorAll('.gallery-item img');
+    currentIdx = Array.from(galleryImgs).indexOf(img);
+    bigImg.src = img.src;
     overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
   }
   
-  function closeLightbox(event) {
-    if (event && event.target !== event.currentTarget && !event.target.classList.contains('lightbox-close')) return;
-    const overlay = document.getElementById('lightbox');
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
   }
   
-  function changeImage(direction) {
-    if (currentGalleryImages.length === 0) return;
-    currentImageIndex += direction;
-    if (currentImageIndex >= currentGalleryImages.length) currentImageIndex = 0;
-    if (currentImageIndex < 0) currentImageIndex = currentGalleryImages.length - 1;
-    const img = currentGalleryImages[currentImageIndex];
-    document.getElementById('lightbox-img').src = img.src;
-    document.getElementById('lightbox-caption').textContent = img.alt || '';
+  function changeImage(dir) {
+    currentIdx += dir;
+    if (currentIdx >= galleryImgs.length) currentIdx = 0;
+    if (currentIdx < 0) currentIdx = galleryImgs.length - 1;
+    document.getElementById('lightbox-img').src = galleryImgs[currentIdx].src;
   }
-  
-  document.addEventListener('keydown', function(e) {
-    const overlay = document.getElementById('lightbox');
-    if (!overlay.classList.contains('active')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') changeImage(-1);
-    if (e.key === 'ArrowRight') changeImage(1);
-  });
   
   document.addEventListener('click', function(e) {
     if (e.target.matches('.gallery-item img')) {
       e.preventDefault();
       openLightbox(e.target);
+    }
+    if (e.target.matches('.lightbox-overlay, .lightbox-close')) {
+      closeLightbox();
     }
   });
 </script>
@@ -830,19 +502,14 @@ layout: default
         <div class="chat-info">
           <div class="chat-name">Александр</div>
           <div class="chat-status status-online" id="status-text">
-            <span class="online-dot" id="status-dot"></span>
-            В сети
+            <span class="online-dot"></span>В сети
           </div>
         </div>
         <span class="chat-arrow">↓</span>
       </summary>
       <div class="chat-options">
-        <a href="https://t.me/AlexDrog81 " class="chat-btn telegram" target="_blank">
-          📱 Telegram
-        </a>
-        <a href="viber://chat?number=375297256982" class="chat-btn viber">
-          💬 Viber
-        </a>
+        <a href="https://t.me/AlexDrog81 " class="chat-btn telegram" target="_blank">📱 Telegram</a>
+        <a href="viber://chat?number=375297256982" class="chat-btn viber">💬 Viber</a>
       </div>
     </details>
     <p style="text-align: center; margin-top: 8px; font-size: 0.9rem; color: var(--text); opacity: 0.8;">
@@ -857,8 +524,8 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=г.%20Дрогичин%2C%20ул.%20Ленина%2C%20141%20а">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=г.%20Дрогичин%2C%20ул.%20Ленина%2C%20141%20а">Google Maps</a>
     </div>
   </div>
 </div>
@@ -866,7 +533,6 @@ layout: default
 <a href="./uslugi/" class="btn btn-large">Прайс и услуги</a>
 
 <h2>Режим работы:</h2>
-
 <p>
 🕐 Вт-Пт: 10:00-18:00<br>
 🕐 Обед: 12:00-13:00<br>
@@ -884,13 +550,11 @@ layout: default
   <div class="gallery-grid">
     <div class="gallery-item">
       <div class="label-red">🔴 ДО</div>
-      <img src="{{ work.before_img | relative_url }}" alt="До ремонта: {{ work.title }}">
-      <p>{{ work.desc_before | default: "До ремонта" }}</p>
+      <img src="{{ work.before_img | relative_url }}" alt="До ремонта">
     </div>
     <div class="gallery-item">
       <div class="label-green">🟢 ПОСЛЕ</div>
-      <img src="{{ work.after_img | relative_url }}" alt="После ремонта: {{ work.title }}">
-      <p>{{ work.desc_after | default: "После ремонта" }}</p>
+      <img src="{{ work.after_img | relative_url }}" alt="После ремонта">
     </div>
   </div>
 </details>
@@ -901,7 +565,6 @@ layout: default
 {% endif %}
 
 <h2>Почему обращаются ко мне</h2>
-
 <p>
 ✅ <strong>Бесплатная диагностика</strong> — платишь только за ремонт<br>
 ✅ <strong>Гарантия</strong> — от 1 месяца на все виды работ<br>
@@ -909,31 +572,24 @@ layout: default
 ✅ <strong>Сложные случаи</strong> — то, что отказались делать другие
 </p>
 
-<div id="lightbox" class="lightbox-overlay" onclick="closeLightbox(event)">
-  <div class="lightbox-container" onclick="event.stopPropagation()">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <span class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</span>
-    <img id="lightbox-img" class="lightbox-img" src="" alt="">
-    <span class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</span>
-    <div id="lightbox-caption" class="lightbox-caption"></div>
-  </div>
+<div id="lightbox" class="lightbox-overlay">
+  <span class="lightbox-close" style="position:absolute;top:20px;right:20px;color:white;font-size:40px;z-index:10001;">&times;</span>
+  <img id="lightbox-img" style="max-width:95%;max-height:80vh;">
 </div>
 
 <div class="site-footer-stats">
   <div class="metrika-informer">
-    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer " target="_blank" rel="nofollow">
-      <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews " 
-           style="width:88px; height:31px; border:0;" 
-           alt="Яндекс.Метрика" />
+    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer" target="_blank" rel="nofollow">
+      <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика">
     </a>
   </div>
   
-  <div class="footer-text">
+  <div style="color: var(--text); font-size: 0.875rem; line-height: 1.6;">
     Разработка и сопровождение<br>
-    <a href="tel:+375292065065" class="footer-phone">📞 +375 29 2 065 065</a>
+    <a href="tel:+375292065065" style="color: var(--btn-bg); text-decoration: none; font-weight: 600; font-size: 1rem;">📞 +375 29 2 065 065</a>
   </div>
   
-  <div class="online-now" title="Количество посетителей на сайте прямо сейчас">
+  <div class="online-now">
     Сейчас онлайн: <span id="online-count">1</span>&nbsp;чел.
   </div>
 </div>
