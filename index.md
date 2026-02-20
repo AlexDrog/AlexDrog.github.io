@@ -2,26 +2,34 @@
 layout: default
 ---
 
-<!-- === 1. НЕМЕДЛЕННАЯ УСТАНОВКА ТЕМЫ (до всего остального) === -->
+<!-- 1. СКРИПТ ТЕМЫ - САМЫЙ ПЕРВЫЙ, до стилей и контента -->
 <script>
+  // Немедленная установка темы (до отрисовки страницы)
   (function() {
-    // Устанавливаем тему немедленно
-    const savedTheme = localStorage.getItem('theme');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (systemDark ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
-    
-    // Глобальная функция для кнопки
-    window.toggleTheme = function() {
-      const current = document.documentElement.getAttribute('data-theme');
-      const newTheme = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+    try {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch(e) {
+      console.error('Theme init error:', e);
+    }
+  })();
+
+  // Глобальная функция для кнопки (доступна сразу)
+  window.toggleTheme = function() {
+    try {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
       
       const btn = document.getElementById('theme-toggle');
-      if (btn) btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    };
-  })();
+      if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
+    } catch(e) {
+      console.error('Toggle error:', e);
+    }
+  };
 </script>
 
 <style>
@@ -594,8 +602,8 @@ layout: default
   }
 </style>
 
-<!-- Кнопка без inline onclick -->
-<button id="theme-toggle">🌙</button>
+<!-- 2. КНОПКА С INLINE ONCLICK -->
+<button onclick="toggleTheme()" id="theme-toggle">🌙</button>
 
 <script type="module">
   // === FIREBASE: РЕАЛЬНЫЙ СЧЁТЧИК ОНЛАЙН-ПОСЕТИТЕЛЕЙ ===
@@ -645,17 +653,14 @@ layout: default
 </script>
 
 <script>
-  // === ОСНОВНЫЕ СКРИПТЫ ===
+  // 3. ОСТАЛЬНЫЕ СКРИПТЫ
   
-  // Установка правильной иконки на кнопке при загрузке
+  // Установка правильной иконки на кнопке
   document.addEventListener('DOMContentLoaded', function() {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
     const btn = document.getElementById('theme-toggle');
-    if (btn) {
-      btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-      
-      // Назначаем обработчик клика
-      btn.addEventListener('click', toggleTheme);
+    const current = document.documentElement.getAttribute('data-theme');
+    if (btn && current) {
+      btn.textContent = current === 'dark' ? '☀️' : '🌙';
     }
     
     // Статус мастера
@@ -680,7 +685,7 @@ layout: default
     }
   });
   
-  // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА МАСТЕРА ===
+  // ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА МАСТЕРА
   function checkOnlineStatus() {
     const now = new Date();
     const day = now.getDay();
@@ -745,7 +750,7 @@ layout: default
     return { isOnline, statusText };
   }
   
-  // === LIGHTBOX ===
+  // LIGHTBOX
   let currentImageIndex = 0;
   let currentGalleryImages = [];
   
