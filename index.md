@@ -579,7 +579,7 @@ layout: default
   const firebaseConfig = {
     apiKey: "AIzaSyDgSGIhDkfu1_l0Ryg0MeiLfVxp-lgiSsU",
     authDomain: "alexdrog.firebaseapp.com",
-    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app",
+    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app ",
     projectId: "alexdrog",
     storageBucket: "alexdrog.firebasestorage.app",
     messagingSenderId: "33899135860",
@@ -587,8 +587,8 @@ layout: default
     measurementId: "G-KJ7JQ8R476"
   };
 
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js ";
+  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js ";
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
@@ -620,7 +620,7 @@ layout: default
   // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА МАСТЕРА ПО РАСПИСАНИЮ ===
   function checkOnlineStatus() {
     const now = new Date();
-    const day = now.getDay();
+    const day = now.getDay(); // 0=Вс, 1=Пн, 2=Вт, 3=Ср, 4=Чт, 5=Пт, 6=Сб
     const hour = now.getHours();
     const minute = now.getMinutes();
     const time = hour + minute / 60;
@@ -629,10 +629,12 @@ layout: default
     let statusText = "";
     
     if (day === 1) {
+      // Понедельник - всегда выходной
       isOnline = false;
-      statusText = "Сегодня выходной, отвечу завтра";
+      statusText = "Сегодня выходной, отвечу завтра с 10:00";
     }
     else if (day >= 2 && day <= 5) {
+      // Вторник-пятница: 10:00-18:00 (обед 12:00-13:00)
       if (time >= 10 && time < 12) {
         isOnline = true;
         statusText = "В сети";
@@ -642,18 +644,48 @@ layout: default
       } else if (time >= 12 && time < 13) {
         isOnline = false;
         statusText = "Обеденный перерыв до 13:00";
-      } else {
+      } else if (time < 10) {
+        // Утро перед началом работы - сегодня ещё будет работа
         isOnline = false;
-        statusText = "Не в сети, отвечу завтра с 10:00";
+        statusText = "Начинаю работу сегодня в 10:00";
+      } else {
+        // После 18:00
+        isOnline = false;
+        if (day === 5) {
+          // Пятница вечер → следующий рабочий день суббота
+          statusText = "Отвечу завтра (суббота) с 10:00";
+        } else {
+          // Вт-Чт вечер → завтра
+          statusText = "Отвечу завтра с 10:00";
+        }
       }
     }
-    else if (day === 0 || day === 6) {
+    else if (day === 6) {
+      // Суббота: 10:00-14:00
       if (time >= 10 && time < 14) {
         isOnline = true;
         statusText = "В сети";
-      } else {
+      } else if (time < 10) {
         isOnline = false;
-        statusText = "Не в сети, приём завтра с 10:00";
+        statusText = "Начинаю работу сегодня в 10:00";
+      } else {
+        // После 14:00 в субботу → воскресенье
+        isOnline = false;
+        statusText = "Отвечу завтра (воскресенье) с 10:00";
+      }
+    }
+    else if (day === 0) {
+      // Воскресенье: 10:00-14:00
+      if (time >= 10 && time < 14) {
+        isOnline = true;
+        statusText = "В сети";
+      } else if (time < 10) {
+        isOnline = false;
+        statusText = "Начинаю работу сегодня в 10:00";
+      } else {
+        // После 14:00 в воскресенье → понедельник выходной → вторник
+        isOnline = false;
+        statusText = "Отвечу во вторник с 10:00";
       }
     }
     
@@ -776,7 +808,7 @@ layout: default
         <span class="chat-arrow">↓</span>
       </summary>
       <div class="chat-options">
-        <a href="https://t.me/AlexDrog81" class="chat-btn telegram" target="_blank">
+        <a href="https://t.me/AlexDrog81 " class="chat-btn telegram" target="_blank">
           📱 Telegram
         </a>
         <a href="viber://chat?number=375297256982" class="chat-btn viber">
@@ -796,8 +828,8 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a>
     </div>
   </div>
 </div>
@@ -860,8 +892,8 @@ layout: default
 
 <div class="site-footer-stats">
   <div class="metrika-informer">
-    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer" target="_blank" rel="nofollow">
-      <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews" 
+    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer " target="_blank" rel="nofollow">
+      <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews " 
            style="width:88px; height:31px; border:0;" 
            alt="Яндекс.Метрика" 
            title="Сейчас онлайн: посетителей / просмотров за сегодня" />
