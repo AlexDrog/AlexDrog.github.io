@@ -2,6 +2,28 @@
 layout: default
 ---
 
+<!-- === 1. НЕМЕДЛЕННАЯ УСТАНОВКА ТЕМЫ (до всего остального) === -->
+<script>
+  (function() {
+    // Устанавливаем тему немедленно
+    const savedTheme = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = savedTheme || (systemDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+    
+    // Глобальная функция для кнопки
+    window.toggleTheme = function() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      
+      const btn = document.getElementById('theme-toggle');
+      if (btn) btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    };
+  })();
+</script>
+
 <style>
   :root {
     --bg: #ffffff;
@@ -572,17 +594,8 @@ layout: default
   }
 </style>
 
-<!-- === НЕМЕДЛЕННАЯ УСТАНОВКА ТЕМЫ (до рендеринга контента) === -->
-<script>
-  (function() {
-    const savedTheme = localStorage.getItem('theme');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const theme = savedTheme || (systemDark ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme', theme);
-  })();
-</script>
-
-<button onclick="toggleTheme()" id="theme-toggle">🌙</button>
+<!-- Кнопка без inline onclick -->
+<button id="theme-toggle">🌙</button>
 
 <script type="module">
   // === FIREBASE: РЕАЛЬНЫЙ СЧЁТЧИК ОНЛАЙН-ПОСЕТИТЕЛЕЙ ===
@@ -632,7 +645,42 @@ layout: default
 </script>
 
 <script>
-  // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА МАСТЕРА ПО РАСПИСАНИЮ ===
+  // === ОСНОВНЫЕ СКРИПТЫ ===
+  
+  // Установка правильной иконки на кнопке при загрузке
+  document.addEventListener('DOMContentLoaded', function() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const btn = document.getElementById('theme-toggle');
+    if (btn) {
+      btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+      
+      // Назначаем обработчик клика
+      btn.addEventListener('click', toggleTheme);
+    }
+    
+    // Статус мастера
+    const status = checkOnlineStatus();
+    const avatar = document.getElementById('chat-avatar');
+    const dot = document.getElementById('status-dot');
+    const text = document.getElementById('status-text');
+    
+    if (avatar && dot && text) {
+      if (status.isOnline) {
+        avatar.classList.add('online');
+        avatar.classList.remove('offline');
+        dot.className = 'online-dot';
+        text.className = 'chat-status status-online';
+      } else {
+        avatar.classList.add('offline');
+        avatar.classList.remove('online');
+        dot.className = 'offline-dot';
+        text.className = 'chat-status status-offline';
+      }
+      text.innerHTML = '<span id="status-dot" class="' + (status.isOnline ? 'online-dot' : 'offline-dot') + '"></span>' + status.statusText;
+    }
+  });
+  
+  // === ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА МАСТЕРА ===
   function checkOnlineStatus() {
     const now = new Date();
     const day = now.getDay();
@@ -695,56 +743,6 @@ layout: default
     }
     
     return { isOnline, statusText };
-  }
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    // Установка статуса мастера
-    const status = checkOnlineStatus();
-    const avatar = document.getElementById('chat-avatar');
-    const dot = document.getElementById('status-dot');
-    const text = document.getElementById('status-text');
-    
-    if (avatar && dot && text) {
-      if (status.isOnline) {
-        avatar.classList.add('online');
-        avatar.classList.remove('offline');
-        dot.className = 'online-dot';
-        text.className = 'chat-status status-online';
-      } else {
-        avatar.classList.add('offline');
-        avatar.classList.remove('online');
-        dot.className = 'offline-dot';
-        text.className = 'chat-status status-offline';
-      }
-      text.innerHTML = '<span id="status-dot" class="' + (status.isOnline ? 'online-dot' : 'offline-dot') + '"></span>' + status.statusText;
-    }
-    
-    // Обновление иконки кнопки темы после загрузки DOM
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-  });
-  
-  // === УПРАВЛЕНИЕ ТЕМОЙ ===
-  const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
-  
-  function applyTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    const btn = document.getElementById('theme-toggle');
-    if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
-  }
-  
-  systemDark.addEventListener('change', (e) => {
-    if (!localStorage.getItem('theme')) {
-      applyTheme(e.matches ? 'dark' : 'light');
-    }
-  });
-  
-  function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    const newTheme = current === 'dark' ? 'light' : 'dark';
-    applyTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
   }
   
   // === LIGHTBOX ===
