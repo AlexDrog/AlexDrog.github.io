@@ -5,46 +5,41 @@ permalink: /uslugi/
 ---
 
 <style>
-/* === ПЕРЕМЕННЫЕ === */
+/* === ПЕРЕМЕННЫЕ — мягкие цвета, нет резкой черноты === */
 :root {
-  --bg: #f8fafc;
-  --bg-card: #ffffff;
-  --bg-secondary: #f1f5f9;
-  --bg-hover: #e2e8f0;
-  --text: #1e293b;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --border: #cbd5e1;
-  --accent: #3b82f6;
+  --bg: #f1f5f9;           /* Мягкий серо-голубой фон */
+  --bg-card: #ffffff;       /* Белые карточки */
+  --bg-secondary: #f8fafc;  /* Очень светлый для заголовков */
+  --bg-hover: #e2e8f0;      /* Hover — мягкий серый */
+  --text: #475569;          /* Основной текст — серо-синий (не черный!) */
+  --text-secondary: #64748b;/* Вторичный — серый */
+  --text-muted: #94a3b8;    /* Приглушенный */
+  --border: #e2e8f0;        /* Границы — светло-серые */
+  --accent: #3b82f6;        /* Акцент — синий */
   --accent-hover: #2563eb;
-  --shadow: rgba(0,0,0,0.08);
-  --shadow-hover: rgba(0,0,0,0.12);
+  --shadow: rgba(0,0,0,0.04); /* Мягкая тень */
   --success: #10b981;
-  --error-bg: #fee2e2;
-  --error-text: #991b1b;
-  --gradient-start: #3b82f6;
-  --gradient-end: #6366f1;
+  --error-bg: #fef2f2;
+  --error-text: #dc2626;
+  --gradient-start: #60a5fa;
+  --gradient-end: #818cf8;
 }
 
+/* Темная тема */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0f172a;
     --bg-card: #1e293b;
     --bg-secondary: #334155;
     --bg-hover: #475569;
-    --text: #f8fafc;
+    --text: #e2e8f0;        /* Светло-серый, не белый */
     --text-secondary: #94a3b8;
     --text-muted: #64748b;
     --border: #334155;
     --accent: #60a5fa;
-    --accent-hover: #3b82f6;
-    --shadow: rgba(0,0,0,0.3);
-    --shadow-hover: rgba(0,0,0,0.5);
-    --success: #34d399;
+    --shadow: rgba(0,0,0,0.2);
     --error-bg: #450a0a;
     --error-text: #fca5a5;
-    --gradient-start: #2563eb;
-    --gradient-end: #4f46e5;
   }
 }
 
@@ -52,74 +47,60 @@ html[data-theme="dark"] {
   --bg: #0f172a;
   --bg-card: #1e293b;
   --bg-secondary: #334155;
-  --bg-hover: #475569;
-  --text: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text: #e2e8f0;
   --border: #334155;
-  --accent: #60a5fa;
-  --accent-hover: #3b82f6;
-  --shadow: rgba(0,0,0,0.3);
-  --shadow-hover: rgba(0,0,0,0.5);
-  --success: #34d399;
-  --error-bg: #450a0a;
-  --error-text: #fca5a5;
-  --gradient-start: #2563eb;
-  --gradient-end: #4f46e5;
 }
 
 body {
   background-color: var(--bg);
   color: var(--text);
-  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
 }
 
-/* === НАВИГАЦИЯ === */
+/* === НАВИГАЦИЯ — компактная === */
 .category-nav {
   position: sticky;
-  top: 80px;
+  top: 70px;
   background: var(--bg-card);
-  padding: 1rem;
-  border-radius: 16px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 12px var(--shadow);
+  padding: 0.75rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px var(--shadow);
   z-index: 100;
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
   justify-content: center;
   border: 1px solid var(--border);
-  max-height: 200px;
+  max-height: 160px;
   overflow-y: auto;
 }
 
 .category-nav a {
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.9rem;
   background: var(--bg-secondary);
-  border-radius: 50px;
+  border-radius: 20px;
   text-decoration: none;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   white-space: nowrap;
-  color: var(--text);
+  color: var(--text-secondary);
   font-weight: 500;
   transition: all 0.2s;
   border: 1px solid var(--border);
-  touch-action: manipulation;
 }
 
-.category-nav a:hover, .category-nav a:active {
+.category-nav a:hover {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
-  transform: translateY(-1px);
 }
 
 /* === АККОРДЕОН === */
 .category-accordion {
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px var(--shadow);
+  box-shadow: 0 1px 3px var(--shadow);
   border: 1px solid var(--border);
   background: var(--bg-card);
 }
@@ -131,30 +112,23 @@ body {
 .category-header {
   background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
   color: white;
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1rem;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 0.95rem;
   border: none;
   width: 100%;
   text-align: left;
-  transition: all 0.2s;
   margin: 0;
-  min-height: 56px;
-}
-
-.category-header:active {
-  opacity: 0.9;
 }
 
 .category-header .arrow {
   transition: transform 0.3s;
-  font-size: 0.8rem;
-  flex-shrink: 0;
-  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.8;
 }
 
 .category-header.active .arrow {
@@ -164,81 +138,86 @@ body {
 .category-content {
   display: none;
   background: var(--bg-card);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .category-content.active {
   display: block;
 }
 
-/* === ТАБЛИЦА === */
+/* === ТАБЛИЦА — МОБИЛЬНАЯ КОМПАКТНАЯ === */
 .price-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* Минимальная ширина для читаемости */
+  font-size: 0.9rem;
 }
 
 .price-table th {
   background: var(--bg-secondary);
-  padding: 0.875rem 1rem;
+  padding: 0.625rem 0.75rem;
   text-align: left;
   font-weight: 600;
-  color: var(--text);
-  border-bottom: 2px solid var(--border);
-  font-size: 0.9rem;
-  white-space: nowrap;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .price-table td {
-  padding: 1rem;
+  padding: 0.75rem;
   border-bottom: 1px solid var(--border);
   color: var(--text);
-  vertical-align: middle;
-  font-size: 0.95rem;
-}
-
-.price-table tbody tr:active {
-  background-color: var(--bg-hover);
+  vertical-align: top;
 }
 
 .price-table tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* === УСЛУГА === */
+/* Услуга — компактно */
 .service-name {
   color: var(--accent);
   cursor: pointer;
   font-weight: 600;
-  text-decoration: underline;
-  text-decoration-color: transparent;
-  transition: all 0.2s;
-  display: inline;
-  padding: 0.25rem 0;
+  text-decoration: none;
+  display: block;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
 }
 
-.service-name:hover, .service-name:active {
-  text-decoration-color: var(--accent);
-  color: var(--accent-hover);
+.service-name:active {
+  opacity: 0.7;
+}
+
+/* Цена — выделена */
+td strong {
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Примечание — мелкое */
+td:last-child {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
 }
 
 /* === ПОИСК === */
 .search-container {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   background: var(--bg-card);
-  padding: 1.25rem;
-  border-radius: 16px;
+  padding: 1rem;
+  border-radius: 12px;
   border: 1px solid var(--border);
-  box-shadow: 0 2px 8px var(--shadow);
+  box-shadow: 0 1px 3px var(--shadow);
 }
 
 .search-container label {
   display: block;
-  color: var(--text);
+  color: var(--text-secondary);
   font-weight: 600;
-  margin-bottom: 0.75rem;
-  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
 .search-wrapper {
@@ -247,21 +226,19 @@ body {
 
 #searchInput {
   width: 100%;
-  padding: 0.875rem 2.75rem 0.875rem 1rem;
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  font-size: 16px; /* Предотвращает зум на iOS */
-  background: var(--bg);
+  padding: 0.625rem 2.5rem 0.625rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px; /* Анти-зум iOS */
+  background: var(--bg-secondary);
   color: var(--text);
-  transition: all 0.2s;
   font-family: inherit;
-  -webkit-appearance: none;
 }
 
 #searchInput:focus {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  background: var(--bg-card);
 }
 
 #searchInput::placeholder {
@@ -270,51 +247,41 @@ body {
 
 #clearBtn {
   position: absolute;
-  right: 10px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   background: var(--text-muted);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px;
   display: none;
   align-items: center;
   justify-content: center;
-  padding: 0;
-  touch-action: manipulation;
-}
-
-#clearBtn:active {
-  transform: translateY(-50%) scale(0.95);
 }
 
 .search-stats {
-  margin-top: 0.75rem;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  margin-top: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
 .no-results {
-  margin-top: 1rem;
-  padding: 1rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
   background: var(--error-bg);
-  border-radius: 10px;
+  border-radius: 8px;
   color: var(--error-text);
   text-align: center;
   display: none;
+  font-size: 0.9rem;
   border: 1px solid var(--border);
-  font-weight: 500;
-  font-size: 0.95rem;
 }
 
-/* === МОДАЛЬНОЕ ОКНО === */
+/* === МОДАЛЬНОЕ ОКНО (снизу) === */
 .messenger-modal {
   display: none;
   position: fixed;
@@ -322,11 +289,10 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.5);
   z-index: 1000;
   justify-content: center;
-  align-items: flex-end; /* Прижимаем к низу на мобильных */
-  padding: 0;
+  align-items: flex-end;
 }
 
 .messenger-modal.active {
@@ -335,15 +301,14 @@ body {
 
 .messenger-content {
   background: var(--bg-card);
-  padding: 1.5rem;
-  border-radius: 20px 20px 0 0; /* Скругление только сверху на мобильных */
+  padding: 1.25rem;
+  border-radius: 16px 16px 0 0;
   width: 100%;
-  max-height: 90vh;
+  max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 -10px 40px var(--shadow-hover);
   border: 1px solid var(--border);
   border-bottom: none;
-  animation: slideUp 0.3s ease-out;
+  animation: slideUp 0.25s ease-out;
 }
 
 @keyframes slideUp {
@@ -352,7 +317,7 @@ body {
 }
 
 .messenger-title {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: var(--text);
@@ -362,40 +327,33 @@ body {
 .messenger-service {
   color: var(--accent);
   font-weight: 600;
-  margin-bottom: 1.25rem;
-  padding: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
   background: var(--bg-secondary);
-  border-radius: 10px;
-  font-size: 1rem;
-  word-break: break-word;
+  border-radius: 8px;
+  font-size: 0.95rem;
   text-align: center;
 }
 
 .messenger-buttons {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.625rem;
 }
 
 .messenger-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  padding: 1rem;
-  border-radius: 12px;
+  gap: 0.5rem;
+  padding: 0.875rem;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: 600;
   color: white;
-  transition: transform 0.1s;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
-  min-height: 52px; /* Удобно для пальца */
-  touch-action: manipulation;
-}
-
-.messenger-btn:active {
-  transform: scale(0.98);
+  font-size: 0.95rem;
+  min-height: 48px;
 }
 
 .btn-tg { background: #0088cc; }
@@ -404,49 +362,55 @@ body {
 .btn-phone { background: var(--success); }
 .btn-cancel { 
   background: var(--bg-secondary); 
-  color: var(--text);
-  border: 2px solid var(--border);
-  margin-top: 0.5rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  margin-top: 0.25rem;
 }
 
-/* === АДАПТИВНОСТЬ ДЛЯ ПК === */
-@media (min-width: 769px) {
+/* === ДЕСКТОП === */
+@media (min-width: 768px) {
   .category-nav {
-    padding: 1.25rem;
-    gap: 0.75rem;
-    top: 90px;
+    padding: 1rem;
+    gap: 0.625rem;
+    top: 80px;
   }
   
   .category-nav a {
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 1.1rem;
     font-size: 0.9rem;
   }
   
   .category-header {
-    padding: 1.25rem 1.5rem;
-    font-size: 1.1rem;
+    padding: 1rem 1.25rem;
+    font-size: 1.05rem;
   }
   
   .price-table {
-    min-width: 100%;
+    font-size: 1rem;
   }
   
-  .price-table th,
+  .price-table th {
+    padding: 0.875rem 1rem;
+    font-size: 0.85rem;
+  }
+  
   .price-table td {
+    padding: 1rem;
+  }
+  
+  .search-container {
     padding: 1.25rem;
-    font-size: 1rem;
   }
   
   .messenger-modal {
     align-items: center;
     padding: 1rem;
-    background: rgba(0,0,0,0.5);
   }
   
   .messenger-content {
-    border-radius: 20px;
-    max-width: 420px;
-    max-height: 85vh;
+    border-radius: 16px;
+    max-width: 400px;
+    max-height: 90vh;
     animation: fadeIn 0.2s;
   }
   
@@ -456,40 +420,33 @@ body {
   }
 }
 
-/* === МОБИЛЬНЫЕ ОПТИМИЗАЦИИ === */
-@media (max-width: 480px) {
-  .category-nav {
-    top: 70px;
-    padding: 0.75rem;
-    gap: 0.4rem;
-    border-radius: 12px;
+/* === МАЛЕНЬКИЕ МОБИЛЬНЫЕ === */
+@media (max-width: 380px) {
+  .price-table {
+    font-size: 0.85rem;
   }
   
-  .category-nav a {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.875rem;
-  }
-  
-  .search-container {
-    padding: 1rem;
-    border-radius: 12px;
-  }
-  
-  .price-table th,
   .price-table td {
-    padding: 0.75rem 0.625rem;
+    padding: 0.625rem 0.5rem;
+  }
+  
+  .service-name {
     font-size: 0.9rem;
   }
   
+  td:last-child {
+    font-size: 0.8rem;
+  }
+  
   .category-header {
-    padding: 0.875rem 1rem;
+    padding: 0.75rem 0.875rem;
+    font-size: 0.9rem;
   }
 }
 </style>
 
 # 📋 Прайс-лист
 
-<!-- НАВИГАЦИЯ -->
 <div class="category-nav">
   {% assign sorted_prices = site.prices | sort: 'path' %}
   {% for category in sorted_prices %}
@@ -497,18 +454,17 @@ body {
   {% endfor %}
 </div>
 
-<!-- ПОИСК -->
 <div class="search-container">
-  <label>🔍 Быстрый поиск услуги</label>
+  <label>🔍 Поиск услуги</label>
   <div class="search-wrapper">
-    <input type="text" id="searchInput" placeholder="Например: замена экрана..." autocomplete="off">
-    <button id="clearBtn" onclick="clearSearch()" aria-label="Очистить">✕</button>
+    <input type="text" id="searchInput" placeholder="Например: экран, батарея..." autocomplete="off">
+    <button id="clearBtn" onclick="clearSearch()">✕</button>
   </div>
   <div class="search-stats" id="searchStats" style="display: none;">
-    <span>📊 Найдено: <strong id="foundCount">0</strong> услуг</span>
+    Найдено: <span id="foundCount">0</span>
   </div>
   <div class="no-results" id="noResults">
-    ❌ Ничего не найдено. Попробуйте: <b>ремонт</b>, <b>экран</b>, <b>Windows</b>
+    Ничего не найдено. Попробуйте: <b>ремонт</b>, <b>замена</b>
   </div>
 </div>
 
@@ -522,11 +478,6 @@ body {
   </button>
   <div class="category-content">
     <table class="price-table">
-      <colgroup>
-        <col style="width:55%">
-        <col style="width:20%">
-        <col style="width:25%">
-      </colgroup>
       <thead>
         <tr>
           <th>Услуга</th>
@@ -542,8 +493,8 @@ body {
               {{ service.name }}
             </span>
           </td>
-          <td><strong style="color: var(--accent); white-space: nowrap;">{{ service.price }}</strong></td>
-          <td style="color: var(--text-secondary); font-size: 0.9rem;">{{ service.note }}</td>
+          <td><strong>{{ service.price }}</strong></td>
+          <td>{{ service.note }}</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -553,62 +504,44 @@ body {
 {% endfor %}
 
 {% if site.prices.size == 0 %}
-<p style="text-align: center; padding: 2rem; color: var(--text-secondary); background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); margin: 2rem 0;">
+<p style="text-align: center; padding: 2rem; color: var(--text-secondary); background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border); margin: 1rem 0; font-size: 0.95rem;">
   📝 Прайс-лист обновляется. Позвоните для уточнения цен.
 </p>
 {% endif %}
 
-<div style="text-align: center; margin: 2rem 0;">
-  <a href="{{ site.baseurl }}/" style="display: inline-block; padding: 0.875rem 1.5rem; background: var(--bg-secondary); color: var(--text); text-decoration: none; border-radius: 10px; border: 1px solid var(--border); font-weight: 500; margin: 0.25rem;">← На главную</a>
-  <a href="tel:+375297256982" style="display: inline-block; padding: 0.875rem 1.5rem; background: var(--success); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; margin: 0.25rem;">📞 Позвонить</a>
+<div style="text-align: center; margin: 1.5rem 0;">
+  <a href="{{ site.baseurl }}/" style="display: inline-block; padding: 0.75rem 1.25rem; background: var(--bg-card); color: var(--text); text-decoration: none; border-radius: 8px; border: 1px solid var(--border); font-weight: 500; margin: 0.25rem; font-size: 0.9rem;">← На главную</a>
+  <a href="tel:+375297256982" style="display: inline-block; padding: 0.75rem 1.25rem; background: var(--success); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; margin: 0.25rem; font-size: 0.9rem;">📞 Позвонить</a>
 </div>
 
-<!-- МОДАЛЬНОЕ ОКНО -->
 <div id="messengerModal" class="messenger-modal" onclick="closeMessengerModal(event)">
   <div class="messenger-content" onclick="event.stopPropagation()">
-    <div class="messenger-title">📱 Выберите способ связи</div>
+    <div class="messenger-title">Выберите способ связи</div>
     <div class="messenger-service" id="modalServiceName">Услуга</div>
     
     <div class="messenger-buttons">
-      <a href="#" id="tgLink" class="messenger-btn btn-tg" target="_blank">
-        <span>✈️</span> Telegram
-      </a>
-      <a href="#" id="viberLink" class="messenger-btn btn-viber" target="_blank">
-        <span>📞</span> Viber
-      </a>
-      <a href="#" id="waLink" class="messenger-btn btn-whatsapp" target="_blank">
-        <span>💬</span> WhatsApp
-      </a>
-      <a href="#" id="phoneLink" class="messenger-btn btn-phone">
-        <span>📱</span> Позвонить
-      </a>
-      <button onclick="closeMessengerModal()" class="messenger-btn btn-cancel">
-        ✕ Отмена
-      </button>
+      <a href="#" id="tgLink" class="messenger-btn btn-tg" target="_blank">Telegram</a>
+      <a href="#" id="viberLink" class="messenger-btn btn-viber" target="_blank">Viber</a>
+      <a href="#" id="waLink" class="messenger-btn btn-whatsapp" target="_blank">WhatsApp</a>
+      <a href="#" id="phoneLink" class="messenger-btn btn-phone">Позвонить</a>
+      <button onclick="closeMessengerModal()" class="messenger-btn btn-cancel">Отмена</button>
     </div>
   </div>
 </div>
 
 <script>
-// Аккордеон
 document.addEventListener('DOMContentLoaded', function() {
   const headers = document.querySelectorAll('.category-header');
-  
   headers.forEach(header => {
     header.addEventListener('click', () => {
-      const isActive = header.classList.toggle('active');
-      const content = header.nextElementSibling;
-      content.classList.toggle('active');
+      header.classList.toggle('active');
+      header.nextElementSibling.classList.toggle('active');
     });
   });
 });
 
-// Поиск
 const searchInput = document.getElementById('searchInput');
 const clearBtn = document.getElementById('clearBtn');
-const statsDiv = document.getElementById('searchStats');
-const noResultsDiv = document.getElementById('noResults');
-const countSpan = document.getElementById('foundCount');
 
 function filterTables() {
   const searchTerm = searchInput.value.toLowerCase().trim();
@@ -656,14 +589,9 @@ function filterTables() {
     }
   });
   
-  if (searchTerm.length > 0) {
-    statsDiv.style.display = 'flex';
-    countSpan.textContent = totalFound;
-    noResultsDiv.style.display = hasAnyVisible ? 'none' : 'block';
-  } else {
-    statsDiv.style.display = 'none';
-    noResultsDiv.style.display = 'none';
-  }
+  document.getElementById('searchStats').style.display = searchTerm.length > 0 ? 'block' : 'none';
+  document.getElementById('foundCount').textContent = totalFound;
+  document.getElementById('noResults').style.display = (searchTerm.length > 0 && !hasAnyVisible) ? 'block' : 'none';
 }
 
 function clearSearch() {
@@ -672,33 +600,19 @@ function clearSearch() {
   searchInput.focus();
 }
 
-if (searchInput) {
-  searchInput.addEventListener('input', filterTables);
-  
-  searchInput.addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      filterTables();
-    }
-  });
-}
+searchInput.addEventListener('input', filterTables);
 
-// Модальное окно
 function openMessengerModal(serviceName, price) {
-  const modal = document.getElementById('messengerModal');
-  const serviceDiv = document.getElementById('modalServiceName');
-  
-  serviceDiv.textContent = price ? `${serviceName} (${price})` : serviceName;
-  
   const text = `Здравствуйте! Хочу заказать: ${serviceName}${price ? ' (' + price + ')' : ''}`;
-  const encodedText = encodeURIComponent(text);
+  const encoded = encodeURIComponent(text);
   
-  document.getElementById('tgLink').href = `https://t.me/alexdrog81?text=${encodedText}`;
-  document.getElementById('viberLink').href = `viber://chat?number=+375297256982&draft=${encodedText}`;
-  document.getElementById('waLink').href = `https://wa.me/375297256982?text=${encodedText}`;
+  document.getElementById('modalServiceName').textContent = price ? `${serviceName} (${price})` : serviceName;
+  document.getElementById('tgLink').href = `https://t.me/alexdrog81?text=${encoded}`;
+  document.getElementById('viberLink').href = `viber://chat?number=+375297256982&draft=${encoded}`;
+  document.getElementById('waLink').href = `https://wa.me/375297256982?text=${encoded}`;
   document.getElementById('phoneLink').href = `tel:+375297256982`;
   
-  modal.classList.add('active');
+  document.getElementById('messengerModal').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
@@ -709,24 +623,7 @@ function closeMessengerModal(event) {
   }
 }
 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeMessengerModal();
-  }
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMessengerModal();
 });
-
-// Закрытие по свайпу вниз на мобильных
-let touchStartY = 0;
-const modalContent = document.querySelector('.messenger-content');
-if (modalContent) {
-  modalContent.addEventListener('touchstart', e => {
-    touchStartY = e.touches[0].clientY;
-  });
-  modalContent.addEventListener('touchend', e => {
-    const touchEndY = e.changedTouches[0].clientY;
-    if (touchEndY - touchStartY > 100) { // Свайп вниз больше 100px
-      closeMessengerModal();
-    }
-  });
-}
 </script>
