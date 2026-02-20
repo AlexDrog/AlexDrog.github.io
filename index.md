@@ -3,7 +3,6 @@ layout: default
 ---
 
 <script>
-  // === ТЕМА: При открытии — системная, при переключении — временно ===
   (function() {
     const saved = sessionStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -22,25 +21,35 @@ layout: default
 </script>
 
 <style>
+  /* === ЕДИНАЯ ЦВЕТОВАЯ СХЕМА С УСЛУГАМИ === */
   :root {
-    --bg: #ffffff;
-    --text: #24292e;
-    --heading: #1a1a1a;
-    --link: #0366d6;
-    --border: #e1e4e8;
-    --card: #f6f8fa;
-    --btn-bg: #2ea44f;
+    --bg: #f8fafc;           /* Как в uslugi */
+    --bg-card: #ffffff;       /* Как в uslugi */
+    --bg-secondary: #f1f5f9;  /* Как в uslugi */
+    --text: #334155;          /* Как в uslugi */
+    --text-secondary: #64748b;
+    --heading: #1e293b;
+    --link: #3b82f6;          /* Синий как в uslugi */
+    --border: #e2e8f0;        /* Как в uslugi */
+    --accent: #3b82f6;        /* Синий акцент как в uslugi */
+    --btn-bg: #10b981;        /* Зеленый для кнопок */
     --btn-color: #ffffff;
+    --success: #10b981;
+    --shadow: rgba(0,0,0,0.04);
   }
   
   [data-theme="dark"] {
-    --bg: #0d1117;
-    --text: #c9d1d9;
-    --heading: #e6edf3;
-    --link: #58a6ff;
-    --border: #30363d;
-    --card: #161b22;
-    --btn-bg: #238636;
+    --bg: #0f172a;
+    --bg-card: #1e293b;
+    --bg-secondary: #334155;
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --heading: #f8fafc;
+    --link: #60a5fa;
+    --border: #334155;
+    --accent: #60a5fa;
+    --btn-bg: #059669;
+    --shadow: rgba(0,0,0,0.2);
   }
   
   body { 
@@ -49,17 +58,15 @@ layout: default
     transition: 0.3s;
     margin: 0;
     padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
   
   h1, h2, h3 { 
     color: var(--heading) !important; 
-    border-color: var(--border) !important; 
     line-height: 1.3;
   }
   
   a { color: var(--link) !important; }
-  .page-header { background: linear-gradient(120deg, #155799, #159957) !important; }
-  .main-content { background: var(--bg) !important; }
   
   .btn {
     display: inline-block;
@@ -67,9 +74,17 @@ layout: default
     margin: 5px;
     background-color: var(--btn-bg) !important;
     color: var(--btn-color) !important;
-    border-radius: 6px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   }
   
   .btn-large {
@@ -80,14 +95,16 @@ layout: default
     text-align: center;
     font-size: 1.1rem;
     padding: 14px 20px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
   }
   
   details {
-    background: var(--card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 12px;
     margin-bottom: 12px;
+    box-shadow: 0 1px 3px var(--shadow);
   }
   
   summary { 
@@ -108,18 +125,19 @@ layout: default
   .gallery-item { 
     text-align: center; 
     background: var(--bg); 
-    border-radius: 4px; 
+    border-radius: 8px; 
     overflow: hidden; 
+    border: 1px solid var(--border);
   }
   .label-red { 
-    background: #e74c3c; 
+    background: #ef4444; 
     color: white; 
     padding: 8px; 
     font-weight: bold; 
     font-size: 0.9rem;
   }
   .label-green { 
-    background: #27ae60; 
+    background: #10b981; 
     color: white; 
     padding: 8px; 
     font-weight: bold; 
@@ -137,25 +155,30 @@ layout: default
   
   .gallery-item img:hover { transform: scale(1.02); }
   
-  .highlight { color: #e94560; font-weight: bold; }
+  .highlight { color: #e85d04; font-weight: bold; }
   
   #theme-toggle {
     position: fixed;
     top: 15px;
     right: 15px;
     z-index: 9999;
-    background: var(--btn-bg);
-    color: var(--btn-color);
-    border: none;
+    background: var(--bg-card);
+    color: var(--text);
+    border: 1px solid var(--border);
     border-radius: 50%;
     width: 45px;
     height: 45px;
     font-size: 20px;
     cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 10px var(--shadow);
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s;
+  }
+  
+  #theme-toggle:hover {
+    transform: scale(1.1);
   }
   
   .photos-row { 
@@ -169,10 +192,11 @@ layout: default
   .chat-container { width: 100%; }
   
   .chat-details { 
-    background: var(--card); 
+    background: var(--bg-card); 
     border: 1px solid var(--border); 
-    border-radius: 30px; 
+    border-radius: 24px; 
     overflow: hidden; 
+    box-shadow: 0 2px 8px var(--shadow);
   }
   
   .chat-summary { 
@@ -191,36 +215,36 @@ layout: default
     object-fit: cover;
     object-position: center 30%;
     border: 3px solid var(--border);
-    flex-shrink: 0; /* Запрещаем сжимать на десктопе */
+    flex-shrink: 0;
   }
   
-  .chat-avatar.online { border-color: #2ea44f; }
-  .chat-avatar.offline { border-color: #8b949e; }
+  .chat-avatar.online { border-color: var(--success); }
+  .chat-avatar.offline { border-color: var(--text-secondary); }
   
   .chat-info { flex: 1; min-width: 0; }
   
   .chat-name { 
     color: var(--heading); 
     font-weight: 600; 
-    font-size: 1.05rem; 
+    font-size: 1.1rem; 
     margin-bottom: 4px;
   }
   
   .chat-status { 
-    font-size: 0.85rem; 
+    font-size: 0.9rem; 
     display: flex; 
     align-items: center; 
     gap: 6px; 
     font-weight: 500; 
   }
   
-  .status-online { color: #2ea44f; }
-  .status-offline { color: #8b949e; }
+  .status-online { color: var(--success); }
+  .status-offline { color: var(--text-secondary); }
   
   .online-dot {
     width: 8px;
     height: 8px;
-    background: #2ea44f;
+    background: var(--success);
     border-radius: 50%;
     animation: pulse 2s infinite;
     flex-shrink: 0;
@@ -229,7 +253,7 @@ layout: default
   .offline-dot {
     width: 8px;
     height: 8px;
-    background: #8b949e;
+    background: var(--text-secondary);
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -261,6 +285,11 @@ layout: default
     font-weight: 600; 
     color: white !important; 
     font-size: 0.9rem;
+    transition: transform 0.2s;
+  }
+  
+  .chat-btn:hover {
+    transform: translateY(-2px);
   }
   
   .chat-btn.telegram { background: linear-gradient(135deg, #0088cc, #00a8e8); }
@@ -274,8 +303,9 @@ layout: default
     object-fit: cover; 
     object-position: center 40%; 
     border-radius: 12px; 
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+    box-shadow: 0 4px 12px var(--shadow); 
     display: block;
+    border: 1px solid var(--border);
   }
   
   .photo-label { 
@@ -286,33 +316,33 @@ layout: default
     line-height: 1.4;
   }
   
-  .photo-label small { opacity: 0.7; font-size: 0.9em; }
+  .photo-label small { opacity: 0.7; font-size: 0.9em; color: var(--text-secondary); }
   
   .photo-links {
     margin-top: 0.5rem;
     font-size: 0.85rem;
-    color: var(--text-secondary);
   }
   
   .photo-links a { 
-    color: var(--link) !important; 
     text-decoration: none;
+    opacity: 0.8;
   }
   
   .site-footer-stats {
     margin-top: 4rem;
     padding: 2rem;
     text-align: center;
-    background: var(--card);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
+    box-shadow: 0 2px 8px var(--shadow);
   }
   
   .online-now {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: #2ea44f;
+    color: var(--success);
     font-size: 0.95rem;
     font-weight: 500;
     margin-top: 12px;
@@ -322,7 +352,7 @@ layout: default
     border: 1px solid var(--border);
   }
   
-  #online-count { color: #2ea44f; font-weight: 700; font-size: 1.1rem; }
+  #online-count { color: var(--success); font-weight: 700; font-size: 1.1rem; }
   
   .site-footer { display: none !important; }
   
@@ -355,13 +385,38 @@ layout: default
     justify-content: center;
   }
   
-  /* === МОБИЛЬНАЯ ВЕРСИЯ (исправлено) === */
+  /* === ПЛАВАЮЩАЯ КНОПКА ЗВОНКА (как на главной) === */
+  .floating-call-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  
+  .floating-call-btn:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+  
   @media (max-width: 768px) {
     h1 { 
       font-size: 1.5rem; 
       line-height: 1.25; 
       margin-bottom: 1rem;
-      word-wrap: break-word;
     }
     
     h2 { font-size: 1.25rem; }
@@ -374,14 +429,13 @@ layout: default
       margin: 1rem 0;
     }
     
-    /* ФИКС ВЫТЯНУТОГО АВАТАРА */
     .chat-avatar { 
       width: 60px; 
       height: 60px; 
-      min-width: 60px;  /* Фикс для Safari */
+      min-width: 60px;
       min-height: 60px;
-      flex-shrink: 0;   /* Запрещаем flexbox менять размер */
-      aspect-ratio: 1 / 1; /* Принудительно квадрат */
+      flex-shrink: 0;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
       border-radius: 50%;
     }
@@ -433,9 +487,17 @@ layout: default
       border-right: none;
       padding: 1.5rem 1rem;
     }
+    
+    /* На мобильных плавающая кнопка меньше */
+    .floating-call-btn {
+      width: 56px;
+      height: 56px;
+      font-size: 24px;
+      bottom: 1rem;
+      right: 1rem;
+    }
   }
   
-  /* Очень маленькие экраны */
   @media (max-width: 380px) {
     .chat-avatar {
       width: 52px;
@@ -450,6 +512,8 @@ layout: default
 </style>
 
 <button onclick="toggleTheme()" id="theme-toggle">🌙</button>
+
+<a href="tel:+375297256982" class="floating-call-btn" title="Позвонить">📞</a>
 
 <script type="module">
   const firebaseConfig = {
@@ -604,8 +668,8 @@ layout: default
         <a href="viber://chat?number=375297256982" class="chat-btn viber">💬 Viber</a>
       </div>
     </details>
-    <p style="text-align: center; margin-top: 8px; font-size: 0.9rem; color: var(--text); opacity: 0.8;">
-      Мастер по ремонту • <span style="color: #2ea44f;">Принимаю заказы</span>
+    <p style="text-align: center; margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary);">
+      Мастер по ремонту • <span style="color: var(--success);">Принимаю заказы</span>
     </p>
   </div>
   
@@ -653,7 +717,7 @@ layout: default
 {% endfor %}
 
 {% if works.size == 0 %}
-<p style="text-align: center; color: var(--text); opacity: 0.7;">Примеры работ скоро появятся...</p>
+<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Примеры работ скоро появятся...</p>
 {% endif %}
 
 <h2>Почему обращаются ко мне</h2>
@@ -678,7 +742,7 @@ layout: default
   
   <div style="color: var(--text); font-size: 0.875rem; line-height: 1.6;">
     Разработка и сопровождение<br>
-    <a href="tel:+375292065065" style="color: var(--btn-bg); text-decoration: none; font-weight: 600; font-size: 1rem;">📞 +375 29 2 065 065</a>
+    <a href="tel:+375292065065" style="color: var(--success); text-decoration: none; font-weight: 600; font-size: 1rem;">📞 +375 29 2 065 065</a>
   </div>
   
   <div class="online-now">
