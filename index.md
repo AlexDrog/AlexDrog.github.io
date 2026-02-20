@@ -2,22 +2,37 @@
 layout: default
 ---
 
-<!-- 1. СКРИПТ ТЕМЫ - САМЫЙ ПЕРВЫЙ, до стилей и контента -->
+<!-- СКРИПТ ТЕМЫ - САМЫЙ ПЕРВЫЙ -->
 <script>
-  // Немедленная установка темы (до отрисовки страницы)
+  console.log('=== THEME SCRIPT START ===');
+  
   (function() {
     try {
       const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const theme = saved || (prefersDark ? 'dark' : 'light');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      console.log('saved:', saved);
+      console.log('prefersDark:', prefersDark);
+      
+      let theme;
+      if (saved) {
+        theme = saved;
+        console.log('Using saved theme:', theme);
+      } else {
+        theme = prefersDark ? 'dark' : 'light';
+        console.log('Using system theme:', theme);
+      }
+      
       document.documentElement.setAttribute('data-theme', theme);
+      console.log('Theme set to:', document.documentElement.getAttribute('data-theme'));
+      
     } catch(e) {
-      console.error('Theme init error:', e);
+      console.error('Theme error:', e);
     }
   })();
 
-  // Глобальная функция для кнопки (доступна сразу)
   window.toggleTheme = function() {
+    console.log('Toggle clicked!');
     try {
       const current = document.documentElement.getAttribute('data-theme') || 'light';
       const next = current === 'dark' ? 'light' : 'dark';
@@ -26,10 +41,14 @@ layout: default
       
       const btn = document.getElementById('theme-toggle');
       if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
+      console.log('Toggled to:', next);
     } catch(e) {
       console.error('Toggle error:', e);
     }
   };
+  
+  console.log('toggleTheme exists:', typeof window.toggleTheme);
+  console.log('=== THEME SCRIPT END ===');
 </script>
 
 <style>
@@ -59,6 +78,8 @@ layout: default
     color: var(--text) !important;
     transition: 0.3s;
   }
+  
+  /* ... остальные стили без изменений ... */
   
   h1, h2, h3 { 
     color: var(--heading) !important; 
@@ -602,11 +623,10 @@ layout: default
   }
 </style>
 
-<!-- 2. КНОПКА С INLINE ONCLICK -->
 <button onclick="toggleTheme()" id="theme-toggle">🌙</button>
 
 <script type="module">
-  // === FIREBASE: РЕАЛЬНЫЙ СЧЁТЧИК ОНЛАЙН-ПОСЕТИТЕЛЕЙ ===
+  // FIREBASE
   const firebaseConfig = {
     apiKey: "AIzaSyDgSGIhDkfu1_l0Ryg0MeiLfVxp-lgiSsU",
     authDomain: "alexdrog.firebaseapp.com",
@@ -641,10 +661,6 @@ layout: default
       const counterElement = document.getElementById('online-count');
       if (counterElement) {
         counterElement.textContent = count;
-        counterElement.style.transform = 'scale(1.3)';
-        setTimeout(() => {
-          counterElement.style.transform = 'scale(1)';
-        }, 200);
       }
     });
   } catch (e) {
@@ -653,12 +669,15 @@ layout: default
 </script>
 
 <script>
-  // 3. ОСТАЛЬНЫЕ СКРИПТЫ
-  
-  // Установка правильной иконки на кнопке
+  // ОСТАЛЬНЫЕ СКРИПТЫ
   document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded');
+    
+    // Обновляем иконку кнопки
     const btn = document.getElementById('theme-toggle');
     const current = document.documentElement.getAttribute('data-theme');
+    console.log('Current theme on DOM ready:', current);
+    
     if (btn && current) {
       btn.textContent = current === 'dark' ? '☀️' : '🌙';
     }
@@ -685,7 +704,6 @@ layout: default
     }
   });
   
-  // ОПРЕДЕЛЕНИЕ ОНЛАЙН-СТАТУСА МАСТЕРА
   function checkOnlineStatus() {
     const now = new Date();
     const day = now.getDay();
@@ -771,7 +789,6 @@ layout: default
   
   function closeLightbox(event) {
     if (event && event.target !== event.currentTarget && !event.target.classList.contains('lightbox-close')) return;
-    
     const overlay = document.getElementById('lightbox');
     overlay.classList.remove('active');
     document.body.style.overflow = '';
@@ -779,15 +796,9 @@ layout: default
   
   function changeImage(direction) {
     if (currentGalleryImages.length === 0) return;
-    
     currentImageIndex += direction;
-    
-    if (currentImageIndex >= currentGalleryImages.length) {
-      currentImageIndex = 0;
-    } else if (currentImageIndex < 0) {
-      currentImageIndex = currentGalleryImages.length - 1;
-    }
-    
+    if (currentImageIndex >= currentGalleryImages.length) currentImageIndex = 0;
+    if (currentImageIndex < 0) currentImageIndex = currentGalleryImages.length - 1;
     const img = currentGalleryImages[currentImageIndex];
     document.getElementById('lightbox-img').src = img.src;
     document.getElementById('lightbox-caption').textContent = img.alt || '';
@@ -796,7 +807,6 @@ layout: default
   document.addEventListener('keydown', function(e) {
     const overlay = document.getElementById('lightbox');
     if (!overlay.classList.contains('active')) return;
-    
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') changeImage(-1);
     if (e.key === 'ArrowRight') changeImage(1);
@@ -914,8 +924,7 @@ layout: default
     <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer " target="_blank" rel="nofollow">
       <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews " 
            style="width:88px; height:31px; border:0;" 
-           alt="Яндекс.Метрика" 
-           title="Сейчас онлайн: посетителей / просмотров за сегодня" />
+           alt="Яндекс.Метрика" />
     </a>
   </div>
   
