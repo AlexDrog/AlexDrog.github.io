@@ -3,6 +3,10 @@ backend:
   repo: AlexDrog/AlexDrog.github.io
   branch: main
 
+# Добавляем эти две строки (обязательно!)
+media_folder: "assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
 site_url: https://alexdrog.github.io
 display_url: alexdrog.github.io
 locale: 'ru'
