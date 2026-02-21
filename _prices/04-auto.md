@@ -5,7 +5,7 @@ services:
 - name: Обновление Navitel
   price: от 25 BYN
   note: Все регионы, официальные карты
-- name: Установка IGO Primo / OpenStreetMap
+- name: Установка IGO Primo
   price: Установка IGO Primo
   note: Карты EU/RU/BY, скоростные камеры
 - name: Настройка VCDS / OBDeleven (VW/Audi/Skoda)
