@@ -15,6 +15,6 @@ services:
   price: от 60 BYN
   note: Ubuntu/Debian + драйверы
 - name: Настройка удаленного доступа (RDP/AnyDesk)
-  price: от 25 BYN
+  price: от 30 BYN
   note: Безопасное подключение
 ---
