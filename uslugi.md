@@ -4,8 +4,27 @@ title: Услуги и цены
 permalink: /uslugi/
 ---
 
+<script>
+  // === ТЕМА: Синхронизация с главной страницей ===
+  (function() {
+    const saved = sessionStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = saved || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+
+  window.toggleTheme = function() {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    sessionStorage.setItem('theme', next);
+    const btn = document.getElementById('theme-toggle');
+    if (btn) btn.textContent = next === 'dark' ? '☀️' : '🌙';
+  };
+</script>
+
 <style>
-/* === СВЕТЛАЯ ТЕМА === */
+/* === ТЕМНАЯ ТЕМА === */
 :root,
 html {
   --bg: #f8fafc;
@@ -26,7 +45,6 @@ html {
   --gradient-end: #6366f1;
 }
 
-/* ТЕМНАЯ ТЕМА */
 html[data-theme="dark"] {
   --bg: #0f172a;
   --bg-card: #1e293b;
@@ -51,6 +69,32 @@ body {
   color: var(--text);
   line-height: 1.5;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* === КНОПКА ТЕМЫ === */
+#theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 9999;
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
 }
 
 /* === КНОПКА НА ГЛАВНУЮ === */
@@ -374,6 +418,20 @@ td:last-child {
 }
 
 /* === АДАПТИВНОСТЬ === */
+@media (max-width: 768px) {
+  #theme-toggle {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .messenger-modal {
+    align-items: flex-end;
+  }
+}
+
 @media (min-width: 768px) {
   .messenger-modal {
     align-items: center;
@@ -410,6 +468,9 @@ td:last-child {
 }
 </style>
 
+<!-- КНОПКА ТЕМЫ -->
+<button onclick="toggleTheme()" id="theme-toggle">🌙</button>
+
 <!-- КНОПКА НА ГЛАВНУЮ -->
 <div class="nav-back">
   <a href="{{ '/' | relative_url }}" class="btn-back">← На главную</a>
@@ -417,9 +478,11 @@ td:last-child {
 
 # 📋 Прайс-лист
 
+{% assign sorted_prices = site.prices | sort: 'path' %}
+{% assign visible_categories = sorted_prices | where_exp: "item", "item.hidden != true" %}
+
 <div class="category-nav">
-  {% assign sorted_prices = site.prices | sort: 'path' %}
-  {% for category in sorted_prices %}
+  {% for category in visible_categories %}
     <a href="#cat-{{ forloop.index }}">{{ category.title }}</a>
   {% endfor %}
 </div>
@@ -438,9 +501,7 @@ td:last-child {
   </div>
 </div>
 
-{% assign sorted_prices = site.prices | sort: 'path' %}
-
-{% for category in sorted_prices %}
+{% for category in visible_categories %}
 <div class="category-accordion" data-category="{{ category.title | downcase }}">
   <button class="category-header" id="cat-{{ forloop.index }}" type="button">
     <span>{{ category.title }}</span>
@@ -457,6 +518,7 @@ td:last-child {
       </thead>
       <tbody>
         {% for service in category.services %}
+        {% unless service.hidden == true %}
         <tr data-name="{{ service.name | downcase }}">
           <td>
             <span class="service-name" onclick="openModal('{{ service.name }}', '{{ service.price }}')">
@@ -466,6 +528,7 @@ td:last-child {
           <td><strong>{{ service.price }}</strong></td>
           <td>{{ service.note }}</td>
         </tr>
+        {% endunless %}
         {% endfor %}
       </tbody>
     </table>
@@ -489,6 +552,14 @@ td:last-child {
 </div>
 
 <script>
+// Инициализация темы при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.getElementById('theme-toggle');
+  const current = document.documentElement.getAttribute('data-theme');
+  if (btn) btn.textContent = current === 'dark' ? '☀️' : '🌙';
+});
+
+// Аккордеон
 document.querySelectorAll('.category-header').forEach(btn => {
   btn.addEventListener('click', () => {
     btn.classList.toggle('active');
@@ -496,6 +567,7 @@ document.querySelectorAll('.category-header').forEach(btn => {
   });
 });
 
+// Поиск
 const searchInput = document.getElementById('searchInput');
 const clearBtn = document.getElementById('clearBtn');
 
@@ -550,6 +622,7 @@ function clearSearch() {
 
 searchInput.addEventListener('input', filter);
 
+// Модальное окно
 function openModal(service, price) {
   const text = `Здравствуйте! Хочу заказать: ${service}${price ? ' ('+price+')' : ''}`;
   document.getElementById('modalService').textContent = price ? `${service} — ${price}` : service;
