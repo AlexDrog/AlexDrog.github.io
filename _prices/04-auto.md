@@ -11,4 +11,7 @@ services:
 - name: Настройка VCDS / OBDeleven (VW/Audi/Skoda)
   price: от 50 BYN
   note: Кодирование модулей, адаптация
+- name: Обновление карт IGO
+  price: от 30 BYN
+  note: Установка самых последних карт на данный момент
 ---
