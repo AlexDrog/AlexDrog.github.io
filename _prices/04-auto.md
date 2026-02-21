@@ -6,7 +6,7 @@ services:
   price: от 25 BYN
   note: Все регионы, официальные карты
 - name: Установка IGO Primo
-  price: Установка IGO Primo
+  price: от 40 BYN
   note: Карты EU/RU/BY, скоростные камеры
 - name: Настройка VCDS / OBDeleven (VW/Audi/Skoda)
   price: от 50 BYN
