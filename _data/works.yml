@@ -14,3 +14,11 @@
   desc_before: До ремонта
   desc_after: После ремонта
   date: '2026-02-19'
+- id: 3
+  title: Тест
+  category: repair
+  before_img: assets/works/work_3_20260222_131227_before.jpg
+  after_img: assets/works/work_3_20260222_131227_after.jpg
+  desc_before: До ремонта
+  desc_after: После ремонта
+  date: '2026-02-22'
