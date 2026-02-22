@@ -535,6 +535,103 @@ layout: default
 </script>
 
 <script>
+  // === УПРАВЛЕНИЕ ТЕКСТОМ "Принимаю заказы" ===
+  const WORK_PHRASES = [
+    "Принимаю заказы", "На связи прямо сейчас", "Готов помочь с ремонтом",
+    "Жду вашего звонка", "Работаю сегодня", "Можно обращаться",
+    "Свободен для заказов", "На рабочем месте", "Готов к работе",
+    "Онлайн и доступен", "Звоните, отвечу", "Пишите в мессенджер",
+    "Сейчас свободен", "Рабочий день в разгаре", "К вашим услугам",
+    "Мастер на месте", "Готов выехать", "Принимаю вызовы",
+    "На связи до вечера", "Диагностика доступна", "Ремонт сегодня возможен",
+    "Консультирую бесплатно", "Отвечаю быстро", "Провожу диагностику",
+    "Жду клиентов", "Срочный ремонт возможен", "Работаю без перерывов",
+    "Техника будет работать", "Помогу сейчас", "Доступен для консультаций"
+  ];
+
+  const REST_PHRASES = [
+    "Увидимся завтра", "Сейчас отдыхаю", "Прием заказов с утра",
+    "Вернусь в рабочее время", "Пишите, отвечу позже", "Сегодня уже поздно",
+    "Отдыхаю до завтра", "Нерабочее время", "Завтра буду на связи",
+    "Отвечу утром", "Сейчас не работаю", "Жду вас завтра",
+    "Время отдыха", "Заказы принимаю с 10:00", "Уже сплю, пишите утром",
+    "Вне рабочего графика", "До встречи завтра", "Отдыхаю для новых заказов",
+    "Не на связи до утра", "Рабочий день закончен", "Возвращаюсь завтра",
+    "Отвечу завтра с утра", "Сейчас недоступен", "Увидимся в рабочие часы",
+    "Завтра решим вашу проблему", "Отдыхаю, чтобы лучше работать",
+    "Перерыв до завтра", "Закончил на сегодня", "Снова в деле завтра"
+  ];
+
+  let customStatusData = null;
+
+  async function loadCustomStatus() {
+    try {
+      const response = await fetch('status.json?t=' + Date.now());
+      if (response.ok) {
+        const data = await response.json();
+        if (data.active && data.text) {
+          if (data.until) {
+            const now = new Date();
+            const parts = data.until.split('.');
+            if (parts.length >= 2) {
+              const day = parseInt(parts[0]);
+              const month = parseInt(parts[1]) - 1;
+              const year = parts[2] ? (parts[2].length === 2 ? 2000 + parseInt(parts[2]) : parseInt(parts[2])) : now.getFullYear();
+              const untilDate = new Date(year, month, day, 23, 59);
+              if (now > untilDate) {
+                customStatusData = null;
+                return;
+              }
+            }
+          }
+          customStatusData = data;
+          return;
+        }
+      }
+      customStatusData = null;
+    } catch (e) {
+      customStatusData = null;
+    }
+  }
+
+  function isWorkTime() {
+    const now = new Date();
+    const day = now.getDay();
+    const hour = now.getHours();
+    
+    if (day === 1) return false;
+    if (day >= 2 && day <= 5) return hour >= 10 && hour < 18;
+    if (day === 0 || day === 6) return hour >= 10 && hour < 14;
+    return false;
+  }
+
+  function updateWorkStatus() {
+    const statusEl = document.getElementById('work-status-text');
+    if (!statusEl) return;
+    
+    if (customStatusData && customStatusData.active) {
+      statusEl.textContent = customStatusData.text;
+      statusEl.style.color = '#dc2626';
+      statusEl.style.fontWeight = '700';
+      statusEl.style.fontSize = '0.95rem';
+      return;
+    }
+    
+    const isWork = isWorkTime();
+    const phrases = isWork ? WORK_PHRASES : REST_PHRASES;
+    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    
+    statusEl.textContent = phrase;
+    statusEl.style.fontWeight = '600';
+    statusEl.style.fontSize = '0.9rem';
+    
+    if (isWork) {
+      statusEl.style.color = 'var(--success)';
+    } else {
+      statusEl.style.color = 'var(--text-secondary)';
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     const btn = document.getElementById('theme-toggle');
     const current = document.documentElement.getAttribute('data-theme');
@@ -557,6 +654,12 @@ layout: default
         text.className = 'chat-status status-offline';
       }
     }
+    
+    loadCustomStatus().then(updateWorkStatus);
+    setInterval(async () => {
+      await loadCustomStatus();
+      updateWorkStatus();
+    }, 300000);
   });
   
   function checkOnlineStatus() {
@@ -655,7 +758,7 @@ layout: default
       </div>
     </details>
     <p style="text-align: center; margin-top: 8px; font-size: 0.9rem; color: var(--text-secondary);">
-      Мастер по ремонту • <span style="color: var(--success);">Принимаю заказы</span>
+      Мастер по ремонту • <span id="work-status-text" style="color: var(--success); font-weight: 600;">Принимаю заказы</span>
     </p>
   </div>
   
@@ -666,8 +769,8 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=г.%20Дрогичин%2C%20ул.%20Ленина%2C%20141%20а">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=г.%20Дрогичин%2C%20ул.%20Ленина%2C%20141%20а">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
     </div>
   </div>
 </div>
