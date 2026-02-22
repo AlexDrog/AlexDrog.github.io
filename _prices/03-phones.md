@@ -28,7 +28,7 @@ services:
   price: от 60 BYN
   note: QFIL, SP Flash Tool, EDL-режим, Samsung Odin
 - name: Прошивка / обновление ПО
-  price: от 30 BYN
+  price: от 50 BYN
   note: Официальная или кастомная (LineageOS и др.)
 - name: Восстановление после воды
   price: от 50 BYN
