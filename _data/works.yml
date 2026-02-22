@@ -6,6 +6,7 @@
   desc_before: До ремонта
   desc_after: После ремонта
   date: '2026-02-19'
+  pinned: true
 - id: 2
   title: Переустановка ОС Windows
   category: repair
@@ -14,3 +15,4 @@
   desc_before: До ремонта
   desc_after: После ремонта
   date: '2026-02-19'
+  pinned: false
