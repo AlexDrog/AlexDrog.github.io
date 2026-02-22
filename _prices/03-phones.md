@@ -23,6 +23,7 @@ services:
 - name: Обход iCloud (Activation Lock)
   price: от 100 BYN
   note: Зависит от модели iOS
+  hidden: true
 - name: Восстановление 'кирпича'
   price: от 60 BYN
   note: QFIL, SP Flash Tool, EDL-режим, Samsung Odin
