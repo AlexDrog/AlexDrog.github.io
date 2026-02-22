@@ -549,17 +549,40 @@ layout: default
     "Техника будет работать", "Помогу сейчас", "Доступен для консультаций"
   ];
 
-  const REST_PHRASES = [
-    "Увидимся завтра", "Сейчас отдыхаю", "Прием заказов с утра",
-    "Вернусь в рабочее время", "Пишите, отвечу позже", "Сегодня уже поздно",
-    "Отдыхаю до завтра", "Нерабочее время", "Завтра буду на связи",
-    "Отвечу утром", "Сейчас не работаю", "Жду вас завтра",
-    "Время отдыха", "Заказы принимаю с 10:00", "Уже сплю, пишите утром",
-    "Вне рабочего графика", "До встречи завтра", "Отдыхаю для новых заказов",
-    "Не на связи до утра", "Рабочий день закончен", "Возвращаюсь завтра",
-    "Отвечу завтра с утра", "Сейчас недоступен", "Увидимся в рабочие часы",
-    "Завтра решим вашу проблему", "Отдыхаю, чтобы лучше работать",
-    "Перерыв до завтра", "Закончил на сегодня", "Снова в деле завтра"
+  // УТРО: до начала работы (7:00-10:00 в рабочие дни)
+  const MORNING_PHRASES = [
+    "Начинаю работу в 10:00", "Скоро буду на месте", "С 10:00 принимаю заказы",
+    "Откроюсь через час", "Готовлюсь к работе", "Скоро на связи",
+    "Завтракаю, с 10:00 работаю", "Начало рабочего дня в 10:00",
+    "Скоро откроюсь", "Жду 10:00 чтобы начать", "Приходите с 10:00",
+    "Уже еду в мастерскую", "Открытие в 10:00", "Скоро жду клиентов",
+    "До открытия меньше часа", "С 10:00 жду вас", "Утренняя подготовка"
+  ];
+
+  // ВЕЧЕР: после работы (18:00-23:00 вт-пт, 14:00-23:00 сб-вс)
+  const EVENING_PHRASES = [
+    "Сегодня больше не работаю", "Завтра с 10:00 на месте", "Рабочий день окончен",
+    "Увидимся завтра", "Сегодня закрыто", "Завтра буду на связи",
+    "Приходите завтра", "Сегодня уже поздно", "Завтра с утра жду",
+    "Вечерний перерыв", "Завтра решим", "До завтра с 10:00",
+    "Сегодня отдыхаю", "Завтра в рабочем режиме", "Вечером не работаю",
+    "Закончил на сегодня", "Возвращаюсь завтра", "Жду вас завтра"
+  ];
+
+  // НОЧЬ: 23:00-07:00
+  const NIGHT_PHRASES = [
+    "Ночной перерыв", "Сплю, отвечу утром", "Отдыхаю до рассвета",
+    "Не беспокоить до утра", "Снова на связи с 10:00", "Ночь — время отдыха",
+    "Утром отвечу", "До завтра", "Снова в деле с утра", "Ночь, отдыхаю"
+  ];
+
+  // ВЫХОДНОЙ: понедельник (и воскресенье после 18:00 если хочешь)
+  const DAY_OFF_PHRASES = [
+    "Сегодня выходной", "Отдыхаю сегодня", "Прием заказов с завтра",
+    "Сегодня не работаю", "Выходной день", "Свободный день",
+    "Завтра с 10:00 работаю", "Сегодня восстанавливаю силы",
+    "Снова в деле завтра", "Сегодня лень работать", "Выходной!",
+    "Сегодня семья, завтра работа", "Отдыхаю до вторника"
   ];
 
   let customStatusData = null;
@@ -594,21 +617,39 @@ layout: default
     }
   }
 
-  function isWorkTime() {
+  function getTimePeriod() {
     const now = new Date();
-    const day = now.getDay();
+    const day = now.getDay(); // 0=Вс, 1=Пн, 2=Вт, 3=Ср, 4=Чт, 5=Пт, 6=Сб
     const hour = now.getHours();
     
-    if (day === 1) return false;
-    if (day >= 2 && day <= 5) return hour >= 10 && hour < 18;
-    if (day === 0 || day === 6) return hour >= 10 && hour < 14;
-    return false;
+    // Ночь: 23:00-07:00 (во все дни)
+    if (hour >= 23 || hour < 7) return 'night';
+    
+    // Понедельник - всегда выходной
+    if (day === 1) return 'dayoff';
+    
+    // Вт-Пт: 10:00-18:00 работа
+    if (day >= 2 && day <= 5) {
+      if (hour < 10) return 'morning';
+      if (hour >= 18) return 'evening';
+      return 'work';
+    }
+    
+    // Сб-Вс: 10:00-14:00 работа
+    if (day === 0 || day === 6) {
+      if (hour < 10) return 'morning';
+      if (hour >= 14) return 'evening';
+      return 'work';
+    }
+    
+    return 'dayoff';
   }
 
   function updateWorkStatus() {
     const statusEl = document.getElementById('work-status-text');
     if (!statusEl) return;
     
+    // Если есть кастомный статус из бота — показываем его КРАСНЫМ ЖИРНЫМ
     if (customStatusData && customStatusData.active) {
       statusEl.textContent = customStatusData.text;
       statusEl.style.color = '#dc2626';
@@ -617,19 +658,44 @@ layout: default
       return;
     }
     
-    const isWork = isWorkTime();
-    const phrases = isWork ? WORK_PHRASES : REST_PHRASES;
+    const period = getTimePeriod();
+    let phrases;
+    let color;
+    let weight = '600';
+    
+    switch(period) {
+      case 'work':
+        phrases = WORK_PHRASES;
+        color = 'var(--success)'; // зеленый
+        break;
+      case 'morning':
+        phrases = MORNING_PHRASES;
+        color = '#f59e0b'; // оранжевый/желтый - "скоро откроюсь"
+        break;
+      case 'evening':
+        phrases = EVENING_PHRASES;
+        color = 'var(--text-secondary)'; // серый
+        break;
+      case 'night':
+        phrases = NIGHT_PHRASES;
+        color = 'var(--text-secondary)'; // серый
+        break;
+      case 'dayoff':
+        phrases = DAY_OFF_PHRASES;
+        color = '#dc2626'; // красный для выходного
+        weight = '700';
+        break;
+      default:
+        phrases = WORK_PHRASES;
+        color = 'var(--success)';
+    }
+    
     const phrase = phrases[Math.floor(Math.random() * phrases.length)];
     
     statusEl.textContent = phrase;
-    statusEl.style.fontWeight = '600';
+    statusEl.style.color = color;
+    statusEl.style.fontWeight = weight;
     statusEl.style.fontSize = '0.9rem';
-    
-    if (isWork) {
-      statusEl.style.color = 'var(--success)';
-    } else {
-      statusEl.style.color = 'var(--text-secondary)';
-    }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
