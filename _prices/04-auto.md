@@ -1,5 +1,5 @@
 ---
-title: 🗺 Навигаторы и автоэлектроника
+title: 😊GPS навигаторы
 category_id: auto
 services:
 - name: Обновление Navitel
