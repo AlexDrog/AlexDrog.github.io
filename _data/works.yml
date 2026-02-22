@@ -16,12 +16,3 @@
   desc_after: После ремонта
   date: '2026-02-19'
   pinned: false
-- id: 3
-  title: test
-  category: repair
-  before_img: assets/works/work_3_20260222_143934_before.jpg
-  after_img: assets/works/work_3_20260222_143934_after.jpg
-  desc_before: До ремонта
-  desc_after: После ремонта
-  date: '2026-02-22'
-  pinned: true
