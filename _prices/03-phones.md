@@ -16,7 +16,7 @@ services:
   note: Микропайка под микроскопом, Type-C/Lightning/microUSB
 - name: Разблокировка FRP (Google-аккаунт)
   price: от 50 BYN
-  note: С сохранением данных или сбросом
+  note: С потерей всех данных
 - name: Снятие Mi-Account / блокировки Xiaomi
   price: от 70 BYN
   note: Разблокировка загрузчика, авторизация
