@@ -14,5 +14,5 @@ services:
 - name: Усиление Wi-Fi сигнала (Mesh/repeater)
   price: от 60 BYN
   note: Покрытие всего помещения
-hidden: true
+hidden: false
 ---
