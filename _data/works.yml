@@ -1,12 +1,3 @@
-- id: 1
-  title: Замена разъема Huawei
-  category: repair
-  before_img: assets/works/work_1_20260219_140547_before.jpg
-  after_img: assets/works/work_1_20260219_140547_after.jpg
-  desc_before: До ремонта
-  desc_after: После ремонта
-  date: '2026-02-19'
-  pinned: false
 - id: 2
   title: ☝️Переустановка ОС Windows
   category: repair
@@ -16,3 +7,21 @@
   desc_after: После ремонта
   date: '2026-02-19'
   pinned: true
+- id: 1
+  title: Замена разъема Huawei
+  category: repair
+  before_img: assets/works/work_1_20260219_140547_before.jpg
+  after_img: assets/works/work_1_20260219_140547_after.jpg
+  desc_before: До ремонта
+  desc_after: После ремонта
+  date: '2026-02-19'
+  pinned: false
+- id: 3
+  title: Замена задней крышки на Poco F7
+  category: repair
+  before_img: assets/works/work_3_20260222_235429_before.jpg
+  after_img: assets/works/work_3_20260222_235429_after.jpg
+  desc_before: До ремонта
+  desc_after: После ремонта
+  date: '2026-02-22'
+  pinned: false
