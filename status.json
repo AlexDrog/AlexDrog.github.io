@@ -1,7 +1,7 @@
 {
-  "active": true,
-  "type": "weekend",
-  "text": "Сегодня (22.02.2026) выходной",
-  "until": "23.02.2026",
-  "set_at": "2026-02-22T11:02:45.267205"
+  "active": false,
+  "type": null,
+  "text": null,
+  "until": null,
+  "set_at": null
 }
