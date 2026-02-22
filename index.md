@@ -110,6 +110,34 @@ layout: default
     padding: 16px;
     margin-bottom: 16px;
     box-shadow: 0 2px 8px var(--shadow);
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Стиль для закреплённой работы */
+  details.pinned {
+    border: 2px solid var(--accent);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(59, 130, 246, 0.05) 100%);
+  }
+  
+  [data-theme="dark"] details.pinned {
+    background: linear-gradient(135deg, var(--bg-card) 0%, rgba(96, 165, 250, 0.1) 100%);
+  }
+  
+  .pinned-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--accent);
+    color: white !important;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-right: 8px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   
   summary { 
@@ -484,6 +512,12 @@ layout: default
       padding: 0;
       border-radius: 0;
     }
+    
+    .pinned-badge {
+      font-size: 0.7rem;
+      padding: 3px 6px;
+      margin-right: 4px;
+    }
   }
   
   @media (max-width: 380px) {
@@ -853,11 +887,16 @@ layout: default
 
 <h2>Примеры работ <small style="font-size:0.6em;opacity:0.7;color:var(--text-secondary);">(последние 10)</small></h2>
 
-{% assign works = site.data.works | reverse | slice: 0, 10 %}
+{% assign works = site.data.works %}
 
-{% for work in works %}
-<details {% if forloop.first %}open{% endif %}>
-  <summary><h3>🔧 {{ work.title }}</h3></summary>
+{% for work in works limit:10 %}
+<details {% if forloop.first %}open{% endif %} {% if work.pinned %}class="pinned" open{% endif %}>
+  <summary>
+    <h3>
+      {% if work.pinned %}<span class="pinned-badge">📌 ЗАКРЕПЛЕНО</span>{% endif %}
+      🔧 {{ work.title }}
+    </h3>
+  </summary>
   <div class="gallery-grid">
     <div class="gallery-item">
       <div class="label-red">🔴 ДО</div>
