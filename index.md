@@ -72,7 +72,6 @@ layout: default
   
   a { color: var(--accent) !important; }
   
-  /* Кнопка Прайс и услуги — в стиле услуг */
   .btn {
     display: inline-block;
     padding: 14px 28px;
@@ -127,17 +126,17 @@ layout: default
   .pinned-badge {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
     background: var(--accent);
     color: white !important;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 50%;
+    font-size: 0.9rem;
     margin-right: 8px;
     vertical-align: middle;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    width: 24px;
+    height: 24px;
+    line-height: 1;
   }
   
   summary { 
@@ -188,7 +187,6 @@ layout: default
   
   .gallery-item img:hover { transform: scale(1.02); }
   
-  /* Исправление: убираем белый фон, оставляем только цвет текста */
   .highlight { 
     color: #ef4444; 
     font-weight: bold; 
@@ -428,7 +426,6 @@ layout: default
     justify-content: center;
   }
   
-  /* === МОБИЛЬНАЯ ВЕРСИЯ === */
   @media (max-width: 768px) {
     h1 { 
       font-size: 1.5rem; 
@@ -506,7 +503,6 @@ layout: default
       padding: 1.5rem 1rem;
     }
     
-    /* Фикс для highlight на мобильной темной теме */
     .highlight {
       background: transparent !important;
       padding: 0;
@@ -514,8 +510,10 @@ layout: default
     }
     
     .pinned-badge {
-      font-size: 0.7rem;
-      padding: 3px 6px;
+      font-size: 0.8rem;
+      padding: 0;
+      width: 20px;
+      height: 20px;
       margin-right: 4px;
     }
   }
@@ -569,7 +567,6 @@ layout: default
 </script>
 
 <script>
-  // === УПРАВЛЕНИЕ ТЕКСТОМ "Принимаю заказы" ===
   const WORK_PHRASES = [
     "Принимаю заказы", "На связи прямо сейчас", "Готов помочь с ремонтом",
     "Жду вашего звонка", "Работаю сегодня", "Можно обращаться",
@@ -583,7 +580,6 @@ layout: default
     "Техника будет работать", "Помогу сейчас", "Доступен для консультаций"
   ];
 
-  // УТРО: до начала работы (7:00-10:00 в рабочие дни)
   const MORNING_PHRASES = [
     "Начинаю работу в 10:00", "Скоро буду на месте", "С 10:00 принимаю заказы",
     "Откроюсь через час", "Готовлюсь к работе", "Скоро на связи",
@@ -593,7 +589,6 @@ layout: default
     "До открытия меньше часа", "С 10:00 жду вас", "Утренняя подготовка"
   ];
 
-  // ВЕЧЕР: после работы (18:00-23:00 вт-пт, 14:00-23:00 сб-вс)
   const EVENING_PHRASES = [
     "Сегодня больше не работаю", "Завтра с 10:00 на месте", "Рабочий день окончен",
     "Увидимся завтра", "Сегодня закрыто", "Завтра буду на связи",
@@ -603,14 +598,12 @@ layout: default
     "Закончил на сегодня", "Возвращаюсь завтра", "Жду вас завтра"
   ];
 
-  // НОЧЬ: 23:00-07:00
   const NIGHT_PHRASES = [
     "Ночной перерыв", "Сплю, отвечу утром", "Отдыхаю до рассвета",
     "Не беспокоить до утра", "Снова на связи с 10:00", "Ночь — время отдыха",
     "Утром отвечу", "До завтра", "Снова в деле с утра", "Ночь, отдыхаю"
   ];
 
-  // ВЫХОДНОЙ: понедельник (и воскресенье после 18:00 если хочешь)
   const DAY_OFF_PHRASES = [
     "Сегодня выходной", "Отдыхаю сегодня", "Прием заказов с завтра",
     "Сегодня не работаю", "Выходной день", "Свободный день",
@@ -653,23 +646,18 @@ layout: default
 
   function getTimePeriod() {
     const now = new Date();
-    const day = now.getDay(); // 0=Вс, 1=Пн, 2=Вт, 3=Ср, 4=Чт, 5=Пт, 6=Сб
+    const day = now.getDay();
     const hour = now.getHours();
     
-    // Ночь: 23:00-07:00 (во все дни)
     if (hour >= 23 || hour < 7) return 'night';
-    
-    // Понедельник - всегда выходной
     if (day === 1) return 'dayoff';
     
-    // Вт-Пт: 10:00-18:00 работа
     if (day >= 2 && day <= 5) {
       if (hour < 10) return 'morning';
       if (hour >= 18) return 'evening';
       return 'work';
     }
     
-    // Сб-Вс: 10:00-14:00 работа
     if (day === 0 || day === 6) {
       if (hour < 10) return 'morning';
       if (hour >= 14) return 'evening';
@@ -683,7 +671,6 @@ layout: default
     const statusEl = document.getElementById('work-status-text');
     if (!statusEl) return;
     
-    // Если есть кастомный статус из бота — показываем его КРАСНЫМ ЖИРНЫМ
     if (customStatusData && customStatusData.active) {
       statusEl.textContent = customStatusData.text;
       statusEl.style.color = '#dc2626';
@@ -700,23 +687,23 @@ layout: default
     switch(period) {
       case 'work':
         phrases = WORK_PHRASES;
-        color = 'var(--success)'; // зеленый
+        color = 'var(--success)';
         break;
       case 'morning':
         phrases = MORNING_PHRASES;
-        color = '#f59e0b'; // оранжевый/желтый - "скоро откроюсь"
+        color = '#f59e0b';
         break;
       case 'evening':
         phrases = EVENING_PHRASES;
-        color = 'var(--text-secondary)'; // серый
+        color = 'var(--text-secondary)';
         break;
       case 'night':
         phrases = NIGHT_PHRASES;
-        color = 'var(--text-secondary)'; // серый
+        color = 'var(--text-secondary)';
         break;
       case 'dayoff':
         phrases = DAY_OFF_PHRASES;
-        color = '#dc2626'; // красный для выходного
+        color = '#dc2626';
         weight = '700';
         break;
       default:
@@ -885,15 +872,18 @@ layout: default
 <span class="highlight">🕐 Понедельник: ВЫХОДНОЙ</span>
 </p>
 
-<h2>Примеры работ <small style="font-size:0.6em;opacity:0.7;color:var(--text-secondary);">(последние 10)</small></h2>
+<h2>Примеры работ <small style="font-size:0.6em;opacity:0.7;color:var(--text-secondary);">(от новых к старым)</small></h2>
 
-{% assign works = site.data.works %}
+{% assign all_works = site.data.works | reversed %}
+{% assign pinned_works = all_works | where: "pinned", true %}
+{% assign regular_works = all_works | where_exp: "item", "item.pinned != true" %}
+{% assign works = pinned_works | concat: regular_works %}
 
 {% for work in works limit:10 %}
-<details {% if forloop.first %}open{% endif %} {% if work.pinned %}class="pinned" open{% endif %}>
+<details {% if work.pinned %}class="pinned" open{% endif %}>
   <summary>
     <h3>
-      {% if work.pinned %}<span class="pinned-badge">📌 ЗАКРЕПЛЕНО</span>{% endif %}
+      {% if work.pinned %}<span class="pinned-badge">📌</span>{% endif %}
       🔧 {{ work.title }}
     </h3>
   </summary>
