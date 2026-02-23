@@ -426,6 +426,46 @@ layout: default
     justify-content: center;
   }
   
+  /* === СТИЛИ ДЛЯ АКЦИИ ДНЯ === */
+  .promo-banner {
+    display: none;
+    background: linear-gradient(135deg, #00c853 0%, #64dd17 100%);
+    color: white;
+    padding: 24px;
+    border-radius: 16px;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    box-shadow: 0 4px 20px rgba(0, 200, 83, 0.4);
+    animation: promo-pulse 2s infinite;
+    border: 2px solid rgba(255,255,255,0.2);
+    line-height: 1.4;
+  }
+  
+  .promo-banner.active {
+    display: block;
+  }
+  
+  .promo-label {
+    display: block;
+    font-size: 0.7em;
+    opacity: 0.9;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  @keyframes promo-pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 4px 20px rgba(0, 200, 83, 0.4); }
+    50% { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0, 200, 83, 0.6); }
+  }
+  
+  [data-theme="dark"] .promo-banner {
+    background: linear-gradient(135deg, #00b248 0%, #76ff03 100%);
+    box-shadow: 0 4px 20px rgba(0, 200, 83, 0.5);
+  }
+  
   @media (max-width: 768px) {
     h1 { 
       font-size: 1.5rem; 
@@ -516,6 +556,13 @@ layout: default
       height: 20px;
       margin-right: 4px;
     }
+    
+    /* Акция на мобильных */
+    .promo-banner {
+      font-size: 1.2em;
+      padding: 16px;
+      margin: 16px 0;
+    }
   }
   
   @media (max-width: 380px) {
@@ -528,6 +575,11 @@ layout: default
     
     .chat-name { font-size: 0.95rem; }
     h1 { font-size: 1.35rem; }
+    
+    .promo-banner {
+      font-size: 1.1em;
+      padding: 14px;
+    }
   }
 </style>
 
@@ -620,14 +672,17 @@ layout: default
       if (response.ok) {
         const data = await response.json();
         if (data.active && data.text) {
+          // Проверяем не истекло ли время (если есть until)
           if (data.until) {
             const now = new Date();
-            const parts = data.until.split('.');
+            const parts = data.until.split(/[. :]/);
             if (parts.length >= 2) {
               const day = parseInt(parts[0]);
               const month = parseInt(parts[1]) - 1;
               const year = parts[2] ? (parts[2].length === 2 ? 2000 + parseInt(parts[2]) : parseInt(parts[2])) : now.getFullYear();
-              const untilDate = new Date(year, month, day, 23, 59);
+              const hour = parts[3] ? parseInt(parts[3]) : 23;
+              const minute = parts[4] ? parseInt(parts[4]) : 59;
+              const untilDate = new Date(year, month, day, hour, minute);
               if (now > untilDate) {
                 customStatusData = null;
                 return;
@@ -669,16 +724,58 @@ layout: default
 
   function updateWorkStatus() {
     const statusEl = document.getElementById('work-status-text');
-    if (!statusEl) return;
+    const promoBanner = document.getElementById('promo-banner');
+    const promoText = document.getElementById('promo-text');
     
+    // Проверяем АКЦИЮ ДНЯ (promo)
+    if (customStatusData && customStatusData.active && customStatusData.type === 'promo') {
+      // Проверяем не истекло ли время акции
+      let isExpired = false;
+      if (customStatusData.until) {
+        const now = new Date();
+        const parts = customStatusData.until.split(/[. :]/);
+        if (parts.length >= 2) {
+          const day = parseInt(parts[0]);
+          const month = parseInt(parts[1]) - 1;
+          const year = parts[2] ? (parts[2].length === 2 ? 2000 + parseInt(parts[2]) : parseInt(parts[2])) : now.getFullYear();
+          const hour = parts[3] ? parseInt(parts[3]) : 20; // По умолчанию 20:00
+          const minute = parts[4] ? parseInt(parts[4]) : 0;
+          const untilDate = new Date(year, month, day, hour, minute);
+          if (now > untilDate) isExpired = true;
+        }
+      }
+      
+      if (!isExpired) {
+        // Показываем акцию
+        if (promoText) promoText.textContent = customStatusData.text;
+        if (promoBanner) promoBanner.classList.add('active');
+        
+        // Меняем статус под аватаркой на "🔥 Акция!"
+        if (statusEl) {
+          statusEl.textContent = "🔥 Акция дня!";
+          statusEl.style.color = '#00c853';
+          statusEl.style.fontWeight = '700';
+          statusEl.style.fontSize = '1rem';
+        }
+        return;
+      }
+    }
+    
+    // Скрываем баннер акции если не активна или истекла
+    if (promoBanner) promoBanner.classList.remove('active');
+    
+    // Обычный статус (не promo)
     if (customStatusData && customStatusData.active) {
-      statusEl.textContent = customStatusData.text;
-      statusEl.style.color = '#dc2626';
-      statusEl.style.fontWeight = '700';
-      statusEl.style.fontSize = '0.95rem';
+      if (statusEl) {
+        statusEl.textContent = customStatusData.text;
+        statusEl.style.color = '#dc2626';
+        statusEl.style.fontWeight = '700';
+        statusEl.style.fontSize = '0.95rem';
+      }
       return;
     }
     
+    // Авто-статус по времени
     const period = getTimePeriod();
     let phrases;
     let color;
@@ -713,10 +810,12 @@ layout: default
     
     const phrase = phrases[Math.floor(Math.random() * phrases.length)];
     
-    statusEl.textContent = phrase;
-    statusEl.style.color = color;
-    statusEl.style.fontWeight = weight;
-    statusEl.style.fontSize = '0.9rem';
+    if (statusEl) {
+      statusEl.textContent = phrase;
+      statusEl.style.color = color;
+      statusEl.style.fontWeight = weight;
+      statusEl.style.fontSize = '0.9rem';
+    }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
@@ -743,10 +842,19 @@ layout: default
     }
     
     loadCustomStatus().then(updateWorkStatus);
+    
+    // Обновляем каждые 5 минут (проверка истечения акции)
     setInterval(async () => {
       await loadCustomStatus();
       updateWorkStatus();
     }, 300000);
+    
+    // Дополнительная проверка каждую минуту для точности времени акции
+    setInterval(() => {
+      if (customStatusData && customStatusData.type === 'promo') {
+        updateWorkStatus();
+      }
+    }, 60000);
   });
   
   function checkOnlineStatus() {
@@ -825,6 +933,12 @@ layout: default
 </script>
 
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
+
+<!-- Баннер Акции Дня (появляется автоматически при активации) -->
+<div id="promo-banner" class="promo-banner">
+  <span class="promo-label">🎯 Акция дня</span>
+  <span id="promo-text"></span>
+</div>
 
 <div class="photos-row">
   <div class="chat-container">
