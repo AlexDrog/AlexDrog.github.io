@@ -466,6 +466,101 @@ layout: default
     box-shadow: 0 4px 20px rgba(0, 200, 83, 0.5);
   }
   
+  /* === СТИЛИ ДЛЯ ОТЗЫВОВ === */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 1.5rem 0;
+  }
+  
+  .review-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .review-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.1);
+  }
+  
+  [data-theme="dark"] .review-card:hover {
+    box-shadow: 0 4px 16px rgba(96, 165, 250, 0.15);
+  }
+  
+  .review-header {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  
+  .review-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--gradient-end));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  
+  .review-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .review-name {
+    color: var(--heading);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+  
+  .review-stars {
+    color: #fbbf24;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+  
+  .review-date {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+  
+  .review-text {
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+  
+  .review-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  
+  .review-tag {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+  }
+  
   @media (max-width: 768px) {
     h1 { 
       font-size: 1.5rem; 
@@ -563,6 +658,20 @@ layout: default
       padding: 16px;
       margin: 16px 0;
     }
+    
+    /* Отзывы на мобильных */
+    .reviews-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    
+    .review-card {
+      padding: 16px;
+    }
+    
+    .review-text {
+      font-size: 0.9rem;
+    }
   }
   
   @media (max-width: 380px) {
@@ -589,7 +698,7 @@ layout: default
   const firebaseConfig = {
     apiKey: "AIzaSyDgSGIhDkfu1_l0Ryg0MeiLfVxp-lgiSsU",
     authDomain: "alexdrog.firebaseapp.com",
-    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app ",
+    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "alexdrog",
     storageBucket: "alexdrog.firebasestorage.app",
     messagingSenderId: "33899135860",
@@ -597,8 +706,8 @@ layout: default
     measurementId: "G-KJ7JQ8R476"
   };
 
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js ";
-  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js ";
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
   try {
     const app = initializeApp(firebaseConfig);
@@ -990,7 +1099,7 @@ layout: default
         <span class="chat-arrow">↓</span>
       </summary>
       <div class="chat-options">
-        <a href="https://t.me/AlexDrog81 " class="chat-btn telegram" target="_blank">📱 Telegram</a>
+        <a href="https://t.me/AlexDrog81" class="chat-btn telegram" target="_blank">📱 Telegram</a>
         <a href="viber://chat?number=375297256982" class="chat-btn viber">💬 Viber</a>
       </div>
     </details>
@@ -1006,8 +1115,8 @@ layout: default
       <small>2 этаж</small>
     </div>
     <div class="photo-links">
-      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Яндекс Карты</a> • 
-      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0 ">Google Maps</a>
+      🗺️ <a href="https://yandex.ru/maps/?text=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Яндекс Карты</a> • 
+      <a href="https://www.google.com/maps/search/?api=1&query=%D0%B3.%20%D0%94%D1%80%D0%BE%D0%B3%D0%B8%D1%87%D0%B8%D0%BD%2C%20%D1%83%D0%BB.%20%D0%9B%D0%B5%D0%BD%D0%B8%D0%BD%D0%B0%2C%20141%20%D0%B0">Google Maps</a>
     </div>
   </div>
 </div>
@@ -1054,6 +1163,49 @@ layout: default
 <p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Примеры работ скоро появятся...</p>
 {% endif %}
 
+<!-- === БЛОК ОТЗЫВОВ (динамический) === -->
+<h2>Отзывы клиентов <small style="font-size:0.6em;opacity:0.7;color:var(--text-secondary);">что говорят о работе</small></h2>
+
+{% assign approved_reviews = site.data.reviews | where: "approved", true | where: "banned", false | reverse %}
+{% assign display_reviews = approved_reviews | limit: 3 %}
+
+{% if display_reviews.size > 0 %}
+<div class="reviews-grid">
+  {% for review in display_reviews %}
+  <div class="review-card" data-review-id="{{ review.id }}">
+    <div class="review-header">
+      <div class="review-avatar" style="{% if review.initials == 'ВП' %}background: linear-gradient(135deg, #f59e0b, #d97706);{% endif %}">
+        {{ review.initials }}
+      </div>
+      <div class="review-meta">
+        <div class="review-name">{{ review.name }}</div>
+        <div class="review-stars">
+          {% for i in (1..review.stars) %}★{% endfor %}
+        </div>
+        <div class="review-date">{{ review.date }}</div>
+      </div>
+    </div>
+    <div class="review-text">
+      "{{ review.text }}"
+    </div>
+    {% if review.tags.size > 0 %}
+    <div class="review-tags">
+      {% for tag in review.tags %}
+      <span class="review-tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+<p style="text-align: center; margin-top: 1.5rem;">
+  <a href="./otzyvy/" class="btn" style="padding: 12px 24px; font-size: 0.95rem;">📖 Все отзывы на Яндекс.Картах</a>
+</p>
+{% else %}
+<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Отзывы появятся здесь скоро...</p>
+{% endif %}
+
 <h2>Почему обращаются ко мне</h2>
 <p>
 ✅ <strong>Бесплатная диагностика</strong> — платишь только за ремонт<br>
@@ -1069,8 +1221,8 @@ layout: default
 
 <div class="site-footer-stats">
   <div style="margin-bottom: 1rem;">
-    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer " target="_blank" rel="noopener">
-      <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews " style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика">
+    <a href="https://metrika.yandex.ru/stat/?id=106913790&from=informer" target="_blank" rel="noopener">
+      <img src="https://informer.yandex.ru/informer/106913790/3_1_FFFFFFFF_EFEFEFFF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика">
     </a>
   </div>
   
