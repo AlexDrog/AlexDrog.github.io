@@ -1509,52 +1509,85 @@ layout: default
 <p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Примеры работ скоро появятся...</p>
 {% endif %}
 
-<!-- === БЛОК ОТЗЫВОВ (динамический) === -->
+<!-- === БЛОК ОТЗЫВОВ (динамический из Firebase) === -->
 <h2>Отзывы клиентов <small style="font-size:0.6em;opacity:0.7;color:var(--text-secondary);">что говорят о работе</small></h2>
 
-{% assign approved_reviews = site.data.reviews | where: "approved", true | where: "banned", false | reverse %}
-{% assign display_reviews = approved_reviews | limit: 3 %}
-
-{% if display_reviews.size > 0 %}
-<div class="reviews-grid">
-  {% for review in display_reviews %}
-  <div class="review-card" data-review-id="{{ review.id }}">
-    <div class="review-header">
-      <div class="review-avatar" style="{% if review.initials == 'ВП' %}background: linear-gradient(135deg, #f59e0b, #d97706);{% endif %}">
-        {{ review.initials }}
-      </div>
-      <div class="review-meta">
-        <div class="review-name">{{ review.name }}</div>
-        <div class="review-stars">
-          {% for i in (1..review.stars) %}★{% endfor %}
-        </div>
-        <div class="review-date">{{ review.date }}</div>
-      </div>
-    </div>
-    <div class="review-text">
-      "{{ review.text }}"
-    </div>
-    {% if review.tags.size > 0 %}
-    <div class="review-tags">
-      {% for tag in review.tags %}
-      <span class="review-tag">{{ tag }}</span>
-      {% endfor %}
-    </div>
-    {% endif %}
-  </div>
-  {% endfor %}
+<div id="reviews-container">
+  <p style="text-align: center; color: var(--text-secondary);">Загрузка отзывов...</p>
 </div>
 
 <p style="text-align: center; margin-top: 1.5rem;">
   <button onclick="openReviewModal()" class="btn" style="font-size: 1rem; padding: 14px 28px; margin-top: 1rem;">⭐ Оставить отзыв</button>
 </p>
-{% else %}
-<p style="text-align: center; color: var(--text-secondary); opacity: 0.7; margin-bottom: 2rem;">Отзывы появятся здесь скоро...</p>
-<div class="review-section">
-  <button onclick="openReviewModal()" class="btn" style="font-size: 1rem; padding: 14px 28px;">⭐ Оставить первый отзыв</button>
-</div>
-{% endif %}
 
+<script>
+// Загрузка отзывов из Firebase
+async function loadReviewsFromFirebase() {
+  const container = document.getElementById('reviews-container');
+  
+  try {
+    const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_approved.json');
+    const data = await response.json();
+    
+    if (!data) {
+      container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Отзывы появятся здесь скоро...</p>';
+      return;
+    }
+    
+    // Преобразуем объект в массив, фильтруем banned и сортируем по дате (новые сверху)
+    const reviews = Object.values(data)
+      .filter(r => r && !r.banned)
+      .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    
+    if (reviews.length === 0) {
+      container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Отзывы появятся здесь скоро...</p>';
+      return;
+    }
+    
+    // Берем первые 3 отзыва
+    const displayReviews = reviews.slice(0, 3);
+    
+    let html = '<div class="reviews-grid">';
+    
+    displayReviews.forEach(review => {
+      // Генерируем инициалы (максимум 2 символа)
+      const initials = review.name 
+        ? review.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+        : '??';
+      
+      // Генерируем звезды
+      const stars = '★'.repeat(review.stars || 5) + '☆'.repeat(5 - (review.stars || 5));
+      
+      html += `
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">${initials}</div>
+            <div class="review-meta">
+              <div class="review-name">${review.name || 'Аноним'}</div>
+              <div class="review-stars">${stars}</div>
+              <div class="review-date">${review.date || ''}</div>
+            </div>
+          </div>
+          <div class="review-text">"${review.text || ''}"</div>
+        </div>
+      `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+    
+  } catch (error) {
+    console.error('Ошибка загрузки отзывов:', error);
+    container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Не удалось загрузить отзывы. Обновите страницу позже.</p>';
+  }
+}
+
+// Загружаем отзывы при загрузке страницы
+document.addEventListener('DOMContentLoaded', loadReviewsFromFirebase);
+
+// Обновляем отзывы каждые 60 секунд (чтобы появлялись новые без перезагрузки)
+setInterval(loadReviewsFromFirebase, 60000);
+</script>
 <!-- === МОДАЛЬНОЕ ОКНО ФОРМЫ ОТЗЫВА === -->
 <div id="review-modal-overlay" class="review-modal-overlay">
   <div class="review-modal">
