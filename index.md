@@ -113,7 +113,6 @@ layout: default
     transition: border-color 0.3s, box-shadow 0.3s;
   }
   
-  /* Стиль для закреплённой работы */
   details.pinned {
     border: 2px solid var(--accent);
     box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
@@ -427,7 +426,6 @@ layout: default
     justify-content: center;
   }
   
-  /* === СТИЛИ ДЛЯ АКЦИИ ДНЯ === */
   .promo-banner {
     display: none;
     background: linear-gradient(135deg, #00c853 0%, #64dd17 100%);
@@ -467,7 +465,6 @@ layout: default
     box-shadow: 0 4px 20px rgba(0, 200, 83, 0.5);
   }
   
-  /* === СТИЛИ ДЛЯ ОТЗЫВОВ === */
   .reviews-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -546,28 +543,6 @@ layout: default
     font-style: italic;
   }
   
-  .review-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  
-  .review-tag {
-    background: var(--bg-secondary);
-    color: var(--text-secondary);
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    border: 1px solid var(--border);
-  }
-  
-  /* === СТИЛИ ДЛЯ ФОРМЫ ОТЗЫВОВ === */
-  .review-section {
-    text-align: center;
-    margin: 3rem 0 2rem;
-  }
-  
   .review-modal-overlay {
     display: none;
     position: fixed;
@@ -627,7 +602,7 @@ layout: default
     font-size: 0.9rem;
   }
   
-  .review-input {
+  .review-input, .review-textarea, .review-stars-select {
     width: 100%;
     padding: 12px 16px;
     border: 1px solid var(--border);
@@ -637,44 +612,11 @@ layout: default
     font-size: 1rem;
     box-sizing: border-box;
     font-family: inherit;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  
-  .review-input:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
   
   .review-textarea {
-    width: 100%;
-    padding: 12px 16px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 1rem;
-    box-sizing: border-box;
-    font-family: inherit;
     resize: vertical;
     min-height: 100px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  
-  .review-textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-  }
-  
-  .review-stars-select {
-    padding: 10px 14px;
-    border-radius: 10px;
-    background: var(--bg);
-    color: var(--text);
-    border: 1px solid var(--border);
-    font-size: 1rem;
-    cursor: pointer;
   }
   
   .review-modal-buttons {
@@ -693,18 +635,11 @@ layout: default
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .review-btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
   }
   
   .review-btn-submit:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    transform: none;
   }
   
   .review-btn-cancel {
@@ -717,11 +652,6 @@ layout: default
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    transition: background 0.2s;
-  }
-  
-  .review-btn-cancel:hover {
-    background: var(--border);
   }
   
   .review-status {
@@ -734,698 +664,23 @@ layout: default
   
   .review-status.success { color: var(--success); }
   .review-status.error { color: #ef4444; }
-  .review-status.loading { color: var(--text-secondary); }
   
   @media (max-width: 768px) {
-    h1 { 
-      font-size: 1.5rem; 
-      line-height: 1.25; 
-      margin-bottom: 1rem;
-      word-wrap: break-word;
-    }
-    
-    h2 { font-size: 1.25rem; }
-    
+    h1 { font-size: 1.5rem; }
     .gallery-grid { grid-template-columns: 1fr; }
-    
-    .photos-row { 
-      grid-template-columns: 1fr; 
-      gap: 20px; 
-      margin: 1rem 0;
-    }
-    
-    .chat-avatar { 
-      width: 60px; 
-      height: 60px; 
-      min-width: 60px;
-      min-height: 60px;
-      flex-shrink: 0;
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-    
-    .chat-summary { 
-      padding: 12px 16px; 
-      gap: 12px;
-    }
-    
-    .chat-name { font-size: 1rem; }
-    .chat-status { font-size: 0.8rem; }
-    
-    .chat-options { 
-      padding: 0 16px 12px; 
-      gap: 8px;
-    }
-    
-    .chat-btn { 
-      padding: 10px; 
-      font-size: 0.85rem; 
-    }
-    
-    .photo-card img { 
-      height: 220px; 
-      border-radius: 12px;
-    }
-    
-    #theme-toggle { 
-      width: 44px; 
-      height: 44px; 
-      font-size: 20px;
-      top: 10px;
-      right: 10px;
-    }
-    
-    .btn-large {
-      margin: 1.5rem auto;
-      padding: 14px 20px;
-      font-size: 1rem;
-    }
-    
-    details { padding: 12px; }
-    summary h3 { font-size: 0.95rem; }
-    
-    .site-footer-stats { 
-      margin: 2rem -1rem 0; 
-      border-radius: 0; 
-      border-left: none; 
-      border-right: none;
-      padding: 1.5rem 1rem;
-    }
-    
-    .highlight {
-      background: transparent !important;
-      padding: 0;
-      border-radius: 0;
-    }
-    
-    .pinned-badge {
-      font-size: 0.8rem;
-      padding: 0;
-      width: 20px;
-      height: 20px;
-      margin-right: 4px;
-    }
-    
-    /* Акция на мобильных */
-    .promo-banner {
-      font-size: 1.2em;
-      padding: 16px;
-      margin: 16px 0;
-    }
-    
-    /* Отзывы на мобильных */
-    .reviews-grid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    
-    .review-card {
-      padding: 16px;
-    }
-    
-    .review-text {
-      font-size: 0.9rem;
-    }
-    
-    /* Форма отзывов на мобильных */
-    .review-modal {
-      padding: 24px 20px;
-      margin: 10px;
-    }
-    
-    .review-modal h3 {
-      font-size: 1.25rem;
-    }
-    
-    .review-modal-buttons {
-      flex-direction: column;
-    }
-  }
-  
-  @media (max-width: 380px) {
-    .chat-avatar {
-      width: 52px;
-      height: 52px;
-      min-width: 52px;
-      min-height: 52px;
-    }
-    
-    .chat-name { font-size: 0.95rem; }
-    h1 { font-size: 1.35rem; }
-    
-    .promo-banner {
-      font-size: 1.1em;
-      padding: 14px;
-    }
+    .photos-row { grid-template-columns: 1fr; }
+    .chat-avatar { width: 60px; height: 60px; }
+    .photo-card img { height: 220px; }
+    #theme-toggle { width: 44px; height: 44px; }
+    .reviews-grid { grid-template-columns: 1fr; }
   }
 </style>
 
 <button onclick="toggleTheme()" id="theme-toggle">🌙</button>
 
-<script type="module">
-  const firebaseConfig = {
-    apiKey: "AIzaSyDgSGIhDkfu1_l0Ryg0MeiLfVxp-lgiSsU",
-    authDomain: "alexdrog.firebaseapp.com",
-    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "alexdrog",
-    storageBucket: "alexdrog.firebasestorage.app",
-    messagingSenderId: "33899135860",
-    appId: "1:33899135860:web:396df092035fb19a11a221",
-    measurementId: "G-KJ7JQ8R476"
-  };
-
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-
-  try {
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-    const userRef = ref(db, 'online/' + sessionId);
-    
-    set(userRef, { timestamp: serverTimestamp() });
-    onDisconnect(userRef).remove();
-    
-    onValue(ref(db, 'online'), (snapshot) => {
-      const data = snapshot.val();
-      const count = data ? Object.keys(data).length : 0;
-      const el = document.getElementById('online-count');
-      if (el) el.textContent = count;
-    });
-  } catch (e) {}
-</script>
-
-<script>
-  const WORK_PHRASES = [
-    "Принимаю заказы", "На связи прямо сейчас", "Готов помочь с ремонтом",
-    "Жду вашего звонка", "Работаю сегодня", "Можно обращаться",
-    "Свободен для заказов", "На рабочем месте", "Готов к работе",
-    "Онлайн и доступен", "Звоните, отвечу", "Пишите в мессенджер",
-    "Сейчас свободен", "Рабочий день в разгаре", "К вашим услугам",
-    "Мастер на месте", "Готов выехать", "Принимаю вызовы",
-    "На связи до вечера", "Диагностика доступна", "Ремонт сегодня возможен",
-    "Консультирую бесплатно", "Отвечаю быстро", "Провожу диагностику",
-    "Жду клиентов", "Срочный ремонт возможен", "Работаю без перерывов",
-    "Техника будет работать", "Помогу сейчас", "Доступен для консультаций"
-  ];
-
-  const MORNING_PHRASES = [
-    "Начинаю работу в 10:00", "Скоро буду на месте", "С 10:00 принимаю заказы",
-    "Откроюсь через час", "Готовлюсь к работе", "Скоро на связи",
-    "Завтракаю, с 10:00 работаю", "Начало рабочего дня в 10:00",
-    "Скоро откроюсь", "Жду 10:00 чтобы начать", "Приходите с 10:00",
-    "Уже еду в мастерскую", "Открытие в 10:00", "Скоро жду клиентов",
-    "До открытия меньше часа", "С 10:00 жду вас", "Утренняя подготовка"
-  ];
-
-  const EVENING_PHRASES = [
-    "Сегодня больше не работаю", "Завтра с 10:00 на месте", "Рабочий день окончен",
-    "Увидимся завтра", "Сегодня закрыто", "Завтра буду на связи",
-    "Приходите завтра", "Сегодня уже поздно", "Завтра с утра жду",
-    "Вечерний перерыв", "Завтра решим", "До завтра с 10:00",
-    "Сегодня отдыхаю", "Завтра в рабочем режиме", "Вечером не работаю",
-    "Закончил на сегодня", "Возвращаюсь завтра", "Жду вас завтра"
-  ];
-
-  const NIGHT_PHRASES = [
-    "Ночной перерыв", "Сплю, отвечу утром", "Отдыхаю до рассвета",
-    "Не беспокоить до утра", "Снова на связи с 10:00", "Ночь — время отдыха",
-    "Утром отвечу", "До завтра", "Снова в деле с утра", "Ночь, отдыхаю"
-  ];
-
-  const DAY_OFF_PHRASES = [
-    "Сегодня выходной", "Отдыхаю сегодня", "Прием заказов с завтра",
-    "Сегодня не работаю", "Выходной день", "Свободный день",
-    "Завтра с 10:00 работаю", "Сегодня восстанавливаю силы",
-    "Снова в деле завтра", "Сегодня лень работать", "Выходной!",
-    "Сегодня семья, завтра работа", "Отдыхаю до вторника"
-  ];
-
-  let customStatusData = null;
-
-  // === НОВАЯ ФУНКЦИЯ: Проверка активности акции ===
-  function isPromoActive() {
-    if (!customStatusData || !customStatusData.active || customStatusData.type !== 'promo') {
-      return false;
-    }
-    
-    if (customStatusData.until) {
-      const now = new Date();
-      const parts = customStatusData.until.split(/[. :]/);
-      if (parts.length >= 2) {
-        const day = parseInt(parts[0]);
-        const month = parseInt(parts[1]) - 1;
-        const year = parts[2] ? (parts[2].length === 2 ? 2000 + parseInt(parts[2]) : parseInt(parts[2])) : now.getFullYear();
-        const hour = parts[3] ? parseInt(parts[3]) : 20;
-        const minute = parts[4] ? parseInt(parts[4]) : 0;
-        const untilDate = new Date(year, month, day, hour, minute);
-        if (now > untilDate) return false;
-      }
-    }
-    return true;
-  }
-
-  async function loadCustomStatus() {
-    try {
-      const response = await fetch('status.json?t=' + Date.now());
-      if (response.ok) {
-        const data = await response.json();
-        if (data.active && data.text) {
-          // Проверяем не истекло ли время (если есть until)
-          if (data.until) {
-            const now = new Date();
-            const parts = data.until.split(/[. :]/);
-            if (parts.length >= 2) {
-              const day = parseInt(parts[0]);
-              const month = parseInt(parts[1]) - 1;
-              const year = parts[2] ? (parts[2].length === 2 ? 2000 + parseInt(parts[2]) : parseInt(parts[2])) : now.getFullYear();
-              const hour = parts[3] ? parseInt(parts[3]) : 23;
-              const minute = parts[4] ? parseInt(parts[4]) : 59;
-              const untilDate = new Date(year, month, day, hour, minute);
-              if (now > untilDate) {
-                customStatusData = null;
-                return;
-              }
-            }
-          }
-          customStatusData = data;
-          return;
-        }
-      }
-      customStatusData = null;
-    } catch (e) {
-      customStatusData = null;
-    }
-  }
-
-  function getTimePeriod() {
-    const now = new Date();
-    const day = now.getDay();
-    const hour = now.getHours();
-    
-    if (hour >= 23 || hour < 7) return 'night';
-    if (day === 1) return 'dayoff';
-    
-    if (day >= 2 && day <= 5) {
-      if (hour < 10) return 'morning';
-      if (hour >= 18) return 'evening';
-      return 'work';
-    }
-    
-    if (day === 0 || day === 6) {
-      if (hour < 10) return 'morning';
-      if (hour >= 14) return 'evening';
-      return 'work';
-    }
-    
-    return 'dayoff';
-  }
-
-  // === НОВАЯ ФУНКЦИЯ: Обновление всех статусов с приоритетом акции ===
-  function updateAllStatuses() {
-    const statusEl = document.getElementById('work-status-text');
-    const promoBanner = document.getElementById('promo-banner');
-    const promoText = document.getElementById('promo-text');
-    const avatar = document.getElementById('chat-avatar');
-    const avatarText = document.getElementById('status-text');
-    
-    // ПРИОРИТЕТ 1: АКЦИЯ ДНЯ (promo)
-    if (isPromoActive()) {
-      // Баннер
-      if (promoText) promoText.textContent = customStatusData.text;
-      if (promoBanner) promoBanner.classList.add('active');
-      
-      // Статус под аватаркой = В сети (зеленый) - даже в понедельник!
-      if (avatar) {
-        avatar.classList.remove('offline');
-        avatar.classList.add('online');
-      }
-      if (avatarText) {
-        avatarText.innerHTML = '<span class="online-dot"></span>В сети';
-        avatarText.className = 'chat-status status-online';
-      }
-      
-      // Текст под контактами
-      if (statusEl) {
-        statusEl.textContent = "🔥 Акция дня!";
-        statusEl.style.color = '#00c853';
-        statusEl.style.fontWeight = '700';
-        statusEl.style.fontSize = '1rem';
-      }
-      return;
-    }
-    
-    // Скрываем баннер если нет акции
-    if (promoBanner) promoBanner.classList.remove('active');
-    
-    // ПРИОРИТЕТ 2: Другие кастомные статусы
-    if (customStatusData && customStatusData.active) {
-      const schedule = checkWorkSchedule();
-      
-      // Для обычных статусов показываем реальное время работы под аватаркой
-      if (schedule.isOnline) {
-        avatar.classList.remove('offline');
-        avatar.classList.add('online');
-        avatarText.innerHTML = '<span class="online-dot"></span>В сети';
-        avatarText.className = 'chat-status status-online';
-      } else {
-        avatar.classList.remove('online');
-        avatar.classList.add('offline');
-        avatarText.innerHTML = '<span class="offline-dot"></span>' + schedule.statusText;
-        avatarText.className = 'chat-status status-offline';
-      }
-      
-      // Текст кастомного статуса
-      if (statusEl) {
-        statusEl.textContent = customStatusData.text;
-        statusEl.style.color = '#dc2626';
-        statusEl.style.fontWeight = '700';
-        statusEl.style.fontSize = '0.95rem';
-      }
-      return;
-    }
-    
-    // ПРИОРИТЕТ 3: Авто-режим по расписанию
-    const period = getTimePeriod();
-    let phrases;
-    let color;
-    let weight = '600';
-    
-    switch(period) {
-      case 'work':
-        phrases = WORK_PHRASES;
-        color = 'var(--success)';
-        break;
-      case 'morning':
-        phrases = MORNING_PHRASES;
-        color = '#f59e0b';
-        break;
-      case 'evening':
-        phrases = EVENING_PHRASES;
-        color = 'var(--text-secondary)';
-        break;
-      case 'night':
-        phrases = NIGHT_PHRASES;
-        color = 'var(--text-secondary)';
-        break;
-      case 'dayoff':
-        phrases = DAY_OFF_PHRASES;
-        color = '#dc2626';
-        weight = '700';
-        break;
-      default:
-        phrases = WORK_PHRASES;
-        color = 'var(--success)';
-    }
-    
-    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
-    
-    if (statusEl) {
-      statusEl.textContent = phrase;
-      statusEl.style.color = color;
-      statusEl.style.fontWeight = weight;
-      statusEl.style.fontSize = '0.9rem';
-    }
-    
-    // Обновляем статус под аватаркой
-    const schedule = checkWorkSchedule();
-    if (schedule.isOnline) {
-      avatar.classList.remove('offline');
-      avatar.classList.add('online');
-      avatarText.innerHTML = '<span class="online-dot"></span>В сети';
-      avatarText.className = 'chat-status status-online';
-    } else {
-      avatar.classList.remove('online');
-      avatar.classList.add('offline');
-      avatarText.innerHTML = '<span class="offline-dot"></span>' + schedule.statusText;
-      avatarText.className = 'chat-status status-offline';
-    }
-  }
-
-  // === ИЗМЕНЕНО: DOMContentLoaded теперь использует updateAllStatuses ===
-  document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('theme-toggle');
-    const current = document.documentElement.getAttribute('data-theme');
-    if (btn) btn.textContent = current === 'dark' ? '☀️' : '🌙';
-    
-    // Убран дублирующий вызов checkOnlineStatus, теперь всё через updateAllStatuses
-    loadCustomStatus().then(updateAllStatuses);
-    
-    // Обновляем каждые 5 минут
-    setInterval(async () => {
-      await loadCustomStatus();
-      updateAllStatuses();
-    }, 300000);
-    
-    // Дополнительная проверка каждую минуту для точности времени акции
-    setInterval(() => {
-      if (customStatusData && customStatusData.type === 'promo') {
-        updateAllStatuses();
-      }
-    }, 60000);
-  });
-  
-  // === ОСТАЛЬНЫЕ ФУНКЦИИ БЕЗ ИЗМЕНЕНИЙ ===
-  function checkOnlineStatus() {
-    const now = new Date();
-    const day = now.getDay();
-    const hour = now.getHours();
-    const minute = now.getMinutes();
-    const time = hour + minute / 60;
-    
-    let isOnline = false;
-    let statusText = "";
-    
-    if (day === 1) {
-      statusText = "Сегодня выходной, отвечу завтра с 10:00";
-    }
-    else if (day >= 2 && day <= 5) {
-      if (time >= 10 && time < 12) isOnline = true;
-      else if (time >= 13 && time < 18) isOnline = true;
-      else if (time >= 12 && time < 13) statusText = "Обеденный перерыв до 13:00";
-      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
-      else statusText = day === 5 ? "Отвечу завтра (суббота) с 10:00" : "Отвечу завтра с 10:00";
-    }
-    else if (day === 6) {
-      if (time >= 10 && time < 14) isOnline = true;
-      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
-      else statusText = "Отвечу завтра (воскресенье) с 10:00";
-    }
-    else if (day === 0) {
-      if (time >= 10 && time < 14) isOnline = true;
-      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
-      else statusText = "Отвечу во вторник с 10:00";
-    }
-    
-    if (isOnline) statusText = "В сети";
-    return { isOnline, statusText };
-  }
-
-  function checkWorkSchedule() {
-    return checkOnlineStatus();
-  }
-  
-  let currentIdx = 0;
-  let galleryImgs = [];
-  
-  function openLightbox(img) {
-    galleryImgs = img.closest('details').querySelectorAll('.gallery-item img');
-    currentIdx = Array.from(galleryImgs).indexOf(img);
-    document.getElementById('lightbox-img').src = img.src;
-    document.getElementById('lightbox').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-    document.body.style.overflow = '';
-  }
-  
-  function changeImage(dir) {
-    currentIdx += dir;
-    if (currentIdx >= galleryImgs.length) currentIdx = 0;
-    if (currentIdx < 0) currentIdx = galleryImgs.length - 1;
-    document.getElementById('lightbox-img').src = galleryImgs[currentIdx].src;
-  }
-  
-  document.addEventListener('click', function(e) {
-    if (e.target.matches('.gallery-item img')) {
-      e.preventDefault();
-      openLightbox(e.target);
-    }
-    if (e.target.matches('.lightbox-overlay, .lightbox-close')) {
-      closeLightbox();
-    }
-  });
-  
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') changeImage(-1);
-    if (e.key === 'ArrowRight') changeImage(1);
-  });
-
-  // === ФУНКЦИИ ДЛЯ ФОРМЫ ОТЗЫВОВ ===
-  
-  // Генерация fingerprint для защиты от спама
-  function getFingerprint() {
-    let fp = localStorage.getItem('review_fp');
-    if (!fp) {
-      fp = 'fp_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
-      localStorage.setItem('review_fp', fp);
-    }
-    return fp;
-  }
-
-  // Проверка бана
-  function isBanned() {
-    return localStorage.getItem('review_banned') === 'true';
-  }
-
-  // Открытие модального окна
-  window.openReviewModal = function() {
-    if (isBanned()) {
-      alert('❌ Вы не можете оставлять отзывы');
-      return;
-    }
-    document.getElementById('review-modal-overlay').classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
-
-  // Закрытие модального окна
-  window.closeReviewModal = function() {
-    document.getElementById('review-modal-overlay').classList.remove('active');
-    document.body.style.overflow = '';
-    // Сброс статуса
-    const statusEl = document.getElementById('review-form-status');
-    if (statusEl) {
-      statusEl.textContent = '';
-      statusEl.className = 'review-status';
-    }
-  };
-
-  // Отправка отзыва
-  window.submitReview = async function() {
-    const nameInput = document.getElementById('review-name');
-    const textInput = document.getElementById('review-text');
-    const starsInput = document.getElementById('review-stars');
-    const statusEl = document.getElementById('review-form-status');
-    const submitBtn = document.getElementById('review-submit-btn');
-    
-    const name = nameInput.value.trim();
-    const text = textInput.value.trim();
-    const stars = parseInt(starsInput.value);
-    
-    // Валидация
-    if (!name || !text) {
-      statusEl.textContent = '❌ Заполните все поля';
-      statusEl.className = 'review-status error';
-      return;
-    }
-    
-    if (name.length < 2) {
-      statusEl.textContent = '❌ Имя слишком короткое';
-      statusEl.className = 'review-status error';
-      return;
-    }
-    
-    if (text.length < 10) {
-      statusEl.textContent = '❌ Отзыв слишком короткий (минимум 10 символов)';
-      statusEl.className = 'review-status error';
-      return;
-    }
-    
-    if (text.length > 500) {
-      statusEl.textContent = '❌ Отзыв слишком длинный (максимум 500 символов)';
-      statusEl.className = 'review-status error';
-      return;
-    }
-    
-    // Rate limiting (10 минут)
-    const lastReview = localStorage.getItem('last_review_time');
-    if (lastReview && (Date.now() - parseInt(lastReview)) < 600000) {
-      const minsLeft = Math.ceil((600000 - (Date.now() - parseInt(lastReview))) / 60000);
-      statusEl.textContent = `❌ Подождите ${minsLeft} мин. перед следующим отзывом`;
-      statusEl.className = 'review-status error';
-      return;
-    }
-    
-    // Блокировка кнопки
-    submitBtn.disabled = true;
-    statusEl.textContent = '⏳ Отправка...';
-    statusEl.className = 'review-status loading';
-    
-    // Формирование данных
-    const reviewData = {
-      id: 'rev_' + Date.now(),
-      name: name,
-      text: text,
-      stars: stars,
-      date: new Date().toLocaleDateString('ru-RU', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-      }),
-      timestamp: Date.now(),
-      status: 'pending',
-      fingerprint: getFingerprint()
-    };
-    
-    try {
-      const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_pending/' + reviewData.id + '.json', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(reviewData)
-      });
-      
-      if (response.ok) {
-        statusEl.textContent = '✅ Отзыв отправлен! Появится после проверки.';
-        statusEl.className = 'review-status success';
-        localStorage.setItem('last_review_time', Date.now());
-        
-        // Очистка полей
-        nameInput.value = '';
-        textInput.value = '';
-        starsInput.value = '5';
-        
-        // Закрытие через 2 секунды
-        setTimeout(() => {
-          closeReviewModal();
-        }, 2000);
-      } else {
-        throw new Error('Network error');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      statusEl.textContent = '❌ Ошибка отправки. Попробуйте позже.';
-      statusEl.className = 'review-status error';
-      submitBtn.disabled = false;
-    }
-  };
-
-  // Закрытие по клику на оверлей
-  document.addEventListener('click', function(e) {
-    if (e.target.id === 'review-modal-overlay') {
-      closeReviewModal();
-    }
-  });
-
-  // Закрытие по Escape
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      const modal = document.getElementById('review-modal-overlay');
-      if (modal && modal.classList.contains('active')) {
-        closeReviewModal();
-      }
-    }
-  });
-</script>
-
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
 
-<!-- Баннер Акции Дня (появляется автоматически при активации) -->
+<!-- Баннер Акции Дня -->
 <div id="promo-banner" class="promo-banner">
   <span class="promo-label">🎯 Акция дня</span>
   <span id="promo-text"></span>
@@ -1520,74 +775,6 @@ layout: default
   <button onclick="openReviewModal()" class="btn" style="font-size: 1rem; padding: 14px 28px; margin-top: 1rem;">⭐ Оставить отзыв</button>
 </p>
 
-<script>
-// Загрузка отзывов из Firebase
-async function loadReviewsFromFirebase() {
-  const container = document.getElementById('reviews-container');
-  
-  try {
-    const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_approved.json');
-    const data = await response.json();
-    
-    if (!data) {
-      container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Отзывы появятся здесь скоро...</p>';
-      return;
-    }
-    
-    // Преобразуем объект в массив, фильтруем banned и сортируем по дате (новые сверху)
-    const reviews = Object.values(data)
-      .filter(r => r && !r.banned)
-      .sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-    
-    if (reviews.length === 0) {
-      container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Отзывы появятся здесь скоро...</p>';
-      return;
-    }
-    
-    // Берем первые 3 отзыва
-    const displayReviews = reviews.slice(0, 3);
-    
-    let html = '<div class="reviews-grid">';
-    
-    displayReviews.forEach(review => {
-      // Генерируем инициалы (максимум 2 символа)
-      const initials = review.name 
-        ? review.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
-        : '??';
-      
-      // Генерируем звезды
-      const stars = '★'.repeat(review.stars || 5) + '☆'.repeat(5 - (review.stars || 5));
-      
-      html += `
-        <div class="review-card">
-          <div class="review-header">
-            <div class="review-avatar">${initials}</div>
-            <div class="review-meta">
-              <div class="review-name">${review.name || 'Аноним'}</div>
-              <div class="review-stars">${stars}</div>
-              <div class="review-date">${review.date || ''}</div>
-            </div>
-          </div>
-          <div class="review-text">"${review.text || ''}"</div>
-        </div>
-      `;
-    });
-    
-    html += '</div>';
-    container.innerHTML = html;
-    
-  } catch (error) {
-    console.error('Ошибка загрузки отзывов:', error);
-    container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Не удалось загрузить отзывы. Обновите страницу позже.</p>';
-  }
-}
-
-// Загружаем отзывы при загрузке страницы
-document.addEventListener('DOMContentLoaded', loadReviewsFromFirebase);
-
-// Обновляем отзывы каждые 60 секунд (чтобы появлялись новые без перезагрузки)
-setInterval(loadReviewsFromFirebase, 60000);
-</script>
 <!-- === МОДАЛЬНОЕ ОКНО ФОРМЫ ОТЗЫВА === -->
 <div id="review-modal-overlay" class="review-modal-overlay">
   <div class="review-modal">
@@ -1653,3 +840,574 @@ setInterval(loadReviewsFromFirebase, 60000);
     Сейчас онлайн: <span id="online-count">1</span>&nbsp;чел.
   </div>
 </div>
+
+<script type="module">
+  // Firebase конфиг
+  const firebaseConfig = {
+    apiKey: "AIzaSyDgSGIhDkfu1_l0Ryg0MeiLfVxp-lgiSsU",
+    authDomain: "alexdrog.firebaseapp.com",
+    databaseURL: "https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "alexdrog",
+    storageBucket: "alexdrog.firebasestorage.app",
+    messagingSenderId: "33899135860",
+    appId: "1:33899135860:web:396df092035fb19a11a221",
+    measurementId: "G-KJ7JQ8R476"
+  };
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, set, onDisconnect, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    const userRef = ref(db, 'online/' + sessionId);
+    
+    set(userRef, { timestamp: serverTimestamp() });
+    onDisconnect(userRef).remove();
+    
+    onValue(ref(db, 'online'), (snapshot) => {
+      const data = snapshot.val();
+      const count = data ? Object.keys(data).length : 0;
+      const el = document.getElementById('online-count');
+      if (el) el.textContent = count;
+    });
+  } catch (e) {
+    console.error('Firebase init error:', e);
+  }
+</script>
+
+<script>
+  // === ЗАГРУЗКА ОТЗЫВОВ ИЗ FIREBASE ===
+  async function loadReviewsFromFirebase() {
+    const container = document.getElementById('reviews-container');
+    
+    try {
+      // ВАЖНО: URL без пробелов в конце!
+      const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_approved.json');
+      
+      if (!response.ok) {
+        throw new Error('HTTP ' + response.status);
+      }
+      
+      const data = await response.json();
+      console.log('Отзывы из Firebase:', data);
+      
+      if (!data) {
+        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Пока нет отзывов. Будьте первым!</p>';
+        return;
+      }
+      
+      // Преобразуем объект в массив
+      let reviews = [];
+      for (let key in data) {
+        if (data.hasOwnProperty(key) && data[key]) {
+          const review = data[key];
+          // Проверяем обязательные поля
+          if (review.name || review.text) {
+            reviews.push({
+              id: key,
+              name: review.name || 'Аноним',
+              text: review.text || review.comment || '',
+              stars: parseInt(review.stars) || 5,
+              date: review.date || '',
+              timestamp: review.timestamp || 0,
+              banned: review.banned || false
+            });
+          }
+        }
+      }
+      
+      // Фильтруем забаненных и сортируем по дате (новые сверху)
+      reviews = reviews.filter(r => !r.banned).sort((a, b) => b.timestamp - a.timestamp);
+      
+      console.log('Обработанные отзывы:', reviews);
+      
+      if (reviews.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Пока нет отзывов. Будьте первым!</p>';
+        return;
+      }
+      
+      // Берем первые 3 отзыва
+      const displayReviews = reviews.slice(0, 3);
+      
+      let html = '<div class="reviews-grid">';
+      
+      displayReviews.forEach(review => {
+        // Экранирование HTML для безопасности
+        const escapeHtml = (text) => {
+          if (!text) return '';
+          return text.replace(/&/g, "&amp;")
+                     .replace(/</g, "&lt;")
+                     .replace(/>/g, "&gt;")
+                     .replace(/"/g, "&quot;")
+                     .replace(/'/g, "&#039;");
+        };
+        
+        // Генерируем инициалы
+        let initials = 'АН';
+        if (review.name && review.name !== 'Аноним') {
+          initials = review.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+        }
+        
+        // Генерируем звезды
+        const starCount = Math.max(1, Math.min(5, review.stars));
+        const stars = '★'.repeat(starCount) + '☆'.repeat(5 - starCount);
+        
+        const safeName = escapeHtml(review.name);
+        const safeText = escapeHtml(review.text);
+        const safeDate = escapeHtml(review.date);
+        
+        html += `
+          <div class="review-card">
+            <div class="review-header">
+              <div class="review-avatar">${initials}</div>
+              <div class="review-meta">
+                <div class="review-name">${safeName}</div>
+                <div class="review-stars">${stars}</div>
+                <div class="review-date">${safeDate}</div>
+              </div>
+            </div>
+            <div class="review-text">"${safeText || 'Без текста'}"</div>
+          </div>
+        `;
+      });
+      
+      html += '</div>';
+      container.innerHTML = html;
+      
+    } catch (error) {
+      console.error('Ошибка загрузки отзывов:', error);
+      container.innerHTML = '<p style="text-align: center; color: var(--text-secondary);">Не удалось загрузить отзывы. <button onclick="loadReviewsFromFirebase()" style="background:none;border:none;color:var(--accent);text-decoration:underline;cursor:pointer;">Попробовать снова</button></p>';
+    }
+  }
+
+  // Загружаем при старте
+  document.addEventListener('DOMContentLoaded', loadReviewsFromFirebase);
+  
+  // Обновляем каждую минуту
+  setInterval(loadReviewsFromFirebase, 60000);
+
+  // === ОСТАЛЬНЫЕ ФУНКЦИИ ===
+  
+  const WORK_PHRASES = [
+    "Принимаю заказы", "На связи прямо сейчас", "Готов помочь с ремонтом",
+    "Жду вашего звонка", "Работаю сегодня", "Можно обращаться"
+  ];
+
+  const MORNING_PHRASES = [
+    "Начинаю работу в 10:00", "Скоро буду на месте", "С 10:00 принимаю заказы"
+  ];
+
+  const EVENING_PHRASES = [
+    "Сегодня больше не работаю", "Завтра с 10:00 на месте", "Рабочий день окончен"
+  ];
+
+  const NIGHT_PHRASES = [
+    "Ночной перерыв", "Сплю, отвечу утром", "Отдыхаю до рассвета"
+  ];
+
+  const DAY_OFF_PHRASES = [
+    "Сегодня выходной", "Отдыхаю сегодня", "Прием заказов с завтра"
+  ];
+
+  let customStatusData = null;
+
+  function isPromoActive() {
+    if (!customStatusData || !customStatusData.active || customStatusData.type !== 'promo') {
+      return false;
+    }
+    if (customStatusData.until) {
+      const now = new Date();
+      const parts = customStatusData.until.split(/[. :]/);
+      if (parts.length >= 2) {
+        const day = parseInt(parts[0]);
+        const month = parseInt(parts[1]) - 1;
+        const year = parts[2] ? (parts[2].length === 2 ? 2000 + parseInt(parts[2]) : parseInt(parts[2])) : now.getFullYear();
+        const hour = parts[3] ? parseInt(parts[3]) : 20;
+        const minute = parts[4] ? parseInt(parts[4]) : 0;
+        const untilDate = new Date(year, month, day, hour, minute);
+        if (now > untilDate) return false;
+      }
+    }
+    return true;
+  }
+
+  async function loadCustomStatus() {
+    try {
+      const response = await fetch('status.json?t=' + Date.now());
+      if (response.ok) {
+        const data = await response.json();
+        if (data.active && data.text) {
+          if (data.until) {
+            const now = new Date();
+            const parts = data.until.split(/[. :]/);
+            if (parts.length >= 2) {
+              const day = parseInt(parts[0]);
+              const month = parseInt(parts[1]) - 1;
+              const year = parts[2] ? (parts[2].length === 2 ? 2000 + parseInt(parts[2]) : parseInt(parts[2])) : now.getFullYear();
+              const hour = parts[3] ? parseInt(parts[3]) : 23;
+              const minute = parts[4] ? parseInt(parts[4]) : 59;
+              const untilDate = new Date(year, month, day, hour, minute);
+              if (now > untilDate) {
+                customStatusData = null;
+                return;
+              }
+            }
+          }
+          customStatusData = data;
+          return;
+        }
+      }
+      customStatusData = null;
+    } catch (e) {
+      customStatusData = null;
+    }
+  }
+
+  function getTimePeriod() {
+    const now = new Date();
+    const day = now.getDay();
+    const hour = now.getHours();
+    
+    if (hour >= 23 || hour < 7) return 'night';
+    if (day === 1) return 'dayoff';
+    
+    if (day >= 2 && day <= 5) {
+      if (hour < 10) return 'morning';
+      if (hour >= 18) return 'evening';
+      return 'work';
+    }
+    
+    if (day === 0 || day === 6) {
+      if (hour < 10) return 'morning';
+      if (hour >= 14) return 'evening';
+      return 'work';
+    }
+    
+    return 'dayoff';
+  }
+
+  function updateAllStatuses() {
+    const statusEl = document.getElementById('work-status-text');
+    const promoBanner = document.getElementById('promo-banner');
+    const promoText = document.getElementById('promo-text');
+    const avatar = document.getElementById('chat-avatar');
+    const avatarText = document.getElementById('status-text');
+    
+    if (isPromoActive()) {
+      if (promoText) promoText.textContent = customStatusData.text;
+      if (promoBanner) promoBanner.classList.add('active');
+      
+      if (avatar) {
+        avatar.classList.remove('offline');
+        avatar.classList.add('online');
+      }
+      if (avatarText) {
+        avatarText.innerHTML = '<span class="online-dot"></span>В сети';
+        avatarText.className = 'chat-status status-online';
+      }
+      
+      if (statusEl) {
+        statusEl.textContent = "🔥 Акция дня!";
+        statusEl.style.color = '#00c853';
+        statusEl.style.fontWeight = '700';
+        statusEl.style.fontSize = '1rem';
+      }
+      return;
+    }
+    
+    if (promoBanner) promoBanner.classList.remove('active');
+    
+    if (customStatusData && customStatusData.active) {
+      const schedule = checkWorkSchedule();
+      
+      if (schedule.isOnline) {
+        avatar.classList.remove('offline');
+        avatar.classList.add('online');
+        avatarText.innerHTML = '<span class="online-dot"></span>В сети';
+        avatarText.className = 'chat-status status-online';
+      } else {
+        avatar.classList.remove('online');
+        avatar.classList.add('offline');
+        avatarText.innerHTML = '<span class="offline-dot"></span>' + schedule.statusText;
+        avatarText.className = 'chat-status status-offline';
+      }
+      
+      if (statusEl) {
+        statusEl.textContent = customStatusData.text;
+        statusEl.style.color = '#dc2626';
+        statusEl.style.fontWeight = '700';
+        statusEl.style.fontSize = '0.95rem';
+      }
+      return;
+    }
+    
+    const period = getTimePeriod();
+    let phrases, color, weight = '600';
+    
+    switch(period) {
+      case 'work': phrases = WORK_PHRASES; color = 'var(--success)'; break;
+      case 'morning': phrases = MORNING_PHRASES; color = '#f59e0b'; break;
+      case 'evening': phrases = EVENING_PHRASES; color = 'var(--text-secondary)'; break;
+      case 'night': phrases = NIGHT_PHRASES; color = 'var(--text-secondary)'; break;
+      case 'dayoff': phrases = DAY_OFF_PHRASES; color = '#dc2626'; weight = '700'; break;
+      default: phrases = WORK_PHRASES; color = 'var(--success)';
+    }
+    
+    const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+    
+    if (statusEl) {
+      statusEl.textContent = phrase;
+      statusEl.style.color = color;
+      statusEl.style.fontWeight = weight;
+      statusEl.style.fontSize = '0.9rem';
+    }
+    
+    const schedule = checkWorkSchedule();
+    if (schedule.isOnline) {
+      avatar.classList.remove('offline');
+      avatar.classList.add('online');
+      avatarText.innerHTML = '<span class="online-dot"></span>В сети';
+      avatarText.className = 'chat-status status-online';
+    } else {
+      avatar.classList.remove('online');
+      avatar.classList.add('offline');
+      avatarText.innerHTML = '<span class="offline-dot"></span>' + schedule.statusText;
+      avatarText.className = 'chat-status status-offline';
+    }
+  }
+
+  function checkWorkSchedule() {
+    const now = new Date();
+    const day = now.getDay();
+    const hour = now.getHours();
+    const minute = now.getMinutes();
+    const time = hour + minute / 60;
+    
+    let isOnline = false;
+    let statusText = "";
+    
+    if (day === 1) {
+      statusText = "Сегодня выходной, отвечу завтра с 10:00";
+    } else if (day >= 2 && day <= 5) {
+      if (time >= 10 && time < 12) isOnline = true;
+      else if (time >= 13 && time < 18) isOnline = true;
+      else if (time >= 12 && time < 13) statusText = "Обеденный перерыв до 13:00";
+      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
+      else statusText = day === 5 ? "Отвечу завтра (суббота) с 10:00" : "Отвечу завтра с 10:00";
+    } else if (day === 6) {
+      if (time >= 10 && time < 14) isOnline = true;
+      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
+      else statusText = "Отвечу завтра (воскресенье) с 10:00";
+    } else if (day === 0) {
+      if (time >= 10 && time < 14) isOnline = true;
+      else if (time < 10) statusText = "Начинаю работу сегодня в 10:00";
+      else statusText = "Отвечу во вторник с 10:00";
+    }
+    
+    if (isOnline) statusText = "В сети";
+    return { isOnline, statusText };
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('theme-toggle');
+    const current = document.documentElement.getAttribute('data-theme');
+    if (btn) btn.textContent = current === 'dark' ? '☀️' : '🌙';
+    
+    loadCustomStatus().then(updateAllStatuses);
+    
+    setInterval(async () => {
+      await loadCustomStatus();
+      updateAllStatuses();
+    }, 300000);
+    
+    setInterval(() => {
+      if (customStatusData && customStatusData.type === 'promo') {
+        updateAllStatuses();
+      }
+    }, 60000);
+  });
+
+  // Lightbox
+  let currentIdx = 0;
+  let galleryImgs = [];
+  
+  function openLightbox(img) {
+    galleryImgs = img.closest('details').querySelectorAll('.gallery-item img');
+    currentIdx = Array.from(galleryImgs).indexOf(img);
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  function changeImage(dir) {
+    currentIdx += dir;
+    if (currentIdx >= galleryImgs.length) currentIdx = 0;
+    if (currentIdx < 0) currentIdx = galleryImgs.length - 1;
+    document.getElementById('lightbox-img').src = galleryImgs[currentIdx].src;
+  }
+  
+  document.addEventListener('click', function(e) {
+    if (e.target.matches('.gallery-item img')) {
+      e.preventDefault();
+      openLightbox(e.target);
+    }
+    if (e.target.matches('.lightbox-overlay, .lightbox-close')) {
+      closeLightbox();
+    }
+  });
+  
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'ArrowRight') changeImage(1);
+  });
+
+  // Форма отзывов
+  function getFingerprint() {
+    let fp = localStorage.getItem('review_fp');
+    if (!fp) {
+      fp = 'fp_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+      localStorage.setItem('review_fp', fp);
+    }
+    return fp;
+  }
+
+  function isBanned() {
+    return localStorage.getItem('review_banned') === 'true';
+  }
+
+  window.openReviewModal = function() {
+    if (isBanned()) {
+      alert('❌ Вы не можете оставлять отзывы');
+      return;
+    }
+    document.getElementById('review-modal-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeReviewModal = function() {
+    document.getElementById('review-modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+    const statusEl = document.getElementById('review-form-status');
+    if (statusEl) {
+      statusEl.textContent = '';
+      statusEl.className = 'review-status';
+    }
+  };
+
+  window.submitReview = async function() {
+    const nameInput = document.getElementById('review-name');
+    const textInput = document.getElementById('review-text');
+    const starsInput = document.getElementById('review-stars');
+    const statusEl = document.getElementById('review-form-status');
+    const submitBtn = document.getElementById('review-submit-btn');
+    
+    const name = nameInput.value.trim();
+    const text = textInput.value.trim();
+    const stars = parseInt(starsInput.value);
+    
+    if (!name || !text) {
+      statusEl.textContent = '❌ Заполните все поля';
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    if (name.length < 2) {
+      statusEl.textContent = '❌ Имя слишком короткое';
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    if (text.length < 10) {
+      statusEl.textContent = '❌ Отзыв слишком короткий (минимум 10 символов)';
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    if (text.length > 500) {
+      statusEl.textContent = '❌ Отзыв слишком длинный (максимум 500 символов)';
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    const lastReview = localStorage.getItem('last_review_time');
+    if (lastReview && (Date.now() - parseInt(lastReview)) < 600000) {
+      const minsLeft = Math.ceil((600000 - (Date.now() - parseInt(lastReview))) / 60000);
+      statusEl.textContent = `❌ Подождите ${minsLeft} мин. перед следующим отзывом`;
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    submitBtn.disabled = true;
+    statusEl.textContent = '⏳ Отправка...';
+    statusEl.className = 'review-status';
+    
+    const reviewData = {
+      id: 'rev_' + Date.now(),
+      name: name,
+      text: text,
+      stars: stars,
+      date: new Date().toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      }),
+      timestamp: Date.now(),
+      status: 'pending',
+      fingerprint: getFingerprint()
+    };
+    
+    try {
+      const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_pending/' + reviewData.id + '.json', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reviewData)
+      });
+      
+      if (response.ok) {
+        statusEl.textContent = '✅ Отзыв отправлен! Появится после проверки.';
+        statusEl.className = 'review-status success';
+        localStorage.setItem('last_review_time', Date.now());
+        
+        nameInput.value = '';
+        textInput.value = '';
+        starsInput.value = '5';
+        
+        setTimeout(() => {
+          closeReviewModal();
+        }, 2000);
+      } else {
+        throw new Error('Network error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      statusEl.textContent = '❌ Ошибка отправки. Попробуйте позже.';
+      statusEl.className = 'review-status error';
+      submitBtn.disabled = false;
+    }
+  };
+
+  document.addEventListener('click', function(e) {
+    if (e.target.id === 'review-modal-overlay') {
+      closeReviewModal();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('review-modal-overlay');
+      if (modal && modal.classList.contains('active')) {
+        closeReviewModal();
+      }
+    }
+  });
+</script>
