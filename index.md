@@ -883,7 +883,7 @@ layout: default
     const container = document.getElementById('reviews-container');
     
     try {
-      // ВАЖНО: URL без пробелов в конце!
+      // ИСПРАВЛЕНО: убран пробел в URL
       const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_approved.json');
       
       if (!response.ok) {
@@ -1365,6 +1365,7 @@ layout: default
     };
     
     try {
+      // ИСПРАВЛЕНО: убран пробел в URL
       const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_pending/' + reviewData.id + '.json', {
         method: 'PUT',
         headers: {
