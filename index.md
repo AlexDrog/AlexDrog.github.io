@@ -85,6 +85,7 @@ layout: default
     transition: transform 0.2s, box-shadow 0.2s;
     border: none;
     cursor: pointer;
+    font-size: 1rem;
   }
   
   .btn:hover {
@@ -561,6 +562,180 @@ layout: default
     border: 1px solid var(--border);
   }
   
+  /* === СТИЛИ ДЛЯ ФОРМЫ ОТЗЫВОВ === */
+  .review-section {
+    text-align: center;
+    margin: 3rem 0 2rem;
+  }
+  
+  .review-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 10001;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .review-modal-overlay.active {
+    display: flex;
+  }
+  
+  .review-modal {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .review-modal h3 {
+    margin: 0 0 8px 0;
+    color: var(--heading);
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  
+  .review-modal-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  
+  .review-form-group {
+    margin-bottom: 16px;
+  }
+  
+  .review-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  .review-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .review-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .review-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 1rem;
+    box-sizing: border-box;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 100px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .review-textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .review-stars-select {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .review-modal-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  
+  .review-btn-submit {
+    flex: 1;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .review-btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  }
+  
+  .review-btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .review-btn-cancel {
+    flex: 1;
+    padding: 14px;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .review-btn-cancel:hover {
+    background: var(--border);
+  }
+  
+  .review-status {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    text-align: center;
+    min-height: 24px;
+    font-weight: 500;
+  }
+  
+  .review-status.success { color: var(--success); }
+  .review-status.error { color: #ef4444; }
+  .review-status.loading { color: var(--text-secondary); }
+  
   @media (max-width: 768px) {
     h1 { 
       font-size: 1.5rem; 
@@ -671,6 +846,20 @@ layout: default
     
     .review-text {
       font-size: 0.9rem;
+    }
+    
+    /* Форма отзывов на мобильных */
+    .review-modal {
+      padding: 24px 20px;
+      margin: 10px;
+    }
+    
+    .review-modal h3 {
+      font-size: 1.25rem;
+    }
+    
+    .review-modal-buttons {
+      flex-direction: column;
     }
   }
   
@@ -1075,6 +1264,163 @@ layout: default
     if (e.key === 'ArrowLeft') changeImage(-1);
     if (e.key === 'ArrowRight') changeImage(1);
   });
+
+  // === ФУНКЦИИ ДЛЯ ФОРМЫ ОТЗЫВОВ ===
+  
+  // Генерация fingerprint для защиты от спама
+  function getFingerprint() {
+    let fp = localStorage.getItem('review_fp');
+    if (!fp) {
+      fp = 'fp_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+      localStorage.setItem('review_fp', fp);
+    }
+    return fp;
+  }
+
+  // Проверка бана
+  function isBanned() {
+    return localStorage.getItem('review_banned') === 'true';
+  }
+
+  // Открытие модального окна
+  window.openReviewModal = function() {
+    if (isBanned()) {
+      alert('❌ Вы не можете оставлять отзывы');
+      return;
+    }
+    document.getElementById('review-modal-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  // Закрытие модального окна
+  window.closeReviewModal = function() {
+    document.getElementById('review-modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+    // Сброс статуса
+    const statusEl = document.getElementById('review-form-status');
+    if (statusEl) {
+      statusEl.textContent = '';
+      statusEl.className = 'review-status';
+    }
+  };
+
+  // Отправка отзыва
+  window.submitReview = async function() {
+    const nameInput = document.getElementById('review-name');
+    const textInput = document.getElementById('review-text');
+    const starsInput = document.getElementById('review-stars');
+    const statusEl = document.getElementById('review-form-status');
+    const submitBtn = document.getElementById('review-submit-btn');
+    
+    const name = nameInput.value.trim();
+    const text = textInput.value.trim();
+    const stars = parseInt(starsInput.value);
+    
+    // Валидация
+    if (!name || !text) {
+      statusEl.textContent = '❌ Заполните все поля';
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    if (name.length < 2) {
+      statusEl.textContent = '❌ Имя слишком короткое';
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    if (text.length < 10) {
+      statusEl.textContent = '❌ Отзыв слишком короткий (минимум 10 символов)';
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    if (text.length > 500) {
+      statusEl.textContent = '❌ Отзыв слишком длинный (максимум 500 символов)';
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    // Rate limiting (10 минут)
+    const lastReview = localStorage.getItem('last_review_time');
+    if (lastReview && (Date.now() - parseInt(lastReview)) < 600000) {
+      const minsLeft = Math.ceil((600000 - (Date.now() - parseInt(lastReview))) / 60000);
+      statusEl.textContent = `❌ Подождите ${minsLeft} мин. перед следующим отзывом`;
+      statusEl.className = 'review-status error';
+      return;
+    }
+    
+    // Блокировка кнопки
+    submitBtn.disabled = true;
+    statusEl.textContent = '⏳ Отправка...';
+    statusEl.className = 'review-status loading';
+    
+    // Формирование данных
+    const reviewData = {
+      id: 'rev_' + Date.now(),
+      name: name,
+      text: text,
+      stars: stars,
+      date: new Date().toLocaleDateString('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      }),
+      timestamp: Date.now(),
+      status: 'pending',
+      fingerprint: getFingerprint()
+    };
+    
+    try {
+      const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_pending/' + reviewData.id + '.json', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reviewData)
+      });
+      
+      if (response.ok) {
+        statusEl.textContent = '✅ Отзыв отправлен! Появится после проверки.';
+        statusEl.className = 'review-status success';
+        localStorage.setItem('last_review_time', Date.now());
+        
+        // Очистка полей
+        nameInput.value = '';
+        textInput.value = '';
+        starsInput.value = '5';
+        
+        // Закрытие через 2 секунды
+        setTimeout(() => {
+          closeReviewModal();
+        }, 2000);
+      } else {
+        throw new Error('Network error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      statusEl.textContent = '❌ Ошибка отправки. Попробуйте позже.';
+      statusEl.className = 'review-status error';
+      submitBtn.disabled = false;
+    }
+  };
+
+  // Закрытие по клику на оверлей
+  document.addEventListener('click', function(e) {
+    if (e.target.id === 'review-modal-overlay') {
+      closeReviewModal();
+    }
+  });
+
+  // Закрытие по Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const modal = document.getElementById('review-modal-overlay');
+      if (modal && modal.classList.contains('active')) {
+        closeReviewModal();
+      }
+    }
+  });
 </script>
 
 <h1>Ремонт компьютерной и мобильной техники в Дрогичине</h1>
@@ -1200,11 +1546,50 @@ layout: default
 </div>
 
 <p style="text-align: center; margin-top: 1.5rem;">
-  <a href="./otzyvy/" class="btn" style="padding: 12px 24px; font-size: 0.95rem;">📖 Все отзывы на Яндекс.Картах</a>
+  <button onclick="openReviewModal()" class="btn" style="font-size: 1rem; padding: 14px 28px; margin-top: 1rem;">⭐ Оставить отзыв</button>
 </p>
 {% else %}
-<p style="text-align: center; color: var(--text-secondary); opacity: 0.7;">Отзывы появятся здесь скоро...</p>
+<p style="text-align: center; color: var(--text-secondary); opacity: 0.7; margin-bottom: 2rem;">Отзывы появятся здесь скоро...</p>
+<div class="review-section">
+  <button onclick="openReviewModal()" class="btn" style="font-size: 1rem; padding: 14px 28px;">⭐ Оставить первый отзыв</button>
+</div>
 {% endif %}
+
+<!-- === МОДАЛЬНОЕ ОКНО ФОРМЫ ОТЗЫВА === -->
+<div id="review-modal-overlay" class="review-modal-overlay">
+  <div class="review-modal">
+    <h3>Ваш отзыв</h3>
+    <p class="review-modal-subtitle">Появится на сайте после проверки</p>
+    
+    <div class="review-form-group">
+      <label for="review-name">Ваше имя</label>
+      <input type="text" id="review-name" class="review-input" placeholder="Например: Александр" maxlength="50">
+    </div>
+    
+    <div class="review-form-group">
+      <label for="review-text">Ваш отзыв</label>
+      <textarea id="review-text" class="review-textarea" placeholder="Напишите о вашем опыте ремонта..." maxlength="500"></textarea>
+    </div>
+    
+    <div class="review-form-group" style="text-align: center;">
+      <label for="review-stars" style="display: inline-block; margin-right: 10px;">Оценка:</label>
+      <select id="review-stars" class="review-stars-select">
+        <option value="5">★★★★★ Отлично</option>
+        <option value="4">★★★★☆ Хорошо</option>
+        <option value="3">★★★☆☆ Нормально</option>
+        <option value="2">★★☆☆☆ Плохо</option>
+        <option value="1">★☆☆☆☆ Ужасно</option>
+      </select>
+    </div>
+    
+    <div class="review-modal-buttons">
+      <button onclick="submitReview()" class="review-btn-submit" id="review-submit-btn">Отправить</button>
+      <button onclick="closeReviewModal()" class="review-btn-cancel">Отмена</button>
+    </div>
+    
+    <div id="review-form-status" class="review-status"></div>
+  </div>
+</div>
 
 <h2>Почему обращаются ко мне</h2>
 <p>
