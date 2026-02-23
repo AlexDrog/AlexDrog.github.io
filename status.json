@@ -1,7 +1,7 @@
 {
-  "active": false,
-  "type": null,
-  "text": null,
-  "until": null,
-  "set_at": null
+  "active": true,
+  "type": "promo",
+  "text": "До конца февраля акция на установку Windows - 30 BYN",
+  "until": "23.02.2026 23:59",
+  "set_at": "2026-02-23T20:35:57.440563"
 }
