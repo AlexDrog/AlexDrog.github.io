@@ -1,7 +1,7 @@
 {
-  "active": true,
-  "type": "promo",
-  "text": "❗❗❗ ТОЛЬКО сегодня Win за 30 BYN❗❗❗",
-  "until": "23.02.2026 20:00",
-  "set_at": "2026-02-23T11:53:21.395727"
+  "active": false,
+  "type": null,
+  "text": null,
+  "until": null,
+  "set_at": null
 }
