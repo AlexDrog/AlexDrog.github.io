@@ -543,6 +543,40 @@ layout: default
     font-style: italic;
   }
   
+  /* === СТИЛИ ДЛЯ ОТВЕТА АДМИНИСТРАТОРА === */
+  .review-reply {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  
+  .review-reply strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+  }
+  
+  [data-theme="dark"] .review-reply {
+    background: rgba(59, 130, 246, 0.1);
+    border-left-color: var(--accent);
+  }
+  
+  .review-reply-date {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    opacity: 0.8;
+  }
+  
   .review-modal-overlay {
     display: none;
     position: fixed;
@@ -883,7 +917,6 @@ layout: default
     const container = document.getElementById('reviews-container');
     
     try {
-      // ИСПРАВЛЕНО: убран пробел в URL
       const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_approved.json');
       
       if (!response.ok) {
@@ -903,7 +936,7 @@ layout: default
       for (let key in data) {
         if (data.hasOwnProperty(key) && data[key]) {
           const review = data[key];
-          // Проверяем обязательные поля
+          // Проверяем обязательные поля и добавляем ответ администратора
           if (review.name || review.text) {
             reviews.push({
               id: key,
@@ -912,7 +945,9 @@ layout: default
               stars: parseInt(review.stars) || 5,
               date: review.date || '',
               timestamp: review.timestamp || 0,
-              banned: review.banned || false
+              banned: review.banned || false,
+              reply: review.reply || null,           // Ответ администратора
+              reply_date: review.reply_date || null  // Дата ответа
             });
           }
         }
@@ -958,6 +993,7 @@ layout: default
         const safeText = escapeHtml(review.text);
         const safeDate = escapeHtml(review.date);
         
+        // Формируем HTML карточки отзыва с ответом администратора (если есть)
         html += `
           <div class="review-card">
             <div class="review-header">
@@ -969,6 +1005,13 @@ layout: default
               </div>
             </div>
             <div class="review-text">"${safeText || 'Без текста'}"</div>
+            ${review.reply ? `
+              <div class="review-reply">
+                <strong>Ответ мастера</strong>
+                ${escapeHtml(review.reply)}
+                ${review.reply_date ? `<div class="review-reply-date">${escapeHtml(review.reply_date)}</div>` : ''}
+              </div>
+            ` : ''}
           </div>
         `;
       });
@@ -1365,7 +1408,6 @@ layout: default
     };
     
     try {
-      // ИСПРАВЛЕНО: убран пробел в URL
       const response = await fetch('https://alexdrog-default-rtdb.europe-west1.firebasedatabase.app/reviews_pending/' + reviewData.id + '.json', {
         method: 'PUT',
         headers: {
