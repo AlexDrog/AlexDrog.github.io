@@ -1,7 +1,7 @@
 {
-  "active": true,
-  "type": "promo",
-  "text": "сегодня win 45 BYN",
-  "until": "23.02.2026 23:59",
-  "set_at": "2026-02-23T21:06:42.187533"
+  "active": false,
+  "type": null,
+  "text": null,
+  "until": null,
+  "set_at": null
 }
