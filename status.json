@@ -1,7 +1,7 @@
 {
-  "active": true,
-  "type": "promo",
-  "text": "Прошивка 20byn только сегодня",
-  "until": "18.04.2026 23:59",
-  "set_at": "2026-04-18T21:59:18.432637"
+  "active": false,
+  "type": null,
+  "text": null,
+  "until": null,
+  "set_at": null
 }
