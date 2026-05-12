@@ -1,7 +1,7 @@
 {
-  "active": true,
-  "type": "promo",
-  "text": "При заказе через сайт скидка 20% на все виды услуг",
-  "until": "01.05.2026 20:00",
-  "set_at": "2026-05-01T09:49:29.446572"
+  "active": false,
+  "type": null,
+  "text": null,
+  "until": null,
+  "set_at": null
 }
