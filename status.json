@@ -1,7 +1,7 @@
 {
-  "active": false,
-  "type": null,
-  "text": null,
-  "until": null,
-  "set_at": null
+  "active": true,
+  "type": "vacation",
+  "text": "Ушел в отпуск до 1.09.2026",
+  "until": "1.09.2026",
+  "set_at": "2026-06-14T08:40:25.303039"
 }
